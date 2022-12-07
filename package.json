@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "name": "online-academy-web-app-ver001",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001/issues"
+  },
+  "homepage": "https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001#readme"
+}
