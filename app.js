@@ -44,6 +44,10 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
+app.get('/home', function (req, res) {
+    res.render('home');
+});
+
 app.get('/about', function (req, res) {
     res.render('about');
 })
@@ -62,6 +66,10 @@ app.get('/blog', function (req, res) {
 
 app.get('/single', function (req, res) {
     res.render('single');
+})
+
+app.get('/contact', function (req, res) {
+    res.render('contact');
 })
 //
 // app.get('/bs4', function (req, res) {
