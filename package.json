@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001/issues"
   },
-  "homepage": "https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001#readme"
+  "homepage": "https://github.com/HelloWorld-00001/Online-Academy-Web-App-Ver001#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
