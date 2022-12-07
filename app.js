@@ -17,9 +17,6 @@ app.use(express.urlencoded({
 }));
 
 app.use('/public', express.static('public'));
-app.use('/css', express.static('css'));
-app.use('/lib', express.static('lib'));
-app.use('/img', express.static('img'));
 
 app.engine('hbs', engine({
     // defaultLayout: 'index.hbs'
@@ -44,9 +41,9 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/home', function (req, res) {
-    res.render('home');
-});
+// app.get('/home', function (req, res) {
+//     res.render('home');
+// });
 
 app.get('/about', function (req, res) {
     res.render('about');
