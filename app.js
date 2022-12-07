@@ -55,6 +55,14 @@ app.get('/course', function (req, res) {
 app.get('/teacher', function (req, res) {
     res.render('teacher');
 })
+
+app.get('/blog', function (req, res) {
+    res.render('blog');
+})
+
+app.get('/single', function (req, res) {
+    res.render('single');
+})
 //
 // app.get('/bs4', function (req, res) {
 //     const __dirname = dirname(fileURLToPath(import.meta.url));
