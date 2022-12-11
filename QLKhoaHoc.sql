@@ -180,6 +180,156 @@ INSERT INTO `DanhSachVideo` VALUES (5, 9, 'https://www.youtube.com/watch?v=F5z6Y
 INSERT INTO `DanhSachVideo` VALUES (5, 10, 'https://www.youtube.com/watch?v=6j9b2_E34JM&list=PL_-VfJajZj0U1MSx1IMu13oLJq2nM97ac&index=10', '2021-08-03', '', 'Hoàn thành');
 INSERT INTO `DanhSachVideo` VALUES (5, 11, 'https://www.youtube.com/watch?v=QxLTSdTJDXY&list=PL_-VfJajZj0U1MSx1IMu13oLJq2nM97ac&index=11', '2021-08-06', '', 'Hoàn thành');
 INSERT INTO `DanhSachVideo` VALUES (5, 12, 'https://www.youtube.com/watch?v=a4FjX4Z-9Rs&list=PL_-VfJajZj0U1MSx1IMu13oLJq2nM97ac&index=12', '2021-08-26', '', 'Hoàn thành');
+
+INSERT INTO `DanhSachVideo` VALUES (6, 1, 'https://www.youtube.com/watch?v=1976Hf-DR44&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=1', '2022-11-10', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 2, 'https://www.youtube.com/watch?v=U5IHV-Ftf7c&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=2', '2022-06-09', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 3, 'https://www.youtube.com/watch?v=IHtfy2ywW9s&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=3', '2022-06-22', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 4, 'https://www.youtube.com/watch?v=SF4QFxyIyX0&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=4', '2022-06-26', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 5, 'https://www.youtube.com/watch?v=Hvxt3JHTCoI&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=5', '2022-07-04', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 6, 'https://www.youtube.com/watch?v=WfESlbkyQow&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=6', '2022-07-06', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 7, 'https://www.youtube.com/watch?v=hgtcRDqfjeE&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=7', '2022-07-07', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 8, 'https://www.youtube.com/watch?v=aVJU__8ERWM&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=8', '2022-07-07', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 9, 'https://www.youtube.com/watch?v=ltI_GM_6xrA&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=9', '2022-07-08', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 10, 'https://www.youtube.com/watch?v=2_E_Bird3VU&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=10', '2022-07-09', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 11, 'https://www.youtube.com/watch?v=E_1Zoy5OUNA&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=11', '2022-07-18', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 12, 'https://www.youtube.com/watch?v=rt3NOoQH4Zs&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=12', '2022-07-25', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 13, 'https://www.youtube.com/watch?v=XhWBgx3Vjrc&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=13', '2022-07-26', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 14, 'https://www.youtube.com/watch?v=zI2SxDz8uU0&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=14', '2022-07-28', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 15, 'https://www.youtube.com/watch?v=pHV4rZBwkAo&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=15', '2022-07-30', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 16, 'https://www.youtube.com/watch?v=0X-xG8jQ0pY&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=16', '2022-08-07', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 17, 'https://www.youtube.com/watch?v=coZUNjZ4i6I&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=17', '2022-08-10', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 18, 'https://www.youtube.com/watch?v=dRFqF3ore78&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=18', '2022-08-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 19, 'https://www.youtube.com/watch?v=jX5bED9oYFA&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=19', '2022-08-31', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 20, 'https://www.youtube.com/watch?v=juQBPlnqnzg&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=20', '2022-10-05', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 21, 'https://www.youtube.com/watch?v=jNJXQJWn3uw&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=21', '2022-10-06', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 22, 'https://www.youtube.com/watch?v=9GST89tMkqw&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=22', '2022-10-07', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 23, 'https://www.youtube.com/watch?v=W9uaLTV8njA&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=23', '2022-10-09', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 24, 'https://www.youtube.com/watch?v=qRy7lij5qzc&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=24', '2022-10-14', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 25, 'https://www.youtube.com/watch?v=tJw8tasMfu8&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=25', '2022-10-14', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 26, 'https://www.youtube.com/watch?v=wk0ykfM3Xog&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=26', '2022-10-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 27, 'https://www.youtube.com/watch?v=xKjWl71hFxo&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=27', '2022-10-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 28, 'https://www.youtube.com/watch?v=x37JEBnD4LI&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=28', '2022-10-18', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 29, 'https://www.youtube.com/watch?v=sML0EaGBlgM&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=29', '2022-10-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (6, 30, 'https://www.youtube.com/watch?v=XaNiZUQhlQA&list=PLd7dW_Jxkr_Yw6apt7tpzDC6X2mP5UhtQ&index=30', '2022-10-20', '', 'Chưa Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (7, 1, 'https://www.youtube.com/watch?v=6ca7Roj_NfE&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=1', '2020-09-12', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 2, 'https://www.youtube.com/watch?v=T4RIbr9VIT8&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=2', '2020-09-12', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 3, 'https://www.youtube.com/watch?v=3hx24mRfKGE&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=3', '2020-09-12', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 4, 'https://www.youtube.com/watch?v=HrzV05lzf2Y&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=4', '2021-06-15', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 5, 'https://www.youtube.com/watch?v=rvIyNR4L0KI&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=5', '2021-06-17', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 6, 'https://www.youtube.com/watch?v=hZVtkPv2q0A&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=6', '2021-06-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 7, 'https://www.youtube.com/watch?v=oYLwpa0Ug-A&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=7', '2021-07-09', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 8, 'https://www.youtube.com/watch?v=zUVbKfHgA40&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=8', '2021-07-13', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 9, 'https://www.youtube.com/watch?v=iI_IBe_SW9Q&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=9', '2021-07-14', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 10, 'https://www.youtube.com/watch?v=QgM6Gp7lzYw&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=10', '2021-07-16', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 11, 'https://www.youtube.com/watch?v=KeO2VAlXBMM&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=11', '2021-07-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 12, 'https://www.youtube.com/watch?v=v_puS2Wh-SU&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=12', '2021-07-21', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 13, 'https://www.youtube.com/watch?v=rgdcz6MTKgg&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=13', '2021-07-22', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 14, 'https://www.youtube.com/watch?v=P4LaivJMDos&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=14', '2021-07-23', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 15, 'https://www.youtube.com/watch?v=QxIxNjOCCDQ&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=15', '2021-07-24', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 16, 'https://www.youtube.com/watch?v=TsWrgF8VZT8&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=16', '2021-07-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 17, 'https://www.youtube.com/watch?v=cSRsf2sbGC4&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=17', '2021-07-27', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 18, 'https://www.youtube.com/watch?v=nkqoUtDhch8&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=18', '2021-07-28', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 19, 'https://www.youtube.com/watch?v=igV7S5RmvnY&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=19', '2021-07-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 20, 'https://www.youtube.com/watch?v=Cbcj88qVF48&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=20', '2021-07-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 21, 'https://www.youtube.com/watch?v=THn0Fz-6wd8&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=21', '2021-08-01', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 22, 'https://www.youtube.com/watch?v=E7BJZt7kWDE&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=22', '2021-08-01', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 23, 'https://www.youtube.com/watch?v=v37YjUMjmz4&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=23', '2021-08-02', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 24, 'https://www.youtube.com/watch?v=5lVEJwbY2Z4&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=24', '2021-08-03', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (7, 25, 'https://www.youtube.com/watch?v=I3QFatY-Nmk&list=PLPNLZmPSwSkc0jZwYBIxHjACQrq16lJQe&index=25', '2021-10-02', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (8, 1, 'https://www.youtube.com/watch?v=MV8AT9a2oSM&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=1', '2021-12-07', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 2, 'https://www.youtube.com/watch?v=BLqDewjag48&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=2', '2021-12-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 3, 'https://www.youtube.com/watch?v=2gzS9Z6DRps&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=3', '2022-01-04', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 4, 'https://www.youtube.com/watch?v=XDF8POggNhA&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=4', '2022-01-12', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 5, 'https://www.youtube.com/watch?v=5yqjH97vi00&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=5', '2022-01-14', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 6, 'https://www.youtube.com/watch?v=R6dQF5L1YXE&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=6', '2022-01-28', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 7, 'https://www.youtube.com/watch?v=KxTgIgwDzUw&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=7', '2022-02-09', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 8, 'https://www.youtube.com/watch?v=NY6qw2l0BsQ&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=8', '2022-02-16', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 9, 'https://www.youtube.com/watch?v=Oe6V-roHTaA&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=9', '2022-02-21', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 10, 'https://www.youtube.com/watch?v=dxcJcr3d3qg&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=10', '2022-02-24', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 11, 'https://www.youtube.com/watch?v=KgoEqvT5bZk&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=11', '2022-03-03', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 12, 'https://www.youtube.com/watch?v=MdC3ZGON9SU&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=12', '2022-03-11', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 13, 'https://www.youtube.com/watch?v=mqxh-vfyrtM&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=13', '2022-03-16', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 14, 'https://www.youtube.com/watch?v=56vGOux0dPE&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=14', '2022-04-03', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 15, 'https://www.youtube.com/watch?v=DeyTQ8Kf3so&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=15', '2022-04-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 16, 'https://www.youtube.com/watch?v=5Ou7DlnbHQg&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=16', '2022-06-04', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 17, 'https://www.youtube.com/watch?v=RWsdhFUYKQo&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=17', '2022-06-13', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 18, 'https://www.youtube.com/watch?v=7PWRKQc8SRU&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=18', '2022-06-19', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 19, 'https://www.youtube.com/watch?v=5qzHB2QIEqE&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=19', '2022-06-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 20, 'https://www.youtube.com/watch?v=KhtPJTj8ofY&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=20', '2022-07-21', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 21, 'https://www.youtube.com/watch?v=rTGVIGUsFjw&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=21', '2022-07-30', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 22, 'https://www.youtube.com/watch?v=zm9EdW1154A&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=22', '2022-08-16', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 23, 'https://www.youtube.com/watch?v=80ugNWeeFiE&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=23', '2022-08-21', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 24, 'https://www.youtube.com/watch?v=3rphuE3j1_8&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=24', '2022-08-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 25, 'https://www.youtube.com/watch?v=oodexu4qj4E&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=25', '2022-09-01', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (8, 26, 'https://www.youtube.com/watch?v=wpWYsbQgD5s&list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt&index=26', '2022-09-08', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (9, 1, 'https://www.youtube.com/watch?v=dD2EISBDjWM&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=1', '2014-03-29', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 2, 'https://www.youtube.com/watch?v=-USAeFpVf_A&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=2', '2014-03-30', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 3, 'https://www.youtube.com/watch?v=i3GE-toQg-o&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=3', '2014-03-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 4, 'https://www.youtube.com/watch?v=09oErCBjVns&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=4', '2015-06-05', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 5, 'https://www.youtube.com/watch?v=wvR40su_XBM&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=5', '2015-06-13', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 6, 'https://www.youtube.com/watch?v=U4UHoiK6Oo4&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=6', '2014-11-08', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 7, 'https://www.youtube.com/watch?v=bCt2FnyY7AE&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=7', '2014-04-14', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 8, 'https://www.youtube.com/watch?v=Zy4KJeVN7Gk&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=8', '2014-04-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 9, 'https://www.youtube.com/watch?v=dM12ctixdT4&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=9', '2014-04-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 10, 'https://www.youtube.com/watch?v=rO6_MZLIzCg&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=10', '2014-04-21', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 11, 'https://www.youtube.com/watch?v=wvU1mmJn_UI&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=11', '2015-05-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 12, 'https://www.youtube.com/watch?v=f9QXNFVlsls&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=12', '2015-05-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 13, 'https://www.youtube.com/watch?v=onKF88kRK3Q&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=13', '2015-05-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 14, 'https://www.youtube.com/watch?v=NDAa6EaKce8&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=14', '2015-05-31', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 15, 'https://www.youtube.com/watch?v=g4UAV1lIHyA&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=15', '2015-06-01', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 16, 'https://www.youtube.com/watch?v=NPfy-hKOGfk&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=16', '2015-06-01', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 17, 'https://www.youtube.com/watch?v=yWuAsqUnNsA&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=17', '2015-12-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 18, 'https://www.youtube.com/watch?v=H6BSr5UOg2Y&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=18', '2015-12-30', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 19, 'https://www.youtube.com/watch?v=x13Uxl6_dyw&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=19', '2016-09-02', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 20, 'https://www.youtube.com/watch?v=iWWTtYGZ4YA&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=20', '2015-06-06', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 21, 'https://www.youtube.com/watch?v=sx4kaeyzQzw&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=21', '2015-06-23', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 22, 'https://www.youtube.com/watch?v=s3h5FLBon88&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=22', '2015-07-06', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 23, 'https://www.youtube.com/watch?v=X_OROia6aPo&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=23', '2016-01-11', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 24, 'https://www.youtube.com/watch?v=7PORMYx30xE&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=24', '2016-01-22', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 25, 'https://www.youtube.com/watch?v=iG703SLOJ-Q&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=25', '2016-02-06', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 26, 'https://www.youtube.com/watch?v=kA5pqPA5eZE&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=26', '2016-03-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 27, 'https://www.youtube.com/watch?v=7tWBcT83hek&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=27', '2016-03-27', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 28, 'https://www.youtube.com/watch?v=2aenvVrYWjg&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=28', '2016-03-27', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 29, 'https://www.youtube.com/watch?v=iIgFqkDs4tY&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=29', '2016-03-27', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (9, 30, 'https://www.youtube.com/watch?v=c625P4B0OY0&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB&index=30', '2015-03-15', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (10, 1, 'https://www.youtube.com/watch?v=nQeCtHxC93A&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=1', '2022-07-30', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 2, 'https://www.youtube.com/watch?v=x2eoEZU5fIk&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=2', '2022-08-02', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 3, 'https://www.youtube.com/watch?v=Ifxr9bOdwxM&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=3', '2022-08-02', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 4, 'https://www.youtube.com/watch?v=Y0Xep9cnxyY&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=4', '2022-08-02', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 5, 'https://www.youtube.com/watch?v=7MMJrFWfbC4&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=5', '2022-08-02', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 6, 'https://www.youtube.com/watch?v=gpdEVZilQb4&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=6', '2022-08-03', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 7, 'https://www.youtube.com/watch?v=CD5h69sijd0&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=7', '2022-08-03', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 8, 'https://www.youtube.com/watch?v=tc4D8d_hrVc&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=8', '2022-08-03', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 9, 'https://www.youtube.com/watch?v=mnWmWTYk6OY&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=9', '2022-08-03', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 10, 'https://www.youtube.com/watch?v=0FDyeOBdjBY&list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u&index=10', '2022-08-05', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 11, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 12, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 13, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 14, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 15, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 16, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 17, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 18, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 19, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 20, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 21, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 22, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 23, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 24, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 25, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 26, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 27, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 28, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 29, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 30, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 31, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 32, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 33, '', '2022-08-01', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (10, 34, '', '2022-08-01', '', 'Chưa Hoàn Thành');
 COMMIT;
 -- ----------------------------
 -- Table structure for Account
@@ -209,7 +359,98 @@ INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', 'EJ', '123', 'ejPro@gmail.com', '
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
 
-INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học niên');
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
+VALUES ( 
+  12,
+  'DastagirAhmedTeacher',
+  '123',
+  'info@dbestech.com',
+  'Dastagir Ahmed',
+  '1995-10-02',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  13,
+  'AdrianHajdinTeacher',
+  '123',
+  'contact@jsmasterypro.com',
+  'Adrian Hajdin',
+  '1990-12-21',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  14,
+  'ImranQasimTeacher',
+  '123',
+  'itsmeleo.qureshi@gmail.com',
+  'Imran Qasim',
+  '1989-06-17',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  15,
+  'vandadTeacher',
+  '123',
+  'beau@freecodecamp.org',
+  'Vandad Nahavandipoor',
+  '1998-03-27',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
+VALUES ( 
+  16,
+  'buckyTeacher',
+  '123',
+  'thenewboston@.com',
+  'Bucky Roberts',
+  '1992-05-21',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  17,
+  'phhoangTeacher',
+  '123',
+  'huyhoang8a5@gmail.com',
+  'Phạm Huy Hoàng',
+  '1998-11-11',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  18,
+  'chrisTeacher',
+  '123',
+  'chris@codewithchris',
+  'Chris Ching',
+  '1994-09-21',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  19,
+  'CryceTrulyTeacher',
+  '123',
+  'crycetruly@gmail.com',
+  'Cryce Truly',
+  '1993-11-30',
+  'Giáo viên' 
+);
+INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+VALUES ( 
+  20,
+  'JamesMontemagnoTeacher',
+  '123',
+  'refractoredllc@gmail.com',
+  'James Montemagno',
+  '1994-02-07',
+  'Giáo viên' 
+);
+
+INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên');
@@ -235,17 +476,26 @@ CREATE TABLE `GiaoVien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
-INSERT `GiaoVien` VALUES (1, 1, 1);
-INSERT `GiaoVien` VALUES (2, 2, 1);
-INSERT `GiaoVien` VALUES (3, 3, 1);
-INSERT `GiaoVien` VALUES (4, 4, 1);
-INSERT `GiaoVien` VALUES (5, 5, 1);
-INSERT `GiaoVien` VALUES (6, 6, 1);
-INSERT `GiaoVien` VALUES (7, 7, 1);
-INSERT `GiaoVien` VALUES (8, 8, 1);
-INSERT `GiaoVien` VALUES (9, 9, 1);
-INSERT `GiaoVien` VALUES (10, 10, 1);
-INSERT `GiaoVien` VALUES (11, 11, 1);
+INSERT INTO `GiaoVien` VALUES (1, 1, 1);
+INSERT INTO `GiaoVien` VALUES (2, 2, 1);
+INSERT INTO `GiaoVien` VALUES (3, 3, 1);
+INSERT INTO `GiaoVien` VALUES (4, 4, 1);
+INSERT INTO `GiaoVien` VALUES (5, 5, 1);
+INSERT INTO `GiaoVien` VALUES (6, 6, 1);
+INSERT INTO `GiaoVien` VALUES (7, 7, 1);
+INSERT INTO `GiaoVien` VALUES (8, 8, 1);
+INSERT INTO `GiaoVien` VALUES (9, 9, 1);
+INSERT INTO `GiaoVien` VALUES (10, 10, 1);
+INSERT INTO `GiaoVien` VALUES (11, 11, 1);
+INSERT INTO `GiaoVien` VALUES (12, 12, 1);
+INSERT INTO `GiaoVien` VALUES (13, 13, 1);
+INSERT INTO `GiaoVien` VALUES (14, 14, 1);
+INSERT INTO `GiaoVien` VALUES (15, 15, 1);
+INSERT INTO `GiaoVien` VALUES (16, 16, 1);
+INSERT INTO `GiaoVien` VALUES (17, 17, 1);
+INSERT INTO `GiaoVien` VALUES (18, 18, 1);
+INSERT INTO `GiaoVien` VALUES (19, 19, 1);
+INSERT INTO `GiaoVien` VALUES (20, 20, 1);
 COMMIT;
 
 -- ----------------------------
