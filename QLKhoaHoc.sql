@@ -37,21 +37,21 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `KhoaHoc`;
 CREATE TABLE `KhoaHoc` (
-  MaKhoaHoc int(11) unsigned NOT NULL AUTO_INCREMENT,
-  TenKhoaHoc VARCHAR(100) COLLATE UTF8_GENERAL_CI NOT NULL,
-  LinhVuc int,
-  Gia float not null,
-  SoLuongVideo int,
-  GiaoVien int(11) not null,
-  Image varchar(255),
-  KhuyenMai float,
-  RateTB float,
-  SLHocSinhDanhGia int,
-  MoTaNgan varchar(255) COLLATE utf8_general_ci NOT NULL,
-  LuotXem int,
+  `MaKhoaHoc`int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `TenKhoaHoc` VARCHAR(100) COLLATE UTF8_GENERAL_CI NOT NULL,
+  `LinhVuc` int,
+  `Gia` float not null,
+  `SoLuongVideo` int,
+  `GiaoVien` int(11) not null,
+  `Image` varchar(255),
+  `KhuyenMai` float,
+  `RateTB` float,
+  `SLHocSinhDanhGia` int,
+  `MoTaNgan` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `LuotXem` int,
   
   PRIMARY KEY (`MaKhoaHoc`),
-  Foreign key(LinhVuc) references LinhVuc(MaLinhVuc)
+  Foreign key(`LinhVuc`) references LinhVuc(`MaLinhVuc`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -82,16 +82,16 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `ChiTietKhoaHoc`;
 CREATE TABLE `ChiTietKhoaHoc` (
-  MaKhoaHoc int not null,
-  NgayCapNhat datetime NOT NULL,
-  MoTaChiTiet text COLLATE utf8_general_ci NOT NULL,
-  Link varchar(255) not null,
-  SLHocVien int,
-  NgayBD date,
-  NgayKT date,
+  `MaKhoaHoc` int not null,
+  `NgayCapNhat` datetime NOT NULL,
+  `MoTaChiTiet` text COLLATE utf8_general_ci NOT NULL,
+  `Link` varchar(255) not null,
+  `SLHocVien` int,
+  `NgayBD` date,
+  `NgayKT` date,
   
-  PRIMARY KEY (MaKhoaHoc, NgayCapNhat),
-  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
+  PRIMARY KEY (`MaKhoaHoc`, `NgayCapNhat`),
+  foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -123,14 +123,14 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhSachVideo`;
 CREATE TABLE `DanhSachVideo` (
-   MaKhoaHoc int not null,
-   STT int,
-   Link varchar(255) not null,
-   NgayCapNhat datetime NOT NULL,
-   MoTaVideo varchar(255) COLLATE utf8_general_ci NOT NULL,
-  TrangThai varchar(50),
-  PRIMARY KEY (MaKhoaHoc, STT),
-  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
+  `MaKhoaHoc` int not null,
+  `STT` int,
+  `Link` varchar(255) not null,
+  `NgayCapNhat` datetime NOT NULL,
+  `MoTaVideo` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `TrangThai` varchar(50),
+  PRIMARY KEY (`MaKhoaHoc`, STT),
+  foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -421,14 +421,14 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `TaiKhoan`;
 CREATE TABLE `TaiKhoan` (
-  MaTaiKhoan int(11) NOT NULL AUTO_INCREMENT,
-  Username varchar(50) COLLATE utf8_general_ci NOT NULL,
-  Password varchar(255) COLLATE utf8_general_ci NOT NULL,
-  Name varchar(150) COLLATE utf8_general_ci NOT NULL,
-  Email varchar(150) COLLATE utf8_general_ci NOT NULL,
-  DOB date NOT NULL,
-  LoaiTaiKhoan varchar(50) COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (MaTaiKhoan)
+  `MaTaiKhoan` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(50) COLLATE utf8_general_ci NOT NULL,
+  `Password` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `Name` varchar(150) COLLATE utf8_general_ci NOT NULL,
+  `Email` varchar(150) COLLATE utf8_general_ci NOT NULL,
+  `DOB` date NOT NULL,
+  `LoaiTaiKhoan` varchar(50) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`MaTaiKhoan`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -472,11 +472,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `GiaoVien`;
 CREATE TABLE `GiaoVien` (
-  MaGiaoVien int(11) NOT NULL AUTO_INCREMENT,
-  MaTaiKhoan int(11) NOT NULL ,
-  SLKhoaHoc int,
-  PRIMARY KEY (MaGiaoVien),
-  foreign key(MaTaiKhoan) references TaiKhoan(MaTaiKhoan)
+  `MaGiaoVien` int(11) NOT NULL AUTO_INCREMENT,
+  `MaTaiKhoan` int(11) NOT NULL ,
+  `SLKhoaHoc` int,
+  PRIMARY KEY (`MaGiaoVien`),
+  foreign key(`MaTaiKhoan`) references TaiKhoan(`MaTaiKhoan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -507,11 +507,11 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `HocVien`;
 CREATE TABLE `HocVien` (
-  MaHocVien int(11) NOT NULL AUTO_INCREMENT,
-  MaTaiKhoan int(11) NOT NULL ,
-  SLKhoaHoc int,
-  PRIMARY KEY (MaHocVien),
-  foreign key(MaTaiKhoan) references TaiKhoan(MaTaiKhoan)
+  `MaHocVien` int(11) NOT NULL AUTO_INCREMENT,
+  `MaTaiKhoan` int(11) NOT NULL ,
+  `SLKhoaHoc` int,
+  PRIMARY KEY (`MaHocVien`),
+  foreign key(`MaTaiKhoan`) references TaiKhoan(`MaTaiKhoan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -533,30 +533,58 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `BangDanhGia`;
 CREATE TABLE `BangDanhGia` (
-  MaHocVien int(11) NOT NULL ,
-  MaKhoaHoc int(11) NOT NULL ,
-  Rate int,
-  Comment varchar(250) COLLATE utf8_general_ci NOT NULL,
-  
-  PRIMARY KEY (MaHocVien, MaKhoaHoc),
-  foreign key(MaHocVien) references HocVien(MaHocVien),
-  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
-
+  `MaHocVien` int(11) NOT NULL ,
+  `MaKhoaHoc` int(11) NOT NULL ,
+  `Rate` int,
+  `Comment` varchar(250) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`MaHocVien`, `MaKhoaHoc`),
+  foreign key(`MaHocVien`) references HocVien(`MaHocVien`),
+  foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+INSERT INTO `BangDanhGia` VALUES (1, 8, 4, 'This courses is very helpful. Thanks teacher a lot.');
+INSERT INTO `BangDanhGia` VALUES (2, 8, 3, 'Good but I need more.');
+INSERT INTO `BangDanhGia` VALUES (2, 15, 5, 'Wow. This courses open my mind. Excellent');
+INSERT INTO `BangDanhGia` VALUES (2, 2, 3, 'Normal');
+INSERT INTO `BangDanhGia` VALUES (3, 17, 5, 'Very Good');
+INSERT INTO `BangDanhGia` VALUES (3, 15, 5, 'Your videos has been a blessing....thank you so much for the time and effort.');
+INSERT INTO `BangDanhGia` VALUES (5, 6, 4, 'This courses is very helpful. Need to learn');
+INSERT INTO `BangDanhGia` VALUES (7, 13, 3, 'Thank you for all this amazing courses');
+INSERT INTO `BangDanhGia` VALUES (7, 14, 4, 'What can i say except Thank You ♥?!!');
+INSERT INTO `BangDanhGia` VALUES (8, 11, 4, 'I appriaciate this course');
+INSERT INTO `BangDanhGia` VALUES (8, 15, 4, 'so,so,so,so UNDERSTANDABLE,I love the way you explain,started to learn today ♥');
+INSERT INTO `BangDanhGia` VALUES (9, 9, 3, 'Nice');
+INSERT INTO `BangDanhGia` VALUES (9, 7, 3, 'Nice');
+INSERT INTO `BangDanhGia` VALUES (11, 12, 3, 'Good');
 -- ----------------------------
 -- Table structure for Danh sach dang ki
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhSachDangKi`;
 CREATE TABLE `DanhSachDangKi` (
-  MaHocVien int(11) NOT NULL,
-  MaKhoaHoc int(11) NOT NULL ,
-  NgayDangKy date not null,
-  Note varchar(100) COLLATE utf8_general_ci NOT NULL,
-  
-  PRIMARY KEY (MaHocVien, MaKhoaHoc),
-  foreign key(MaHocVien) references HocVien(MaHocVien),
-  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
+  `MaHocVien` int(11) NOT NULL,
+  `MaKhoaHoc` int(11) NOT NULL ,
+  `NgayDangKy` date not null,
+  `Note` varchar(100) COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`MaHocVien`, `MaKhoaHoc`),
+  foreign key(`MaHocVien`) references HocVien(`MaHocVien`),
+  foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+BEGIN;
+INSERT INTO `DanhSachDangKi` VALUES (1, 8, '2022-12-25', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 8, '2022-12-25', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 15, '2022-12-28', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 2, '2022-12-21', '');
+INSERT INTO `DanhSachDangKi` VALUES (3, 17, '2022-12-20', '');
+INSERT INTO `DanhSachDangKi` VALUES (3, 15, '2022-12-20', '');
+INSERT INTO `DanhSachDangKi` VALUES (5, 6, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (7, 13, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (7, 14, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (8, 11, '2022-12-21', '');
+INSERT INTO `DanhSachDangKi` VALUES (8, 15, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (9, 9, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (9, 7, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (11, 12, '2022-12-29', '');
+COMMIT;
+
 SET FOREIGN_KEY_CHECKS = 1;

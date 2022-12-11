@@ -10,6 +10,7 @@ import courseRoute from "./routes/course.route.js";
 // import productRoute from './routes/product.route.js';
 // import productUserRoute from './routes/product-user.route.js';
 // import categoryService from './services/category.service.js';
+import accountRoute from './routes/account.route.js';
 
 import courseService from "./services/course.service.js";
 
@@ -80,8 +81,8 @@ app.get('/contact', function (req, res) {
     res.render('contact');
 })
 
-
 app.use('/course', courseRoute);
+app.use('/account', accountRoute);
 //
 // app.get('/bs4', function (req, res) {
 //     const __dirname = dirname(fileURLToPath(import.meta.url));
