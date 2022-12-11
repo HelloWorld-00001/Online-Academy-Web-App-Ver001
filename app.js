@@ -4,12 +4,14 @@ import { engine } from 'express-handlebars';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import numeral from 'numeral';
-import courseRoute from "./routes/course.route.js";
 
+import courseRoute from "./routes/course.route.js";
 // import categoryRoute from './routes/category.route.js';
 // import productRoute from './routes/product.route.js';
 // import productUserRoute from './routes/product-user.route.js';
 // import categoryService from './services/category.service.js';
+
+import courseService from "./services/course.service.js";
 
 const app = express();
 app.use(express.urlencoded({
@@ -36,9 +38,17 @@ app.set('views', './views');
 //     next();
 // });
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
     // res.send('Hello World.');
-    res.render('home');
+    const listTop10CourseView = await courseService.findTop10MostViewCourse();
+
+    res.render('home', {
+        listTop10CourseView1: listTop10CourseView[0],
+        listTop10CourseView2: listTop10CourseView[1],
+        listTop10CourseView3: listTop10CourseView[2],
+        listTop10CourseView4: listTop10CourseView[3]
+    });
+    console.log(listTop10CourseView[0]);
 });
 
 // app.get('/home', function (req, res) {
