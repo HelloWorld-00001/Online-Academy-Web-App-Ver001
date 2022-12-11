@@ -1,0 +1,68 @@
+html {
+    background:linear-gradient(#FF7F50, #00008B) !important;   
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family:'Jost', sans-serif;
+}
+
+.frmSign {
+    height: 80%; 
+    width: 70%;   
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display:flex; 
+    justify-content:space-between; 
+    box-shadow: 10px 10px 68px -6px;
+    border-radius: 20px;
+    /* background-image: url("https://github.com/m-mourouh/Animated-Login-Form-Using-Only-HTML-CSS-Sign-In-Form-Design/blob/master/Login_form/bg2.png?raw=true"); */
+}
+
+.frmBack {
+    color: white;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+}
+
+.frmRegister {
+    border-radius: 0px 20px 20px 0px;
+    height:100%; 
+    width:100%; 
+    background-color:white;
+}
+
+.frmLogin {
+    border-radius: 0px 20px 20px 0px;
+    height:100%; 
+    width:100%; 
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 50%;
+    height: 100%;
+    border-radius: 20px 0px 0px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:  linear-gradient(rgba(0,0,0,.5), rgba(255,255,255,.3)), url("/public/img/sc_sign.jpg");
+    background-size: 600px 600px;
+}
+
+#login {
+    text-align: center; 
+    font-family:'Jost', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
