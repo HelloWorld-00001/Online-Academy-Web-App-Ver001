@@ -89,11 +89,11 @@ CREATE TABLE `ChiTietKhoaHoc` (
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhSachVideo`;
 CREATE TABLE `DanhSachVideo` (
-   MaKhoaHoc int not null,
-   STT int,
-   Link varchar(255) not null,
-   NgayCapNhat datetime NOT NULL,
-   MoTaVideo varchar(255) COLLATE utf8_general_ci NOT NULL,
+  MaKhoaHoc int not null,
+  STT int,
+  Link varchar(255) not null,
+  NgayCapNhat datetime NOT NULL,
+  MoTaVideo varchar(255) COLLATE utf8_general_ci NOT NULL,
   TrangThai varchar(50),
   PRIMARY KEY (MaKhoaHoc, STT),
   foreign key(MaKhoaHoc) references KhoaHoc
@@ -373,8 +373,12 @@ INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal',
 INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', 'EJ', '123', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
+<<<<<<< Updated upstream
 
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan )
+>>>>>>> Stashed changes
 VALUES ( 
   12,
   'DastagirAhmedTeacher',
@@ -384,7 +388,11 @@ VALUES (
   '1995-10-02',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   13,
   'AdrianHajdinTeacher',
@@ -394,7 +402,11 @@ VALUES (
   '1990-12-21',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   14,
   'ImranQasimTeacher',
@@ -404,7 +416,11 @@ VALUES (
   '1989-06-17',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   15,
   'vandadTeacher',
@@ -414,7 +430,11 @@ VALUES (
   '1998-03-27',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan )
+>>>>>>> Stashed changes
 VALUES ( 
   16,
   'buckyTeacher',
@@ -424,7 +444,11 @@ VALUES (
   '1992-05-21',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   17,
   'phhoangTeacher',
@@ -434,7 +458,11 @@ VALUES (
   '1998-11-11',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   18,
   'chrisTeacher',
@@ -444,7 +472,11 @@ VALUES (
   '1994-09-21',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   19,
   'CryceTrulyTeacher',
@@ -454,7 +486,11 @@ VALUES (
   '1993-11-30',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
+=======
+INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
+>>>>>>> Stashed changes
 VALUES ( 
   20,
   'JamesMontemagnoTeacher',
@@ -464,8 +500,12 @@ VALUES (
   '1994-02-07',
   'Giáo viên' 
 );
+<<<<<<< Updated upstream
 
 INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên');
+=======
+INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học niên');
+>>>>>>> Stashed changes
 INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên');
