@@ -3,8 +3,8 @@ import { engine } from 'express-handlebars';
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-
 import numeral from 'numeral';
+import courseRoute from "./routes/course.route.js";
 
 // import categoryRoute from './routes/category.route.js';
 // import productRoute from './routes/product.route.js';
@@ -53,6 +53,7 @@ app.get('/course', function (req, res) {
     res.render('course');
 })
 
+
 app.get('/teacher', function (req, res) {
     res.render('teacher');
 })
@@ -68,6 +69,9 @@ app.get('/single', function (req, res) {
 app.get('/contact', function (req, res) {
     res.render('contact');
 })
+
+
+app.use('/course', courseRoute);
 //
 // app.get('/bs4', function (req, res) {
 //     const __dirname = dirname(fileURLToPath(import.meta.url));

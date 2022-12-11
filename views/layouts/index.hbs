@@ -9,20 +9,22 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="public/img/favicon.ico" rel="icon">
+    <link href="../public/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="public/css/style.css" rel="stylesheet">
+    <link href="../public/css/style.css" rel="stylesheet">
+    <!-- Customized mysefl for notfound product and notfound page-->
+    <link href="../public/css/notfound.css" rel="stylesheet">
 </head>
 
 <body>
@@ -114,6 +116,10 @@
                         </div>
                         <a href="/contact" class="nav-item nav-link">Contact</a>
                     </div>
+                    <form class="form-inline my-2 my-lg-0" method="post" action="/course/search">
+                        <input class="form-control mr-sm-2" name="courseFind" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn borderColor changeColor my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                     <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">Join Now</a>
                 </div>
             </nav>
