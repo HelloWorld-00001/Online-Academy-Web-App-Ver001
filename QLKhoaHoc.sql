@@ -51,7 +51,7 @@ CREATE TABLE `KhoaHoc` (
   LuotXem int,
   
   PRIMARY KEY (`MaKhoaHoc`),
-  Foreign key(LinhVuc) references LinhVuc
+  Foreign key(LinhVuc) references LinhVuc(MaLinhVuc)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -67,16 +67,15 @@ INSERT INTO `KhoaHoc` VALUES (9, 'HTML Tutorial for Beginners', 1, 75, 30, 9, '9
 INSERT INTO `KhoaHoc` VALUES (10, 'Hotel booking web', 1, 130, 34, 10, '10.jpg', 10, 0, 0, 'Learn about booking web and how to do it', 0);
 
 INSERT INTO `KhoaHoc` VALUES (11, 'How to Make an App for Beginners (SwiftUI)', 2, 50, 14, 11, '11.jpg', 10, 0, 0, 'In this 14 day beginner challenge, you’ll learn how to make an app even if you’ve never coded before.', 0);
-INSERT INTO `KhoaHoc` VALUES ( 12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13 '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0 );
-INSERT INTO `KhoaHoc` VALUES ( 20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 15, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0 );
-
+INSERT INTO `KhoaHoc` VALUES (12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0 );
+INSERT INTO `KhoaHoc` VALUES (13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13, '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0 );
+INSERT INTO `KhoaHoc` VALUES (14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0 );
+INSERT INTO `KhoaHoc` VALUES (15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES (16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES (17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0 );
+INSERT INTO `KhoaHoc` VALUES (18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0 );
+INSERT INTO `KhoaHoc` VALUES (19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0 );
+INSERT INTO `KhoaHoc` VALUES (20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 10, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0 );
 COMMIT;
 -- ----------------------------
 -- Table structure for CourseDetail
@@ -92,7 +91,7 @@ CREATE TABLE `ChiTietKhoaHoc` (
   NgayKT date,
   
   PRIMARY KEY (MaKhoaHoc, NgayCapNhat),
-  foreign key(MaKhoaHoc) references KhoaHoc
+  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -106,6 +105,7 @@ INSERT INTO `ChiTietKhoaHoc` VALUES (7, '2021-10-04', '', 'https://www.youtube.c
 INSERT INTO `ChiTietKhoaHoc` VALUES (8, '2022-09-07', '', 'https://www.youtube.com/playlist?list=PLWxTHN2c_6cbh1C7yIskoXszoTl-okogt', 0, '2022-12-11', '2023-01-21');
 INSERT INTO `ChiTietKhoaHoc` VALUES (9, '2016-09-02', '', 'https://www.youtube.com/playlist?list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB', 0, '2022-12-2', '2023-01-25');
 INSERT INTO `ChiTietKhoaHoc` VALUES (10, '2022-08-29', '', 'https://www.youtube.com/playlist?list=PLflVqQLAWzC9qybF40gPXpzntMQIoYG5u', 0, '2022-12-6', '2023-01-27');
+
 INSERT INTO `ChiTietKhoaHoc` VALUES (11, '2022-11-20', '', 'https://www.youtube.com/playlist?list=PLMRqhzcHGw1YqPh-ggQHJPAUxdHov_uNJ', 0, '2022-12-24', '2023-01-21');
 INSERT INTO `ChiTietKhoaHoc` VALUES (12, '2022-09-20', '', 'https://www.dbestech.com/tutorials/flutter-food-delivery-app-e-commerce-for-ios-and-android', 0, '2022-01-28', '2022-09-20');
 INSERT INTO `ChiTietKhoaHoc` VALUES (13, '2022-04-01', '', 'https://www.youtube.com/watch?v=_ivIUCSOZ78', 0, '2022-04-01', '2022-04-01');
@@ -130,7 +130,7 @@ CREATE TABLE `DanhSachVideo` (
    MoTaVideo varchar(255) COLLATE utf8_general_ci NOT NULL,
   TrangThai varchar(50),
   PRIMARY KEY (MaKhoaHoc, STT),
-  foreign key(MaKhoaHoc) references KhoaHoc
+  foreign key(MaKhoaHoc) references KhoaHoc(MaKhoaHoc)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -364,21 +364,21 @@ INSERT INTO `DanhSachVideo` VALUES (14, 15, 'https://youtu.be/iTgM-0NDAKY', '202
 
 INSERT INTO `DanhSachVideo` VALUES (15, 1, 'https://youtu.be/VPvVD8t02U8', '2022-02-24', '', 'Hoàn Thành');
 
-INSERT INTO `DanhSachVideo` VALUES (16, 1, 'https://youtu.be/QAbQgLGKd3Y', '2014-12-12', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 2, 'https://youtu.be/zEsDwzjPJ5c', '2014-12-12', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 3, 'https://youtu.be/r4oIez0sfvY', '2014-12-16', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 4, 'https://youtu.be/qKRWC3Q8wRw', '2014-12-16', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 5, 'https://youtu.be/-pdTqBq2TFQ', '2014-12-16', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 6, 'https://youtu.be/OUCjk_n3raM', '2014-12-16', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 7, 'https://youtu.be/XWk5hKmgAmE', '2014-12-16', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 8, 'https://youtu.be/9l1lfWAiHPg', '2014-12-19', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 9, 'https://youtu.be/NMDPxN8FgXM', '2014-12-19', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 10, 'https://youtu.be/9LbETUPM_sY', '2014-12-19', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 11, 'https://youtu.be/cOYzJN6A-JM', '2014-12-19', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 12, 'https://youtu.be/72mf0rmjNAA', '2014-12-19', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 13, 'https://youtu.be/MdOxtws4DsI', '2014-12-21', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 14, 'https://youtu.be/RLDqbEhUjVk', '2014-12-21', '', 'Chưa Hoàn Thành');
-INSERT INTO `DanhSachVideo` VALUES (16, 15, 'https://youtu.be/cXKsFHRG2_c', '2014-12-21', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 1, 'https://youtu.be/QAbQgLGKd3Y', '2022-12-12', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 2, 'https://youtu.be/zEsDwzjPJ5c', '2022-12-12', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 3, 'https://youtu.be/r4oIez0sfvY', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 4, 'https://youtu.be/qKRWC3Q8wRw', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 5, 'https://youtu.be/-pdTqBq2TFQ', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 6, 'https://youtu.be/OUCjk_n3raM', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 7, 'https://youtu.be/XWk5hKmgAmE', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 8, 'https://youtu.be/9l1lfWAiHPg', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 9, 'https://youtu.be/NMDPxN8FgXM', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 10, 'https://youtu.be/9LbETUPM_sY', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 11, 'https://youtu.be/cOYzJN6A-JM', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 12, 'https://youtu.be/72mf0rmjNAA', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 13, 'https://youtu.be/MdOxtws4DsI', '2022-12-21', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 14, 'https://youtu.be/RLDqbEhUjVk', '2022-12-21', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 15, 'https://youtu.be/cXKsFHRG2_c', '2022-12-21', '', 'Chưa Hoàn Thành');
 
 INSERT INTO `DanhSachVideo` VALUES (17, 1, 'https://youtu.be/lBuj1zoij6Y', '2020-06-02', '', 'Hoàn Thành');
 
@@ -415,9 +415,6 @@ INSERT INTO `DanhSachVideo` VALUES (20, 13, 'https://youtu.be/a37qBMt0V9w', '202
 INSERT INTO `DanhSachVideo` VALUES (20, 14, 'https://youtu.be/8iYpLMKE_ws', '2021-04-08', '', 'Chưa Hoàn Thành');
 INSERT INTO `DanhSachVideo` VALUES (20, 15, 'https://youtu.be/ylbgWHB_gMI', '2021-04-22', '', 'Chưa Hoàn Thành');
 
-
-
-
 COMMIT;
 -- ----------------------------
 -- Table structure for Account
@@ -443,7 +440,7 @@ INSERT INTO `TaiKhoan` VALUES (5, 'dtsonTeacher', '123', 'Đặng Trường Sơn
 INSERT INTO `TaiKhoan` VALUES (6, 'euniqaTeacher', '123', 'Euniqa', 'euniqaPro@gmail.com', '1991-11-12', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (7, 'nsnguyenTeacher', '123', 'Ngô Sỹ Nguyên', 'nsnguyenPro@gmail.com', '1989-07-06', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal', 'mtjamalPro@gmail.com', '1997-12-18', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', 'EJ', '123', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
 
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
@@ -517,6 +514,19 @@ CREATE TABLE `HocVien` (
   foreign key(MaTaiKhoan) references TaiKhoan(MaTaiKhoan)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+BEGIN;
+INSERT INTO `HocVien` VALUES (1, 21, 1);
+INSERT INTO `HocVien` VALUES (2, 22, 3);
+INSERT INTO `HocVien` VALUES (3, 23, 2);
+INSERT INTO `HocVien` VALUES (4, 24, 0);
+INSERT INTO `HocVien` VALUES (5, 25, 1);
+INSERT INTO `HocVien` VALUES (6, 26, 0);
+INSERT INTO `HocVien` VALUES (7, 27, 2);
+INSERT INTO `HocVien` VALUES (8, 28, 2);
+INSERT INTO `HocVien` VALUES (9, 29, 2);
+INSERT INTO `HocVien` VALUES (10, 30, 0);
+INSERT INTO `HocVien` VALUES (11, 31, 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for Account
