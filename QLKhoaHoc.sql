@@ -67,15 +67,16 @@ INSERT INTO `KhoaHoc` VALUES (9, 'HTML Tutorial for Beginners', 1, 75, 30, 9, '9
 INSERT INTO `KhoaHoc` VALUES (10, 'Hotel booking web', 1, 130, 34, 10, '10.jpg', 10, 0, 0, 'Learn about booking web and how to do it', 0);
 
 INSERT INTO `KhoaHoc` VALUES (11, 'How to Make an App for Beginners (SwiftUI)', 2, 50, 14, 11, '11.jpg', 10, 0, 0, 'In this 14 day beginner challenge, you’ll learn how to make an app even if you’ve never coded before.', 0);
-INSERT INTO `KhoaHoc` VALUES (12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0 );
-INSERT INTO `KhoaHoc` VALUES (13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13, '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0 );
-INSERT INTO `KhoaHoc` VALUES (14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0 );
-INSERT INTO `KhoaHoc` VALUES (15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0 );
-INSERT INTO `KhoaHoc` VALUES (16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0 );
-INSERT INTO `KhoaHoc` VALUES (17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0 );
-INSERT INTO `KhoaHoc` VALUES (18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0 );
-INSERT INTO `KhoaHoc` VALUES (19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0 );
-INSERT INTO `KhoaHoc` VALUES (20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 10, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13 '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 10, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0 );
+
 COMMIT;
 -- ----------------------------
 -- Table structure for CourseDetail
@@ -324,6 +325,72 @@ INSERT INTO `DanhSachVideo` VALUES (11, 11, 'https://www.youtube.com/watch?v=2oT
 INSERT INTO `DanhSachVideo` VALUES (11, 12, 'https://www.youtube.com/watch?v=kwz9-EjL7dY&list=PLMRqhzcHGw1YqPh-ggQHJPAUxdHov_uNJ&index=12', '2020-12-18', '', 'Hoàn Thành');
 INSERT INTO `DanhSachVideo` VALUES (11, 13, 'https://www.youtube.com/watch?v=zP1LFgBO8Jg&list=PLMRqhzcHGw1YqPh-ggQHJPAUxdHov_uNJ&index=13', '2020-12-23', '', 'Hoàn Thành');
 INSERT INTO `DanhSachVideo` VALUES (11, 14, 'https://www.youtube.com/watch?v=4Evf46kbB3c&list=PLMRqhzcHGw1YqPh-ggQHJPAUxdHov_uNJ&index=14', '2020-12-25', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (12, 1, 'https://youtu.be/7dAt-JMSCVQ', '2022-01-28', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 2, 'https://youtu.be/GQJovou6zuE', '2022-02-17', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 3, 'https://youtu.be/qapb-_gMZRs', '2022-03-23', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 4, 'https://youtu.be/sJoJVmk1M8Y', '2022-04-20', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 5, 'https://youtu.be/5VZCpwcZ8dI', '2022-05-09', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 6, 'https://youtu.be/Oggjb7ATVew', '2022-06-11', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 7, 'https://youtu.be/ROkGpSy78c0', '2022-07-18', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (12, 8, 'https://youtu.be/jwTdm6fNx1I', '2022-09-20', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (13, 1, 'https://youtu.be/_ivIUCSOZ78', '2022-04-01', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (14, 1, 'https://youtu.be/wJwsLVE1r8w', '2020-01-22', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 2, 'https://youtu.be/zwP1ctb6k7M', '2020-01-23', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 3, 'https://youtu.be/MjKcKYDg6S4', '2020-01-24', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 4, 'https://youtu.be/VVzGahVaW6U', '2020-01-25', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 5, 'https://youtu.be/gUueGj81T3U', '2020-01-26', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 6, 'https://youtu.be/DZyIxlXEPJ4', '2020-01-27', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 7, 'https://youtu.be/Osrg1in6g54', '2020-01-29', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 8, 'https://youtu.be/B2LZrVa-UtU', '2020-01-30', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 9, 'https://youtu.be/_vaM3phHh6I', '2020-01-30', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 10, 'https://youtu.be/p9_BObgP1DE', '2020-01-31', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 11, 'https://youtu.be/sA_VrlZkygU', '2020-02-02', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 12, 'https://youtu.be/gJsOFtBPtt4', '2020-02-03', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 13, 'https://youtu.be/vcjX8owxWU8', '2020-02-05', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 14, 'https://youtu.be/7Qoop-weQs0', '2020-02-07', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (14, 15, 'https://youtu.be/iTgM-0NDAKY', '2020-02-10', '', 'Chưa Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (15, 1, 'https://youtu.be/VPvVD8t02U8', '2022-02-24', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (16, 1, 'https://youtu.be/QAbQgLGKd3Y', '2022-12-12', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 2, 'https://youtu.be/zEsDwzjPJ5c', '2022-12-12', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 3, 'https://youtu.be/r4oIez0sfvY', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 4, 'https://youtu.be/qKRWC3Q8wRw', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 5, 'https://youtu.be/-pdTqBq2TFQ', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 6, 'https://youtu.be/OUCjk_n3raM', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 7, 'https://youtu.be/XWk5hKmgAmE', '2022-12-16', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 8, 'https://youtu.be/9l1lfWAiHPg', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 9, 'https://youtu.be/NMDPxN8FgXM', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 10, 'https://youtu.be/9LbETUPM_sY', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 11, 'https://youtu.be/cOYzJN6A-JM', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 12, 'https://youtu.be/72mf0rmjNAA', '2022-12-19', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 13, 'https://youtu.be/MdOxtws4DsI', '2022-12-21', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 14, 'https://youtu.be/RLDqbEhUjVk', '2022-12-21', '', 'Chưa Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (16, 15, 'https://youtu.be/cXKsFHRG2_c', '2022-12-21', '', 'Chưa Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (17, 1, 'https://youtu.be/lBuj1zoij6Y', '2020-02-02', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (18, 1, 'https://youtu.be/yOYnXoFvmj4', '2020-11-11', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 2, 'https://youtu.be/tPWUsSELJyY', '2020-11-13', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 3, 'https://youtu.be/K6FXSVc-axM', '2020-11-17', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 4, 'https://youtu.be/wEF9AXy8-Sc', '2020-11-19', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 5, 'https://youtu.be/GqWgsWS4aL4', '2020-11-24', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 6, 'https://youtu.be/72JNNU2otF4', '2020-11-26', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 7, 'https://youtu.be/ce6W9E82lOA', '2020-12-02', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 8, 'https://youtu.be/voviIrX7bXU', '2020-12-04', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 9, 'https://youtu.be/9KMaGxYTcEI', '2020-12-09', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 10, 'https://youtu.be/Xx9HjAB-Zz0', '2020-12-11', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 11, 'https://youtu.be/2oT32JUH1s0', '2020-12-16', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 12, 'https://youtu.be/kwz9-EjL7dY', '2020-12-18', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 13, 'https://youtu.be/zP1LFgBO8Jg', '2020-12-23', '', 'Hoàn Thành');
+INSERT INTO `DanhSachVideo` VALUES (18, 14, 'https://youtu.be/4Evf46kbB3c', '2020-12-25', '', 'Hoàn Thành');
+
+INSERT INTO `DanhSachVideo` VALUES (19, 1, 'https://youtu.be/npe3Wf4tpSg', '2021-02-14', '', 'Hoàn Thành');
+
+
 COMMIT;
 -- ----------------------------
 -- Table structure for Account
@@ -353,15 +420,15 @@ INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', 'EJ', '123', 'ejPro@gmail.com', '
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
 
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'info@dbestech.com', 'Dastagir Ahmed', '1995-10-02', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'contact@jsmasterypro.com', 'Adrian Hajdin', '1990-12-21', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (14, 'ImranQasimTeacher', '123', 'itsmeleo.qureshi@gmail.com', 'Imran Qasim', '1989-06-17', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (15, 'vandadTeacher', '123', 'beau@freecodecamp.org', 'Vandad Nahavandipoor', '1998-03-27', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (16, 'buckyTeacher', '123', 'thenewboston@.com', 'Bucky Roberts', '1992-05-21', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'huyhoang8a5@gmail.com', 'Phạm Huy Hoàng', '1998-11-11', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'chris@codewithchris', 'Chris Ching', '1994-09-21', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'crycetruly@gmail.com', 'Cryce Truly', '1993-11-30', 'Giáo viên');
-INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'refractoredllc@gmail.com', 'James Montemagno', '1994-02-07', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'Dastagir Ahmed', 'info@dbestech.com', '1995-10-02', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'Adrian Hajdin', 'contact@jsmasterypro.com', '1990-12-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (14, 'ImranQasimTeacher', '123', 'Imran Qasim', 'itsmeleo.qureshi@gmail.com', '1989-06-17', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (15, 'vandadTeacher', '123', 'Vandad Nahavandipoor', 'beau@freecodecamp.org', '1998-03-27', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (16, 'buckyTeacher', '123', 'Bucky Roberts', 'thenewboston@.com', '1992-05-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'Phạm Huy Hoàng', 'huyhoang8a5@gmail.com', '1998-11-11', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'Chris Ching', 'chris@codewithchris', '1994-09-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'Cryce Truly', 'crycetruly@gmail.com', '1993-11-30', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'James Montemagno', 'refractoredllc@gmail.com', '1994-02-07', 'Giáo viên');
 
 INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên');
