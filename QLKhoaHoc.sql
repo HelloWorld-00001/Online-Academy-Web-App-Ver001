@@ -66,6 +66,16 @@ INSERT INTO `KhoaHoc` VALUES (8, 'Hotel booking web using PHP and MySQL', 1, 140
 INSERT INTO `KhoaHoc` VALUES (9, 'HTML Tutorial for Beginners', 1, 75, 30, 9, '9.jpg', 10, 0, 0, 'In this video we go over the basics of HTML and what you will need to follow along for the entire series. This series will cover the latest concepts including HTML5.', 0);
 INSERT INTO `KhoaHoc` VALUES (10, 'Hotel booking web', 1, 130, 34, 10, '10.jpg', 10, 0, 0, 'Learn about booking web and how to do it', 0);
 INSERT INTO `KhoaHoc` VALUES (11, 'How to Make an App for Beginners (SwiftUI)', 2, 50, 14, 11, '11.jpg', 10, 0, 0, 'In this 14 day beginner challenge, you’ll learn how to make an app even if you’ve never coded before.', 0);
+INSERT INTO `KhoaHoc` VALUES ( 12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13 '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0 );
+INSERT INTO `KhoaHoc` VALUES ( 20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 10, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0 );
+
 COMMIT;
 -- ----------------------------
 -- Table structure for CourseDetail
@@ -373,143 +383,17 @@ INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal',
 INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', 'EJ', '123', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
-<<<<<<< Updated upstream
-
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan )
->>>>>>> Stashed changes
-VALUES ( 
-  12,
-  'DastagirAhmedTeacher',
-  '123',
-  'info@dbestech.com',
-  'Dastagir Ahmed',
-  '1995-10-02',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  13,
-  'AdrianHajdinTeacher',
-  '123',
-  'contact@jsmasterypro.com',
-  'Adrian Hajdin',
-  '1990-12-21',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  14,
-  'ImranQasimTeacher',
-  '123',
-  'itsmeleo.qureshi@gmail.com',
-  'Imran Qasim',
-  '1989-06-17',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  15,
-  'vandadTeacher',
-  '123',
-  'beau@freecodecamp.org',
-  'Vandad Nahavandipoor',
-  '1998-03-27',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan )
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan )
->>>>>>> Stashed changes
-VALUES ( 
-  16,
-  'buckyTeacher',
-  '123',
-  'thenewboston@.com',
-  'Bucky Roberts',
-  '1992-05-21',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  17,
-  'phhoangTeacher',
-  '123',
-  'huyhoang8a5@gmail.com',
-  'Phạm Huy Hoàng',
-  '1998-11-11',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  18,
-  'chrisTeacher',
-  '123',
-  'chris@codewithchris',
-  'Chris Ching',
-  '1994-09-21',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  19,
-  'CryceTrulyTeacher',
-  '123',
-  'crycetruly@gmail.com',
-  'Cryce Truly',
-  '1993-11-30',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-INSERT INTO `TaiKhoan` ( MaTaiKhoan, Username, Password, Email, Name, DOB, LoaiTaiKhoan)
-=======
-INSERT INTO taikhoan ( MaTaiKhoan, Username, Password, Email, name, DOB, LoaiTaiKhoan)
->>>>>>> Stashed changes
-VALUES ( 
-  20,
-  'JamesMontemagnoTeacher',
-  '123',
-  'refractoredllc@gmail.com',
-  'James Montemagno',
-  '1994-02-07',
-  'Giáo viên' 
-);
-<<<<<<< Updated upstream
-
+INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'info@dbestech.com', 'Dastagir Ahmed', '1995-10-02', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'contact@jsmasterypro.com', 'Adrian Hajdin', '1990-12-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (14, 'ImranQasimTeacher', '123', 'itsmeleo.qureshi@gmail.com', 'Imran Qasim', '1989-06-17', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (15, 'vandadTeacher', '123', 'beau@freecodecamp.org', 'Vandad Nahavandipoor', '1998-03-27', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (16, 'buckyTeacher', '123', 'thenewboston@.com', 'Bucky Roberts', '1992-05-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'huyhoang8a5@gmail.com', 'Phạm Huy Hoàng', '1998-11-11', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'chris@codewithchris', 'Chris Ching', '1994-09-21', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'crycetruly@gmail.com', 'Cryce Truly', '1993-11-30', 'Giáo viên');
+INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'refractoredllc@gmail.com', 'James Montemagno', '1994-02-07', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên');
-=======
-INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học niên');
->>>>>>> Stashed changes
 INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên');
-INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên');
-INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên');
-INSERT INTO `TaiKhoan` VALUES (25, 'loidForger', '123', 'Loid Forger', 'loidSxf@gmail.com', '2002-05-01', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (26, 'kenKaneki', '123', 'Ken Kaneki', 'kaneki1000_7@gmail.com', '2004-11-19', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (27, 'todorokiShoto', '123', 'Todoroki Shoto', 'shotoBaka@gmail.com', '2005-04-03', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (28, 'bakugoKatsuki', '123', 'Bakugo Katsuki', 'kacchanAngry@gmail.com', '2002-12-25', 'Học viên');
