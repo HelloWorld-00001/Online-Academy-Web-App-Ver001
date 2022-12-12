@@ -9842,7 +9842,7 @@ h6,
 }
 
 .page-header {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(public/img/page-header.jpg), no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/public/img/page-header.jpg), no-repeat center center;
   background-size: cover;
 }
 
@@ -9869,7 +9869,7 @@ h6,
 }
 
 .bg-registration {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(public/img/registration.jpg), no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/public/img/registration.jpg), no-repeat center center;
   background-size: cover;
 }
 
@@ -9955,4 +9955,13 @@ h6,
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.text-log {
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }

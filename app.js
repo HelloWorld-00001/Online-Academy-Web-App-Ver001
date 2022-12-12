@@ -5,14 +5,15 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import numeral from 'numeral';
 
-import courseRoute from "./routes/course.route.js";
 // import categoryRoute from './routes/category.route.js';
 // import productRoute from './routes/product.route.js';
 // import productUserRoute from './routes/product-user.route.js';
 // import categoryService from './services/category.service.js';
-import accountRoute from './routes/account.route.js';
 
 import courseService from "./services/course.service.js";
+import accountRoute from './routes/account.route.js';
+import courseRoute from "./routes/course.route.js";
+import categoryUserRoute from "./routes/category-user.route.js"
 
 const app = express();
 app.use(express.urlencoded({
@@ -60,11 +61,6 @@ app.get('/about', function (req, res) {
     res.render('about');
 })
 
-app.get('/course', function (req, res) {
-    res.render('course');
-})
-
-
 app.get('/teacher', function (req, res) {
     res.render('teacher');
 })
@@ -83,6 +79,7 @@ app.get('/contact', function (req, res) {
 
 app.use('/course', courseRoute);
 app.use('/account', accountRoute);
+app.use('/categories', categoryUserRoute);
 //
 // app.get('/bs4', function (req, res) {
 //     const __dirname = dirname(fileURLToPath(import.meta.url));

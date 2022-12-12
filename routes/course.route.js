@@ -1,5 +1,5 @@
 import express from 'express';
-import courseModel from '../models/course.model.js';
+import courseModel from '../services/course.service.js';
 const router = express.Router();
 
 router.post('/search', function (req, res) {
@@ -19,4 +19,63 @@ router.get('/search', function (req, res) {
     // });
     res.render('/');
 });
+
+
+router.get('/', async function (req, res) {
+    const countF =  await courseModel.countField();
+    console.log(countF)
+    const fields = [];
+    const nameField = ["Web Development", "Mobile Development"];
+    for(let i = 0; i < countF; i++) {
+        let field = await courseModel.countByField(i + 1);
+        console.log(field)
+        fields.push({
+            imgNumber: i + 1,
+            nameField: nameField[i],
+            value: field,
+        });
+    }
+
+    const limit = 6;
+    const page = req.query.page || 1;
+    const offset = (page - 1) * limit;
+
+    const total = await courseModel.countCourseAll();
+    let nPages = Math.ceil(total / limit);
+    if(total % limit > 0) nPages++;
+
+    const pageNumbers = [];
+    for(let i = 1; i <= nPages; i++) {
+        pageNumbers.push({
+            value: i,
+            isCurrent: i === +page,
+        })
+    }
+    const nextPageNumber = {
+        value: +page + 1,
+        isNextPage:   +page + 1 <= +nPages,
+    }
+    const previousPageNumber = {
+        value: +page - 1,
+        isPreviousPage:   +page - 1 > 0,
+    }
+
+    const list = await courseModel.findPageCourseAll(limit, offset);
+    const courses = [];
+    for(let course of list) {
+        courses.push({
+            value: course,
+            isFieldType: course.LinhVuc === 1
+        })
+    }
+    res.render('course' , {
+        courses: courses,
+        empty: list.length === 0,
+        pageNumbers,
+        nextPageNumber,
+        previousPageNumber,
+        fields,
+    });
+});
+
 export default router;
