@@ -59,12 +59,4 @@ export default {
             .limit(limit)
             .offset(offset);
     },
-    async findCourseList(limit, offset) {
-        const sql = `select k.*, tk.Username, lv.TenLinhVuc
-                    from khoahoc k left join giaovien gv on k.GiaoVien = gv.MaGiaoVien and k.Mak 
-                    join taikhoan tk on gv.MaTaiKhoan = tk.MaTaiKhoan 
-                    join linhvuc lv on k.LinhVuc = lv.MaLinhVuc`
-        const raw =  await db.raw(sql);
-        return raw[0];
-    }
 }
