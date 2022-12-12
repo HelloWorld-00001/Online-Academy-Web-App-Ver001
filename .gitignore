@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/utils
 .pnp.js
 
 # testing
@@ -24,5 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 QLKhoaHoc.session.sql
 .vscode/settings.json
-db.js
 *.log
