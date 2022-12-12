@@ -5,21 +5,20 @@ const router = express.Router();
 
 router.get('/:id', async function (req, res) {
     const linhVuc = req.params.id || 1;
-
-    // for(const c of res.locals.lcCategories) {
-    //     if(c.CatID === +linhVuc) {
-    //         c.isActive = true;
-    //         break;
-    //     }
-    // }
+    const fields = await courseModel.countByField();
 
     const limit = 6;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
+    let total = 0;
 
-    const total = await courseModel.countByField(linhVuc);
+    for(let i = 0; i < fields.length; i++) {
+        if( +linhVuc === fields[i].MaLinhVuc) {
+            total = fields[i].SLKhoaHoc;
+            break;
+        }
+    }
     const nPages = Math.ceil(total / limit);
-
     const pageNumbers = [];
     for(let i = 1; i <= nPages; i++) {
         pageNumbers.push({
@@ -36,20 +35,15 @@ router.get('/:id', async function (req, res) {
         isPreviousPage:   +page - 1 > 0,
     }
 
-    const list = await courseModel.findPageByField(linhVuc, limit, offset);
-    const courses = [];
-    for(let course of list) {
-        courses.push({
-            value: course,
-            isFieldType: course.LinhVuc === 1
-        })
-    }
+    const courses = await courseModel.findPageByField(linhVuc, limit, offset);
+
     res.render('vwCategories/index' , {
         courses: courses,
-        empty: list.length === 0,
+        empty: courses.length === 0,
         pageNumbers,
         nextPageNumber,
         previousPageNumber,
+        fields,
     });
 });
 

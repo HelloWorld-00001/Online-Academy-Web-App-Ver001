@@ -32,6 +32,23 @@ export default {
 
     findPageCourseAll(limit, offset) {
         return db('Khoahoc')
+            .select(
+                ['Khoahoc.MaKhoaHoc',
+                'Khoahoc.TenKhoaHoc',
+                'Khoahoc.LinhVuc',
+                'Khoahoc.Gia',
+                'Khoahoc.SoLuongVideo',
+                'Khoahoc.Image',
+                'Khoahoc.KhuyenMai',
+                'Khoahoc.RateTB',
+                'Khoahoc.SLHocSinhDanhGia',
+                'Khoahoc.LuotXem',
+                'taikhoan.Username',
+                'linhvuc.TenLinhVuc']
+            )
+            .innerJoin('giaovien', {'Khoahoc.GiaoVien': 'MaGiaoVien.id'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.LinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)
             .offset(offset);
     },
@@ -42,4 +59,12 @@ export default {
             .limit(limit)
             .offset(offset);
     },
+    async findCourseList(limit, offset) {
+        const sql = `select k.*, tk.Username, lv.TenLinhVuc
+                    from khoahoc k left join giaovien gv on k.GiaoVien = gv.MaGiaoVien and k.Mak 
+                    join taikhoan tk on gv.MaTaiKhoan = tk.MaTaiKhoan 
+                    join linhvuc lv on k.LinhVuc = lv.MaLinhVuc`
+        const raw =  await db.raw(sql);
+        return raw[0];
+    }
 }
