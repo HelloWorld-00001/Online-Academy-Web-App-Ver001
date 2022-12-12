@@ -27,3 +27,5 @@ yarn-error.log*
 QLKhoaHoc.session.sql
 .vscode/settings.json
 *.log
+utils/db.js
+utils/db.js
