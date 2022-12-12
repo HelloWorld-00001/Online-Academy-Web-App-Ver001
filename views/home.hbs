@@ -399,122 +399,243 @@
             <li data-target="#carouselTop10LastedCourse" data-slide-to="0" class="active"></li>
             <li data-target="#carouselTop10LastedCourse" data-slide-to="1"></li>
             <li data-target="#carouselTop10LastedCourse" data-slide-to="2"></li>
+            <li data-target="#carouselTop10LastedCourse" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4 ">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
+                    {{#each this.listTop10LastedCourse1}}
+                        <div class="col-lg-4 mb-3">
+                            <div class="form_course">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <small class="m-0">
+                                                <i class="fa fa-users text-primary mr-2"></i>
+                                                {{LuotXem}} Students
+                                            </small>
+                                            <small class="m-0">
+                                                <i class="far fa-clock text-primary mr-2"></i>
+                                                {{SoLuongVideo}}
+                                            </small>
+                                        </div>
+                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                        {{#if isFieldType}}
+                                            <p class="card-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{else}}
+                                            <p class="card-text">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{/if}}
+                                        <p class="card-text">{{Username}}</p>
+                                        <div class="card__stars">
+                                        <span>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star-half text-primary"></i>
+                                        </span>
+                                            <span class="text-primary">{{RateTB}}</span>
+                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                        </div>
+                                    </div>
+                                    <div class="border-top card-footer d-flex">
+                                        <div class="card__price h5 ">
+                                            {{#if isNoDiscount}}
+                                                <span class="align-self-center">${{format_number Gia}}</span>
+                                            {{else}}
+                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                            {{/if}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4 ">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
+                    {{#each this.listTop10LastedCourse2}}
+                        <div class="col-lg-4 mb-3">
+                            <div class="form_course">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <small class="m-0">
+                                                <i class="fa fa-users text-primary mr-2"></i>
+                                                {{LuotXem}} Students
+                                            </small>
+                                            <small class="m-0">
+                                                <i class="far fa-clock text-primary mr-2"></i>
+                                                {{SoLuongVideo}}
+                                            </small>
+                                        </div>
+                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                        {{#if isFieldType}}
+                                            <p class="card-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{else}}
+                                            <p class="card-text">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{/if}}
+                                        <p class="card-text">{{Username}}</p>
+                                        <div class="card__stars">
+                                        <span>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star-half text-primary"></i>
+                                        </span>
+                                            <span class="text-primary">{{RateTB}}</span>
+                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                        </div>
+                                    </div>
+                                    <div class="border-top card-footer d-flex">
+                                        <div class="card__price h5 ">
+                                            {{#if isNoDiscount}}
+                                                <span class="align-self-center">${{format_number Gia}}</span>
+                                            {{else}}
+                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                            {{/if}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    {{#each this.listTop10LastedCourse3}}
+                        <div class="col-lg-4 mb-3">
+                            <div class="form_course">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <small class="m-0">
+                                                <i class="fa fa-users text-primary mr-2"></i>
+                                                {{LuotXem}} Students
+                                            </small>
+                                            <small class="m-0">
+                                                <i class="far fa-clock text-primary mr-2"></i>
+                                                {{SoLuongVideo}}
+                                            </small>
+                                        </div>
+                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                        {{#if isFieldType}}
+                                            <p class="card-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{else}}
+                                            <p class="card-text">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{/if}}
+                                        <p class="card-text">{{Username}}</p>
+                                        <div class="card__stars">
+                                        <span>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star-half text-primary"></i>
+                                        </span>
+                                            <span class="text-primary">{{RateTB}}</span>
+                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                        </div>
+                                    </div>
+                                    <div class="border-top card-footer d-flex">
+                                        <div class="card__price h5 ">
+                                            {{#if isNoDiscount}}
+                                                <span class="align-self-center">${{format_number Gia}}</span>
+                                            {{else}}
+                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                            {{/if}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="public/img/course-1.jpg" alt="">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
-                                </div>
-                                <a class="h5" href="">Web design & development courses for beginner</a>
-                                <div class="border-top mt-4 pt-4">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                        <h5 class="m-0">$99</h5>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    {{#each this.listTop10LastedCourse4}}
+                        <div class="col-lg-4 mb-3">
+                            <div class="form_course">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <small class="m-0">
+                                                <i class="fa fa-users text-primary mr-2"></i>
+                                                {{LuotXem}} Students
+                                            </small>
+                                            <small class="m-0">
+                                                <i class="far fa-clock text-primary mr-2"></i>
+                                                {{SoLuongVideo}}
+                                            </small>
+                                        </div>
+                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                        {{#if isFieldType}}
+                                            <p class="card-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{else}}
+                                            <p class="card-text">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                {{TenLinhVuc}}
+                                            </p>
+                                        {{/if}}
+                                        <p class="card-text">{{Username}}</p>
+                                        <div class="card__stars">
+                                        <span>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star-half text-primary"></i>
+                                        </span>
+                                            <span class="text-primary">{{RateTB}}</span>
+                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                        </div>
+                                    </div>
+                                    <div class="border-top card-footer d-flex">
+                                        <div class="card__price h5 ">
+                                            {{#if isNoDiscount}}
+                                                <span class="align-self-center">${{format_number Gia}}</span>
+                                            {{else}}
+                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                            {{/if}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

@@ -44,12 +44,17 @@ app.get('/', async function (req, res) {
     // res.send('Hello World.');
     const listTop10CourseView = await courseService.findTop10MostViewCourse();
     const listTop3CourseLastWeek = await courseService.findTop3LastWeek();
+    const listTop10LastedCourse = await courseService.findTop10LastedCourse();
     res.render('home', {
         listTop10CourseView1: listTop10CourseView[0],
         listTop10CourseView2: listTop10CourseView[1],
         listTop10CourseView3: listTop10CourseView[2],
         listTop10CourseView4: listTop10CourseView[3],
-        listTop3CourseLastWeek: listTop3CourseLastWeek
+        listTop3CourseLastWeek: listTop3CourseLastWeek,
+        listTop10LastedCourse1: listTop10LastedCourse[0],
+        listTop10LastedCourse2: listTop10LastedCourse[1],
+        listTop10LastedCourse3: listTop10LastedCourse[2],
+        listTop10LastedCourse4: listTop10LastedCourse[3]
     });
 });
 

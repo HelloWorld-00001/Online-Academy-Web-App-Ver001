@@ -49,7 +49,7 @@ export default {
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
                          INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                          INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
-                     GROUP BY Day between 0 AND 7
+                     HAVING Day between 0 AND 7
                      ORDER BY Day ASC, SLHocVien DESC
                      LIMIT 3`;
         const ret = await db.raw(sql);
@@ -65,6 +65,48 @@ export default {
         }
 
         return courses;
+    },
+
+    async findTop10LastedCourse() {
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+                     FROM khoahoc KH
+                         INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
+                         INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
+                         INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
+                         INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                     ORDER BY Day ASC
+                    LIMIT 10`;
+        const ret = await db.raw(sql);
+        const courses = ret[0];
+        for(let i = 0; i < courses.length; i++) {
+            const ele1 = courses[i].LinhVuc === 1;
+            const ele2 = courses[i].KhuyenMai === 0;
+            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+
+            Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {isNoDiscount: ele2});
+            Object.assign(courses[i], {finalPrice: ele3});
+        }
+        const temp1 = [];
+        const temp2 = [];
+        const temp3 = [];
+        const temp4 = [];
+        const res = [];
+        for (let i = 0; i < 10; i++) {
+            if (i < 3)
+                temp1.push(courses[i]);
+            if (i >=3 && i < 6)
+                temp2.push(courses[i]);
+            if (i >= 6 && i < 9)
+                temp3.push(courses[i]);
+            if (i == 9)
+                temp4.push(courses[i]);
+        }
+        res.push(temp1);
+        res.push(temp2);
+        res.push(temp3);
+        res.push(temp4);
+        return res;
     },
 
     findAll() {
