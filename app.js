@@ -45,6 +45,7 @@ app.get('/', async function (req, res) {
     const listTop10CourseView = await courseService.findTop10MostViewCourse();
     const listTop3CourseLastWeek = await courseService.findTop3LastWeek();
     const listTop10LastedCourse = await courseService.findTop10LastedCourse();
+    const fields = await  courseService.findTopFiedls();
     res.render('home', {
         listTop10CourseView1: listTop10CourseView[0],
         listTop10CourseView2: listTop10CourseView[1],
@@ -54,7 +55,8 @@ app.get('/', async function (req, res) {
         listTop10LastedCourse1: listTop10LastedCourse[0],
         listTop10LastedCourse2: listTop10LastedCourse[1],
         listTop10LastedCourse3: listTop10LastedCourse[2],
-        listTop10LastedCourse4: listTop10LastedCourse[3]
+        listTop10LastedCourse4: listTop10LastedCourse[3],
+        fields: fields
     });
 });
 

@@ -109,6 +109,15 @@ export default {
         return res;
     },
 
+    async findTopFiedls() {
+        const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
+                        from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
+                        Group by lv.MaLinhVuc, lv.TenLinhVuc
+                        LIMIT 1`;
+        const raw = await db.raw(sql);
+        return raw[0] ;
+    },
+
     findAll() {
         return db('Khoahoc')
     },
