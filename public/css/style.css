@@ -4472,6 +4472,11 @@ input[type="button"].btn-block {
   border-radius: 8px;
 }
 
+.card:hover {
+  outline: #FF6600 solid 4px;
+  margin: -15px;
+}
+
 .card > hr {
   margin-right: 0;
   margin-left: 0;

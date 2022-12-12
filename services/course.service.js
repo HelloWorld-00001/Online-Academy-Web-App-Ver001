@@ -2,24 +2,38 @@ import db from '../utils/db.js';
 
 export default {
     async findTop10MostViewCourse() {
-        const sql = `select * from khoahoc
-                     ORDER BY LuotXem DESC`;
+        const sql = `SELECT KH.*, TK.Username, LV.TenLinhVuc
+                     FROM khoahoc KH
+                              INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
+                              INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
+                              INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
+                     ORDER BY KH.LuotXem DESC
+                     LIMIT 10`;
         const ret = await db.raw(sql);
-        const result = ret[0];
+        const courses = ret[0];
+        for(let i = 0; i < courses.length; i++) {
+            const ele1 = courses[i].LinhVuc === 1;
+            const ele2 = courses[i].KhuyenMai === 0;
+            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+
+            Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {isNoDiscount: ele2});
+            Object.assign(courses[i], {finalPrice: ele3});
+        }
         const temp1 = [];
         const temp2 = [];
         const temp3 = [];
         const temp4 = [];
         const res = [];
-        for (let i = 1; i <= 10; i++) {
-            if (i < 4)
-                temp1.push(result[i]);
-            if (i >=4 && i < 7)
-                temp2.push(result[i]);
-            if (i >= 7 && i < 10)
-                temp3.push(result[i]);
-            if (i == 10)
-                temp4.push(result[i]);
+        for (let i = 0; i < 10; i++) {
+            if (i < 3)
+                temp1.push(courses[i]);
+            if (i >=3 && i < 6)
+                temp2.push(courses[i]);
+            if (i >= 6 && i < 9)
+                temp3.push(courses[i]);
+            if (i == 9)
+                temp4.push(courses[i]);
         }
         res.push(temp1);
         res.push(temp2);
