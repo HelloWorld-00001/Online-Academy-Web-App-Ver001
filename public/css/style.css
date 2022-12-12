@@ -9973,6 +9973,7 @@ h6,
 
 .ratingMe {
   color: #16181b;
+  direction: rtl;
 }
 .ratingMe > span > i {
   cursor: pointer;
