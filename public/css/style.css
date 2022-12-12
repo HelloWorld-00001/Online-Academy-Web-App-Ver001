@@ -9970,3 +9970,14 @@ h6,
   outline: #44425a solid 4px;
   margin: -15px;
 }
+
+.ratingMe {
+  color: #16181b;
+}
+.ratingMe > span > i {
+  cursor: pointer;
+}
+.ratingMe > span > i:hover:before,
+.ratingMe > span > i:hover ~ i:before {
+  color: orange;
+}
