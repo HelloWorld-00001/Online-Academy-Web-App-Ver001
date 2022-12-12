@@ -80,7 +80,7 @@ export default {
     async countByField() {
         const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
                         from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
-                        Group by lv.TenLinhVuc`;
+                        Group by lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
         return raw[0] ;
     },
