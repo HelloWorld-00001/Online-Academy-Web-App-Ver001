@@ -9959,7 +9959,7 @@ h6,
 }
 
 .text-log {
-  height: 50px;
+  height: 45px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

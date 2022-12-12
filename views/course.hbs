@@ -21,10 +21,10 @@
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
             <h1>Explore Top Subjects</h1>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-lg-center">
             {{#each this.fields}}
                 <div class="col-lg-6 mb-4">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2 d-flex justify-content-center align-items-center">
+                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
                         <img class="img-fluid" src="/public/img/cat-{{imgNumber}}.jpg" alt="">
                         <a class="cat-overlay text-white text-decoration-none" href="/categories/{{imgNumber}}">
                             <h4 class="text-white font-weight-medium">{{nameField}}</h4>
@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-<!-- Category Start -->
+<!-- Category End -->
 
 
 <!-- Courses Start -->
@@ -53,38 +53,23 @@
             <div class="row">
                 {{#each this.courses}}
                     <div class="col-lg-4 mb-4">
-                        <div class="form_course card h-100">
+                        <div class="card h-100">
                             <img class="card-img-top" src="/public/img/courses/{{value.MaKhoaHoc}}.jpg" alt="">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between mb-3">
+                                <div class="d-flex justify-content-between mb-2">
                                     <small class="m-0">
                                         <i class="fa fa-users text-primary mr-2"></i>
-                                        {{value.LuotXem}} Students
+                                        {{LuotXem}} Students
                                     </small>
-                                    {{#if isFieldType}}
-                                        <small class="m-0">
-                                            <i class="fa fa-globe" aria-hidden="true"></i>
-                                            Web
-                                        </small>
-                                    {{else}}
-                                        <small class="m-0">
-                                            <i class="fa fa-mobile" aria-hidden="true"></i>
-                                            Mobile
-                                        </small>
-                                    {{/if}}
                                     <small class="m-0">
                                         <i class="far fa-clock text-primary mr-2"></i>
-                                        {{value.SoLuongVideo}}
+                                        {{SoLuongVideo}}
                                     </small>
                                 </div>
-<!--                                <h5 class="card-title text-log" href=""></h5>-->                                
-                                
-                                <div class="container-{100px} h-50">
-                                    <a class="h5" href="">{{value.TenKhoaHoc}}</a>
-                                </div>
+                                <h5 class="card-title text-log" href="">{{value.TenKhoaHoc}}</h5>
 
                                 <p class="card-text mb-1 mt-1">{{value.GiaoVien}}</p>
-                                <div class="card__stars mb-1 ratingMe">
+                                <div class="card__stars mb-1">
                                     <span>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -94,13 +79,16 @@
                                     </span>
                                     <span class="card__rate">{{value.RateTB}}</span>
                                     <span class="card__totaln">({{value.SLHocSinhDanhGia}})</span>
-                                    
                                 </div>
                             </div>
-                            <div class="border-top card-footer pt-4">
-                                <div class="card__price">
-                                    <span style="text-decoration: line-through;">${{format_number value.Gia}}</span>
-                                    <span>${{format_number value.KhuyenMai}}</span>
+                            <div class="border-top card-footer d-flex">
+                                <div class="card__price h5 ">
+                                    {{#if isNoDiscount}}
+                                        <span class="align-self-center">${{format_number Gia}}</span>
+                                    {{else}}
+                                        <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                        <span class="align-self-center">${{format_number finalPrice}}</span>
+                                    {{/if}}
                                 </div>
                             </div>
                         </div>
