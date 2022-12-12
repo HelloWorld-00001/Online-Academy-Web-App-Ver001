@@ -4508,6 +4508,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  height: 200px;
 }
 
 .card-title {
@@ -9969,4 +9970,21 @@ h6,
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+.form_course:hover {
+  outline: #44425a solid 4px;
+  margin: -15px;
+}
+
+.ratingMe {
+  color: #16181b;
+  direction: rtl;
+}
+.ratingMe > span > i {
+  cursor: pointer;
+}
+.ratingMe > span > i:hover:before,
+.ratingMe > span > i:hover ~ i:before {
+  color: orange;
 }
