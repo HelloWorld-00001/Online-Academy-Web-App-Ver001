@@ -24,4 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 QLKhoaHoc.session.sql
 .vscode/settings.json
+db.js
 *.log
