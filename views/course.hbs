@@ -53,7 +53,7 @@
             <div class="row">
                 {{#each this.courses}}
                     <div class="col-lg-4 mb-4">
-                        <div class="card h-100">
+                        <div class="form_course card h-100">
                             <img class="card-img-top" src="/public/img/courses/{{value.MaKhoaHoc}}.jpg" alt="">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-3">
@@ -77,7 +77,8 @@
                                         {{value.SoLuongVideo}}
                                     </small>
                                 </div>
-                                <h5 class="card-title text-log" href="">{{value.TenKhoaHoc}}</h5>
+<!--                                <h5 class="card-title text-log" href=""></h5>-->
+                                <a class="h5" href="">{{value.TenKhoaHoc}}</a>
 
                                 <p class="card-text mb-1 mt-1">{{value.GiaoVien}}</p>
                                 <div class="card__stars mb-1">

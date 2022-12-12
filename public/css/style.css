@@ -9965,3 +9965,8 @@ h6,
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+.form_course:hover {
+  outline: #44425a solid 4px;
+  margin: -15px;
+}

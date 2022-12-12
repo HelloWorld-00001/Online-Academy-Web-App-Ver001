@@ -50,7 +50,6 @@ app.get('/', async function (req, res) {
         listTop10CourseView3: listTop10CourseView[2],
         listTop10CourseView4: listTop10CourseView[3]
     });
-    console.log(listTop10CourseView[0]);
 });
 
 // app.get('/home', function (req, res) {
