@@ -42,6 +42,31 @@ export default {
         return res;
     },
 
+    async findTop3LastWeek() {
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+                     FROM khoahoc KH
+                         INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
+                         INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
+                         INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
+                         INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                     GROUP BY Day between 0 AND 7
+                     ORDER BY Day ASC, SLHocVien DESC
+                     LIMIT 3`;
+        const ret = await db.raw(sql);
+        const courses = ret[0];
+        for(let i = 0; i < courses.length; i++) {
+            const ele1 = courses[i].LinhVuc === 1;
+            const ele2 = courses[i].KhuyenMai === 0;
+            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+
+            Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {isNoDiscount: ele2});
+            Object.assign(courses[i], {finalPrice: ele3});
+        }
+
+        return courses;
+    },
+
     findAll() {
         return db('Khoahoc')
     },

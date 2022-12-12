@@ -23,12 +23,12 @@
         </div>
         <div class="row d-flex justify-content-lg-center">
             {{#each this.fields}}
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-3">
                     <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="/public/img/cat-{{imgNumber}}.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="/categories/{{imgNumber}}">
-                            <h4 class="text-white font-weight-medium">{{nameField}}</h4>
-                            <span>{{value}} Courses</span>
+                        <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="">
+                        <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
+                            <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
+                            <span>{{SLKhoaHoc}} Courses</span>
                         </a>
                     </div>
                 </div>
@@ -52,9 +52,9 @@
         {{else}}
             <div class="row">
                 {{#each this.courses}}
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-4 mb-3">
                         <div class="card h-100">
-                            <img class="card-img-top" src="/public/img/courses/{{value.MaKhoaHoc}}.jpg" alt="">
+                            <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-2">
                                     <small class="m-0">
@@ -66,19 +66,29 @@
                                         {{SoLuongVideo}}
                                     </small>
                                 </div>
-                                <h5 class="card-title text-log" href="">{{value.TenKhoaHoc}}</h5>
-
-                                <p class="card-text mb-1 mt-1">{{value.GiaoVien}}</p>
-                                <div class="card__stars mb-1">
+                                <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                {{#if isFieldType}}
+                                    <p class="card-text">
+                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                        {{TenLinhVuc}}
+                                    </p>
+                                {{else}}
+                                    <p class="card-text">
+                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                        {{TenLinhVuc}}
+                                    </p>
+                                {{/if}}
+                                <p class="card-text">{{Username}}</p>
+                                <div class="card__stars">
                                     <span>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star text-primary"></i>
+                                        <i class="fa fa-star text-primary"></i>
+                                        <i class="fa fa-star text-primary"></i>
+                                        <i class="fa fa-star text-primary"></i>
+                                        <i class="fa fa-star-half text-primary"></i>
                                     </span>
-                                    <span class="card__rate">{{value.RateTB}}</span>
-                                    <span class="card__totaln">({{value.SLHocSinhDanhGia}})</span>
+                                    <span class="text-primary">{{RateTB}}</span>
+                                    <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
                                 </div>
                             </div>
                             <div class="border-top card-footer d-flex">
