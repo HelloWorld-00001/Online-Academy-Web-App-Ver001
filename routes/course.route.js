@@ -2,9 +2,6 @@ import express from 'express';
 import courseModel from '../models/course.model.js';
 const router = express.Router();
 
-
-
-
 router.post('/search', function (req, res) {
     const courseName = courseModel.findByName(req.body.courseFind);
     res.render('courses/search.hbs', {
