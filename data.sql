@@ -1,10 +1,7 @@
 use QLKhoaHoc;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
+SET FOREIGN_KEY_CHECKS 0;
 
 -- Xoa het all table
-begin;
 delete from `DanhSachDangKi`;
 delete from `BangDanhGia`;
 delete from `HocVien`;
@@ -14,12 +11,11 @@ delete from `DanhSachVideo`;
 delete from  `ChiTietKhoaHoc`;
 delete from  `KhoaHoc`;
 delete from  `LinhVuc`;
-end;
+
 ----------------------------------
 -- data for Linh vuc
 ----------------------------------
 BEGIN;
-
 INSERT INTO `LinhVuc` VALUES (1, 'Lập trình Web');
 INSERT INTO `LinhVuc` VALUES (2, 'Lập trình thiết bị di động');
 COMMIT;
@@ -29,8 +25,6 @@ COMMIT;
 ----------------------------------
 
 BEGIN;
-
-
 INSERT INTO `KhoaHoc` VALUES (1, 'Introduct To HTML, JS, CSS', 1, 100, 21, 1, '1.jpg', 10, 0, 0, 'Explore how you can create websites from scratch!!!', 0);
 INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database', 0);
 INSERT INTO `KhoaHoc` VALUES (3, 'Web Design Course', 1, 120, 19, 3, '3.jpg', 10, 0, 0, 'In this course, you will learn how to create a website and how to design it', 0);
@@ -60,8 +54,6 @@ COMMIT;
 ----------------------------------
 
 BEGIN;
-
-
 INSERT INTO `ChiTietKhoaHoc` VALUES (1, '2022-12-11', '', 'https://www.youtube.com/playlist?list=PLodO7Gi1F7R0zA8RkRHcDgnPduNBmjkb5', 0, '2022-12-17', '2023-01-21');
 INSERT INTO `ChiTietKhoaHoc` VALUES (2, '2021-06-13', '', 'https://www.youtube.com/playlist?list=PLBLPjjQlnVXXBheMQrkv3UROskC0K1ctW', 0, '2022-12-10', '2023-01-24');
 INSERT INTO `ChiTietKhoaHoc` VALUES (3, '2022-06-09', '', 'https://www.youtube.com/playlist?list=PLXC_gcsKLD6n7p6tHPBxsKjN5hA_quaPI', 0, '2022-12-4', '2023-01-29');
@@ -91,7 +83,6 @@ COMMIT;
 ----------------------------------
 
 BEGIN;
-
 INSERT INTO `DanhSachVideo` VALUES (1, 1, 'https://www.youtube.com/watch?v=gVx72yLou2c&list=PLodO7Gi1F7R0zA8RkRHcDgnPduNBmjkb5&index=1', '2021-11-30', '','Chưa Hoàn Thành');
 INSERT INTO `DanhSachVideo` VALUES (1, 2, 'https://www.youtube.com/watch?v=3odtU8VL3Mc&list=PLodO7Gi1F7R0zA8RkRHcDgnPduNBmjkb5&index=2', '2021-11-17', '', 'Chưa Hoàn Thành');
 INSERT INTO `DanhSachVideo` VALUES (1, 3, 'https://www.youtube.com/watch?v=DkiLJzL6kv4&list=PLodO7Gi1F7R0zA8RkRHcDgnPduNBmjkb5&index=3', '2021-11-18', '', 'Chưa Hoàn Thành');
@@ -378,8 +369,6 @@ COMMIT;
 -- data for 
 ----------------------------------
 BEGIN;
-
-
 INSERT INTO `TaiKhoan` VALUES (1, 'ndnamTeacher', '123', 'Nguyễn Đình Nam', 'ndnamPro@gmail.com', '1995-10-25', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (2, 'vthapaTeacher', '123', 'Vijay Thapa', 'vThapaPro@gmail.com', '2000-12-16', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (3, 'ranTeacher', '123', 'Ran', 'ranPro@gmail.com', '1990-05-01', 'Giáo viên');
