@@ -29,3 +29,5 @@ QLKhoaHoc.session.sql
 *.log
 utils/db.js
 utils/db.js
+data.sql
+QLKhoaHoc.sql
