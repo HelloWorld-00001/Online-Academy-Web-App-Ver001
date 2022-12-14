@@ -15,7 +15,7 @@
 */
 
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS 0;
 
 -- ----------------------------
 -- Table structure for
@@ -443,7 +443,6 @@ INSERT INTO `TaiKhoan` VALUES (7, 'nsnguyenTeacher', '123', 'Ngô Sỹ Nguyên',
 INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal', 'mtjamalPro@gmail.com', '1997-12-18', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên');
-
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'Dastagir Ahmed', 'info@dbestech.com', '1995-10-02', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'Adrian Hajdin', 'contact@jsmasterypro.com', '1990-12-21', 'Giáo viên');
@@ -454,7 +453,6 @@ INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'Phạm Huy Hoàng',
 INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'Chris Ching', 'chris@codewithchris', '1994-09-21', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'Cryce Truly', 'crycetruly@gmail.com', '1993-11-30', 'Giáo viên');
 INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'James Montemagno', 'refractoredllc@gmail.com', '1994-02-07', 'Giáo viên');
-
 INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên');
 INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên');
@@ -478,21 +476,55 @@ CREATE TABLE `GiaoVien` (
   `SLKhoaHoc` int,
   PRIMARY KEY (`MaGiaoVien`),
   foreign key(`MaTaiKhoan`) references TaiKhoan(`MaTaiKhoan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+BEGIN;
+INSERT INTO `GiaoVien` VALUES (1, 1, 1);
+INSERT INTO `GiaoVien` VALUES (2, 2, 1);
+INSERT INTO `GiaoVien` VALUES (3, 3, 1);
+INSERT INTO `GiaoVien` VALUES (4, 4, 1);
+INSERT INTO `GiaoVien` VALUES (5, 5, 1);
+INSERT INTO `GiaoVien` VALUES (6, 6, 1);
+INSERT INTO `GiaoVien` VALUES (7, 7, 1);
+INSERT INTO `GiaoVien` VALUES (8, 8, 1);
+INSERT INTO `GiaoVien` VALUES (9, 9, 1);
+INSERT INTO `GiaoVien` VALUES (10, 10, 1);
+INSERT INTO `GiaoVien` VALUES (11, 11, 1);
+INSERT INTO `GiaoVien` VALUES (12, 12, 1);
+INSERT INTO `GiaoVien` VALUES (13, 13, 1);
+INSERT INTO `GiaoVien` VALUES (14, 14, 1);
+INSERT INTO `GiaoVien` VALUES (15, 15, 1);
+INSERT INTO `GiaoVien` VALUES (16, 16, 1);
+INSERT INTO `GiaoVien` VALUES (17, 17, 1);
+INSERT INTO `GiaoVien` VALUES (18, 18, 1);
+INSERT INTO `GiaoVien` VALUES (19, 19, 1);
+INSERT INTO `GiaoVien` VALUES (20, 20, 1);
+COMMIT;
 -- ----------------------------
 -- Table structure for Account
 -- ----------------------------
 DROP TABLE IF EXISTS `HocVien`;
 CREATE TABLE `HocVien` (
-  `MaHocVien` int(11) NOT NULL AUTO_INCREMENT,
-  `MaTaiKhoan` int(11) NOT NULL ,
+  `MaHocVien` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `MaTaiKhoan` int(11) unsigned NOT NULL ,
   `SLKhoaHoc` int,
   PRIMARY KEY (`MaHocVien`),
   foreign key(`MaTaiKhoan`) references TaiKhoan(`MaTaiKhoan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
+BEGIN;
+INSERT INTO `HocVien` VALUES (1, 21, 1);
+INSERT INTO `HocVien` VALUES (2, 22, 3);
+INSERT INTO `HocVien` VALUES (3, 23, 2);
+INSERT INTO `HocVien` VALUES (4, 24, 0);
+INSERT INTO `HocVien` VALUES (5, 25, 1);
+INSERT INTO `HocVien` VALUES (6, 26, 0);
+INSERT INTO `HocVien` VALUES (7, 27, 2);
+INSERT INTO `HocVien` VALUES (8, 28, 2);
+INSERT INTO `HocVien` VALUES (9, 29, 2);
+INSERT INTO `HocVien` VALUES (10, 30, 0);
+INSERT INTO `HocVien` VALUES (11, 31, 1);
+COMMIT;
 -- ----------------------------
 -- Table structure for Account
 -- ----------------------------
@@ -505,20 +537,53 @@ CREATE TABLE `BangDanhGia` (
   PRIMARY KEY (`MaHocVien`, `MaKhoaHoc`),
   foreign key(`MaHocVien`) references HocVien(`MaHocVien`),
   foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+Begin;
+INSERT INTO `BangDanhGia` VALUES (1, 8, 4, 'This courses is very helpful. Thanks teacher a lot.');
+INSERT INTO `BangDanhGia` VALUES (2, 8, 3, 'Good but I need more.');
+INSERT INTO `BangDanhGia` VALUES (2, 15, 5, 'Wow. This courses open my mind. Excellent');
+INSERT INTO `BangDanhGia` VALUES (2, 2, 3, 'Normal');
+INSERT INTO `BangDanhGia` VALUES (3, 17, 5, 'Very Good');
+INSERT INTO `BangDanhGia` VALUES (3, 15, 5, 'Your videos has been a blessing....thank you so much for the time and effort.');
+INSERT INTO `BangDanhGia` VALUES (5, 6, 4, 'This courses is very helpful. Need to learn');
+INSERT INTO `BangDanhGia` VALUES (7, 13, 3, 'Thank you for all this amazing courses');
+INSERT INTO `BangDanhGia` VALUES (7, 14, 4, 'What can i say except Thank You ?!!');
+INSERT INTO `BangDanhGia` VALUES (8, 11, 4, 'I appriaciate this course');
+INSERT INTO `BangDanhGia` VALUES (8, 15, 4, 'so,so,so,so UNDERSTANDABLE,I love the way you explain,started to learn today ♥');
+INSERT INTO `BangDanhGia` VALUES (9, 9, 3, 'Nice');
+INSERT INTO `BangDanhGia` VALUES (9, 7, 3, 'Nice');
+INSERT INTO `BangDanhGia` VALUES (11, 12, 3, 'Good');
+END;
 
 -- ----------------------------
 -- Table structure for Danh sach dang ki
 -- ----------------------------
 DROP TABLE IF EXISTS `DanhSachDangKi`;
 CREATE TABLE `DanhSachDangKi` (
-  `MaHocVien` int(11) NOT NULL,
-  `MaKhoaHoc` int(11) NOT NULL ,
+  `MaHocVien` int(11) unsigned NOT NULL,
+  `MaKhoaHoc` int(11) unsigned NOT NULL,
   `NgayDangKy` date not null,
   `Note` varchar(100) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`MaHocVien`, `MaKhoaHoc`),
   foreign key(`MaHocVien`) references HocVien(`MaHocVien`),
   foreign key(`MaKhoaHoc`) references KhoaHoc(`MaKhoaHoc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+BEGIN;
+INSERT INTO `DanhSachDangKi` VALUES (1, 8, '2022-12-25', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 8, '2022-12-25', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 15, '2022-12-28', '');
+INSERT INTO `DanhSachDangKi` VALUES (2, 2, '2022-12-21', '');
+INSERT INTO `DanhSachDangKi` VALUES (3, 17, '2022-12-20', '');
+INSERT INTO `DanhSachDangKi` VALUES (3, 15, '2022-12-20', '');
+INSERT INTO `DanhSachDangKi` VALUES (5, 6, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (7, 13, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (7, 14, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (8, 11, '2022-12-21', '');
+INSERT INTO `DanhSachDangKi` VALUES (8, 15, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (9, 9, '2022-12-22', '');
+INSERT INTO `DanhSachDangKi` VALUES (9, 7, '2022-12-27', '');
+INSERT INTO `DanhSachDangKi` VALUES (11, 12, '2022-12-29', '');
+COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;
