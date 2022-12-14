@@ -2,10 +2,11 @@ import express from 'express';
 import courseModel from '../services/course.service.js';
 const router = express.Router();
 
-router.post('/search', function (req, res) {
-    const courseName = courseModel.findByName(req.body.courseFind);
+router.post('/search', async function (req, res) {
+    const courseName = await courseModel.findByName(req.body.courseFind);
+    console.log(courseName[0]);
     res.render('courses/search.hbs', {
-        course: courseName,
+        courses: courseName,
         isNull: courseName.length === 0
     });
 });

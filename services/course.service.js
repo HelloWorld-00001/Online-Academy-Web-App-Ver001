@@ -209,5 +209,11 @@ export default {
         return courseField;
     },
 
+    /// find by name --  not full text search
+    async findByName(name) {
+        const sql = await db('KhoaHoc')
+        .where('TenKhoaHoc', name );
+        return sql;
+    }
 
 }
