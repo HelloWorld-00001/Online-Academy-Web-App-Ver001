@@ -58,4 +58,8 @@ router.get('/', async function (req, res) {
     });
 });
 
+router.get('/detail', function (req, res) {
+    res.render('courses/detail')
+})
+
 export default router;

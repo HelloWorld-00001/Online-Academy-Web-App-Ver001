@@ -1,5 +1,6 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
+import hbs_sections from 'express-handlebars-sections'
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -27,6 +28,7 @@ app.engine('hbs', engine({
     extname: 'hbs',
     defaultLayout: 'index',
     helpers: {
+        section: hbs_sections(),
         format_number(val) {
             return numeral(val).format('0,0');
         }
@@ -82,6 +84,10 @@ app.get('/single', function (req, res) {
 
 app.get('/contact', function (req, res) {
     res.render('contact');
+})
+
+app.get('/detail', function (req, res) {
+    res.render('detail');
 })
 
 app.use('/course', courseRoute);
