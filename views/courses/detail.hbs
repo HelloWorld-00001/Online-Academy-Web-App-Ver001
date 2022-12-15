@@ -80,6 +80,10 @@
             cursor: default;
         }
 
+        #review-list .course-review {
+            display: none;
+        }
+
     </style>
 {{/section}}
 
@@ -121,6 +125,22 @@
         $('.disabled').click(function(e){
             e.preventDefault();
         });
+
+        $(function () {
+            $(".course-review").slice(0, 2).show();
+            $("body").on('click touchstart', '.load-more', function (e) {
+                e.preventDefault();
+                $(".course-review:hidden").slice(0, 2).slideDown();
+                if ($(".course-review:hidden").length === 0) {
+                    $(".load-more").css('visibility', 'hidden');
+                }
+                $('html,body').animate({
+                    scrollTop: $('.load-more').offset().top - 500
+                }, 1000);
+            });
+        });
+
+
     </script>
 {{/section}}
 
@@ -378,7 +398,7 @@
                     </div>
                     <div class="row owl-carousel owl-theme">
                         {{#each this.top5CousresMostView}}
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-4 mb-3 mw-100">
                                 <div class="form_course">
                                     <div class="card h-100">
                                         <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
@@ -440,9 +460,9 @@
                 <div class="card-body h-auto">
                     <div class="w-100">
                         <h5 class="text-primary">What our students have to say</h5>
-                        <div class="owl-carousel owl-theme row">
-                            <div class="col-lg-4 mb-3 mw-100">
-                                <div class="card card--feedback">
+                        <div class="row" id="review-list">
+                            <div class="col-md-6 mb-3 mw-100 course-review">
+                                <div class="card-fluid card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -473,7 +493,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100 course-review">
                                 <div class="card card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
@@ -504,7 +524,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100 course-review">
                                 <div class="card card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
@@ -536,7 +556,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
                                 <div class="card card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
@@ -566,7 +586,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
                                 <div class="card card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
@@ -597,7 +617,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
                                 <div class="card card--feedback">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
@@ -628,6 +648,101 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
+                                <div class="card card--feedback">
+                                    <div class="card-body h-auto">
+                                        <div class="card__top">
+                                            <div class="card__avatar">
+                                                <img src="/public/img/team-2.jpg" alt="student 1">
+                                            </div>
+                                            <div>
+                                                <p class="card__name">Flávio</p>
+                                                <div class="card__stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-text">
+                                            Very explained even for a short course. It's not
+                                            for full
+                                            understanding, but it works perfectly as
+                                            an introduction for the subject. And you can
+                                            really build a robot after taking this
+                                            course.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
+                                <div class="card card--feedback">
+                                    <div class="card-body h-auto">
+                                        <div class="card__top">
+                                            <div class="card__avatar">
+                                                <img src="/public/img/team-3.jpg" alt="student 1">
+                                            </div>
+                                            <div>
+                                                <p class="card__name">Angeles</p>
+                                                <div class="card__stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-text">
+                                            I didn't know anything at all about FB ads for
+                                            this course and have a
+                                            client that is wanting to
+                                            start using them. After taking this course i
+                                            feel like I can help them and so much more
+                                            confident in coming up with
+                                            a strategy.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3 mw-100 course-review ">
+                                <div class="card card--feedback">
+                                    <div class="card-body h-auto">
+                                        <div class="card__top">
+                                            <div class="card__avatar">
+                                                <img src="/public/img/team-4.jpg" alt="student 4">
+                                            </div>
+                                            <div>
+                                                <p class="card__name">Carol</p>
+                                                <div class="card__stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="card-text">
+                                            After studying German for about six months my
+                                            spelling and grammar is
+                                            good, but I was having
+                                            trouble with some pronunciation. After taking
+                                            this course it has really helped me
+                                            pronounce certain words I was
+                                            having trouble with and also have better
+                                            listening skill of German speakers.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-outline-success load-more">Load More</button>
                         </div>
                     </div>
                 </div>
