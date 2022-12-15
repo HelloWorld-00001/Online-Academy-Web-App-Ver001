@@ -15,15 +15,18 @@ export default {
             const ele1 = courses[i].LinhVuc === 1;
             const ele2 = courses[i].KhuyenMai === 0;
             const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+            const ele4 = true;
 
             Object.assign(courses[i], {isFieldType: ele1});
             Object.assign(courses[i], {isNoDiscount: ele2});
             Object.assign(courses[i], {finalPrice: ele3});
+            Object.assign(courses[i], {isExist: ele4});
         }
         const temp1 = [];
         const temp2 = [];
         const temp3 = [];
         const temp4 = [];
+        const temp5 = courses.length / 3 + 1;
         const res = [];
         for (let i = 0; i < 10; i++) {
             if (i < 3)
@@ -39,6 +42,7 @@ export default {
         res.push(temp2);
         res.push(temp3);
         res.push(temp4);
+        res.push(temp5);
         return res;
     },
 
@@ -82,15 +86,18 @@ export default {
             const ele1 = courses[i].LinhVuc === 1;
             const ele2 = courses[i].KhuyenMai === 0;
             const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+            const ele4 = true;
 
             Object.assign(courses[i], {isFieldType: ele1});
             Object.assign(courses[i], {isNoDiscount: ele2});
             Object.assign(courses[i], {finalPrice: ele3});
+            Object.assign(courses[i], {isExist: ele4});
         }
         const temp1 = [];
         const temp2 = [];
         const temp3 = [];
         const temp4 = [];
+        const temp5 = courses.length / 3 + 1;
         const res = [];
         for (let i = 0; i < 10; i++) {
             if (i < 3)
@@ -106,6 +113,7 @@ export default {
         res.push(temp2);
         res.push(temp3);
         res.push(temp4);
+        res.push(temp5);
         return res;
     },
 

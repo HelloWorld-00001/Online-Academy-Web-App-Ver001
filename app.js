@@ -16,6 +16,7 @@ import accountRoute from './routes/account.route.js';
 import courseRoute from "./routes/course.route.js";
 import categoryUserRoute from "./routes/category-user.route.js"
 
+
 const app = express();
 app.use(express.urlencoded({
     extended: true
@@ -31,6 +32,17 @@ app.engine('hbs', engine({
         section: hbs_sections(),
         format_number(val) {
             return numeral(val).format('0,0');
+        },
+        for(from, to, incr, block) {
+            var accum = '';
+            for(var i = from; i < to; i += incr)
+                accum += block.fn(i);
+            return accum;
+        },
+        ifGreaterThan(x, y, options) {
+            if (x >= y)
+                return options.fn(this);
+            return options.inverse(this);
         }
     }
 }));
@@ -53,6 +65,7 @@ app.get('/', async function (req, res) {
         listTop10CourseView2: listTop10CourseView[1],
         listTop10CourseView3: listTop10CourseView[2],
         listTop10CourseView4: listTop10CourseView[3],
+        numPage: listTop10CourseView[4],
         listTop3CourseLastWeek: listTop3CourseLastWeek,
         listTop10LastedCourse1: listTop10LastedCourse[0],
         listTop10LastedCourse2: listTop10LastedCourse[1],
