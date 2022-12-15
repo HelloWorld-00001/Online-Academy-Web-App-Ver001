@@ -74,7 +74,11 @@
             font-size: 15px;
             font-weight: normal;
         }
-
+        a.disabled {
+            color: gray;
+            pointer-events: none;
+            cursor: default;
+        }
 
     </style>
 {{/section}}
@@ -98,7 +102,6 @@
         $('.owl-carousel').owlCarousel({
             margin: 15,
             nav: true,
-            smartSpeed: 1500,
             autoplay: true,
             loop: true,
             navText: ["<div class='nav-button owl-prev bg-color'>‹</div>", "<div class='nav-button owl-next bg-color'>›</div>"],
@@ -114,6 +117,10 @@
                 }
             }
         });
+
+        $('.disabled').click(function(e){
+            e.preventDefault();
+        });
     </script>
 {{/section}}
 
@@ -126,20 +133,27 @@
                     <div class="d-flex justify-content-between mb-2">
                         <p class="m-0">
                             <i class="fa fa-users text-primary mr-2"></i>
-                            10 Students
+                            {{this.course.Luotxem}} Students
                         </p>
                         <p class="m-0">
                             <i class="far fa-clock text-primary mr-2"></i>
-                            100
+                            {{this.course.SoLuongVideo}}
                         </p>
                     </div>
-                    <h5 class="card-title">Fashion Photography From Professional</h5>
-                    <p class="card-text">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                        Web development
-                    </p>
+                    <h5 class="card-title">{{this.course.TenKhoaHoc}}</h5>
+                    {{#if this.course.isFieldType}}
+                        <p class="card-text">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            {{this.course.TenLinhVuc}}
+                        </p>
+                    {{else}}
+                        <p class="card-text">
+                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                            {{this.course.TenLinhVuc}}
+                        </p>
+                    {{/if}}
 
-                    <p class="card-text">Ali Tufan</p>
+                    <p class="card-text">{{this.course.Username}}</p>
                     <div class="card__stars">
                         <span>
                             <i class="fa fa-star text-primary"></i>
@@ -148,8 +162,8 @@
                             <i class="fa fa-star text-primary"></i>
                             <i class="fa fa-star-half text-primary"></i>
                         </span>
-                        <span class="card__rate">50</span>
-                        <span class="card__totaln">1,000</span>
+                        <span class="card__rate">{{this.course.RateTB}}</span>
+                        <span class="card__totaln">{{this.course.SLHocSinhDanhGia}}</span>
                     </div>
                 </div>
             </div>
@@ -157,9 +171,13 @@
             <div class="card mt-3">
                 <div class="card-body h-auto">
                     <div class="mt-3">
-                        <span class="h2"> $299,000</span>
-                        <span class="h4" style="text-decoration: line-through;">1,299,000</span>
-                        <h4> 83% off</h4>
+                        {{#if isNoDiscount}}
+                            <span class="align-self-center">${{format_number this.course.Gia}}</span>
+                        {{else}}
+                            <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
+                            <h4>$ {{format_number this.course.finalPrice}}</h4>
+                            <h4> {{this.course.KhuyenMai}}% off</h4>
+                        {{/if}}
                     </div>
                     <div>
                         <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a>
@@ -240,7 +258,7 @@
         </div>
 
         <div class="col-md-9">
-            <img src="/public/img/courses/1.jpg" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
+            <img src="/public/img/courses/{{this.course.MaKhoaHoc}}.jpg" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
                 <div class="card-body h-auto">
@@ -248,13 +266,18 @@
                         Course Overview
                     </h5>
                     <p class="card-title font-weight-bolder">
-                        Course Description
+                        Short Course Description
                     </p>
                     <p class="card-text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        {{this.course.MoTaNgan}}
                     </p>
+
+                    <p class="card-title font-weight-bolder">
+                        Full Course Description
+                    </p>
+
                     <p class="card-text">
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        {{this.course.MoTaChiTiet}}
                     </p>
 
                     <p class="card-title font-weight-bolder">
@@ -308,71 +331,48 @@
                         Course Content
                     </h5>
                     <p class="card-text">
-                        Start Date: 22/12/19
+                        Start Date: {{NgayBD}}
                     </p>
                 </div>
                 <div class="card-body h-auto">
-                    <div id="accordion">
-                        <div class="card rounded-0">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <div href="#collapse1" class="text-primary" data-toggle="collapse" data-parent="#accordion">
-                                        <i class="fa fa-angle-down"></i>
-                                        Get Inspired
+                    {{#if this.isVideoListEmpty}}
+
+                    {{else}}
+                        <div id="accordion">
+                            {{#each this.courseVideoList}}
+                                <div class="card rounded-0">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <div href="#collapse{{STT}}" class="text-primary" data-toggle="collapse" data-parent="#accordion">
+                                                <i class="fa fa-angle-down"></i>
+                                                Video {{STT}}
+                                            </div>
+                                        </h5>
                                     </div>
-                                </h5>
-                            </div>
+                                    {{#if isShowVideo}}
+                                        <div id="collapse{{STT}}" class="collapse show">
+                                            <div class="card-body h-auto">
+                                                <a href="{{Link}}">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {{else}}
+                                        <div id="collapse{{STT}}" class="collapse">
+                                            <div class="card-body h-auto">
+                                                <a href="{{Link}}" class="disabled">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {{/if}}
 
-                            <div id="collapse1" class="collapse show">
-                                <div class="card-body h-auto">
-                                    <a href="#">
-                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                        <span>Introduction To Getting Started Section</span>
-                                    </a>
                                 </div>
-                            </div>
+                            {{/each}}
                         </div>
-
-                        <div class="card rounded-0">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <div href="#collapse2" class="text-primary" data-toggle="collapse" data-parent="#accordion">
-                                        <i class="fa fa-angle-down"></i>
-                                        Get Inspired
-                                    </div>
-                                </h5>
-                            </div>
-
-                            <div id="collapse2" class="collapse">
-                                <div class="card-body h-auto">
-                                    <a href="#">
-                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                        <span>Introduction To Getting Started Section</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card rounded-0">
-                            <div class="card-header">
-                                <h5 class="mb-0">
-                                    <div href="#collapse3" class="text-primary" data-toggle="collapse" data-parent="#accordion">
-                                        <i class="fa fa-angle-down"></i>
-                                        Open Your Mind
-                                    </div>
-                                </h5>
-                            </div>
-
-                            <div id="collapse3" class="collapse">
-                                <div class="card-body h-auto">
-                                    <a href="#">
-                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                        <span>Introduction To Getting Started Section</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/if}}
                 </div>
             </div>
 
@@ -383,206 +383,61 @@
                         <h5 class="mb-3 text-primary"> Top 5 other courses in the same field are bought the most</h5>
                     </div>
                     <div class="row owl-carousel owl-theme">
-                        <div class="col-lg-4 mb-3 mw-100">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/1.jpg" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
-                                            1000 Students
-                                        </small>
-                                        <small class="m-0">
-                                            <i class="far fa-clock text-primary mr-2"></i>
-                                            10
-                                        </small>
-                                    </div>
-                                    <a class="card-title text-log h5" href="">Web development</a>
-                                    <p class="card-text">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        Web development
-                                    </p>
-
-                                    <p class="card-text">abcdefffff</p>
-                                    <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                        <span class="card__rate">4</span>
-                                        <span class="card__totaln">(444)</span>
-                                    </div>
-                                </div>
-                                <div class="border-top card-footer mt-3">
-                                    <div class="card__price">
-                                        <span>$4444</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3 mw-100">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/1.jpg" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
-                                            1000 Students
-                                        </small>
-                                        <small class="m-0">
-                                            <i class="far fa-clock text-primary mr-2"></i>
-                                            10
-                                        </small>
-                                    </div>
-                                    <a class="card-title text-log h5" href="">Web development</a>
-                                    <p class="card-text">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        Web development
-                                    </p>
-
-                                    <p class="card-text">abcdefffff</p>
-                                    <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                        <span class="card__rate">4</span>
-                                        <span class="card__totaln">(444)</span>
-                                    </div>
-                                </div>
-                                <div class="border-top card-footer mt-3">
-                                    <div class="card__price">
-                                        <span>$4444</span>
+                        {{#each this.top5CousresMostView}}
+                            <div class="col-lg-4 mb-3 mw-100">
+                                <div class="form_course">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <small class="m-0">
+                                                    <i class="fa fa-users text-primary mr-2"></i>
+                                                    {{LuotXem}} Students
+                                                </small>
+                                                <small class="m-0">
+                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    {{SoLuongVideo}}
+                                                </small>
+                                            </div>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            {{#if isFieldType}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
+                                            {{else}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
+                                            {{/if}}
+                                            <p class="card-text">{{Username}}</p>
+                                            <div class="card__stars">
+                                        <span>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star text-primary"></i>
+                                            <i class="fa fa-star-half text-primary"></i>
+                                        </span>
+                                                <span class="text-primary">{{RateTB}}</span>
+                                                <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                            </div>
+                                        </div>
+                                        <div class="border-top card-footer d-flex">
+                                            <div class="card__price h5 ">
+                                                {{#if isNoDiscount}}
+                                                    <span class="align-self-center">${{format_number Gia}}</span>
+                                                {{else}}
+                                                    <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                    <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                {{/if}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 mb-3 mw-100">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/1.jpg" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
-                                            1000 Students
-                                        </small>
-                                        <small class="m-0">
-                                            <i class="far fa-clock text-primary mr-2"></i>
-                                            10
-                                        </small>
-                                    </div>
-                                    <a class="card-title text-log h5" href="">Web development</a>
-                                    <p class="card-text">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        Web development
-                                    </p>
-
-                                    <p class="card-text">abcdefffff</p>
-                                    <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                        <span class="card__rate">4</span>
-                                        <span class="card__totaln">(444)</span>
-                                    </div>
-                                </div>
-                                <div class="border-top card-footer mt-3">
-                                    <div class="card__price">
-                                        <span>$4444</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3 mw-100">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/1.jpg" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
-                                            1000 Students
-                                        </small>
-                                        <small class="m-0">
-                                            <i class="far fa-clock text-primary mr-2"></i>
-                                            10
-                                        </small>
-                                    </div>
-                                    <a class="card-title text-log h5" href="">Web development</a>
-                                    <p class="card-text">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        Web development
-                                    </p>
-
-                                    <p class="card-text">abcdefffff</p>
-                                    <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                        <span class="card__rate">4</span>
-                                        <span class="card__totaln">(444)</span>
-                                    </div>
-                                </div>
-                                <div class="border-top card-footer mt-3">
-                                    <div class="card__price">
-                                        <span>$4444</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-3 mw-100">
-                            <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/1.jpg" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
-                                            1000 Students
-                                        </small>
-                                        <small class="m-0">
-                                            <i class="far fa-clock text-primary mr-2"></i>
-                                            10
-                                        </small>
-                                    </div>
-                                    <a class="card-title text-log h5" href="">Web development</a>
-                                    <p class="card-text">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        Web development
-                                    </p>
-
-                                    <p class="card-text">abcdefffff</p>
-                                    <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                        <span class="card__rate">4</span>
-                                        <span class="card__totaln">(444)</span>
-                                    </div>
-                                </div>
-                                <div class="border-top card-footer mt-3">
-                                    <div class="card__price">
-                                        <span>$4444</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
 
                     </div>
                 </div>

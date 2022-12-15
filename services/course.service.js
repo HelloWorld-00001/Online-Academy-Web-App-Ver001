@@ -109,6 +109,33 @@ export default {
         return res;
     },
 
+    async findTop5MostViewWithField(field, idCourse) {
+        const courses = await db('khoahoc')
+                            .select(
+                                'khoahoc.*',
+                                'taikhoan.Username',
+                                'linhvuc.TenLinhVuc'
+                            )
+                            .where('LinhVuc', field)
+                            .whereNot('MaKhoaHoc', +idCourse)
+                            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+                            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+                            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+
+                            .limit(5);
+
+        for(let i = 0; i < courses.length; i++) {
+            const ele1 = courses[i].LinhVuc === 1;
+            const ele2 = courses[i].KhuyenMai === 0;
+            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+
+            Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {isNoDiscount: ele2});
+            Object.assign(courses[i], {finalPrice: ele3});
+        }
+        return courses;
+    },
+
     async findTopFiedls() {
         const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
                         from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
@@ -139,22 +166,13 @@ export default {
 
 
     async findPageCourseAll(limit, offset) {
-        const courses = await db('Khoahoc')
+        const courses = await db('khoahoc')
                     .select(
-                        'Khoahoc.MaKhoaHoc',
-                        'Khoahoc.TenKhoaHoc',
-                        'Khoahoc.LinhVuc',
-                        'Khoahoc.Gia',
-                        'Khoahoc.SoLuongVideo',
-                        'Khoahoc.Image',
-                        'Khoahoc.KhuyenMai',
-                        'Khoahoc.RateTB',
-                        'Khoahoc.SLHocSinhDanhGia',
-                        'Khoahoc.LuotXem',
+                        'khoahoc.*',
                         'taikhoan.Username',
                         'linhvuc.TenLinhVuc'
                     )
-                    .innerJoin('giaovien', {'Khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+                    .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
                     .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
                     .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
                     .limit(limit)
@@ -169,30 +187,20 @@ export default {
             Object.assign(courses[i], {isNoDiscount: ele2});
             Object.assign(courses[i], {finalPrice: ele3});
         }
-
         return courses;
     },
 
     async findPageByField(linhVuc, limit, offset) {
-        const courseField = await db('Khoahoc')
+        const courseField = await db('khoahoc')
             .select(
-                'Khoahoc.MaKhoaHoc',
-                'Khoahoc.TenKhoaHoc',
-                'Khoahoc.LinhVuc',
-                'Khoahoc.Gia',
-                'Khoahoc.SoLuongVideo',
-                'Khoahoc.Image',
-                'Khoahoc.KhuyenMai',
-                'Khoahoc.RateTB',
-                'Khoahoc.SLHocSinhDanhGia',
-                'Khoahoc.LuotXem',
+                'khoahoc.*',
                 'taikhoan.Username',
                 'linhvuc.TenLinhVuc'
             )
-            .innerJoin('giaovien', {'Khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .where('LinhVuc', linhVuc)
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
             .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
-            .where('LinhVuc', linhVuc)
             .limit(limit)
             .offset(offset);
 
@@ -205,7 +213,6 @@ export default {
             Object.assign(courseField[i], {isNoDiscount: ele2});
             Object.assign(courseField[i], {finalPrice: ele3});
         }
-
         return courseField;
     },
 
@@ -214,6 +221,28 @@ export default {
         const sql = await db('KhoaHoc')
         .where('TenKhoaHoc', name );
         return sql;
-    }
+    },
+
+    async findDetailCourseByID(makhoahoc) {
+        const detailList = await db.select('*')
+                                .from('khoahoc')
+                                .where('khoahoc.MaKHoaHoc', makhoahoc)
+                                .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+                                .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
+                                .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+                                .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+
+        if (detailList.length === 0)
+            return null;
+
+        return detailList[0];
+    },
+
+    async findCourseVideoList(idCourse) {
+        const videoList = await db('danhsachvideo').where('MaKhoaHoc', idCourse);
+        if(videoList.length === 0)
+            return null;
+        return videoList;
+    },
 
 }
