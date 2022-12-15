@@ -9842,7 +9842,7 @@ h6,
 }
 
 .page-header {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/public/img/page-header.jpg), no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/page-header.jpg), no-repeat center center;
   background-size: cover;
 }
 
@@ -9869,7 +9869,7 @@ h6,
 }
 
 .bg-registration {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(/public/img/registration.jpg), no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../img/registration.jpg), no-repeat center center;
   background-size: cover;
 }
 
@@ -9967,5 +9967,9 @@ h6,
 }
 
 .form_course:hover {
-  margin: -15px;
+  /*margin: -15px;*/
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 0px 12px 30px 0px rgba(0, 0, 0, 0.2);
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
 }
