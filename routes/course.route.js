@@ -73,9 +73,9 @@ router.get('/detail/:id', async function (req, res) {
     Object.assign(course, {finalPrice: course.Gia * (1 - course.KhuyenMai / 100)});
     const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
     const top5CousresMostView = await courseService.findTop5MostViewWithField(course.LinhVuc, makhoahoc);
-
+    const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
     for(let i = 0; i < courseVideoList.length; i++) {
-        if(i === 0) {
+        if(i === 0 || i === 1) {
             Object.assign(courseVideoList[i], {isShowVideo: true});
         }
         else {
@@ -87,6 +87,7 @@ router.get('/detail/:id', async function (req, res) {
         courseVideoList,
         isVideoListEmpty: courseVideoList.length === 0,
         top5CousresMostView,
+        inforStudentsOfTeacher,
     });
 });
 

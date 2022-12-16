@@ -48,24 +48,31 @@
             height: 280px;
         }
 
-        .card--feedback .card-body .card__top {
+        .card__top {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
             margin-bottom: 15px;
         }
 
-        .card--feedback .card-body .card__avatar {
+        .card__avatar,
+        .card__avatar__teacher {
             margin-right: 15px;
         }
 
-        .card--feedback .card-body .card__avatar img {
+        .card__avatar img {
             width: 64px;
             height: 64px;
             border-radius: 50%;
         }
 
-        .card--feedback .card-body .card__name {
+        .card__avatar__teacher img {
+            width: 184px;
+            height: 184px;
+            border-radius: 50%;
+        }
+
+        .card__name {
             margin-bottom: 0;
         }
 
@@ -80,8 +87,29 @@
             cursor: default;
         }
 
-        #review-list .course-review {
+        #review-list .course-review,
+        .list-course {
             display: none;
+        }
+
+        .modal-dialog {
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .modal-body {
+            position:relative;
+            padding:0px;
+        }
+        .close {
+            position:absolute;
+            right:-30px;
+            top:0;
+            z-index:999;
+            font-size:2rem;
+            font-weight: normal;
+            color:#fff;
+            opacity:1;
         }
 
     </style>
@@ -114,10 +142,10 @@
                     items: 1
                 },
                 600: {
-                    items: 2
+                    items: 1
                 },
                 1000: {
-                    items: 3
+                    items: 2
                 }
             }
         });
@@ -140,14 +168,56 @@
             });
         });
 
+        // $(function () {
+        //     if ($(".list-course:hidden").length <= 10) {
+        //         $(".more-section").css('visibility', 'hidden');
+        //
+        //     }
+        //     console.log($(".list-course:hidden").length)
+        //
+        //     $(".list-course").slice(0, 10).show();
+        //     $(".more-section").text($(".list-course:hidden").length + " more section");
+        //     $("body").on('click touchstart', '.more-section', function (e) {
+        //         e.preventDefault();
+        //         $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
+        //         if ($(".list-course:hidden").length === 0) {
+        //             $(".more-section").css('visibility', 'hidden');
+        //         }
+        //         $('html,body').animate({
+        //             scrollTop: $('.more-section').offset().top - 500
+        //         }, 1000);
+        //     });
+        // });
+
+        $(function () {
+                if ($(".list-course:hidden").length > 10) {
+                    $(".more-section").removeClass('d-none').addClass('d-inline-block');
+
+                }
+                console.log($(".list-course:hidden").length)
+
+                $(".list-course").slice(0, 10).show();
+                $(".more-section").text($(".list-course:hidden").length + " more sections");
+                $("body").on('click touchstart', '.more-section', function (e) {
+                    e.preventDefault();
+                    $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
+                    if ($(".list-course:hidden").length === 0) {
+                        $(".more-section").removeClass('d-inline-block').addClass('d-none');
+                    }
+                    // $('html,body').animate({
+                    //     scrollTop: $('.more-section').offset().top - 500
+                    // }, 1000);
+                });
+            });
+
 
     </script>
 {{/section}}
 
 
-<div class="container-fluid py-5">
+<div class="container py-5">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body h-auto">
                     <div class="d-flex justify-content-between mb-2">
@@ -173,11 +243,11 @@
                         </p>
                     {{/if}}
 
-                    <p class="card-text">{{this.course.Username}}</p>
+                    <p class="card-text">{{this.course.Name}}</p>
                     <div class="d-flex align-content-center">
-                        <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
-                        <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
-                        <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                        <span class="stars" data-rating="{{this.courseRateTB}}" data-num-stars="5" ></span>
+                        <h5 class="text-primary font-weight-bolder ml-2">{{this.course.RateTB}}</h5>
+                        <span class="">({{this.course.SLHocSinhDanhGia}} ratings)</span>
                     </div>
                 </div>
             </div>
@@ -201,12 +271,11 @@
                     </div>
                     <div class="mt-5">
                         <p class="font-weight-bold">This course includes:</p>
-
                         <div class="row mt-2">
                             <p class="col-sm-2">
                                 <i class="far fa-clock  text-primary"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 11 hours on-demand video
                             </p>
                         </div>
@@ -214,7 +283,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-spinner text-primary" aria-hidden="true"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Effort: 2-5 hours per week
                             </p>
                         </div>
@@ -222,7 +291,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-solid fa-graduation-cap  text-primary"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Web development
                             </p>
                         </div>
@@ -230,7 +299,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-mobile text-primary" aria-hidden="true"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Access on mobile and TV
                             </p>
                         </div>
@@ -238,7 +307,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-desktop text-primary" aria-hidden="true"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Access on mobile and TV
                             </p>
                         </div>
@@ -246,7 +315,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-refresh text-primary" aria-hidden="true"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Always update course
                             </p>
                         </div>
@@ -254,7 +323,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-regular fa-key  text-primary"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Full lifetime access
                             </p>
                         </div>
@@ -262,7 +331,7 @@
                             <p class="col-sm-2">
                                 <i class="fa fa-certificate  text-primary"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Certificate of Completion
                             </p>
                         </div>
@@ -271,14 +340,16 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <img src="/public/img/courses/{{this.course.MaKhoaHoc}}.jpg" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
-                <div class="card-body h-auto">
+                <div class="card-header">
                     <h5 class="card-text text-primary">
                         Course Overview
                     </h5>
+                </div>
+                <div class="card-body h-auto">
                     <p class="card-title font-weight-bolder">
                         Short Course Description
                     </p>
@@ -298,41 +369,41 @@
                         What you'll learn
                     </p>
                     <ul class="list-unstyled" style="column-count: 2">
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Become a UX designer.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             You will be able to add UX designer</li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Become a UI designer.</li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Build & test a full website design.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Build & test a full mobile app.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Learn to design websites & mobile phone apps.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             You'll learn how to choose colors.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Prototype your designs with interactions.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Export production ready assets.
                         </li>
-                        <li class="mb-4">
+                        <li class="h-100" >
                             <i class="fa fa-check" aria-hidden="true"></i>
                             All the techniques used by UX professionals
                         </li>
@@ -345,7 +416,7 @@
                         Course Content
                     </h5>
                     <p class="card-text">
-                        Start Date: {{NgayBD}}
+                        Start Date: {{this.course.NgayBD}}
                     </p>
                 </div>
                 <div class="card-body h-auto">
@@ -354,11 +425,11 @@
                     {{else}}
                         <div id="accordion">
                             {{#each this.courseVideoList}}
-                                <div class="card rounded-0">
-                                    <div class="card-header">
+                                <div class="card rounded-0 list-course">
+                                    <div class="card-header" style="cursor: pointer">
                                         <h5 class="mb-0">
                                             <div href="#collapse{{STT}}" class="text-primary" data-toggle="collapse" data-parent="#accordion">
-                                                <i class="fa fa-angle-down"></i>
+                                                <i class="fa fa-angle-down mr-3"></i>
                                                 Video {{STT}}
                                             </div>
                                         </h5>
@@ -366,7 +437,7 @@
                                     {{#if isShowVideo}}
                                         <div id="collapse{{STT}}" class="collapse show">
                                             <div class="card-body h-auto">
-                                                <a href="{{Link}}">
+                                                <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                     <span>video</span>
                                                 </a>
@@ -375,10 +446,10 @@
                                     {{else}}
                                         <div id="collapse{{STT}}" class="collapse">
                                             <div class="card-body h-auto">
-                                                <a href="{{Link}}" class="disabled">
+                                                <span href="{{Link}}" class="disabled">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                     <span>video</span>
-                                                </a>
+                                                </span>
                                             </div>
                                         </div>
                                     {{/if}}
@@ -386,19 +457,85 @@
                                 </div>
                             {{/each}}
                         </div>
+                        <button type="button" class="btn btn-outline-primary more-section  w-100 mt-3 d-none">More-section</button>
+
                     {{/if}}
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <!-- 16:9 aspect ratio -->
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-3 text-primary">Instructor</h5>
+                </div>
+                <div class="card-body h-auto">
+                    <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
+                    <div class="card__top">
+                        <div class="card__avatar__teacher">
+                            <img src="/public/img/teachers/{{this.course.Username}}.jpg" alt="student 1">
+                        </div>
+                        <div class="ml-5">
+                            <p class="mb-2">
+                                <i class="mr-3 fa fa-envelope text-primary" aria-hidden="true"></i>
+                                {{this.course.Email}}
+                            </p>
+                            <p class="mb-2">
+                                <i class="mr-3 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
+                                {{this.course.DOB}}
+                            </p>
+                            <p class="mb-2">
+                                <i class="mr-3 fa fa-star text-primary" aria-hidden="true"></i>
+                                {{this.inforStudentsOfTeacher.ratings}} Instructor Rating
+                            </p>
+                            <p class="mb-2">
+                                <i class="mr-3 fas fa-trophy text-primary" aria-hidden="true"></i>
+                                {{this.inforStudentsOfTeacher.amountReview}} Reviews
+                            </p>
+                            <p class="mb-2">
+                                <i class="mr-3 fa fa-user-plus text-primary" aria-hidden="true"></i>
+                                {{this.inforStudentsOfTeacher.amountStudents}} 1,801,976 Students
+                            </p>
+                            <p class="mb-2">
+                                <i class="mr-3 fa fa-play-circle text-primary" aria-hidden="true"></i>
+                                {{this.inforStudentsOfTeacher.amountCourses}} Courses
+                            </p>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        I had a couple of months of experience trading
+                        without consistent
+                        results. After taking this
+                        course I'm pretty confident that I'll be a
+                        better trader and know better when to enter a
+                        trade, how to put my stop
+                        loss and take profit, how many lots to trade and
+                        much more.
+                    </p>
                 </div>
             </div>
 
             <div class="card mt-3">
                 <!-- Top 5 most view course End -->
+                <div class="card-header">
+                    <h5 class="mb-3 text-primary"> Top 5 other courses in the same field are bought the most</h5>
+                </div>
                 <div class="card-body h-auto">
-                    <div class="text-left mb-4">
-                        <h5 class="mb-3 text-primary"> Top 5 other courses in the same field are bought the most</h5>
-                    </div>
                     <div class="row owl-carousel owl-theme">
                         {{#each this.top5CousresMostView}}
-                            <div class="col-md-4 mb-3 mw-100">
+                            <div class="col-md-6 mb-3 mw-100">
                                 <div class="form_course">
                                     <div class="card h-100">
                                         <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
@@ -452,17 +589,18 @@
                                 </div>
                             </div>
                         {{/each}}
-
                     </div>
                 </div>
             </div>
             <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="text-primary">What our students have to say</h5>
+                </div>
                 <div class="card-body h-auto">
                     <div class="w-100">
-                        <h5 class="text-primary">What our students have to say</h5>
                         <div class="row" id="review-list">
                             <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card-fluid card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -494,7 +632,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -525,7 +663,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -557,7 +695,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -587,7 +725,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -618,7 +756,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -649,7 +787,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -679,7 +817,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -710,7 +848,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback">
+                                <div class="card card--feedback h-100">
                                     <div class="card-body h-auto">
                                         <div class="card__top">
                                             <div class="card__avatar">
@@ -742,7 +880,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-outline-success load-more">Load More</button>
+                            <button type="button" class="btn btn-outline-primary load-more" style="margin-left: 16px;">Load More</button>
                         </div>
                     </div>
                 </div>

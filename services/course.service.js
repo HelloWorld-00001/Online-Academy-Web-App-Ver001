@@ -239,6 +239,10 @@ export default {
                                 .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
                                 .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
                                 .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+        detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
+        detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
+        detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
+        detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
 
         if (detailList.length === 0)
             return null;
@@ -251,6 +255,22 @@ export default {
         if(videoList.length === 0)
             return null;
         return videoList;
+    },
+
+    async inforStudentsOfTeacher(idTeacher) {
+        const amountCourse = await db('Khoahoc')
+            .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
+            .where('GiaoVien', idTeacher)
+            .count({amountCourses : 'GiaoVien'})
+            .sum({amountReview: 'SLHocSinhDanhGia'})
+            .sum({ratings: 'RateTB'})
+            .sum({amountStudents: 'SLHocVien'})
+            .groupBy('GiaoVien')
+        // const amountStudent = knex('Khoahoc').sum('products')
+        // Outputs:
+        //     select sum("products") from "users"
+        amountCourse[0]['ratings'] = Math.round(amountCourse[0]['ratings'] / amountCourse[0]['amountCourses'] *10) / 10
+        return amountCourse[0];
     },
 
 }

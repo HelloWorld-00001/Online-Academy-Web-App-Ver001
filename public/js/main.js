@@ -63,6 +63,7 @@
     $(function() {
         $('span.stars').stars();
     });
+
 })(jQuery);
 
 
