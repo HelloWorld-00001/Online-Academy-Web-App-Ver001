@@ -231,14 +231,15 @@ export default {
         return sql;
     },
 
-    async findDetailCourseByID(makhoahoc) {
+    async findDetailCourseByID(idCourse) {
         const detailList = await db.select('*')
                                 .from('khoahoc')
-                                .where('khoahoc.MaKHoaHoc', makhoahoc)
                                 .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
                                 .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
                                 .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
                                 .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+                                .where('khoahoc.MaKHoaHoc', idCourse)
+
         detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
         detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
         detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
@@ -247,11 +248,27 @@ export default {
         if (detailList.length === 0)
             return null;
 
+        Object.assign(detailList, {isFieldType: detailList.LinhVuc === 1});
+        Object.assign(detailList, {isNoDiscount: detailList.KhuyenMai === 0});
+        Object.assign(detailList, {finalPrice: detailList.Gia * (1 - detailList.KhuyenMai / 100)});
+
         return detailList[0];
     },
 
     async findCourseVideoList(idCourse) {
         const videoList = await db('danhsachvideo').where('MaKhoaHoc', idCourse);
+
+        for(let i = 0; i < videoList.length; i++) {
+            let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            let match = videoList[i].Link.match(regExp);
+
+            if (match && match[2].length === 11) {
+                videoList[i]['Link'] =  "//www.youtube.com/embed/" + match[2];
+            } else {
+                videoList[i]['Link'] =  "//www.youtube.com/embed/" + 'error';
+            }
+        }
+
         if(videoList.length === 0)
             return null;
         return videoList;
@@ -266,9 +283,7 @@ export default {
             .sum({ratings: 'RateTB'})
             .sum({amountStudents: 'SLHocVien'})
             .groupBy('GiaoVien')
-        // const amountStudent = knex('Khoahoc').sum('products')
-        // Outputs:
-        //     select sum("products") from "users"
+
         amountCourse[0]['ratings'] = Math.round(amountCourse[0]['ratings'] / amountCourse[0]['amountCourses'] *10) / 10
         return amountCourse[0];
     },

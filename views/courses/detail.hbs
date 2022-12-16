@@ -94,7 +94,7 @@
 
         .modal-dialog {
             max-width: 800px;
-            margin: 30px auto;
+            margin: 50px auto;
         }
 
         .modal-body {
@@ -209,6 +209,27 @@
                     // }, 1000);
                 });
             });
+
+
+        $(document).ready(function() {
+        // Gets the video src from the data-src on each button
+            var $videoSrc;
+            $('.video-btn').click(function() {
+                $videoSrc = $(this).data( "src" );
+            });
+            // when the modal is opened autoplay it
+            $('#myModal').on('shown.bs.modal', function (e) {
+
+                // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+                $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+            })
+            // stop playing the youtube video when I close the modal
+            $('#myModal').on('hide.bs.modal', function (e) {
+                // a poor man's stop video
+                $("#video").attr('src',$videoSrc);
+            })
+            // document ready
+        });
 
 
     </script>
@@ -369,41 +390,41 @@
                         What you'll learn
                     </p>
                     <ul class="list-unstyled" style="column-count: 2">
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Become a UX designer.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             You will be able to add UX designer</li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Become a UI designer.</li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Build & test a full website design.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Build & test a full mobile app.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Learn to design websites & mobile phone apps.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             You'll learn how to choose colors.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Prototype your designs with interactions.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             Export production ready assets.
                         </li>
-                        <li class="h-100" >
+                        <li class="h-auto">
                             <i class="fa fa-check" aria-hidden="true"></i>
                             All the techniques used by UX professionals
                         </li>
@@ -441,6 +462,11 @@
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                     <span>video</span>
                                                 </a>
+<!--                                                <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/NFWSFbqL0A0" data-target="#myModal">-->
+
+                                                <a href="">
+<!--                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gVx72yLou2c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+                                                </a>
                                             </div>
                                         </div>
                                     {{else}}
@@ -458,7 +484,6 @@
                             {{/each}}
                         </div>
                         <button type="button" class="btn btn-outline-primary more-section  w-100 mt-3 d-none">More-section</button>
-
                     {{/if}}
                 </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -470,7 +495,15 @@
                                 </button>
                                 <!-- 16:9 aspect ratio -->
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                                    <iframe class="embed-responsive-item" src="" id="video"
+                                            allowscriptaccess="always"
+                                            allow="autoplay"
+                                            allowfullscreen="allowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen"
+                                            msallowfullscreen="msallowfullscreen"
+                                            oallowfullscreen="oallowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen">
+                                    </iframe>
                                 </div>
                             </div>
                         </div>
