@@ -639,17 +639,19 @@
         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Top 1</h5>
         <h1>Top Fields last week</h1>
     </div>
-    {{#each this.fields}}
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="">
-                <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
-                    <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
-                    <span>{{SLKhoaHoc}} Courses</span>
-                </a>
+    <div style="display: flex; justify-content: center">
+        {{#each this.fields}}
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="" width="150%">
+                    <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
+                        <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
+                        <span>{{SLKhoaHoc}} Courses</span>
+                    </a>
+                </div>
             </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    </div>
 </div>
 <!-- Top Fields last week End -->
 
