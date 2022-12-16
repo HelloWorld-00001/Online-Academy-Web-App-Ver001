@@ -14,7 +14,8 @@ import numeral from 'numeral';
 import courseService from "./services/course.service.js";
 import accountRoute from './routes/account.route.js';
 import courseRoute from "./routes/course.route.js";
-import categoryUserRoute from "./routes/category-user.route.js"
+import categoryUserRoute from "./routes/category-user.route.js";
+import teacherRoute from "./routes/teacher.route.js";
 
 
 const app = express();
@@ -83,9 +84,9 @@ app.get('/about', function (req, res) {
     res.render('about');
 })
 
-app.get('/teacher', function (req, res) {
-    res.render('teacher');
-})
+// app.get('/teacher', function (req, res) {
+//     res.render('teacher');
+// })
 
 app.get('/blog', function (req, res) {
     res.render('blog');
@@ -106,6 +107,7 @@ app.get('/detail', function (req, res) {
 app.use('/course', courseRoute);
 app.use('/account', accountRoute);
 app.use('/categories', categoryUserRoute);
+app.use('/teacher', teacherRoute);
 //
 // app.get('/bs4', function (req, res) {
 //     const __dirname = dirname(fileURLToPath(import.meta.url));
