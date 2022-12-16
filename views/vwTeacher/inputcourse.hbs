@@ -91,7 +91,7 @@
             position: relative;
             display: inline-block;
             width: 560px;
-            height: 100px;
+            height: 30px;
         }
 
         .switch input {display:none;}
@@ -113,10 +113,10 @@
             position: absolute;
             z-index: 2;
             content: "";
-            height: 96px;
-            width: 96px;
-            left: 2px;
-            bottom: 2px;
+            height: 32px;
+            width: 32px;
+            left: 0px;
+            bottom: 0px;
             background-color: darkslategrey;
             -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
@@ -128,11 +128,11 @@
             left: 0;
             z-index: 1;
             content: "Đã hoàn thành";
-            font-size: 45px;
+            font-size: 15px;
             text-align: left !important;
-            line-height: 95px;
+            line-height: 30px;
             padding-left: 0;
-            width: 560px;
+            width: 600px;
             color: #fff;
             height: 100px;
             border-radius: 100px;
@@ -144,11 +144,11 @@
         }
 
         input:checked + .slider:after {
-            -webkit-transform: translateX(0px);
-            -ms-transform: translateX(0px);
-            transform: translateX(0px);
+            -webkit-transform: translateX(60px);
+            -ms-transform: translateX(60px);
+            transform: translateX(60px);
             /*width: 235px;*/
-            padding-left: 25px;
+            padding-left: 50px;
         }
 
         input:checked + .slider:before {
@@ -156,9 +156,9 @@
         }
 
         input:checked + .slider:before {
-            -webkit-transform: translateX(460px);
-            -ms-transform: translateX(460px);
-            transform: translateX(460px);
+            -webkit-transform: translateX(530px);
+            -ms-transform: translateX(530px);
+            transform: translateX(530px);
         }
 
         /* Rounded sliders */
@@ -174,11 +174,16 @@
             left: 0;
             color: darkslategrey;
             text-align: right !important;
-            font-size: 45px;
+            font-size: 15px;
             width: calc(100% - 25px);
-            height: 100px;
-            line-height: 95px;
+            height: 30px;
+            line-height: 30px;
             cursor: pointer;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 {{/section}}
@@ -289,8 +294,8 @@
 
 <form method="post" id="frmInputCourse" class="container-fluid py-10">
     <div class="card container-fluid py-5 px-5">
-        <div class="form-group row-md-10">
-            <label for="txtNameCourse">Trạng thái</label>
+        <div class="status">
+            <label>Trạng thái</label>
             <label class="switch">
                 <input type="checkbox" name="check" id="txtCheck">
                 <span class="slider round"></span>
