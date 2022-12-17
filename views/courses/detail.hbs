@@ -155,10 +155,10 @@
         });
 
         $(function () {
-            $(".course-review").slice(0, 2).show();
+            $(".course-review").slice(0, 4).show();
             $("body").on('click touchstart', '.load-more', function (e) {
                 e.preventDefault();
-                $(".course-review:hidden").slice(0, 2).slideDown();
+                $(".course-review:hidden").slice(0, 4).slideDown();
                 if ($(".course-review:hidden").length === 0) {
                     $(".load-more").css('visibility', 'hidden');
                 }
@@ -190,29 +190,29 @@
         // });
 
         $(function () {
-                if ($(".list-course:hidden").length > 10) {
-                    $(".more-section").removeClass('d-none').addClass('d-inline-block');
+            if ($(".list-course:hidden").length > 10) {
+                $(".more-section").removeClass('d-none').addClass('d-inline-block');
 
+            }
+            console.log($(".list-course:hidden").length)
+
+            $(".list-course").slice(0, 10).show();
+            $(".more-section").text($(".list-course:hidden").length + " more sections");
+            $("body").on('click touchstart', '.more-section', function (e) {
+                e.preventDefault();
+                $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
+                if ($(".list-course:hidden").length === 0) {
+                    $(".more-section").removeClass('d-inline-block').addClass('d-none');
                 }
-                console.log($(".list-course:hidden").length)
-
-                $(".list-course").slice(0, 10).show();
-                $(".more-section").text($(".list-course:hidden").length + " more sections");
-                $("body").on('click touchstart', '.more-section', function (e) {
-                    e.preventDefault();
-                    $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
-                    if ($(".list-course:hidden").length === 0) {
-                        $(".more-section").removeClass('d-inline-block').addClass('d-none');
-                    }
-                    // $('html,body').animate({
-                    //     scrollTop: $('.more-section').offset().top - 500
-                    // }, 1000);
-                });
+                // $('html,body').animate({
+                //     scrollTop: $('.more-section').offset().top - 500
+                // }, 1000);
             });
+        });
 
 
         $(document).ready(function() {
-        // Gets the video src from the data-src on each button
+            // Gets the video src from the data-src on each button
             var $videoSrc;
             $('.video-btn').click(function() {
                 $videoSrc = $(this).data( "src" );
@@ -461,11 +461,6 @@
                                                 <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                     <span>video</span>
-                                                </a>
-<!--                                                <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/NFWSFbqL0A0" data-target="#myModal">-->
-
-                                                <a href="">
-<!--                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gVx72yLou2c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
                                                 </a>
                                             </div>
                                         </div>
