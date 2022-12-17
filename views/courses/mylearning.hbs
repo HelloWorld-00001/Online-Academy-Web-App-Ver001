@@ -1,0 +1,635 @@
+{{#section 'css'}}
+    <style>
+        #navbar {
+            display: none;
+        }
+
+        .accordion .fa {
+            margin-right: 0.5rem;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            top: 2px;
+        }
+
+        .owl-stage:first-child {
+            margin-left: 15px;
+        }
+        .owl-carousel .nav-button {
+            height: 50px;
+            width: 25px;
+            cursor: pointer;
+            position: absolute;
+            top: 110px !important;
+            line-height: 50px;
+            text-align: center;
+        }
+        .owl-carousel .owl-prev.disabled,
+        .owl-carousel .owl-next.disabled {
+            pointer-events: none;
+            opacity: 0.25;
+        }
+        .owl-carousel .owl-prev {
+            left: -5px;
+        }
+        .owl-carousel .owl-next {
+            right: -35px;
+        }
+        .owl-theme .owl-nav [class*=owl-] {
+            color: #ffffff;
+            font-size: 39px;
+            background: #000000;
+            border-radius: 3px;
+        }
+        .owl-carousel .prev-carousel:hover {
+            background-position: 0px -53px;
+        }
+        .owl-carousel .next-carousel:hover {
+            background-position: -24px -53px;
+        }
+
+        .card--feedback {
+            height: 280px;
+        }
+
+        .card__top {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .card__avatar,
+        .card__avatar__teacher {
+            margin-right: 15px;
+        }
+
+        .card__avatar img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+        }
+
+        .card__avatar__teacher img {
+            width: 184px;
+            height: 184px;
+            border-radius: 50%;
+        }
+
+        .card__name {
+            margin-bottom: 0;
+        }
+
+        .card--feedback .card-body .card-text {
+            color: #29303b;
+            font-size: 15px;
+            font-weight: normal;
+        }
+        a.disabled {
+            color: gray;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        #review-list .course-review,
+        .list-course {
+            display: none;
+        }
+
+        .modal-dialog {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .modal-body {
+            position:relative;
+            padding:0px;
+        }
+        .close {
+            position:absolute;
+            right:-30px;
+            top:0;
+            z-index:999;
+            font-size:2rem;
+            font-weight: normal;
+            color:#fff;
+            opacity:1;
+        }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            /*aspect-ratio: 16 / 9;*/
+        }
+
+    </style>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function(){
+            // Add down arrow icon for collapse element which is open by default
+            $(".collapse.show").each(function(){
+                $(this).prev(".card-header").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+            });
+
+            // Toggle right and down arrow icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function(){
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+            }).on('hide.bs.collapse', function(){
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        });
+
+        $('.owl-carousel').owlCarousel({
+            margin: 15,
+            nav: true,
+            autoplay: true,
+            loop: true,
+            navText: ["<div class='nav-button owl-prev bg-color'>‹</div>", "<div class='nav-button owl-next bg-color'>›</div>"],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 1
+                },
+                1000: {
+                    items: 2
+                }
+            }
+        });
+
+        $('.disabled').click(function(e){
+            e.preventDefault();
+        });
+
+        $(function () {
+            $(".course-review").slice(0, 4).show();
+            $("body").on('click touchstart', '.load-more', function (e) {
+                e.preventDefault();
+                $(".course-review:hidden").slice(0, 4).slideDown();
+                if ($(".course-review:hidden").length === 0) {
+                    $(".load-more").css('visibility', 'hidden');
+                }
+                $('html,body').animate({
+                    scrollTop: $('.load-more').offset().top - 500
+                }, 1000);
+            });
+        });
+
+        $(function () {
+                if ($(".list-course:hidden").length > 10) {
+                    $(".more-section").removeClass('d-none').addClass('d-inline-block');
+
+                }
+                console.log($(".list-course:hidden").length)
+
+                $(".list-course").slice(0, 10).show();
+                $(".more-section").text($(".list-course:hidden").length + " more sections");
+                $("body").on('click touchstart', '.more-section', function (e) {
+                    e.preventDefault();
+                    $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
+                    if ($(".list-course:hidden").length === 0) {
+                        $(".more-section").removeClass('d-inline-block').addClass('d-none');
+                    }
+                    // $('html,body').animate({
+                    //     scrollTop: $('.more-section').offset().top - 500
+                    // }, 1000);
+                });
+            });
+
+
+        $(document).ready(function() {
+        // Gets the video src from the data-src on each button
+            var $videoSrc;
+            $('.video-btn').click(function() {
+                $videoSrc = $(this).data( "src" );
+            });
+            // when the modal is opened autoplay it
+            $('#myModal').on('shown.bs.modal', function (e) {
+
+                // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+                $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+            })
+            // stop playing the youtube video when I close the modal
+            $('#myModal').on('hide.bs.modal', function (e) {
+                // a poor man's stop video
+                $("#video").attr('src',$videoSrc);
+            })
+            // document ready
+        });
+
+        $( "#close-icon" ).click(function() {
+            $( "#courseDiv" ).css('display', 'none')
+            $( "#videoDiv" ).removeClass('col-md-9').addClass('col-12');
+            $( "#video-container" ).addClass('col-12')
+        });
+
+    </script>
+{{/section}}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9" id="videoDiv">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/s0RI4IXKE_o"
+                        frameborder="0" allowfullscreen class="video" loading="lazy"></iframe>
+            </div>
+            <ul class="nav nav-tabs " role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#home" role="tab">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#overview" role="tab">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#settings" role="tab">Settings</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane" id="home" role="tabpanel">A</div>
+                <div class="tab-pane" id="overview" role="tabpanel">B</div>
+                <div class="tab-pane" id="reviews" role="tabpanel">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5 class="text-primary">What our students have to say</h5>
+                        </div>
+                        <div class="card-body h-auto">
+                            <div class="w-100">
+                                <div class="row" id="review-list">
+                                    <div class="col-md-6 mb-3 mw-100 course-review">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-1.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Oscar Javier</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    I had a couple of months of experience trading
+                                                    without consistent
+                                                    results. After taking this
+                                                    course I'm pretty confident that I'll be a
+                                                    better trader and know better when to enter a
+                                                    trade, how to put my stop
+                                                    loss and take profit, how many lots to trade and
+                                                    much more.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-1.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Estelle</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    My first complete Photoshop for Designing
+                                                    t-shirts course done! I am
+                                                    not a designer at all, but
+                                                    after taking this course I really felt like a
+                                                    professional with enough confidence to now
+                                                    go out and design for the
+                                                    real world. Learned SO much! thank you!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-3.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Mrinal</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    Great course for beginners as well as working
+                                                    professionals. I'm
+                                                    working as a UI developer for
+                                                    last 2 years and worked on different javascript
+                                                    frameworks but the clarity of concepts
+                                                    which I got after taking
+                                                    this course is exceptional which I was not
+                                                    having previously.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-2.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Flávio</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    Very explained even for a short course. It's not
+                                                    for full
+                                                    understanding, but it works perfectly as
+                                                    an introduction for the subject. And you can
+                                                    really build a robot after taking this
+                                                    course.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-3.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Angeles</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    I didn't know anything at all about FB ads for
+                                                    this course and have a
+                                                    client that is wanting to
+                                                    start using them. After taking this course i
+                                                    feel like I can help them and so much more
+                                                    confident in coming up with
+                                                    a strategy.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-4.jpg" alt="student 4">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Carol</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    After studying German for about six months my
+                                                    spelling and grammar is
+                                                    good, but I was having
+                                                    trouble with some pronunciation. After taking
+                                                    this course it has really helped me
+                                                    pronounce certain words I was
+                                                    having trouble with and also have better
+                                                    listening skill of German speakers.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-2.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Flávio</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    Very explained even for a short course. It's not
+                                                    for full
+                                                    understanding, but it works perfectly as
+                                                    an introduction for the subject. And you can
+                                                    really build a robot after taking this
+                                                    course.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-3.jpg" alt="student 1">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Angeles</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    I didn't know anything at all about FB ads for
+                                                    this course and have a
+                                                    client that is wanting to
+                                                    start using them. After taking this course i
+                                                    feel like I can help them and so much more
+                                                    confident in coming up with
+                                                    a strategy.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mw-100 course-review ">
+                                        <div class="card card--feedback h-100">
+                                            <div class="card-body h-auto">
+                                                <div class="card__top">
+                                                    <div class="card__avatar">
+                                                        <img src="/public/img/team-4.jpg" alt="student 4">
+                                                    </div>
+                                                    <div>
+                                                        <p class="card__name">Carol</p>
+                                                        <div class="card__stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-half"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="card-text">
+                                                    After studying German for about six months my
+                                                    spelling and grammar is
+                                                    good, but I was having
+                                                    trouble with some pronunciation. After taking
+                                                    this course it has really helped me
+                                                    pronounce certain words I was
+                                                    having trouble with and also have better
+                                                    listening skill of German speakers.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <button type="button" class="btn btn-outline-primary load-more" style="margin-left: 16px;">Load More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="settings" role="tabpanel">D</div>
+            </div>
+        </div>
+        <div class="col-md-3" id="courseDiv">
+            <div class="w-auto">
+                <div class="d-flex justify-content-between  card-header">
+                    <h5 class="card-text text-primary">
+                        Course Content
+                    </h5>
+                    <h5 class="card-text" id="close-icon">
+                        &#10005;
+                    </h5>
+                </div>
+                <div class="h-auto">
+                    {{#if this.isVideoListEmpty}}
+
+                    {{else}}
+                        <div id="accordion">
+                            {{#each this.courseVideoList}}
+                                <div class="card rounded-0 list-course">
+                                    <div class="card-header" style="cursor: pointer">
+                                        <h5 class="mb-0">
+                                            <div href="#collapse{{STT}}" class="text-primary" data-toggle="collapse" data-parent="#accordion">
+                                                <i class="fa fa-angle-down mr-3"></i>
+                                                Video {{STT}}
+                                            </div>
+                                        </h5>
+                                    </div>
+                                    {{#if isShowVideo}}
+                                        <div id="collapse{{STT}}" class="collapse show">
+                                            <div class="card-body h-auto">
+                                                <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </a>
+                                        </div>
+                                    {{else}}
+                                        <div id="collapse{{STT}}" class="collapse">
+                                            <div class="card-body h-auto">
+                                                <span href="{{Link}}" class="disabled">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+
+                                </div>
+                            {{/each}}
+                        </div>
+                        <button type="button" class="btn btn-outline-primary more-section  w-100 mt-3 d-none">More-section</button>
+                    {{/if}}
+                </div>
+<!--                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--                    <div class="modal-dialog" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="modal-body">-->
+<!--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                                    <span aria-hidden="true">&times;</span>-->
+<!--                                </button>-->
+<!--                                &lt;!&ndash; 16:9 aspect ratio &ndash;&gt;-->
+<!--                                <div class="embed-responsive embed-responsive-16by9">-->
+<!--                                    <iframe class="embed-responsive-item" src="" id="video"-->
+<!--                                            allowscriptaccess="always"-->
+<!--                                            allow="autoplay"-->
+<!--                                            allowfullscreen="allowfullscreen"-->
+<!--                                            mozallowfullscreen="mozallowfullscreen"-->
+<!--                                            msallowfullscreen="msallowfullscreen"-->
+<!--                                            oallowfullscreen="oallowfullscreen"-->
+<!--                                            webkitallowfullscreen="webkitallowfullscreen">-->
+<!--                                    </iframe>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
