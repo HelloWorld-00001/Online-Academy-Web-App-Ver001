@@ -62,7 +62,7 @@ router.get('/', async function (req, res) {
 
 
 router.get('/detail/:id', async function (req, res) {
-    let makhoahoc = req.params.id || 0;
+    const makhoahoc = req.params.id || 0;
     // makhoahoc = +makhoahoc
     const course = await courseService.findDetailCourseByID(makhoahoc);
 
@@ -91,4 +91,21 @@ router.get('/detail/:id', async function (req, res) {
     });
 });
 
+router.get('/mylearning/:id', async function (req, res) {
+    let makhoahoc = req.params.id || 0;
+    const course = await courseService.findDetailCourseByID(makhoahoc);
+
+    if (course === null) {
+        return res.redirect('/');
+    }
+
+    const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
+
+    const firstVideo = courseVideoList[0].Link;
+    console.log(firstVideo)
+    res.render('courses/mylearning', {
+        courseVideoList,
+        firstVideo,
+    });
+});
 export default router;
