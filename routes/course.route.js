@@ -101,9 +101,11 @@ router.get('/mylearning/:id', async function (req, res) {
 
     const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
 
-
+    const firstVideo = courseVideoList[0].Link;
+    console.log(firstVideo)
     res.render('courses/mylearning', {
         courseVideoList,
+        firstVideo,
     });
 });
 export default router;
