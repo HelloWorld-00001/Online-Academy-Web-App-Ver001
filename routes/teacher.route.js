@@ -14,5 +14,12 @@ router.post('/input', function (req, res){
     console.log(req.body);
 });
 
+router.get('/profile', function (req, res){
+    res.render('vwTeacher/profile');
+});
+
+router.post('/profile', function (req, res){
+    console.log(req.body);
+});
 
 export default router;

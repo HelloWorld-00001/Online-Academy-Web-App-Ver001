@@ -66,6 +66,7 @@ app.engine('hbs', engine({
     extname: 'hbs',
     defaultLayout: 'index',
     helpers: {
+        section: hbs_sections(),
         format_number(val) {
             return numeral(val).format('0,0');
         },
@@ -80,8 +81,7 @@ app.engine('hbs', engine({
                 return options.fn(this);
             return options.inverse(this);
         }
-    },
-    section: hbs_sections()
+    }
 }));
 
 app.set('view engine', 'hbs');
