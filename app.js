@@ -2,7 +2,9 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections'
 import session from 'express-session';
-import fnKnexStore from 'connect-session-knex';
+import fnMySQLStore from 'express-mysql-session';
+import passport from 'passport';
+import {connectionInfo} from './utils/db.js';
 
 import db from './utils/db.js';
 
@@ -16,7 +18,9 @@ import numeral from 'numeral';
 // import categoryService from './services/category.service.js';
 
 import courseService from "./services/course.service.js";
+
 import accountRoute from './routes/account.route.js';
+import authRoute from './routes/auth.route.js';
 import courseRoute from "./routes/course.route.js";
 import categoryUserRoute from "./routes/category-user.route.js";
 import teacherRoute from "./routes/teacher.route.js";
@@ -29,19 +33,34 @@ app.use(express.urlencoded({
 
 app.use('/public', express.static('public'));
 
-const KnexStore = fnKnexStore(session);
-const store = new KnexStore({ knex: db });
+const MySQLStore = fnMySQLStore(session);
+const sessionStore = new MySQLStore(connectionInfo);
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-secret: 'keyboard cat',
-resave: false,
-saveUninitialized: true,
-store: store,
-cookie: {
-    // secure: true
-}
-}))
+  secret: 'keyboard cat',
+  resave: false,
+  store: sessionStore,
+  saveUninitialized: true,
+  cookie: { 
+    // secure: true 
+    }
+}));
+
+app.use(async function(req, res, next) {
+    if(typeof req.session.auth === 'undefined') {
+        req.session.auth = false;
+    }
+    if(typeof req.session.regis === 'undefined') {
+        req.session.regis = false;
+    }
+
+    res.locals.regis = req.session.regis;
+    res.locals.temp = req.session.temp;
+    res.locals.auth = req.session.auth;
+    res.locals.authUser = req.session.authUser;
+    next();
+});
 
 app.engine('hbs', engine({
     extname: 'hbs',
@@ -122,6 +141,18 @@ app.get('/detail', function (req, res) {
     res.render('detail');
 })
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
+app.use('/auth', authRoute);
 app.use('/course', courseRoute);
 app.use('/account', accountRoute);
 app.use('/categories', categoryUserRoute);
