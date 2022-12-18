@@ -1,68 +1,162 @@
-html {
-    background:linear-gradient(#FF7F50, #00008B) !important;   
-    height: 100%;
+*{
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+} 
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-body {
-    font-family:'Jost', sans-serif;
+html, body{
+    background:linear-gradient(#FF7F50, #000033); 
 }
 
-.frmSign {
-    height: 80%; 
+.frmContain {
+    min-height: 80vh;
     width: 70%;   
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
+    position: relative;
     display:flex; 
     justify-content:space-between; 
     box-shadow: 10px 10px 68px -6px;
     border-radius: 20px;
-    /* background-image: url("https://github.com/m-mourouh/Animated-Login-Form-Using-Only-HTML-CSS-Sign-In-Form-Design/blob/master/Login_form/bg2.png?raw=true"); */
+}
+
+.container {
+    flex: 1;
+    border-radius: 20px 0px 0px 20px;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:  linear-gradient(rgba(0,0,0,.5), rgba(255,255,255,.3)), url("https://www.oberlo.com/media/1603898030-womans-hands-typing-laptop-scaled.jpg?fit=max&fm=jpg&w=1824");
+    background-size: 100% 100%;
+    position:relative;
+}
+
+.frmSign .form-content .login {
+    text-align: center; 
+    font-family:'Jost', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
 }
 
 .frmBack {
     color: white;
     text-align: center;
     padding: 10px 10px 10px 10px;
-    position: absolute;
+    position: relative;
 }
 
-.frmRegister {
+.frmSign {
+    flex: 1;
+    min-height: 100%;
+    width: 100%;
+    font-size: 15px;
     border-radius: 0px 20px 20px 0px;
-    height:100%; 
-    width:100%; 
     background-color:white;
-}
-
-.frmLogin {
-    border-radius: 0px 20px 20px 0px;
-    height:100%; 
-    width:100%; 
-    background-color:white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container {
-    width: 50%;
-    height: 100%;
-    border-radius: 20px 0px 0px 20px;
 
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-image:  linear-gradient(rgba(0,0,0,.5), rgba(255,255,255,.3)), url("/public/img/sc_sign.jpg");
-    background-size: 600px 600px;
+    justify-content: center;    
 }
 
-#login {
-    text-align: center; 
-    font-family:'Jost', sans-serif;
-    font-size: 35px;
+.form-content {
+   height:100%;
+}
+
+.inval-text {
+    color:red; 
+    visibility:hidden;
+}
+
+.frmSign .form-content .input-box {
+    position: relative;
+    width: 100%;
+    font-size: 17px;
+    margin-top: 20px;
+}
+
+.frmSign .form-content .input-box input{
+    border-radius: 50px;
+}
+
+.frmSign .form-content i {
+    position: relative;
+    font-size: 15px;
+}
+
+.frmSign .form-content .column {
+    position: relative;
+    display: flex;
+    column-gap: 20px;
+}
+
+.frmSign .form-content .check-box {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#btn_sign {
+    background: linear-gradient(45deg, #4876FF, #000080); 
+    border-radius: 50px; 
+    font-size: 20px;
+}
+
+#btn_fb {
+    width: 38px;
+    border-radius: 50px;
+    background-color:#000099;
+    border: none;
     font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 5px;
+}
+
+#btn_gg {
+    width: 38px;
+    border-radius: 50px;
+    background-color:red;
+    border: none;
+}
+
+#btn_sendOTP {
+    border: none;
+    font-size: 20px;
+    background: linear-gradient(45deg, #4876FF, #000080); 
+}
+
+#btn_cancel {
+    border: none;
+    font-size: 20px;
+    background: linear-gradient(45deg, #4876FF, #000080); 
+}
+
+@media only screen and (max-width: 930px){
+    .frmSign .form-content .column {
+        display: inline;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .container {
+        display: none;
+    }
+    .frmLogin {
+        border-radius: 20px;
+    }
+    
+    .frmSign {
+        border-radius: 20px;
+    }
+
+    .frmSign .form-content .column {
+        flex-direction: column;
+    }
 }

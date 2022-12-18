@@ -1,7 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
-import hbs_sections from 'express-handlebars-sections'
 import session from 'express-session';
+import hbs_sections from 'express-handlebars-sections';
 import fnMySQLStore from 'express-mysql-session';
 import passport from 'passport';
 import {connectionInfo} from './utils/db.js';

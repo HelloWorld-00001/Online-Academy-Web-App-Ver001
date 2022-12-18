@@ -119,7 +119,21 @@
                         <input class="form-control mr-sm-2" name="courseFind" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn borderColor changeColor my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/account/login">Join Now</a>
+                    {{#if auth}}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hi, {{authUser.Name}}
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/account/profile">Profile</a>
+                                <form id="frmLogout" action="/account/logout" method="post">
+                                    <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Logout</a>
+                                </form>
+                            </div>
+                        </div>
+                    {{else}}
+                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="/account/login">Join Now</a>
+                    {{/if}}
                 </div>
             </nav>
         </div>
