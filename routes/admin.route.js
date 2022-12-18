@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/profile', function(req, res) {
-    res.render('vwAdmin/profile', {layout: false});
+    res.render('vwAdmin/profile', {layout: 'adminLayout'});
 });
 
 router.get('/allTable', async function(req, res) {
@@ -18,7 +18,7 @@ router.get('/allTable', async function(req, res) {
     const courseList = await adminService.findTopThreeCourse();
 
 
-    res.render('vwAdmin/allTables', {
+    res.render('vwAdmin/allTable', {
         layout: 'adminLayout',
         teacher: teacherList,
         student: studentList,
@@ -26,9 +26,9 @@ router.get('/allTable', async function(req, res) {
     });
 });
 
-router.get('/teacher', async function(req, res) {
+router.get('/teachers', async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
-    res.render('vwAdmin/teacher', {layout: 'adminLayout',
+    res.render('vwAdmin/teachers', {layout: 'adminLayout',
         teacher: teacherList
     });
 });
