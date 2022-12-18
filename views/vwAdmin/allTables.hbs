@@ -1,0 +1,199 @@
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10">Bootstrap Basic Tables</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                        class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#!">Bootstrap Table</a></li>
+                                            <li class="breadcrumb-item"><a href="#!">Basic Tables</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ breadcrumb ] end -->
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ basic-table ] start -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Teacher Table</h5>
+                                        <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/teacher" role="button"><i class="fa fa-eye"
+                                                aria-hidden="true"></i> View all</a>
+                                        <span class="d-block m-t-5">Danh sách các <code>Giáo viên</code> của hệ
+                                            thống</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each this.teacher}}
+                                                    <tr>
+                                                        <td>{{MaGiaoVien}}</td>
+                                                        <td>{{Name}}</td>
+                                                        <td>{{Username}}</td>
+                                                        <td>{{Email}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ basic-table ] end -->
+                            <!-- [ Contextual-table ] start -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header ">
+                                        <h5>Course table</h5>
+                                        <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/teacher" role="button"><i class="fa fa-eye"
+                                                aria-hidden="true"></i> View all</a>
+                                        <span class="d-block m-t-5">Danh sách các <code>Khóa học</code> của hệ
+                                            thống</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên khóa học</th>
+                                                        <th>Giá</th>
+                                                        <th>Giáo viên</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each this.course}}
+                                                    <tr>
+                                                        <td>{{MaKhoaHoc}}</td>
+                                                        <td>{{TenKhoaHoc}}</td>
+                                                        <td>{{Gia}}</td>
+                                                        <td>{{Username}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ inverse-table ] end -->
+                            <!-- [ Hover-table ] start -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Student Table</h5>
+                                        <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/teacher" role="button"><i class="fa fa-eye"
+                                                aria-hidden="true"></i> View all</a>
+
+                                        <span class="d-block m-t-5">use class <code>table-hover</code> inside table
+                                            element</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each this.student}}
+                                                    <tr>
+                                                        <td>{{MaHocVien}}</td>
+                                                        <td>{{Name}}</td>
+                                                        <td>{{Username}}</td>
+                                                        <td>{{Email}}</td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ Hover-table ] end -->
+                            <!-- [ dark-table ] start -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Dark Table</h5>
+                                        <span class="d-block m-t-5">use class <code>table-dark</code> inside table
+                                            element</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>Username</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>@mdo</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>@fat</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Larry</td>
+                                                        <td>the Bird</td>
+                                                        <td>@twitter</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ dark-table ] end -->
+                            <!-- [ stiped-table ] start -->
+
+
+                            <!-- [ Background-Utilities ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

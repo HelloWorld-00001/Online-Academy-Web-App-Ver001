@@ -1,0 +1,59 @@
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                        <div class="col-xl-12 ml-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Teacher Table</h5>
+                                    <span class="d-block m-t-5">Danh sach cac <code>Giao vien</code> cua he thong
+                                       </span>
+                                </div>
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ma Giao Vien</th>
+                                                    <th>Ma tai khoan</th>
+                                                    <th>Ten</th>
+                                                    <th>Username</th>
+                                                    <th>email</th>
+                                                    <th>SLKH</th>
+                                                    <th colspan="3">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                 {{#each this.teacher}}
+                                                <form method="post" action=""></form>
+                                                <tr>
+                                                    <td>{{MaGiaoVien}}</td>
+                                                    <td>{{MaTaiKhoan}}</td>
+                                                    <td>{{Name}}</td>
+                                                    <td>{{Username}}</td>
+                                                    <td>{{Email}}</td>
+                                                    <td>{{SLKhoaHoc}}</td>
+                                                    <td colspan="3">
+                                                        <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-sm" aria-hidden="true"></i></a>
+                                                        <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                        <button type="submit" class="btn btn-danger btn-sm" >Del<i class="material-icons">&#xE872;</i></button>
+                                                    </td>
+                                                </tr>
+                                                </form>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
