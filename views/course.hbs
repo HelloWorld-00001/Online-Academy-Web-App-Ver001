@@ -38,7 +38,6 @@
 </div>
 <!-- Category End -->
 
-
 <!-- Courses Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -67,7 +66,7 @@
                                             {{SoLuongVideo}}
                                         </small>
                                     </div>
-                                    <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                    <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                     {{#if isFieldType}}
                                         <p class="card-text">
                                             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -80,20 +79,14 @@
                                         </p>
                                     {{/if}}
                                     <p class="card-text">{{Username}}</p>
-                                    <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                        <span class="text-primary">{{RateTB}}</span>
-                                        <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                    <div class="d-flex align-content-center">
+                                        <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                        <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                        <span class="">({{SLHocSinhDanhGia}} ratings)</span>
                                     </div>
                                 </div>
-                                <div class="border-top card-footer d-flex">
-                                    <div class="card__price h5 ">
+                                <div class="border-top card-footer d-flex align-content-center">
+                                    <div class="card__price h5">
                                         {{#if isNoDiscount}}
                                             <span class="align-self-center">${{format_number Gia}}</span>
                                         {{else}}

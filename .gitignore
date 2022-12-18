@@ -24,8 +24,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-QLKhoaHoc.session.sql
 .vscode/settings.json
 *.log
 utils/db.js
 utils/db.js
+data.sql
+QLKhoaHoc.sql
+QLKhoaHoc.session.sql

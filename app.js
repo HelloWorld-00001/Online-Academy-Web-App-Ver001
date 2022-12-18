@@ -18,6 +18,9 @@ import numeral from 'numeral';
 import courseService from "./services/course.service.js";
 import accountRoute from './routes/account.route.js';
 import courseRoute from "./routes/course.route.js";
+import categoryUserRoute from "./routes/category-user.route.js";
+import teacherRoute from "./routes/teacher.route.js";
+import adminRoute from "./routes/admin.route.js"
 
 const app = express();
 app.use(express.urlencoded({
@@ -46,6 +49,17 @@ app.engine('hbs', engine({
     helpers: {
         format_number(val) {
             return numeral(val).format('0,0');
+        },
+        for(from, to, incr, block) {
+            var accum = '';
+            for(var i = from; i < to; i += incr)
+                accum += block.fn(i);
+            return accum;
+        },
+        ifGreaterThan(x, y, options) {
+            if (x >= y)
+                return options.fn(this);
+            return options.inverse(this);
         }
     },
     section: hbs_sections()
@@ -70,6 +84,7 @@ app.get('/', async function (req, res) {
         listTop10CourseView2: listTop10CourseView[1],
         listTop10CourseView3: listTop10CourseView[2],
         listTop10CourseView4: listTop10CourseView[3],
+        numPage: listTop10CourseView[4],
         listTop3CourseLastWeek: listTop3CourseLastWeek,
         listTop10LastedCourse1: listTop10LastedCourse[0],
         listTop10LastedCourse2: listTop10LastedCourse[1],
@@ -87,9 +102,9 @@ app.get('/about', function (req, res) {
     res.render('about');
 })
 
-app.get('/teacher', function (req, res) {
-    res.render('teacher');
-})
+// app.get('/teacher', function (req, res) {
+//     res.render('teacher');
+// })
 
 app.get('/blog', function (req, res) {
     res.render('blog');
@@ -109,6 +124,18 @@ app.get('/detail', function (req, res) {
 
 app.use('/course', courseRoute);
 app.use('/account', accountRoute);
+app.use('/categories', categoryUserRoute);
+app.use('/teacher', teacherRoute);
+app.use('/admin', adminRoute);
+//
+// app.get('/bs4', function (req, res) {
+//     const __dirname = dirname(fileURLToPath(import.meta.url));
+//     res.sendFile(__dirname + '/bs4.html');
+// });
+//
+// app.get('/err', function (req, res) {
+//     throw new Error('Something broke!!!');
+// })
 
 
 const PORT = 3000;

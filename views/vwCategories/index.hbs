@@ -48,7 +48,7 @@
                                         {{SoLuongVideo}}
                                     </small>
                                 </div>
-                                <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                 {{#if isFieldType}}
                                     <p class="card-text">
                                         <i class="fa fa-globe" aria-hidden="true"></i>
@@ -61,16 +61,10 @@
                                     </p>
                                 {{/if}}
                                 <p class="card-text">{{Username}}</p>
-                                <div class="card__stars">
-                                    <span>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star text-primary"></i>
-                                        <i class="fa fa-star-half text-primary"></i>
-                                    </span>
-                                    <span class="card__rate">{{RateTB}}</span>
-                                    <span class="card__totaln">({{SLHocSinhDanhGia}})</span>
+                                <div class="d-flex align-content-center">
+                                    <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                    <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                    <span class="">({{SLHocSinhDanhGia}} ratings)</span>
                                 </div>
                             </div>
                             <div class="border-top card-footer">

@@ -73,7 +73,7 @@
                                                     {{SoLuongVideo}}
                                                 </small>
                                             </div>
-                                            <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                             {{#if isFieldType}}
                                                 <p class="card-text">
                                                     <i class="fa fa-globe" aria-hidden="true"></i>
@@ -86,16 +86,10 @@
                                                 </p>
                                             {{/if}}
                                             <p class="card-text">{{Username}}</p>
-                                            <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                                <span class="text-primary">{{RateTB}}</span>
-                                                <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
+                                            <div class="d-flex align-content-center">
+                                                <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                <span class="">({{SLHocSinhDanhGia}} ratings)</span>
                                             </div>
                                         </div>
                                         <div class="border-top card-footer d-flex">
@@ -137,15 +131,16 @@
     <div id="carouselTop10MostViewCourse" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselTop10MostViewCourse" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselTop10MostViewCourse" data-slide-to="1"></li>
-            <li data-target="#carouselTop10MostViewCourse" data-slide-to="2"></li>
-            <li data-target="#carouselTop10MostViewCourse" data-slide-to="3"></li>
+            {{#for 2 this.numPage 1}}
+                <li data-target="#carouselTop10MostViewCourse" data-slide-to="1"></li>
+            {{/for }}
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
                     {{#each this.listTop10CourseView1}}
-                        <div class="col-lg-4 mb-3">
+                        {{#if isExist}}
+                            <div class="col-lg-4 mb-3">
                             <div class="form_course">
                                 <div class="card h-100">
                                     <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
@@ -160,7 +155,7 @@
                                                 {{SoLuongVideo}}
                                             </small>
                                         </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
+                                        <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                         {{#if isFieldType}}
                                             <p class="card-text">
                                                 <i class="fa fa-globe" aria-hidden="true"></i>
@@ -198,186 +193,181 @@
                                 </div>
                             </div>
                         </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10CourseView2}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
+            {{#ifGreaterThan numPage 2}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10CourseView2}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                <div class="form_course">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <small class="m-0">
+                                                    <i class="fa fa-users text-primary mr-2"></i>
+                                                    {{LuotXem}} Students
+                                                </small>
+                                                <small class="m-0">
+                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    {{SoLuongVideo}}
+                                                </small>
+                                            </div>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            {{#if isFieldType}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                <p class="card-text">
+                                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{/if}}
+                                            <p class="card-text">{{Username}}</p>
+                                            <div class="d-flex align-content-center">
+                                                <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                            </div>
+                                        </div>
+                                        <div class="border-top card-footer d-flex">
+                                            <div class="card__price h5 ">
+                                                {{#if isNoDiscount}}
+                                                    <span class="align-self-center">${{format_number Gia}}</span>
+                                                {{else}}
+                                                    <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                    <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                {{/if}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10CourseView3}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
+            {{/ifGreaterThan}}
+            {{#ifGreaterThan numPage 3}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10CourseView3}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                <div class="form_course">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <small class="m-0">
+                                                    <i class="fa fa-users text-primary mr-2"></i>
+                                                    {{LuotXem}} Students
+                                                </small>
+                                                <small class="m-0">
+                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    {{SoLuongVideo}}
+                                                </small>
+                                            </div>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            {{#if isFieldType}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                <p class="card-text">
+                                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{/if}}
+                                            <p class="card-text">{{Username}}</p>
+                                            <div class="d-flex align-content-center">
+                                                <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                            </div>
+                                        </div>
+                                        <div class="border-top card-footer d-flex">
+                                            <div class="card__price h5 ">
+                                                {{#if isNoDiscount}}
+                                                    <span class="align-self-center">${{format_number Gia}}</span>
+                                                {{else}}
+                                                    <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                    <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                {{/if}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10CourseView4}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
+            {{/ifGreaterThan}}
+            {{#ifGreaterThan numPage 4}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10CourseView4}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                <div class="form_course">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <small class="m-0">
+                                                    <i class="fa fa-users text-primary mr-2"></i>
+                                                    {{LuotXem}} Students
+                                                </small>
+                                                <small class="m-0">
+                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    {{SoLuongVideo}}
+                                                </small>
+                                            </div>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            {{#if isFieldType}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                <p class="card-text">
+                                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{/if}}
+                                            <p class="card-text">{{Username}}</p>
+                                            <div class="d-flex align-content-center">
+                                                <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                            </div>
+                                        </div>
+                                        <div class="border-top card-footer d-flex">
+                                            <div class="card__price h5 ">
+                                                {{#if isNoDiscount}}
+                                                    <span class="align-self-center">${{format_number Gia}}</span>
+                                                {{else}}
+                                                    <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                    <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                {{/if}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
+            {{/ifGreaterThan}}
         </div>
         <a class="carousel-control-prev" href="#carouselTop10MostViewCourse" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -400,247 +390,237 @@
     <div id="carouselTop10LastedCourse" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselTop10LastedCourse" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselTop10LastedCourse" data-slide-to="1"></li>
-            <li data-target="#carouselTop10LastedCourse" data-slide-to="2"></li>
-            <li data-target="#carouselTop10LastedCourse" data-slide-to="3"></li>
+            {{#for 2 this.numPage 1}}
+                <li data-target="#carouselTop10LastedCourse" data-slide-to="1"></li>
+            {{/for }}
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row">
                     {{#each this.listTop10LastedCourse1}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
+                        {{#if isExist}}
+                            <div class="col-lg-4 mb-3">
+                                <div class="form_course">
+                                    <div class="card h-100">
+                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <small class="m-0">
+                                                    <i class="fa fa-users text-primary mr-2"></i>
+                                                    {{LuotXem}} Students
+                                                </small>
+                                                <small class="m-0">
+                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    {{SoLuongVideo}}
+                                                </small>
+                                            </div>
+                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            {{#if isFieldType}}
+                                                <p class="card-text">
+                                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                <p class="card-text">
+                                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                    {{TenLinhVuc}}
+                                                </p>
                                             {{/if}}
+                                            <p class="card-text">{{Username}}</p>
+                                            <div class="d-flex align-content-center">
+                                                <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                            </div>
+                                        </div>
+                                        <div class="border-top card-footer d-flex">
+                                            <div class="card__price h5 ">
+                                                {{#if isNoDiscount}}
+                                                    <span class="align-self-center">${{format_number Gia}}</span>
+                                                {{else}}
+                                                    <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                    <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                {{/if}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10LastedCourse2}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
-                                            {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
-                                            {{/if}}
+            {{#ifGreaterThan numPage 2}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10LastedCourse2}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                    <div class="form_course">
+                                        <div class="card h-100">
+                                            <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <small class="m-0">
+                                                        <i class="fa fa-users text-primary mr-2"></i>
+                                                        {{LuotXem}} Students
+                                                    </small>
+                                                    <small class="m-0">
+                                                        <i class="far fa-clock text-primary mr-2"></i>
+                                                        {{SoLuongVideo}}
+                                                    </small>
+                                                </div>
+                                                <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                                {{#if isFieldType}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{else}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{/if}}
+                                                <p class="card-text">{{Username}}</p>
+                                                <div class="d-flex align-content-center">
+                                                    <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                    <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                    <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                                </div>
+                                            </div>
+                                            <div class="border-top card-footer d-flex">
+                                                <div class="card__price h5 ">
+                                                    {{#if isNoDiscount}}
+                                                        <span class="align-self-center">${{format_number Gia}}</span>
+                                                    {{else}}
+                                                        <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                        <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10LastedCourse3}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
-                                            {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
-                                            {{/if}}
+            {{/ifGreaterThan}}
+            {{#ifGreaterThan numPage 3}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10LastedCourse3}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                    <div class="form_course">
+                                        <div class="card h-100">
+                                            <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <small class="m-0">
+                                                        <i class="fa fa-users text-primary mr-2"></i>
+                                                        {{LuotXem}} Students
+                                                    </small>
+                                                    <small class="m-0">
+                                                        <i class="far fa-clock text-primary mr-2"></i>
+                                                        {{SoLuongVideo}}
+                                                    </small>
+                                                </div>
+                                                <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                                {{#if isFieldType}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{else}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{/if}}
+                                                <p class="card-text">{{Username}}</p>
+                                                <div class="d-flex align-content-center">
+                                                    <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                    <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                    <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                                </div>
+                                            </div>
+                                            <div class="border-top card-footer d-flex">
+                                                <div class="card__price h5 ">
+                                                    {{#if isNoDiscount}}
+                                                        <span class="align-self-center">${{format_number Gia}}</span>
+                                                    {{else}}
+                                                        <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                        <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    {{#each this.listTop10LastedCourse4}}
-                        <div class="col-lg-4 mb-3">
-                            <div class="form_course">
-                                <div class="card h-100">
-                                    <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <small class="m-0">
-                                                <i class="fa fa-users text-primary mr-2"></i>
-                                                {{LuotXem}} Students
-                                            </small>
-                                            <small class="m-0">
-                                                <i class="far fa-clock text-primary mr-2"></i>
-                                                {{SoLuongVideo}}
-                                            </small>
-                                        </div>
-                                        <a class="card-title text-log h5" href="">{{TenKhoaHoc}}</a>
-                                        {{#if isFieldType}}
-                                            <p class="card-text">
-                                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{else}}
-                                            <p class="card-text">
-                                                <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                {{TenLinhVuc}}
-                                            </p>
-                                        {{/if}}
-                                        <p class="card-text">{{Username}}</p>
-                                        <div class="card__stars">
-                                        <span>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star text-primary"></i>
-                                            <i class="fa fa-star-half text-primary"></i>
-                                        </span>
-                                            <span class="text-primary">{{RateTB}}</span>
-                                            <small class="font-weight-bolder">({{SLHocSinhDanhGia}})</small>
-                                        </div>
-                                    </div>
-                                    <div class="border-top card-footer d-flex">
-                                        <div class="card__price h5 ">
-                                            {{#if isNoDiscount}}
-                                                <span class="align-self-center">${{format_number Gia}}</span>
-                                            {{else}}
-                                                <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
-                                                <span class="align-self-center">${{format_number finalPrice}}</span>
-                                            {{/if}}
+            {{/ifGreaterThan}}
+            {{#ifGreaterThan numPage 4}}
+                <div class="carousel-item">
+                    <div class="row">
+                        {{#each this.listTop10LastedCourse4}}
+                            {{#if isExist}}
+                                <div class="col-lg-4 mb-3">
+                                    <div class="form_course">
+                                        <div class="card h-100">
+                                            <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <small class="m-0">
+                                                        <i class="fa fa-users text-primary mr-2"></i>
+                                                        {{LuotXem}} Students
+                                                    </small>
+                                                    <small class="m-0">
+                                                        <i class="far fa-clock text-primary mr-2"></i>
+                                                        {{SoLuongVideo}}
+                                                    </small>
+                                                </div>
+                                                <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                                {{#if isFieldType}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{else}}
+                                                    <p class="card-text">
+                                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                        {{TenLinhVuc}}
+                                                    </p>
+                                                {{/if}}
+                                                <p class="card-text">{{Username}}</p>
+                                                <div class="d-flex align-content-center">
+                                                    <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                                    <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                                    <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                                </div>
+                                            </div>
+                                            <div class="border-top card-footer d-flex">
+                                                <div class="card__price h5 ">
+                                                    {{#if isNoDiscount}}
+                                                        <span class="align-self-center">${{format_number Gia}}</span>
+                                                    {{else}}
+                                                        <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>
+                                                        <span class="align-self-center">${{format_number finalPrice}}</span>
+                                                    {{/if}}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    {{/each}}
+                            {{/if}}
+                        {{/each}}
+                    </div>
                 </div>
-            </div>
+            {{/ifGreaterThan}}
         </div>
         <a class="carousel-control-prev" href="#carouselTop10LastedCourse" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -660,17 +640,19 @@
         <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Top 1</h5>
         <h1>Top Fields last week</h1>
     </div>
-    {{#each this.fields}}
-        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="">
-                <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
-                    <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
-                    <span>{{SLKhoaHoc}} Courses</span>
-                </a>
+    <div style="display: flex; justify-content: center">
+        {{#each this.fields}}
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="" width="150%">
+                    <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
+                        <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
+                        <span>{{SLKhoaHoc}} Courses</span>
+                    </a>
+                </div>
             </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    </div>
 </div>
 <!-- Top Fields last week End -->
 

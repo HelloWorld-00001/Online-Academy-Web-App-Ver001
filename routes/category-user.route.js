@@ -1,11 +1,11 @@
 import express from 'express';
-import courseModel from '../services/course.service.js';
+import courseService from '../services/course.service.js';
 
 const router = express.Router();
 
 router.get('/:id', async function (req, res) {
     const linhVuc = req.params.id || 1;
-    const fields = await courseModel.countByField();
+    const fields = await courseService.countByField();
 
     const limit = 6;
     const page = req.query.page || 1;
@@ -35,7 +35,7 @@ router.get('/:id', async function (req, res) {
         isPreviousPage:   +page - 1 > 0,
     }
 
-    const courses = await courseModel.findPageByField(linhVuc, limit, offset);
+    const courses = await courseService.findPageByField(linhVuc, limit, offset);
 
     res.render('vwCategories/index' , {
         courses: courses,
