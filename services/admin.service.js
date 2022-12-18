@@ -20,4 +20,53 @@ export default {
     vwAllVideo() {
         return db('danhsachvideo');
     },
+    async findAllTeacher() {
+        const list = await db('taikhoan')
+        .select(
+            'giaovien.MaGiaoVien',
+            'taikhoan.MaTaiKhoan',
+            'taikhoan.Name',
+            'taikhoan.Username',
+            'taikhoan.Email',
+            'giaovien.SLKhoaHoc'
+        )
+        .innerJoin('giaovien', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'});
+        return list;
+    },
+    async findTopThreeTeacher() {
+        const list = await db('giaovien')
+        .select(
+            'giaovien.MaGiaoVien',
+            'taikhoan.Name',
+            'taikhoan.Username',
+            'taikhoan.Email',
+        )
+        .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
+        .limit(3);
+        return list;
+    },
+    async findTopThreeStudent() {
+        const list = await db('hocvien')
+        .select(
+            'hocvien.MaHocVien',
+            'taikhoan.Name',
+            'taikhoan.Username',
+            'taikhoan.Email',
+        )
+        .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
+        .limit(3);
+        return list;
+    },
+    async findTopThreeCourse() {
+        const list = await db('KhoaHoc')
+        .select(
+            'MaKhoaHoc',
+            'TenKhoaHoc',
+            'Gia',
+            'taikhoan.Username',
+        )
+        .innerJoin('taikhoan', {'KhoaHoc.GiaoVien': 'taikhoan.MaTaiKhoan'})
+        .limit(3);
+        return list;
+    },
 }
