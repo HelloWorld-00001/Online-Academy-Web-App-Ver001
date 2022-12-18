@@ -22,4 +22,10 @@ router.post('/profile', function (req, res){
     console.log(req.body);
 });
 
+router.get('/courses', function (req, res){
+    res.render('vwTeacher/courses', {
+        empty: false
+    });
+});
+
 export default router;
