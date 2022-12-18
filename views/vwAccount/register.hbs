@@ -7,69 +7,100 @@
     <link rel="stylesheet" href="/public/css/style_sign.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>DO AN</title>
 </head>
 <body>
-    <div class="frmSign">
+    <div class="frmContain">
       <div class="container">
         <div class="frmBack">
           <h2 class="my-4">Hello ●ω●</h2>
-
           <h3 class="my-2">You had an account?</h3>
-          <button type="submit" class="btn btn-primary" style="background: linear-gradient(45deg, #4876FF, #000080); border-radius: 50px; font-size: 25px;">
-            Sign in
-          </button>
+            <a href="/account/login" class="btn btn-primary" role="button" style="background: linear-gradient(45deg, #4876FF, #000080); border-radius: 50px; font-size: 25px;">
+              Sign in
+            </a>
         </div>
       </div>
-      <div class ="frmRegister">
-        <form method="post">
-            <h4 id="login">
-              Sign Up
-            </h4>
-            <div class="mx-5">
-              <i class="fa fa-user-circle" aria-hidden="true"></i>
-              <label for="txtUsername">Username</label>
-              <input name="username" type="text" class="form-control" 
-              style="border-radius: 50px;" id="txtUsername" autofocus placeholder= "abc">
-            </div>
-            <div class="mx-5 mt-3">
-              <i class="fa fa-key" aria-hidden="true"></i>
-              <label for="txtPassword">Password</label>
-              <input name="password" type="password" class="form-control" 
-              style="border-radius: 50px;" id="txtPassword" placeholder="●●●●●●●●●●">
-            </div>
-            <div class="mx-5 mt-3">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              <label for="txtName">Fullname</label>
-              <input name="name" type="text" class="form-control"
-              style="border-radius: 50px;" id="txtName" placeholder="Nguyễn Văn A">
-            </div>
-            <div class="mx-5 mt-3">
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <label for="txtEmail">Email</label>
-              <input name="email" type="text" class="form-control"
-              style="border-radius: 50px;" id="txtEmail" placeholder="example@gmail.com">
-            </div>
-            <div class="mx-5 mt-3">
-              <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
-              <label for="txtDOB">Date Of Birth</label>
-              <input name="dob" input type="date" class="form-control"
-              style="border-radius: 50px;" id="txtDOB">
-            </div>
-            <div class="mx-5 mt-2">
-              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-              <label for="vehicle1"> I agree with you condition</label><br>
-            </div>
-            <div style="text-align: center;">
-              <button type="submit" class="btn btn-primary" style="background: linear-gradient(120deg, #4876FF, #000080); border-radius: 50px; font-size: 20px;">
-                Sign up
-              </button>
-            </div>
-        </form>
+      <div class ="frmSign">
+        <div class = "center_">
+        <div class="form-content mx-4">
+          <div class="login">
+            Sign Up
+          </div>
+          <form method="post" id="frmRegister">
+              <div class="input-box">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                <label for="txtUsername">Username</label>
+                <input name="username" type="text" id="txtUsername" class="form-control" autofocus placeholder= "abc">      
+              </div>
+              <div class="input-box">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <label for="txtPassword">Password</label>
+                <input name="password" type="password" class="form-control" id="txtPassword" placeholder="●●●●●●●●●●">
+              </div>
+              <div class="column">
+                <div class="input-box">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <label for="txtName">Fullname</label>
+                  <input name="name" type="text" class="form-control" id="txtName" placeholder="Nguyễn Văn A">
+                </div>
+                <div class="input-box">
+                  <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+                  <label for="txtDOB">Date Of Birth</label>
+                  <input name="dob" input type="date" class="form-control" id="txtDOB">
+                </div>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <label for="txtEmail">Email</label>
+                <input name="email" type="text" class="form-control" id="txtEmail" placeholder="example@gmail.com">
+              </div>   
+              <div class="check-box">
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> I agree with you condition</label><br>
+              </div>
+              <div class="mb-3" style="text-align: center;">
+                <button type="submit" class="btn btn-primary" style="background: linear-gradient(120deg, #4876FF, #000080); border-radius: 50px; font-size: 20px;">
+                  Sign up
+                </button>
+              </div>
+          </form>
+        </div>
+      </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script>
+      $('#frmRegister').on('submit', function(e) {
+        e.preventDefault();
+
+        const username = $('#txtUsername').val();
+        if(username.length === 0) {
+          alert('Invalid data!');
+          return;
+        }
+
+        $.getJSON(`/account/is-available?user=${username}`, function (data) {
+          if (data === false) {
+            alert('Not available for registration!');
+          } else {
+            $('#frmRegister').off('submit').submit();
+          }
+        });
+      });
+      
+      {{!-- $('#txtDOB').datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',
+        mask: true
+      }); --}}
+      
+      $('#txtUsername').select();
+    </script>
 </body>
 </html>

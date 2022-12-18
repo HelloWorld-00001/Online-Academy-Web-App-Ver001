@@ -1,6 +1,10 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections'
+import session from 'express-session';
+import fnKnexStore from 'connect-session-knex';
+
+import db from './utils/db.js';
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -14,7 +18,6 @@ import numeral from 'numeral';
 import courseService from "./services/course.service.js";
 import accountRoute from './routes/account.route.js';
 import courseRoute from "./routes/course.route.js";
-import categoryUserRoute from "./routes/category-user.route.js"
 
 const app = express();
 app.use(express.urlencoded({
@@ -23,17 +26,31 @@ app.use(express.urlencoded({
 
 app.use('/public', express.static('public'));
 
+const KnexStore = fnKnexStore(session);
+const store = new KnexStore({ knex: db });
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+secret: 'keyboard cat',
+resave: false,
+saveUninitialized: true,
+store: store,
+cookie: {
+    // secure: true
+}
+}))
+
 app.engine('hbs', engine({
-    // defaultLayout: 'index.hbs'
     extname: 'hbs',
     defaultLayout: 'index',
     helpers: {
-        section: hbs_sections(),
         format_number(val) {
             return numeral(val).format('0,0');
         }
-    }
+    },
+    section: hbs_sections()
 }));
+
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
@@ -92,33 +109,7 @@ app.get('/detail', function (req, res) {
 
 app.use('/course', courseRoute);
 app.use('/account', accountRoute);
-app.use('/categories', categoryUserRoute);
-//
-// app.get('/bs4', function (req, res) {
-//     const __dirname = dirname(fileURLToPath(import.meta.url));
-//     res.sendFile(__dirname + '/bs4.html');
-// });
-//
-// app.get('/err', function (req, res) {
-//     throw new Error('Something broke!!!');
-// })
 
-
-// app.use('/admin/categories', categoryRoute);
-// app.use('/admin/products', productRoute);
-// app.use('/products', productUserRoute);
-//
-// app.use(function (req, res, next) {
-//     res.render('404', { layout: false });
-// });
-//
-// app.use(function (err, req, res, next) {
-//     // console.error(err.stack);
-//     res.status(500).render('500', {
-//         stack: err.stack,
-//         layout: false
-//     });
-// });
 
 const PORT = 3000;
 app.listen(PORT, function () {
