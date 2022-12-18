@@ -4,7 +4,7 @@ import adminService from '../services/admin.service.js';
 const router = express.Router();
 
 router.get('/', function (req, res) {
-    res.render('vwAdmin/dashboard', {layout: false});
+    res.render('vwAdmin/dashboard', {layout: 'adminLayout'});
 });
 
 router.get('/profile', function(req, res) {
