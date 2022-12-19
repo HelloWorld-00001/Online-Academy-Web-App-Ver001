@@ -26,7 +26,7 @@ router.get('/allTable', async function(req, res) {
     });
 });
 
-router.get('/teachers', async function(req, res) {
+router.get('/teacher', async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
     res.render('vwAdmin/teachers', {layout: 'adminLayout',
         teacher: teacherList
