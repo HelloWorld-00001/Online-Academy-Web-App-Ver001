@@ -32,13 +32,14 @@ router.get('/allTable', async function(req, res) {
     const studentList = await adminService.findTopThreeStudent();
     const teacherList = await adminService.findTopThreeTeacher();
     const courseList = await adminService.findTopThreeCourse();
-
+    const videoList = await adminService.findTopThreeVideo();
 
     res.render('vwAdmin/allTable', {
         layout: 'adminLayout',
         teacher: teacherList,
         student: studentList,
-        course: courseList
+        course: courseList,
+        video: videoList
     });
 });
 

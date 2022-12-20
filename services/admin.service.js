@@ -50,7 +50,7 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
         return list;
     },
     async findTopThreeStudent() {
@@ -62,7 +62,7 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
         return list;
     },
     async findTopThreeCourse() {
@@ -74,7 +74,19 @@ export default {
             'taikhoan.Username',
         )
         .innerJoin('taikhoan', {'KhoaHoc.GiaoVien': 'taikhoan.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
+        return list;
+    },
+    async findTopThreeVideo() {
+        const list = await db('danhsachvideo')
+        .select(
+            'TenVideo',
+            'khoahoc.TenKhoaHoc',
+            'STT',
+            'NgayCapNhat',
+        )
+        .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachvideo.MaKhoaHoc'})
+        //.limit(3);
         return list;
     },
 }

@@ -1,32 +1,11 @@
+{{#section 'css'}}
+
+{{/section}}
+
 {{#section 'js'}}
 <script>
-    $(document).ready(function() {
-    setTimeout(function(){
-        var graph = Morris.Donut({
-            element: 'donut-cate-course',
-            data: [
-                {
-                    value: numofCate,
-                    label: 'Web'
-                },
-                {
-                    value: numofVideo,
-                    label: 'Mobile'
-                },                
-            ],
-            colors: [
-                '#3949AB',
-                '#e52d27',
-            ],
-            resize: true,
-            formatter: function(x) {
-                return "val : " + x
-            }
-        })
-    }, 700)
-})
+    
 </script>
-
 {{/section}}
 
 <!-- [ Main Content ] start -->
@@ -159,18 +138,6 @@
                                 </div>
                             </div>
                             <!-- Course Count end -->
-                            <!-- Chart Donut start -->
-                            <div class="col-xl-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>Donut Chart</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="donut-cate-course" style="height:300px"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Chart Donut end -->
                             <!-- [ sample-page ] end -->
                         </div>
                         <!-- [ Main Content ] end -->
