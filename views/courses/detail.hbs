@@ -266,7 +266,7 @@
 
                     <p class="card-text">{{this.course.Name}}</p>
                     <div class="d-flex align-content-center">
-                        <span class="stars" data-rating="{{this.courseRateTB}}" data-num-stars="5" ></span>
+                        <span class="stars" data-rating="{{this.course.RateTB}}" data-num-stars="5" ></span>
                         <h5 class="text-primary font-weight-bolder ml-2">{{this.course.RateTB}}</h5>
                         <span class="">({{this.course.SLHocSinhDanhGia}} ratings)</span>
                     </div>
@@ -515,30 +515,30 @@
                         <div class="card__avatar__teacher">
                             <img src="/public/img/teachers/{{this.course.Username}}.jpg" alt="student 1">
                         </div>
-                        <div class="ml-5">
-                            <p class="mb-2">
-                                <i class="mr-3 fa fa-envelope text-primary" aria-hidden="true"></i>
-                                {{this.course.Email}}
+                        <div class="ml-3">
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fa fa-envelope text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.course.Email}}</span>
                             </p>
-                            <p class="mb-2">
-                                <i class="mr-3 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                {{this.course.DOB}}
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.course.DOB}}</span>
                             </p>
-                            <p class="mb-2">
-                                <i class="mr-3 fa fa-star text-primary" aria-hidden="true"></i>
-                                {{this.inforStudentsOfTeacher.ratings}} Instructor Rating
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                             </p>
-                            <p class="mb-2">
-                                <i class="mr-3 fas fa-trophy text-primary" aria-hidden="true"></i>
-                                {{this.inforStudentsOfTeacher.amountReview}} Reviews
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                             </p>
-                            <p class="mb-2">
-                                <i class="mr-3 fa fa-user-plus text-primary" aria-hidden="true"></i>
-                                {{this.inforStudentsOfTeacher.amountStudents}} 1,801,976 Students
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fa fa-user-plus text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                             </p>
-                            <p class="mb-2">
-                                <i class="mr-3 fa fa-play-circle text-primary" aria-hidden="true"></i>
-                                {{this.inforStudentsOfTeacher.amountCourses}} Courses
+                            <p class="mb-2 row">
+                                <i class="col-2 mr-2 fa fa-play-circle text-primary" aria-hidden="true"></i>
+                                <span col="10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                             </p>
                         </div>
                     </div>

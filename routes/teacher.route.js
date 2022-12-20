@@ -12,6 +12,7 @@ router.get('/input', function (req, res){
 
 router.post('/input', function (req, res){
     console.log(req.body);
+    res.render('vwTeacher/inputcourse');
 });
 
 router.get('/profile', function (req, res){
@@ -20,6 +21,7 @@ router.get('/profile', function (req, res){
 
 router.post('/profile', function (req, res){
     console.log(req.body);
+    res.render('vwTeacher/profile');
 });
 
 router.get('/courses', function (req, res){

@@ -1,7 +1,21 @@
 {{#section 'css'}}
     <style>
-        #navbar {
-            display: none;
+        #navbar, #topBar {
+            display: none !important;
+        }
+
+        .mylearning-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            background-color: #1c1d1f;
+        }
+
+        .course-name {
+            color: #fff;
+            border-left: 1px solid #3e4143;
         }
 
         .accordion .fa {
@@ -85,11 +99,6 @@
             font-size: 15px;
             font-weight: normal;
         }
-        /*a.disabled {*/
-        /*    color: gray;*/
-        /*    pointer-events: none;*/
-        /*    cursor: default;*/
-        /*}*/
 
         #review-list .course-review,
         .list-course {
@@ -98,8 +107,266 @@
 
         iframe {
             width: 100%;
-            height: 80vh;
+            height: 85vh;
             /*aspect-ratio: 16 / 9;*/
+        }
+
+        .sidebarMini {
+            display: none;
+            width: 400px;
+            position: absolute;
+            top: 25%;
+            right: 0;
+            background-color: #dedfe0;
+            z-index: 5;
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
+
+        .sidebarMini .sidebarMini__button {
+            color: #fff;
+            background-color: #1c1d1f;
+            border: 1px solid #6a6f73;
+            /*font-size: 24px;*/
+            font-weight: normal;
+            padding: 10px 15px;
+            cursor: pointer;
+            /*position: fixed;*/
+            -webkit-transform: translateX(-48px);
+            transform: translateX(-48px);
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
+
+        .sidebarMini .sidebarMini__content {
+            width: 150px;
+            padding: 12px;
+            text-align: center;
+            font-size: 20px;
+
+        }
+
+        .sidebarMini .sidebarMini__content .switch input {
+            display: none;
+        }
+
+        .sidebarMini .sidebarMini__content .switch input:checked + .slider::before {
+            -webkit-transform: translateX(22px);
+            transform: translateX(22px);
+        }
+
+        .sidebarMini .sidebarMini__content .switch .slider {
+            background-color: #ccc;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 34px;
+        }
+
+        .sidebarMini .sidebarMini__content .switch .slider::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: inline-block;
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
+
+        .sidebarMini:hover {
+            background-color: #393b3f;
+            -webkit-transform: translateX(60%);
+            transform: translateX(60%);
+        }
+
+        .progress {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 0;
+        }
+
+        .trigger{
+            text-align: right;
+            outline: none;
+            border: none;
+
+        }
+
+        .modal-review {
+            z-index: 100;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.1);
+            transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+        }
+        .modal-review .modal-review-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 1rem 1.5rem;
+            width: auto;
+        }
+
+        .close-review-button {
+            float: right;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            background-color: lightgray;
+        }
+        .close-button:hover {
+            background-color: darkgray;
+        }
+        .show-modal-review {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.0);
+            transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+        }
+
+        .container-review{
+            position: relative;
+            width: 400px;
+            padding: 20px 30px;
+            border: 1px solid #444;
+            /*border-radius: 5px;*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .container-review .post{
+            display: none;
+        }
+        .container-review .text{
+            font-size: 25px;
+            color: #666;
+            font-weight: 500;
+        }
+        .container-review .edit{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .container-review .edit:hover{
+            text-decoration: underline;
+        }
+        .container-review .star-widget input{
+            display: none;
+        }
+        .star-widget label{
+            font-size: 40px;
+            color: #fd4;
+            padding: 10px;
+            float: right;
+            transition: all 0.2s ease;
+        }
+        input:not(:checked) ~ label:hover,
+        input:not(:checked) ~ label:hover ~ label{
+            color: #fd4;
+            font-weight: 700;
+        }
+        input:checked ~ label{
+            color: #fd4;
+            font-weight: 700;
+        }
+        input#rate-5:checked ~ label{
+            color: #fe7;
+            text-shadow: 0 0 20px #952;
+        }
+        #rate-1:checked ~ form header:before{
+            content: "I just hate it 😠";
+        }
+        #rate-2:checked ~ form header:before{
+            content: "I don't like it 😒";
+        }
+        #rate-3:checked ~ form header:before{
+            content: "It is awesome 😄";
+        }
+        #rate-4:checked ~ form header:before{
+            content: "I just like it 😎";
+        }
+        #rate-5:checked ~ form header:before{
+            content: "I just love it 😍";
+        }
+        .container-review form{
+            display: none;
+        }
+        input:checked ~ form{
+            display: block;
+        }
+        form header{
+            width: 100%;
+            font-size: 25px;
+            color: #fe7;
+            font-weight: 500;
+            margin: 5px 0 20px 0;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        form .textarea{
+            height: 100px;
+            width: 100%;
+            overflow: hidden;
+        }
+        form .textarea textarea{
+            height: 100%;
+            width: 100%;
+            outline: none;
+            color: #000;
+            border: 1px solid #333;
+            /*background: #222;*/
+            padding: 10px;
+            font-size: 17px;
+            resize: none;
+        }
+        .textarea textarea:focus{
+            border-color: #444;
+        }
+        form .btn{
+            height: 45px;
+            width: 100%;
+            margin: 15px 0;
+        }
+        form .btn button{
+            height: 100%;
+            width: 100%;
+            border: 1px solid #444;
+            outline: none;
+            background: #222;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        form .btn button:hover{
+            background: #1b1b1b;
         }
 
     </style>
@@ -159,35 +426,111 @@
         });
 
         $(function () {
-                if ($(".list-course:hidden").length > 10) {
-                    $(".more-section").removeClass('d-none').addClass('d-inline-block');
 
+            if ($(".list-course:hidden").length > 10) {
+                $(".more-section").removeClass('d-none').addClass('d-inline-block');
+
+            }
+            console.log($(".list-course:hidden").length)
+
+            $(".list-course").slice(0, 10).show();
+            $(".more-section").text($(".list-course:hidden").length + " more sections");
+            $("body").on('click touchstart', '.more-section', function (e) {
+                e.preventDefault();
+                $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
+                if ($(".list-course:hidden").length === 0) {
+                    $(".more-section").removeClass('d-inline-block').addClass('d-none');
                 }
-                console.log($(".list-course:hidden").length)
-
-                $(".list-course").slice(0, 10).show();
-                $(".more-section").text($(".list-course:hidden").length + " more sections");
-                $("body").on('click touchstart', '.more-section', function (e) {
-                    e.preventDefault();
-                    $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
-                    if ($(".list-course:hidden").length === 0) {
-                        $(".more-section").removeClass('d-inline-block').addClass('d-none');
-                    }
-                    // $('html,body').animate({
-                    //     scrollTop: $('.more-section').offset().top - 500
-                    // }, 1000);
-                });
+                // $('html,body').animate({
+                //     scrollTop: $('.more-section').offset().top - 500
+                // }, 1000);
             });
+        });
 
 
         $( "#close-icon" ).click(function() {
             $( "#courseDiv" ).css('display', 'none')
+            $( ".sidebarMini" ).css('display', 'block')
             $( "#videoDiv" ).removeClass('col-md-9').addClass('col-12');
             $( "#video-container" ).addClass('col-12')
         });
 
+        $( ".sidebarMini__button" ).click(function() {
+            $( ".sidebarMini" ).css('display', 'none')
+            $( "#courseDiv" ).css('display', 'block')
+            $( "#videoDiv" ).removeClass('col-12').addClass('col-md-9');
+        });
+
+        $( "#navlink-reviews" ).click(function() {
+            var delay = 1000;
+            $(".progress-bar").each(function(i){
+                $(this).delay( delay*i ).animate( { width: $(this).attr('aria-valuenow') + '%' }, delay );
+
+                $(this).prop('Counter',0).animate({
+                    Counter: $(this).text()
+                }, {
+                    duration: delay,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now)+'%');
+                    }
+                });
+            });
+        });
+
+        var modal = document.querySelector(".modal-review");
+        var trigger = document.querySelector(".trigger");
+        var closeButton = document.querySelector(".close-review-button");
+
+        function toggleModal() {
+            modal.classList.toggle("show-modal-review");
+        }
+
+        function windowOnClick(event) {
+            if (event.target === modal) {
+                toggleModal();
+            }
+        }
+
+        trigger.addEventListener("click", toggleModal);
+        closeButton.addEventListener("click", toggleModal);
+        window.addEventListener("click", windowOnClick);
+
+        const btn = document.querySelector(".btn-submit-review");
+        const post = document.querySelector(".post");
+        const widget = document.querySelector(".star-widget");
+        const editBtn = document.querySelector(".edit");
+        btn.onclick = ()=>{
+            widget.style.display = "none";
+            post.style.display = "block";
+            editBtn.onclick = ()=>{
+                widget.style.display = "block";
+                post.style.display = "none";
+            }
+            return false;
+        }
     </script>
 {{/section}}
+<div class="row align-items-center px-xl-5 mylearning-header">
+    <div class="col-lg-2">
+        <a href="/" class="text-decoration-none">
+            <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+        </a>
+    </div>
+
+    <div class="col-lg-4 course-name d-flex align-items-center">
+        <a href="/">
+            {{this.course.TenKhoaHoc}}
+        </a>
+    </div>
+
+    <div class="col-lg-6 text-right">
+        <i class="far fa-star text-primary" aria-hidden="true"></i>
+        <a class="trigger text-primary">
+            Click the modal!
+        </a>
+    </div>
+</div>
 
 
 <div class="container-fluid">
@@ -204,7 +547,7 @@
                     <a class="nav-link rounded-0" data-toggle="tab" href="#overview" role="tab">Overview</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rounded-0" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
+                    <a class="nav-link rounded-0" id="navlink-reviews" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link rounded-0" data-toggle="tab" href="#settings" role="tab">Settings</a>
@@ -213,12 +556,102 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane" id="home" role="tabpanel">A</div>
-                <div class="tab-pane" id="overview" role="tabpanel">B</div>
+                <div class="tab-pane" id="home" role="tabpanel">
+                    <div class="container mt-3">
+                        <div class="card-body h-auto">
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="m-0">
+                                    <i class="fa fa-users text-primary mr-2"></i>
+                                    {{this.course.Luotxem}} Students
+                                </p>
+                                <p class="m-0">
+                                    <i class="far fa-clock text-primary mr-2"></i>
+                                    {{this.course.SoLuongVideo}}
+                                </p>
+                            </div>
+                            <h5 class="card-title">{{this.course.TenKhoaHoc}}</h5>
+                            {{#if this.course.isFieldType}}
+                                <p class="card-text">
+                                    <i class="fa fa-globe" aria-hidden="true"></i>
+                                    {{this.course.TenLinhVuc}}
+                                </p>
+                            {{else}}
+                                <p class="card-text">
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                    {{this.course.TenLinhVuc}}
+                                </p>
+                            {{/if}}
+
+                            <p class="card-text">{{this.course.Name}}</p>
+                            <div class="d-flex align-content-center">
+                                <span class="stars" data-rating="{{this.course.RateTB}}" data-num-stars="5" ></span>
+                                <h5 class="text-primary font-weight-bolder ml-2">{{this.course.RateTB}}</h5>
+                                <span class="">({{this.course.SLHocSinhDanhGia}} ratings)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="overview" role="tabpanel">
+                  <div class="mt-3 container">
+                      <div class="card-body h-auto">
+                      </div>
+                  </div>
+                </div>
                 <div class="tab-pane" id="reviews" role="tabpanel">
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h5 class="text-primary">What our students have to say</h5>
+                    <div class="mt-3 container">
+                        <div class="card-body h-auto">
+                            <h5 class="text-primary">Student feedback</h5>
+                            <div class="row flex align-items-center">
+                                <div class="col-md-2">
+                                    <div class="text-primary font-weight-bold" style="font-size: 64px">{{this.course.RateTB}}</div>
+                                    <div class="mb-1">
+                                        <span class="stars" data-rating="{{this.course.RateTB}}" data-num-stars="5" ></span>
+                                    </div>
+                                    <p class="font-weight-bold text-primary" style="letter-spacing: -0.8px">Course Rating</p>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="progress rounded-0" style="margin-top: 5px">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{this.starRatingList.fiveStarRatePer}}" aria-valuemin="0" aria-valuemax="100">{{this.starRatingList.fiveStarRatePer}}%</div>
+                                            </div>
+                                        </div>
+                                        <span class="stars col-md-2" data-rating="5" data-num-stars="5" ></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="progress rounded-0" style="margin-top: 5px">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{this.starRatingList.fourStarRatePer}}" aria-valuemin="0" aria-valuemax="100">{{this.starRatingList.fourStarRatePer}}%</div>
+                                            </div>
+                                        </div>
+                                        <span class="stars col-md-2" data-rating="4" data-num-stars="5" ></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="progress rounded-0" style="margin-top: 5px">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{this.starRatingList.threeStarRatePer}}" aria-valuemin="0" aria-valuemax="100">{{this.starRatingList.fourStarRatePer}}%</div>
+                                            </div>
+                                        </div>
+                                        <span class="stars col-md-2" data-rating="3" data-num-stars="5" ></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="progress rounded-0" style="margin-top: 5px">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{this.starRatingList.twoStarRatePer}}" aria-valuemin="0" aria-valuemax="100">{{this.starRatingList.fiveStarRatePer}}%</div>
+                                            </div>
+                                        </div>
+                                        <span class="stars col-md-2" data-rating="2" data-num-stars="5" ></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="progress rounded-0" style="margin-top: 5px">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{this.starRatingList.oneStarRatePer}}" aria-valuemin="0" aria-valuemax="100">{{this.starRatingList.fiveStarRatePer}}%</div>
+                                            </div>
+                                        </div>
+                                        <span class="stars col-md-2" data-rating="1" data-num-stars="5" ></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body h-auto">
                             <div class="w-100">
@@ -511,7 +944,56 @@
                     </div>
 
                 </div>
-                <div class="tab-pane" id="settings" role="tabpanel">D</div>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <div class="container mt-3">
+                        <div class="card-body h-auto">
+                                <h5 class="mb-3 text-primary">Instructor</h5>
+
+                                <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
+                                <div class="card__top">
+                                    <div class="card__avatar__teacher">
+                                        <img src="/public/img/teachers/{{this.course.Username}}.jpg" alt="student 1">
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fa fa-envelope text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.course.Email}}</span>
+                                        </p>
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.course.DOB}}</span>
+                                        </p>
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                                        </p>
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                                        </p>
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fa fa-user-plus text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                                        </p>
+                                        <p class="mb-2 row">
+                                            <i class="col-2 mr-2 fa fa-play-circle text-primary" aria-hidden="true"></i>
+                                            <span col="10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="card-text">
+                                    I had a couple of months of experience trading
+                                    without consistent
+                                    results. After taking this
+                                    course I'm pretty confident that I'll be a
+                                    better trader and know better when to enter a
+                                    trade, how to put my stop
+                                    loss and take profit, how many lots to trade and
+                                    much more.
+                                </p>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-3" id="courseDiv">
@@ -544,7 +1026,7 @@
                                             <a href="{{Link}}" class="video-btn" target="myFrame">
                                                 <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                 <span>video</span>
-                                            </a>cr
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -557,3 +1039,49 @@
         </div>
     </div>
 </div>
+<!-- SIDEBAR MINI -->
+<div class="sidebarMini">
+    <button class="sidebarMini__button">
+        <i class="fa fa-arrow-left" aria-hidden="true" style="margin-left: 2px"></i>
+        <span class="sidebarMini__content">
+            Course content
+        </span>
+    </button>
+</div>
+
+<div class="modal-review">
+    <div class="modal-review-content">
+        <span class="close-review-button">×</span>
+        <div class="container-review">
+            <div class="post">
+                <div class="text">Thanks for rating us!</div>
+                <div class="edit">EDIT</div>
+            </div>
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-5">
+                <label for="rate-5" class="far fa-star"></label>
+                <input type="radio" name="rate" id="rate-4">
+                <label for="rate-4" class="far fa-star"></label>
+                <input type="radio" name="rate" id="rate-3">
+                <label for="rate-3" class="far fa-star"></label>
+                <input type="radio" name="rate" id="rate-2">
+                <label for="rate-2" class="far fa-star"></label>
+                <input type="radio" name="rate" id="rate-1">
+                <label for="rate-1" class="far fa-star"></label>
+                <form action="#">
+                    <header></header>
+                    <div class="textarea">
+                        <textarea cols="60" placeholder="Describe your experience.."></textarea>
+                    </div>
+                    <div class="btn">
+                        <button class="btn-submit-review" type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

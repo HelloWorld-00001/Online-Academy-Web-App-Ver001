@@ -287,5 +287,4 @@ export default {
         amountCourse[0]['ratings'] = Math.round(amountCourse[0]['ratings'] / amountCourse[0]['amountCourses'] *10) / 10
         return amountCourse[0];
     },
-
 }
