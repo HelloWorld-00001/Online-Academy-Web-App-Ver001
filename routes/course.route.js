@@ -3,11 +3,10 @@ import courseService from '../services/course.service.js';
 const router = express.Router();
 
 router.post('/search', async function (req, res) {
-    const courseName = await courseService.findByName(req.body.courseFind);
-    console.log(courseName[0]);
+    const courseName = await courseService.courseFullTextSearch(req.body.courseFind);
     res.render('courses/search.hbs', {
-        courses: courseName,
-        isNull: courseName.length === 0
+        courses: courseName[0],
+        isNull: courseName[0].length === 0
     });
 });
 

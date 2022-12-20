@@ -4,7 +4,7 @@ export default {
     async findTop10MostViewCourse() {
         const sql = `SELECT KH.*, TK.Username, LV.TenLinhVuc
                      FROM khoahoc KH
-                              INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
+                              INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
                               INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                      ORDER BY KH.LuotXem DESC
@@ -287,4 +287,14 @@ export default {
         amountCourse[0]['ratings'] = Math.round(amountCourse[0]['ratings'] / amountCourse[0]['amountCourses'] *10) / 10
         return amountCourse[0];
     },
+
+    async courseFullTextSearch(name) {
+        const sql = `SELECT *
+        FROM khoahoc
+        WHERE 
+        MATCH(TenKhoaHoc, MoTaNgan) 
+        AGAINST('` + name + `');`
+        const rel = await db.raw(sql);
+        return rel;
+    }
 }

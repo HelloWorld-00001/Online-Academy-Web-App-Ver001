@@ -89,12 +89,12 @@
                                 <div class="user-avatar">
                                     <img src="/public/img/teachers/AdrianHajdinTeacher.jpg" alt="AdrianHajdin">
                                 </div>
-                                <h5 class="user-name">AdrianHajdin</h5>
-                                <h6 class="user-email">AdrianHajdin@gmail.com</h6>
+                                <h5 class="user-name">{{this.teacher.Name}}</h5>
+                                <h6 class="user-email">{{this.teacher.Email}}</h6>
                             </div>
                             <div class="about">
                                 <h5>About</h5>
-                                <p>I'm AdrianHajdin. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                                <p>{{this.teacher.MoTa}}</p>
                             </div>
                         </div>
                     </div>
@@ -110,19 +110,19 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtName">Full Name</label>
-                                    <input name="name" type="text" class="form-control" id="txtName" placeholder="Enter full name">
+                                    <input name="name" type="text" class="form-control" id="txtName" placeholder="{{this.teacher.Name}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtEmail">Email</label>
-                                    <input name="email" type="email" class="form-control" id="txtEmail" placeholder="Enter email ID">
+                                    <input name="email" type="email" class="form-control" id="txtEmail" placeholder="{{this.teacher.Email}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtPhone">Phone</label>
-                                    <input name="phone" type="text" class="form-control" id="txtPhone" placeholder="Enter phone number">
+                                    <input name="phone" type="text" class="form-control" id="txtPhone" placeholder="{{this.teacher.SDT}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -139,13 +139,13 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtStreet">Street</label>
-                                    <input name="street" type="name" class="form-control" id="txtStreet" placeholder="Enter Street">
+                                    <input name="street" type="name" class="form-control" id="txtStreet" placeholder="227 Nguyen Van Cu">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtCity">City</label>
-                                    <input name="city" type="name" class="form-control" id="txtCity" placeholder="Enter City">
+                                    <input name="city" type="name" class="form-control" id="txtCity" placeholder="Ho Chi Minh City">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
