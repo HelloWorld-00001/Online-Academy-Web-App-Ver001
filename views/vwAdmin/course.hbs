@@ -1,0 +1,61 @@
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                        <div class="col-xl-12 ml-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Course Table</h5>
+                                    <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/courses/add" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add more</a>
+                                    <span class="d-block m-t-5">List of all <code>courses</code> in system
+                                       </span>
+                                </div>
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nam of </th>
+                                                    <th>Ten</th>
+                                                    <th>Username</th>
+                                                    <th>email</th>
+                                                    <th>SLKH</th>
+                                                    <th colspan="3">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                 {{#each this.teacher}}
+                                                <form method="post" action=""></form>
+                                                <tr>
+                                                    <td>{{MaGiaoVien}}</td>
+                                                    <td>{{MaTaiKhoan}}</td>
+                                                    <td>{{Name}}</td>
+                                                    <td>{{Username}}</td>
+                                                    <td>{{Email}}</td>
+                                                    <td>{{SLKhoaHoc}}</td>
+                                                    <td colspan="3">
+                                                        <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-sm" aria-hidden="true"></i></a>
+                                                        <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fa fa-wrench fa-sm ml-2 " aria-hidden="true"></i></i></a>
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm ml-2" ><center><i class="material-icons">&#xE872;</i></center></button>
+                                                    </td>
+                                                </tr>
+                                                </form>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
