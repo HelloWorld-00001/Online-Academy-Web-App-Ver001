@@ -1,6 +1,11 @@
 DROP DATABASE IF EXISTS `QLKhoaHoc`;
 CREATE DATABASE `QLKhoaHoc`;
 USE `QLKhoaHoc`;
+
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+
 DROP TABLE IF EXISTS `LinhVuc`;
 CREATE TABLE `LinhVuc` (
   `MaLinhVuc` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -34,7 +39,7 @@ CREATE TABLE `KhoaHoc` (
 
 BEGIN;
 INSERT INTO `KhoaHoc` VALUES (1, 'Introduct To HTML, JS, CSS', 1, 100, 21, 1, '1.jpg', 10, 0, 0, 'Explore how you can create websites from scratch!!!', 0);
-INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database', 0);
+INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database css', 0);
 INSERT INTO `KhoaHoc` VALUES (3, 'Web Design Course', 1, 120, 19, 3, '3.jpg', 10, 0, 0, 'In this course, you will learn how to create a website and how to design it', 0);
 INSERT INTO `KhoaHoc` VALUES (4, 'HTML & CSS Crash Course Tutorial', 1, 100, 11, 4, '4.jpg', 10, 0, 0, 'Throughout this crash course series I will take you from total beginner to create great-looking sites with HTML & CSS. In this video, we will cover what HTML & CSS are, as well as setting up our dev environment.', 0);
 INSERT INTO `KhoaHoc` VALUES (5, 'Javascript Nâng Cao', 1, 50, 12, 5, '5.jpg', 10, 0, 0, 'Hiểu sâu hơn về cách Javascript hoạt động, hiểu các khái niệm Javascript nâng cao như: IIFE, closure, reference types, this keyword, bind, call, apply, ...', 0);
@@ -413,7 +418,7 @@ INSERT INTO `TaiKhoan` VALUES (5, 'dtsonTeacher', '123', 'Đặng Trường Sơn
 INSERT INTO `TaiKhoan` VALUES (6, 'euniqaTeacher', '123', 'Euniqa', 'euniqaPro@gmail.com', '1991-11-12', 'Giáo viên', '6.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (7, 'nsnguyenTeacher', '123', 'Ngô Sỹ Nguyên', 'nsnguyenPro@gmail.com', '1989-07-06', 'Giáo viên', '7.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal', 'mtjamalPro@gmail.com', '1997-12-18', 'Giáo viên', '8.jpg', '0123456789');
-INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên', '9');
+INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên', '9.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên', '10.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên', '11.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'Dastagir Ahmed', 'info@dbestech.com', '1995-10-02', 'Giáo viên', '12.jpg', '0123456789');
@@ -426,7 +431,7 @@ INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'Chris Ching', 'chris@
 INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'Cryce Truly', 'crycetruly@gmail.com', '1993-11-30', 'Giáo viên', '19.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'James Montemagno', 'refractoredllc@gmail.com', '1994-02-07', 'Giáo viên', '20.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên', '21.jpg', '0123456789');
-INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên', '22.jpg', '0123456789');
+INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-29', 'Học viên', '22.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên', '23.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên', '24.jpg', '0123456789');
 INSERT INTO `TaiKhoan` VALUES (25, 'loidForger', '123', 'Loid Forger', 'loidSxf@gmail.com', '2002-05-01', 'Học viên', '25.jpg', '0123456789');
@@ -560,3 +565,8 @@ INSERT INTO `DanhSachDangKi` VALUES (9, 9, '2022-12-22', '');
 INSERT INTO `DanhSachDangKi` VALUES (9, 7, '2022-12-27', '');
 INSERT INTO `DanhSachDangKi` VALUES (11, 12, '2022-12-29', '');
 COMMIT;
+
+ALTER TABLE khoahoc
+ADD FULLTEXT(TenKhoaHoc, MoTaNgan);
+
+SET FOREIGN_KEY_CHECKS = 0;

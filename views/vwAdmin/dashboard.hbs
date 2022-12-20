@@ -1,3 +1,34 @@
+{{#section 'js'}}
+<script>
+    $(document).ready(function() {
+    setTimeout(function(){
+        var graph = Morris.Donut({
+            element: 'donut-cate-course',
+            data: [
+                {
+                    value: numofCate,
+                    label: 'Web'
+                },
+                {
+                    value: numofVideo,
+                    label: 'Mobile'
+                },                
+            ],
+            colors: [
+                '#3949AB',
+                '#e52d27',
+            ],
+            resize: true,
+            formatter: function(x) {
+                return "val : " + x
+            }
+        })
+    }, 700)
+})
+</script>
+
+{{/section}}
+
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
@@ -28,47 +59,118 @@
                         <!-- [ Main Content ] start -->
                         <div class="row">
                             <!-- [ sample-page ] start -->
-                            <div class="col-sm-12">
+                            <!-- Account Count start -->
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card prod-p-card bg-c-red">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total User</h6>
+												<h3 class="m-b-0 text-white">{{numofAcc}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-users text-c-red f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-danger m-r-10">+11%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card prod-p-card bg-c-blue">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total Teacher</h6>
+												<h3 class="m-b-0 text-white">{{numofTeacher}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-chalkboard-teacher text-c-blue f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-primary m-r-10">+8%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card prod-p-card bg-c-green">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total Student</h6>
+												<h3 class="m-b-0 text-white">{{numofStudent}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-user-graduate text-c-green f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-success m-r-10">+24%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <!-- Account Count end -->
+                            <!-- Course Count start -->
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card prod-p-card bg-c-purple">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total Category</h6>
+												<h3 class="m-b-0 text-white">{{numofCate}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-list text-c-purple f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-purple m-r-10">+0%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card prod-p-card bg-c-yellow">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total Course</h6>
+												<h3 class="m-b-0 text-white">{{numofCourse}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-book text-c-yellow f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-warning m-r-10">+13%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card prod-p-card bg-c-info">
+                                    <div class="card-body">
+										<div class="row align-items-center m-b-25">
+											<div class="col">
+												<h6 class="m-b-5 text-white h3">Total Video</h6>
+												<h3 class="m-b-0 text-white">{{numofVideo}}</h3>
+											</div>
+											<div class="col-auto">
+												<i class="fas fa-play text-c-info f-18"></i>
+											</div>
+										</div>
+										<p class="m-b-0 text-white"><span class="label label-info m-r-10">+32%</span>From Previous Month</p>
+									</div>
+                                </div>
+                            </div>
+                            <!-- Course Count end -->
+                            <!-- Chart Donut start -->
+                            <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="">Hello card</h3>
-                                        <div class="card-header-right">
-                                            <div class="btn-group card-option">
-                                                <button type="button" class="btn dropdown-toggle btn-icon"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="feather icon-more-horizontal"></i>
-                                                </button>
-                                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                    <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                                    class="feather icon-maximize"></i>
-                                                                maximize</span><span style="display:none"><i
-                                                                    class="feather icon-minimize"></i>
-                                                                Restore</span></a>
-                                                    </li>
-                                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                                    class="feather icon-minus"></i> collapse</span><span
-                                                                style="display:none"><i class="feather icon-plus"></i>
-                                                                expand</span></a></li>
-                                                    <li class="dropdown-item reload-card"><a href="#!"><i
-                                                                class="feather icon-refresh-cw"></i> reload</a></li>
-                                                    <li class="dropdown-item close-card"><a href="#!"><i
-                                                                class="feather icon-trash"></i> remove</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <h5>Donut Chart</h5>
                                     </div>
                                     <div class="card-body">
-                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                            occaecat cupidatat non proident, sunt in culpa qui
-                                            officia deserunt mollit anim id est laborum."
-                                        </p>
+                                        <div id="donut-cate-course" style="height:300px"></div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Chart Donut end -->
                             <!-- [ sample-page ] end -->
                         </div>
                         <!-- [ Main Content ] end -->
