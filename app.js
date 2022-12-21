@@ -5,7 +5,6 @@ import hbs_sections from 'express-handlebars-sections';
 import fnMySQLStore from 'express-mysql-session';
 import passport from 'passport';
 import {connectionInfo} from './utils/db.js';
-
 import db from './utils/db.js';
 
 import { dirname } from 'path';
