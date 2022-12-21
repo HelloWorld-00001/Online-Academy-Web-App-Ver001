@@ -16,7 +16,7 @@ router.post('/register', async function (req, res) {
   const rawPassword = req.body.password;
   const salt = await bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(rawPassword, salt);
-  const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const dob = req.body.dob;
   
   const user = {
     Username: req.body.username,
@@ -24,7 +24,10 @@ router.post('/register', async function (req, res) {
     Name: req.body.name,
     DOB: dob,
     Email: req.body.email,
-    LoaiTaiKhoan: 'Học Viên'
+    LoaiTaiKhoan: 'Học Viên',
+    Avatar: null,
+    SDT: null,
+    DiaChi: null
   }
 
   const otp = randomInteger(100000, 999999).toString();
