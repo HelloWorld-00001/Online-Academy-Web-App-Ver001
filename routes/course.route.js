@@ -3,11 +3,10 @@ import courseService from '../services/course.service.js';
 const router = express.Router();
 
 router.post('/search', async function (req, res) {
-    const courseName = await courseService.findByName(req.body.courseFind);
-    console.log(courseName[0]);
+    const courseName = await courseService.courseFullTextSearch(req.body.courseFind);
     res.render('courses/search.hbs', {
-        courses: courseName,
-        isNull: courseName.length === 0
+        courses: courseName[0],
+        isNull: courseName[0].length === 0
     });
 });
 
@@ -94,21 +93,54 @@ router.get('/detail/:id', async function (req, res) {
     });
 });
 
-router.get('/mylearning/:id', async function (req, res) {
-    let makhoahoc = req.params.id || 0;
-    const course = await courseService.findDetailCourseByID(makhoahoc);
+// router.post('/mylearning/id', async function (req, res) {
+//     let makhoahoc = req.params.id || 0;
+//     const oneStarRate = await courseService.countStarRate(makhoahoc,1);
+//     const twoStarRate = await courseService.countStarRate(makhoahoc,2);
+//     const threeStarRate = await courseService.countStarRate(makhoahoc,3);
+//     const fourStarRate = await courseService.countStarRate(makhoahoc,4);
+//     const fiveStarRate = await courseService.countStarRate(makhoahoc,5);
+//
+//     const amountStudentRating = await courseService.countStudentRating(makhoahoc);
+//     const sumRating = oneStarRate + twoStarRate + threeStarRate + fourStarRate + fiveStarRate;
+//     const totalRate = await  courseService.sumStudentRating(makhoahoc);
+//
+//     const RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
+//     const ret = await courseService.addRating(makhoahoc, RateTB, amountStudentRating);
+//     res.render('courses/mylearning',);
+// });
 
-    if (course === null) {
-        return res.redirect('/');
-    }
-
-    const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
-
-    const firstVideo = courseVideoList[0].Link;
-    console.log(firstVideo)
-    res.render('courses/mylearning', {
-        courseVideoList,
-        firstVideo,
-    });
-});
+// router.get('/mylearning/:id', async function (req, res) {
+//     let makhoahoc = req.params.id || 0;
+//     const course = await courseService.findDetailCourseByID(makhoahoc);
+//
+//     if (course === null) {
+//         return res.redirect('/');
+//     }
+//
+//     const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
+//     const oneStarRate = await courseService.countStarRate(makhoahoc,1);
+//     const twoStarRate = await courseService.countStarRate(makhoahoc,2);
+//     const threeStarRate = await courseService.countStarRate(makhoahoc,3);
+//     const fourStarRate = await courseService.countStarRate(makhoahoc,4);
+//     const fiveStarRate = await courseService.countStarRate(makhoahoc,5);
+//     //
+//     // const amountStudentRating = await courseService.countStudentRating(makhoahoc);
+//     // const sumRating = oneStarRate + twoStarRate + threeStarRate + fourStarRate + fiveStarRate;
+//     // const totalRate = await  courseService.sumStudentRating(makhoahoc);
+//     //
+//     // const RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
+//     // const ret = await courseService.addRating(makhoahoc, RateTB, amountStudentRating);
+//
+//
+//     const starRatingList  = {oneStarRate, twoStarRate, threeStarRate, fourStarRate, fiveStarRate};
+//
+//     const firstVideo = courseVideoList[0].Link;
+//     console.log(firstVideo)
+//     res.render('courses/mylearning', {
+//         courseVideoList,
+//         firstVideo,
+//         starRatingList,
+//     });
+// });
 export default router;

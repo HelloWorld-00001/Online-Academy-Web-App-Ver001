@@ -1,20 +1,28 @@
 import db from '../utils/db.js';
 
 export default {
+    async countAllUser() {
+        const list = await db('taikhoan').count({amount: '*'});
+        return list[0].amount;
+    },
     async countAllCourse() {
         const list = await db('khoahoc').count({amount: '*'});
         return list[0].amount;
     },
     async countAllStudent() {
-        const list = await db('taikhoa').count({amount: 'MaTaiKhoan'}).where('LoaiTaiKhoan', 'Học viên');
+        const list = await db('taikhoan').count({amount: 'MaTaiKhoan'}).where('LoaiTaiKhoan', 'Học viên');
         return list[0].amount;
     },
     async countAllTeacher() {
-        const list = await db('taikhoa').count({amount: 'MaTaiKhoan'}).where('LoaiTaiKhoan', 'Giáo viên');
+        const list = await db('taikhoan').count({amount: 'MaTaiKhoan'}).where('LoaiTaiKhoan', 'Giáo viên');
         return list[0].amount;
     },
-    async countNumofVid() {
+    async countAllVid() {
         const list = await db('danhsachvideo').count({amount: '*'});
+        return list[0].amount
+    },
+    async countAllCate() {
+        const list = await db('linhvuc').count({amount: '*'});
         return list[0].amount
     },
     vwAllVideo() {
@@ -42,7 +50,7 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
         return list;
     },
     async findTopThreeStudent() {
@@ -54,7 +62,7 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
         return list;
     },
     async findTopThreeCourse() {
@@ -66,7 +74,19 @@ export default {
             'taikhoan.Username',
         )
         .innerJoin('taikhoan', {'KhoaHoc.GiaoVien': 'taikhoan.MaTaiKhoan'})
-        .limit(3);
+        //.limit(3);
+        return list;
+    },
+    async findTopThreeVideo() {
+        const list = await db('danhsachvideo')
+        .select(
+            'TenVideo',
+            'khoahoc.TenKhoaHoc',
+            'STT',
+            'NgayCapNhat',
+        )
+        .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachvideo.MaKhoaHoc'})
+        //.limit(3);
         return list;
     },
 }
