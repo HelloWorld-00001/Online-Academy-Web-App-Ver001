@@ -1,5 +1,44 @@
-<div>
-    haahaha
-    {{username.gender}}
-    haha
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/css/style_profile.css">
+{{/section}}
+
+{{#section 'js'}}
+{{/section}}
+<div class="container" id="bg">
+    <form method="post" class="my-5">
+        <div class="row">
+            <div class="col-md-4 frmAvatar">
+                <div class="profile-img">
+                    <img src="https://cdn.anisearch.com/images/character/cover/91/91210_300.webp" alt=""/ class="rounded-circle">
+                    <h4 class="my-3" style="color:white">Anya Forger</h4>
+                </div>
+                <div style="color:aliceblue;">
+                    Hello, I'm anya. I really like peanut. My family has 4 member. My mom, my dad, my dog and me. My duty is rescue the world.
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="profile-head">
+                    <div class="my-3">
+                        <h5>Personal Infomation</h5>
+                        <div class="row">
+                            <div class="col-md-6 my-1"><i class="fa fa-user" aria-hidden="true"></i> Full Name: <font color="#C9DEEC">Anya Forger</font></div>
+                            <div class="col-md my-1"> <i class="fa fa-birthday-cake" aria-hidden="true"></i> <storng>Birthday: &nbsp;</storng><font color="#C9DEEC">14/12/2002</font></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 my-1"><i class="fa fa-address-card" aria-hidden="true"></i> <storng>Address: &nbsp;</storng><font color="#C9DEEC">516/4 Bình Long, phường Tân Quý, quận Tân Phú, TP Hồ Chi Minh.</font></div>
+                        </div>
+                    </div>
+                </div>
+                <hr color="grey">
+                <div class="profile-head mt-3">
+                    <div class="my-3">
+                        <h5>Contact Infomation</h5>
+                        <div class="mt-3"><i class="fa fa-envelope" aria-hidden="true"></i> Email: <font color="#C9DEEC">anyaa@gmail.com </font></div>
+                        <div class="mt-1"><i class="fa fa-phone" aria-hidden="true"></i><storng> Phone Number: &nbsp;</storng><font color="#C9DEEC">0123456789</font></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </form>
 </div>

@@ -1,6 +1,11 @@
 DROP DATABASE IF EXISTS `QLKhoaHoc`;
 CREATE DATABASE `QLKhoaHoc`;
 USE `QLKhoaHoc`;
+
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+
 DROP TABLE IF EXISTS `LinhVuc`;
 CREATE TABLE `LinhVuc` (
   `MaLinhVuc` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -34,7 +39,7 @@ CREATE TABLE `KhoaHoc` (
 
 BEGIN;
 INSERT INTO `KhoaHoc` VALUES (1, 'Introduct To HTML, JS, CSS', 1, 100, 21, 1, '1.jpg', 10, 0, 0, 'Explore how you can create websites from scratch!!!', 0);
-INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database', 0);
+INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database css', 0);
 INSERT INTO `KhoaHoc` VALUES (3, 'Web Design Course', 1, 120, 19, 3, '3.jpg', 10, 0, 0, 'In this course, you will learn how to create a website and how to design it', 0);
 INSERT INTO `KhoaHoc` VALUES (4, 'HTML & CSS Crash Course Tutorial', 1, 100, 11, 4, '4.jpg', 10, 0, 0, 'Throughout this crash course series I will take you from total beginner to create great-looking sites with HTML & CSS. In this video, we will cover what HTML & CSS are, as well as setting up our dev environment.', 0);
 INSERT INTO `KhoaHoc` VALUES (5, 'Javascript Nâng Cao', 1, 50, 12, 5, '5.jpg', 10, 0, 0, 'Hiểu sâu hơn về cách Javascript hoạt động, hiểu các khái niệm Javascript nâng cao như: IIFE, closure, reference types, this keyword, bind, call, apply, ...', 0);
@@ -393,48 +398,51 @@ COMMIT;
 DROP TABLE IF EXISTS `TaiKhoan`;
 CREATE TABLE `TaiKhoan` (
   `MaTaiKhoan` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-  `Password` VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+  `Username` VARCHAR(50)  NOT NULL,
+  `Password` VARCHAR(255)  NOT NULL,
   `Name` VARCHAR(150) COLLATE utf8_general_ci NOT NULL,
-  `Email` VARCHAR(150) COLLATE utf8_general_ci NOT NULL,
-  `DOB` date NOT NULL,
+  `Email` VARCHAR(150) NOT NULL,
+  `DOB` DATE,
   `LoaiTaiKhoan` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-  `avatar` varchar(20) not null,
+  `Avatar` VARCHAR(20) ,
+	`SDT` CHAR(10) ,
+  `DiaChi` VARCHAR(150),
+  `Website` VARCHAR(150),
   PRIMARY KEY (`MaTaiKhoan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 BEGIN;
-INSERT INTO `TaiKhoan` VALUES (1, 'ndnamTeacher', '123', 'Nguyễn Đình Nam', 'ndnamPro@gmail.com', '1995-10-25', 'Giáo viên', '1.jpg');
-INSERT INTO `TaiKhoan` VALUES (2, 'vthapaTeacher', '123', 'Vijay Thapa', 'vThapaPro@gmail.com', '2000-12-16', 'Giáo viên', '2.jpg');
-INSERT INTO `TaiKhoan` VALUES (3, 'ranTeacher', '123', 'Ran', 'ranPro@gmail.com', '1990-05-01', 'Giáo viên', '3.jpg');
-INSERT INTO `TaiKhoan` VALUES (4, 'shaunTeacher', '123', 'Shaun', 'shaunPro@gmail.com', '1992-03-03', 'Giáo viên', '4.jpg');
-INSERT INTO `TaiKhoan` VALUES (5, 'dtsonTeacher', '123', 'Đặng Trường Sơn', 'dtrsonPro@gmail.com', '1996-10-20', 'Giáo viên', '5.jpg');
-INSERT INTO `TaiKhoan` VALUES (6, 'euniqaTeacher', '123', 'Euniqa', 'euniqaPro@gmail.com', '1991-11-12', 'Giáo viên', '6.jpg');
-INSERT INTO `TaiKhoan` VALUES (7, 'nsnguyenTeacher', '123', 'Ngô Sỹ Nguyên', 'nsnguyenPro@gmail.com', '1989-07-06', 'Giáo viên', '7.jpg');
-INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal', 'mtjamalPro@gmail.com', '1997-12-18', 'Giáo viên', '8.jpg');
-INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên', '9');
-INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên', '10.jpg');
-INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên', '11.jpg');
-INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'Dastagir Ahmed', 'info@dbestech.com', '1995-10-02', 'Giáo viên', '12.jpg');
-INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'Adrian Hajdin', 'contact@jsmasterypro.com', '1990-12-21', 'Giáo viên', '13.jpg');
-INSERT INTO `TaiKhoan` VALUES (14, 'ImranQasimTeacher', '123', 'Imran Qasim', 'itsmeleo.qureshi@gmail.com', '1989-06-17', 'Giáo viên', '14.jpg');
-INSERT INTO `TaiKhoan` VALUES (15, 'vandadTeacher', '123', 'Vandad Nahavandipoor', 'beau@freecodecamp.org', '1998-03-27', 'Giáo viên', '15.jpg');
-INSERT INTO `TaiKhoan` VALUES (16, 'buckyTeacher', '123', 'Bucky Roberts', 'thenewboston@.com', '1992-05-21', 'Giáo viên', '16.jpg');
-INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'Phạm Huy Hoàng', 'huyhoang8a5@gmail.com', '1998-11-11', 'Giáo viên', '17.jpg');
-INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'Chris Ching', 'chris@codewithchris', '1994-09-21', 'Giáo viên', '18.jpg');
-INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'Cryce Truly', 'crycetruly@gmail.com', '1993-11-30', 'Giáo viên', '19.jpg');
-INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'James Montemagno', 'refractoredllc@gmail.com', '1994-02-07', 'Giáo viên', '20.jpg');
-INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên', '21.jpg');
-INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-30', 'Học viên', '22.jpg');
-INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên', '23.jpg');
-INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên', '24.jpg');
-INSERT INTO `TaiKhoan` VALUES (25, 'loidForger', '123', 'Loid Forger', 'loidSxf@gmail.com', '2002-05-01', 'Học viên', '25.jpg');
-INSERT INTO `TaiKhoan` VALUES (26, 'kenKaneki', '123', 'Ken Kaneki', 'kaneki1000_7@gmail.com', '2004-11-19', 'Học viên', '26.jpg');
-INSERT INTO `TaiKhoan` VALUES (27, 'todorokiShoto', '123', 'Todoroki Shoto', 'shotoBaka@gmail.com', '2005-04-03', 'Học viên', '27.jpg');
-INSERT INTO `TaiKhoan` VALUES (28, 'bakugoKatsuki', '123', 'Bakugo Katsuki', 'kacchanAngry@gmail.com', '2002-12-25', 'Học viên', '28.jpg');
-INSERT INTO `TaiKhoan` VALUES (29, 'sidKagenou', '123', 'Sid Kagenou', 'shadowClown@gmail.com', '2006-08-13', 'Học viên', '29.jpg');
-INSERT INTO `TaiKhoan` VALUES (30, 'sakamotoDesu', '123', 'Sakamoto Desu', 'sakamotoPerfect@gmail.com', '2003-06-01', 'Học viên', '30.jpg');
-INSERT INTO `TaiKhoan` VALUES (31, 'yukihiraSoma', '123', 'Yukihira Soma', 'somaCook@gmail.com', '2003-02-05', 'Học viên', '31.jpg');
+INSERT INTO `TaiKhoan` VALUES (1, 'ndnamTeacher', '123', 'Nguyễn Đình Nam', 'ndnamPro@gmail.com', '1995-10-25', 'Giáo viên', '1.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (2, 'vthapaTeacher', '123', 'Vijay Thapa', 'vThapaPro@gmail.com', '2000-12-16', 'Giáo viên', '2.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (3, 'ranTeacher', '123', 'Ran', 'ranPro@gmail.com', '1990-05-01', 'Giáo viên', '3.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (4, 'shaunTeacher', '123', 'Shaun', 'shaunPro@gmail.com', '1992-03-03', 'Giáo viên', '4.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (5, 'dtsonTeacher', '123', 'Đặng Trường Sơn', 'dtrsonPro@gmail.com', '1996-10-20', 'Giáo viên', '5.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (6, 'euniqaTeacher', '123', 'Euniqa', 'euniqaPro@gmail.com', '1991-11-12', 'Giáo viên', '6.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (7, 'nsnguyenTeacher', '123', 'Ngô Sỹ Nguyên', 'nsnguyenPro@gmail.com', '1989-07-06', 'Giáo viên', '7.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (8, 'mtjamalTeacher', '123', 'Mohd Touseef Jamal', 'mtjamalPro@gmail.com', '1997-12-18', 'Giáo viên', '8.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (9, 'ejTeacher', '123', 'EJ', 'ejPro@gmail.com', '1988-08-13', 'Giáo viên', '9.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (10, 'ksathyaTeacher', '123', 'Kudos Sathya', 'ksathyaPro@gmail.com', '2000-06-17', 'Giáo viên', '10.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (11, 'CrishTeacher', '123', 'Crish', 'crishPro@gmail.com', '2003-12-16', 'Giáo viên', '11.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (12, 'DastagirAhmedTeacher', '123', 'Dastagir Ahmed', 'info@dbestech.com', '1995-10-02', 'Giáo viên', '12.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (13, 'AdrianHajdinTeacher', '123', 'Adrian Hajdin', 'contact@jsmasterypro.com', '1990-12-21', 'Giáo viên', '13.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (14, 'ImranQasimTeacher', '123', 'Imran Qasim', 'itsmeleo.qureshi@gmail.com', '1989-06-17', 'Giáo viên', '14.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (15, 'vandadTeacher', '123', 'Vandad Nahavandipoor', 'beau@freecodecamp.org', '1998-03-27', 'Giáo viên', '15.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (16, 'buckyTeacher', '123', 'Bucky Roberts', 'thenewboston@.com', '1992-05-21', 'Giáo viên', '16.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (17, 'phhoangTeacher', '123', 'Phạm Huy Hoàng', 'huyhoang8a5@gmail.com', '1998-11-11', 'Giáo viên', '17.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (18, 'chrisTeacher', '123', 'Chris Ching', 'chris@codewithchris', '1994-09-21', 'Giáo viên', '18.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (19, 'CryceTrulyTeacher', '123', 'Cryce Truly', 'crycetruly@gmail.com', '1993-11-30', 'Giáo viên', '19.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (20, 'JamesMontemagnoTeacher', '123', 'James Montemagno', 'refractoredllc@gmail.com', '1994-02-07', 'Giáo viên', '20.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (21, 'gojoSatoru', '123', 'Gojo Satoru', 'gojoCute@gmail.com', '2002-12-07', 'Học viên', '21.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (22, 'uzumakiNaruto', '123', 'Uzumaki Naruto', 'narutoFun@gmail.com', '2003-09-29', 'Học viên', '22.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (23, 'leviAckerman', '123', 'Levi Ackerman', 'leviCool@gmail.com', '2000-01-01', 'Học viên', '23.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (24, 'kaitoKid', '123', 'Kaito Kid', 'kaito1412@gmail.com', '2001-12-14', 'Học viên', '24.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (25, 'loidForger', '123', 'Loid Forger', 'loidSxf@gmail.com', '2002-05-01', 'Học viên', '25.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (26, 'kenKaneki', '123', 'Ken Kaneki', 'kaneki1000_7@gmail.com', '2004-11-19', 'Học viên', '26.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (27, 'todorokiShoto', '123', 'Todoroki Shoto', 'shotoBaka@gmail.com', '2005-04-03', 'Học viên', '27.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (28, 'bakugoKatsuki', '123', 'Bakugo Katsuki', 'kacchanAngry@gmail.com', '2002-12-25', 'Học viên', '28.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (29, 'sidKagenou', '123', 'Sid Kagenou', 'shadowClown@gmail.com', '2006-08-13', 'Học viên', '29.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (30, 'sakamotoDesu', '123', 'Sakamoto Desu', 'sakamotoPerfect@gmail.com', '2003-06-01', 'Học viên', '30.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
+INSERT INTO `TaiKhoan` VALUES (31, 'yukihiraSoma', '123', 'Yukihira Soma', 'somaCook@gmail.com', '2003-02-05', 'Học viên', '31.jpg', '0123456789', '12345 Nguyen Van Cu TPHCM', NULL);
 COMMIT;
 
 
@@ -443,32 +451,33 @@ CREATE TABLE `GiaoVien` (
   `MaGiaoVien` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `MaTaiKhoan` INT UNSIGNED NOT NULL,
   `SLKhoaHoc` int,
+	`MoTa` VARCHAR(250) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`MaGiaoVien`),
   KEY `fk_giaovien_taikhoa_idx` (`MaTaiKhoan`),
   CONSTRAINT `fk_giaovien_taikhoa` FOREIGN KEY (`MaTaiKhoan`) REFERENCES `TaiKhoan`(`MaTaiKhoan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 BEGIN;
-INSERT INTO `GiaoVien` VALUES (1, 1, 1);
-INSERT INTO `GiaoVien` VALUES (2, 2, 1);
-INSERT INTO `GiaoVien` VALUES (3, 3, 1);
-INSERT INTO `GiaoVien` VALUES (4, 4, 1);
-INSERT INTO `GiaoVien` VALUES (5, 5, 1);
-INSERT INTO `GiaoVien` VALUES (6, 6, 1);
-INSERT INTO `GiaoVien` VALUES (7, 7, 1);
-INSERT INTO `GiaoVien` VALUES (8, 8, 1);
-INSERT INTO `GiaoVien` VALUES (9, 9, 1);
-INSERT INTO `GiaoVien` VALUES (10, 10, 1);
-INSERT INTO `GiaoVien` VALUES (11, 11, 1);
-INSERT INTO `GiaoVien` VALUES (12, 12, 1);
-INSERT INTO `GiaoVien` VALUES (13, 13, 1);
-INSERT INTO `GiaoVien` VALUES (14, 14, 1);
-INSERT INTO `GiaoVien` VALUES (15, 15, 1);
-INSERT INTO `GiaoVien` VALUES (16, 16, 1);
-INSERT INTO `GiaoVien` VALUES (17, 17, 1);
-INSERT INTO `GiaoVien` VALUES (18, 18, 1);
-INSERT INTO `GiaoVien` VALUES (19, 19, 1);
-INSERT INTO `GiaoVien` VALUES (20, 20, 1);
+INSERT INTO `GiaoVien` VALUES (1, 1, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (2, 2, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (3, 3, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (4, 4, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (5, 5, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (6, 6, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (7, 7, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (8, 8, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (9, 9, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (10, 10, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (11, 11, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (12, 12, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (13, 13, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (14, 14, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (15, 15, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (16, 16, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (17, 17, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (18, 18, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (19, 19, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (20, 20, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
 COMMIT;
 
 DROP TABLE IF EXISTS `HocVien`;
@@ -558,3 +567,8 @@ INSERT INTO `DanhSachDangKi` VALUES (9, 9, '2022-12-22', '');
 INSERT INTO `DanhSachDangKi` VALUES (9, 7, '2022-12-27', '');
 INSERT INTO `DanhSachDangKi` VALUES (11, 12, '2022-12-29', '');
 COMMIT;
+
+ALTER TABLE khoahoc
+ADD FULLTEXT(TenKhoaHoc, MoTaNgan);
+
+SET FOREIGN_KEY_CHECKS = 0;

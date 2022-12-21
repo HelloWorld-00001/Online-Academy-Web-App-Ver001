@@ -44,7 +44,10 @@ router.get('/profile/facebook', async function (req, res) {
         Name: req.user.displayName,
         DOB: '',
         Email: req.user._json.email,
-        LoaiTaiKhoan: 'Học Viên'
+        LoaiTaiKhoan: 'Học Viên',
+        Avatar: null,
+        SDT: null,
+        DiaChi: null
     }
     const check = await accountService.findByUsername(req.user.id);
 
@@ -89,7 +92,10 @@ router.get('/profile/google', async function (req, res) {
         Name: req.user.displayName,
         DOB: req.user.birthday,
         Email: req.user.email,
-        LoaiTaiKhoan: 'Học Viên'
+        LoaiTaiKhoan: 'Học Viên',
+        Avatar: null,
+        SDT: null,
+        DiaChi: null
     }
     const check = await accountService.findByUsername(req.user.id);
     if(check === null)
