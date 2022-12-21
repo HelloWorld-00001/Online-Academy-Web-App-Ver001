@@ -71,4 +71,10 @@ router.get('/categories', async function(req, res) {
     });
 });
 
+router.get('/courses', async function(req, res) {
+    const courses = await adminService.findAllCourse();
+    res.render('vwAdmin/courses', {layout: 'adminLayout',
+        courses: courses
+    });
+});
 export default router;

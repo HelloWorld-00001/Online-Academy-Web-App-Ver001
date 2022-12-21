@@ -44,6 +44,16 @@ export default {
     async findAllCategory() {
         return db('linhvuc');
     },
+
+
+    async findAllCourse() {
+        const sql = `SELECT kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo, COUNT(b.MaHocVien) as SLHocVien
+                        FROM khoahoc kh LEFT JOIN danhsachdangki b on kh.MaKhoaHoc = b.MaKhoaHoc
+                        JOIN linhvuc lv on kh.LinhVuc = lv.MaLinhVuc
+                        GROUP BY kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
     async findTopThreeTeacher() {
         const list = await db('giaovien')
         .select(
