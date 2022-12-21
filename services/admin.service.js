@@ -41,6 +41,9 @@ export default {
         .innerJoin('giaovien', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'});
         return list;
     },
+    async findAllCategory() {
+        return db('linhvuc');
+    },
     async findTopThreeTeacher() {
         const list = await db('giaovien')
         .select(
@@ -65,6 +68,7 @@ export default {
         //.limit(3);
         return list;
     },
+    
     async findTopThreeCourse() {
         const list = await db('KhoaHoc')
         .select(

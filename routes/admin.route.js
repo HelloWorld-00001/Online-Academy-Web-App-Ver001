@@ -58,10 +58,16 @@ router.post('/teachers/add', function (req, res){
     });
 });
 
-
 router.get('/addTeacher', function (req, res){
     res.render('vwAdmin/teacher/add', {
         layout: 'adminLayout',
+    });
+});
+
+router.get('/categories', async function(req, res) {
+    const categories = await adminService.findAllCategory();
+    res.render('vwAdmin/categories', {layout: 'adminLayout',
+        categories: categories
     });
 });
 
