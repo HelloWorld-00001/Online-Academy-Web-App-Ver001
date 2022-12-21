@@ -61,6 +61,35 @@
             margin-bottom: 1rem;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
+{{/section}}
+
+{{#section 'js'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $('#txtDOB').datetimepicker({
+            timepicker: false,
+            format: 'Y/m/d',
+            mask: true
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
+    <script>
+        $('#fuMain').fileinput({
+            dropZoneEnabled: false,
+            maxFileCount: 5,
+            theme: 'fa4',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+    </script>
 {{/section}}
 
 <div class="container-fluid page-header" style="margin-bottom: 90px;">
@@ -87,7 +116,7 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="/public/img/teachers/AdrianHajdinTeacher.jpg" alt="AdrianHajdin">
+                                    <img src="/public/img/teachers/{{this.teacher.Username}}.jpg" alt="/public/img/teachers/{{this.teacher.avatar}}">
                                 </div>
                                 <h5 class="user-name">{{this.teacher.Name}}</h5>
                                 <h6 class="user-email">{{this.teacher.Email}}</h6>
@@ -110,25 +139,44 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtName">Full Name</label>
-                                    <input name="name" type="text" class="form-control" id="txtName" placeholder="{{this.teacher.Name}}">
+                                    <input name="Name" type="text" class="form-control" id="txtName" value="{{this.teacher.Name}}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="example">Username</label>
+                                    <input type="" id="txtUsername" name="Username" class="form-control" value="{{this.teacher.Username}}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="example">Day of birth</label>
+                                    <i class="fas fa-calendar input-prefix"></i>
+                                    <input placeholder="Select date" type="text" id="txtDOB" name="DOB" class="form-control" value="{{#convertDate this.teacher.DOB}} {{/convertDate}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtEmail">Email</label>
-                                    <input name="email" type="email" class="form-control" id="txtEmail" placeholder="{{this.teacher.Email}}">
+                                    <input name="Email" type="email" class="form-control" id="txtEmail" value="{{this.teacher.Email}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtPhone">Phone</label>
-                                    <input name="phone" type="text" class="form-control" id="txtPhone" placeholder="{{this.teacher.SDT}}">
+                                    <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.teacher.SDT}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtWebsite">Website URL</label>
-                                    <input name="website" type="url" class="form-control" id="txtWebsite" placeholder="Website url">
+                                    <input name="Website" type="url" class="form-control" id="txtWebsite" placeholder="Website url">
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Mô tả</label>
+                                    <textarea name="Mota" class="form-control" id="txtMota" rows="4" >{{this.teacher.MoTa}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -139,19 +187,30 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtStreet">Street</label>
-                                    <input name="street" type="name" class="form-control" id="txtStreet" placeholder="227 Nguyen Van Cu">
+                                    <input name="Street" type="name" class="form-control" id="txtStreet" placeholder="227 Nguyen Van Cu">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtCity">City</label>
-                                    <input name="city" type="name" class="form-control" id="txtCity" placeholder="Ho Chi Minh City">
+                                    <input name="City" type="name" class="form-control" id="txtCity" placeholder="Ho Chi Minh City">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="sTate">State</label>
-                                    <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                                    <input name="State" type="text" class="form-control" id="sTate" placeholder="Enter State">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mt-3 mb-2 text-primary">Avatar</h6>
+                            </div>
+                            <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="fuMain">Choose avatar</label>
+                                    <input type="file" multiple id="fuMain" name="Avatar">
                                 </div>
                             </div>
                         </div>

@@ -70,6 +70,12 @@ app.engine('hbs', engine({
         format_number(val) {
             return numeral(val).format('0,0');
         },
+        convertDate(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("/");
+        },
         for(from, to, incr, block) {
             var accum = '';
             for(var i = from; i < to; i += incr)

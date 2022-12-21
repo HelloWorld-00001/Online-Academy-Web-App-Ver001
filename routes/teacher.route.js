@@ -27,6 +27,8 @@ router.get('/profile/:id', async function (req, res){
         teacher: teacher
     });
 });
+
+
 router.post('/profile', function (req, res){
     console.log(req.body);
     res.render('vwTeacher/profile');

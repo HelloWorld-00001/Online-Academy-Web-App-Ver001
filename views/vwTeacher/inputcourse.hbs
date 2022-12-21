@@ -78,12 +78,9 @@
             font-size: 18px;
         }
     </style>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
     <style>
-        body {
-            font-family: sans-serif;
-        }
         .ques {
             color: darkslateblue;
         }
@@ -127,7 +124,7 @@
             position: absolute;
             left: 0;
             z-index: 1;
-            content: "Đã hoàn thành";
+            content: "Completed";
             font-size: 15px;
             text-align: left !important;
             line-height: 30px;
@@ -152,7 +149,7 @@
         }
 
         input:checked + .slider:before {
-            background-color: #fff;
+            background-color: darkslategrey;
         }
 
         input:checked + .slider:before {
@@ -222,7 +219,7 @@
         $(document).ready(function(){ $("body").on("click",".add_new_frm_field_btn", function (){ console.log("clicked"); var index = $(".form_field_outer").find(".form_field_outer_row").length + 1; $(".form_field_outer").append(`
             <div class="row form_field_outer_row">
               <div class="form-group col-md-6">
-                <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_${index}" placeholder="Nhập chủ đề" />
+                <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_${index}" placeholder="Enter topic" />
               </div>
               <div class="form-group col-md-4">
                     <div class="input-group mb-3">
@@ -255,7 +252,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-                .create(document.querySelector('#description'))
+                .create(document.querySelector('#MoTaChiTiet'))
                 .catch(error => {
                     console.error(error)
                 });
@@ -272,6 +269,21 @@
             timepicker: false,
             format: 'd/m/Y',
             mask: true
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
+    <script>
+        $('#fuMain').fileinput({
+            dropZoneEnabled: false,
+            maxFileCount: 5,
+            theme: 'fa4',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
         });
     </script>
 {{/section}}
@@ -296,62 +308,61 @@
     <h1> New Course</h1>
     <div class="card container-fluid py-5 px-5">
         <div class="status">
-            <label>Trạng thái</label>
+            <label>Status</label>
             <label class="switch">
                 <input type="checkbox" name="check" id="txtCheck">
                 <span class="slider round"></span>
-                <span class="absolute-no">Chưa hoàn thành</span>
+                <span class="absolute-no">Incomplete</span>
             </label>
         </div>
 <!--        NameCourse-->
         <div class="form-group">
-            <label for="txtNameCourse">Tên Khóa học</label>
-            <input name="namecourse" type="text" class="form-control" id="txtNameCourse" autofocus>
+            <label for="txtNameCourse">Name course</label>
+            <input name="TenKhoaHoc" type="text" class="form-control" id="txtNameCourse" autofocus>
         </div>
 <!--        Image of course-->
         <div class="form-group">
-            <label for="exampleFormControlFile1">Thêm ảnh</label>
-            <input name="image" type="file" class="form-control-file" id="exampleFormControlFile1">
+            <label for="fuMain">Photo</label>
+            <input type="file" multiple id="fuMain" name="Image">
         </div>
 <!--        Start Day-->
         <div class="form-group">
-            <label for="example">Ngày bắt đầu</label>
+            <label for="example">Start Date</label>
             <i class="fas fa-calendar input-prefix"></i>
-            <input placeholder="Select date" type="text" id="txtDateStart" name="startdate" class="form-control">
+            <input placeholder="Select date" type="text" id="txtDateStart" name="NgayBD" class="form-control">
         </div>
 <!--        End Day-->
         <div class="form-group">
-            <label for="example">Ngày kết thúc</label>
+            <label for="example">End Date</label>
             <i class="fas fa-calendar input-prefix"></i>
-            <input placeholder="Select date" type="text" id="txtDateEnd" name="enddate" class="form-control">
+            <input placeholder="Select date" type="text" id="txtDateEnd" name="NgayKT" class="form-control">
         </div>
 <!--        Short Description-->
         <div class="form-group">
-            <label>Mô tả ngắn gọn</label>
-            <textarea name="shortdescription" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            <label>Short Description</label>
+            <textarea name="MoTaNgan" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
         </div>
 <!--        Description-->
         <div class="form-group">
-            <label>Mô tả</label>
-            <textarea id="description" name="description">
-                Your description
+            <label>Description</label>
+            <textarea id="MoTaChiTiet" name="description" placeholder="Your description">
             </textarea>
         </div>
 <!--        Price-->
         <div class="form-group">
-            <label for="txtPrice">Học phí  </label>
+            <label for="txtPrice">Fee  </label>
             <div class="input-group mb-2">
-                <input name="price" type="number" class="form-control" id="txtPrice" autofocus>
+                <input name="Gia" type="number" class="form-control" id="txtPrice" autofocus>
                 <div class="input-group-append">
-                    <span class="input-group-text">vnd</span>
+                    <span class="input-group-text">$</span>
                 </div>
             </div>
         </div>
 <!--        Discount-->
         <div class="form-group">
-            <label for="txtDiscount">Khuyến mãi</label>
+            <label for="txtDiscount">Discount</label>
             <div class="input-group mb-2">
-                <input name="discount" type="number" class="form-control" id="txtDiscount" autofocus>
+                <input name="KhuyenMai" type="number" class="form-control" id="txtDiscount" autofocus>
                 <div class="input-group-append">
                     <span class="input-group-text">%</span>
                 </div>
@@ -367,14 +378,14 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h4 class="frm_section_n">Đề cương khóa học</h4>
+                                            <h4 class="frm_section_n">Course content</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label>Chủ đề</label>
+                            <label>Topic</label>
                         </div>
                         <div class="col-md-4">
                             <label> Link</label>
@@ -384,7 +395,7 @@
                         <div class="col-md-12 form_field_outer p-0">
                             <div class="row form_field_outer_row">
                                 <div class="form-group col-md-6">
-                                    <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_1" placeholder="Nhập chủ đề" />
+                                    <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_1" placeholder="Enter topic" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="input-group mb-3">
@@ -395,11 +406,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2 add_del_btn_outer">
-                                    <button class="btn_round add_node_btn_frm_field" title="Copy dòng này">
+                                    <button class="btn_round add_node_btn_frm_field" title="Copy this line">
                                         <i class="fas fa-copy"></i>
                                     </button>
 
-                                    <button class="btn_round remove_node_btn_frm_field" title="Xóa dòng này" disabled>
+                                    <button class="btn_round remove_node_btn_frm_field" title="Delete this line" disabled>
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
@@ -409,7 +420,7 @@
                 </div>
                 <div class="row ml-0 bg-light mt-3 border py-3">
                     <div class="col-md-12">
-                        <button class="btn btn-outline-lite py-0 add_new_frm_field_btn"><i class="fas fa-plus add_icon"></i> Thêm chủ đề </button>
+                        <button class="btn btn-outline-lite py-0 add_new_frm_field_btn" type="button"><i class="fas fa-plus add_icon"></i> Add topic </button>
                     </div>
                 </div>
             </div>
