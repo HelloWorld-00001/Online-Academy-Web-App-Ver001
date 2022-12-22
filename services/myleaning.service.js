@@ -29,12 +29,17 @@ export default {
         return totalRate[0].total;
     },
 
-    // addRating(idCourse, rateTB, amountStudentRating) {
-    //     return db('khoahoc')
-    //         .where('MaKhoaHoc', idCourse)
-    //         .update({ RateTB: rateTB, SLHocSinhDanhGia: amountStudentRating })
-    //
-    // },
+    async getUserRating(idCourse, idStudent) {
+        const userReview = await db('bangdanhgia')
+            .select('Rate', 'Comment')
+            .where('MaKhoaHoc', idCourse)
+            .where('MaHocVien', idStudent)
+        if(userReview.length === 0) {
+            return null;
+        }
+        return userReview[0];
+    },
+
     addBangDanhGia(newRating) {
         return db('bangdanhgia').insert(newRating);
     },
@@ -44,4 +49,25 @@ export default {
             .where('MaKhoaHoc', idCourse)
             .update({ RateTB: rateTB, SLHocSinhDanhGia: amountStudentRating })
     },
+
+    delBangDanhGia(idCourse, idStudent) {
+        return db('bangdanhgia')
+            .where('MaKhoaHoc', idCourse)
+            .where('MaHocVien', idStudent)
+            .del();
+    },
+
+    updateBangDanhGia(studentReview) {
+        const idStudent = studentReview.MaHocVien;
+        const idCourse = studentReview.MaKhoaHoc;
+
+        delete studentReview.MaHocVien;
+        delete studentReview.MaKhoaHoc;
+
+        return db('bangdanhgia')
+            .where('MaKhoaHoc', idCourse)
+            .where('MaHocVien', idStudent)
+            .update(studentReview);
+    }
+
 }
