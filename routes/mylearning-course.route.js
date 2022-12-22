@@ -33,7 +33,6 @@ router.get('/:id', async function (req, res) {
     const firstVideo = courseVideoList[0].Link;
     const userRating = await mylearningService.getUserRating(makhoahoc, mahocvien);
     const checkStudentReview = userRating ===  null ? true : false;
-    console.log(1, checkStudentReview);
     res.render('vwMylearning/mylearning', {
         courseVideoList,
         course,
@@ -57,12 +56,13 @@ router.post('/:id', async function (req, res) {
         'Comment': result.Comment,
     }
 
-    const userRating = await mylearningService.getUserRating(makhoahoc1, mahocvien)
+    let userRating = await mylearningService.getUserRating(makhoahoc1, mahocvien);
     let checkStudentReview = userRating ===  null ? true : false;
 
     if (checkStudentReview) {
         const ret1 = await mylearningService.addBangDanhGia(data);
         checkStudentReview = false;
+        userRating = await mylearningService.getUserRating(makhoahoc1, mahocvien);
     }
     else {
         if(result.submitBtn === 'delete') {
@@ -92,8 +92,8 @@ router.post('/:id', async function (req, res) {
 
     const sumRating = oneStarRate + twoStarRate + threeStarRate + fourStarRate + fiveStarRate;
     const totalRate = await  mylearningService.sumStudentRating(makhoahoc1);
-    const RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
-
+    let RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
+    // RateTB = RateTB !== 0 ? Number((RateTB).toFixed(1)) : 0;
     const ret2 = await mylearningService.updateKhoaHoc(makhoahoc1, RateTB, amountStudentRating);
     const course = await courseService.findDetailCourseByID(makhoahoc1);
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
