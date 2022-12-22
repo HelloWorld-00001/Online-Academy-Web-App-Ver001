@@ -9,7 +9,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
-                                        <h4>Categories Table</h4>
+                                        <h4>Courses Table</h4>
                                         <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
                                     </div>
                                     <div>
@@ -26,15 +26,21 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Vid Quantity</th>
+                                                    <th>Attendance Quantity</th>
                                                     <th colspan="2">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{#each this.categories}}
+                                                {{#each this.courses}}
                                                 <form method="post" action="" >
                                                 <tr class="">
-                                                    <td>{{MaLinhVuc}}</td>
+                                                    <td>{{MaKhoaHoc}}</td>
+                                                    <td>{{TenKhoaHoc}}</td>
                                                     <td>{{TenLinhVuc}}</td>
+                                                    <td>{{SoLuongVideo}}</td>
+                                                    <td>{{SLHocVien}}</td>
                                                     <td colspan="2" class="">
                                                         <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fas fa-pen fa-sm ml-2 " aria-hidden="true"></i></i></a>
                                                         <button type="submit" class="btn btn-outline-danger btn-sm ml-4" ><center><i class="material-icons">&#xE872;</i></center></button>

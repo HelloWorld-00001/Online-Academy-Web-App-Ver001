@@ -168,7 +168,7 @@ export default {
                         from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
                         Group by lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
-        return raw[0] ;
+        return raw[0];
     },
 
 
