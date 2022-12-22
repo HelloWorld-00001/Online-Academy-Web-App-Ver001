@@ -404,7 +404,7 @@ CREATE TABLE `TaiKhoan` (
   `Email` VARCHAR(150) NOT NULL,
   `DOB` DATE,
   `LoaiTaiKhoan` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
-  `Avatar` VARCHAR(20) ,
+  `Avatar` VARCHAR(150) ,
 	`SDT` CHAR(10) ,
   `DiaChi` VARCHAR(150),
   PRIMARY KEY (`MaTaiKhoan`)

@@ -83,12 +83,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
     <script>
-        $('#fuMain').fileinput({
+        $('#Avatar').fileinput({
             dropZoneEnabled: false,
             maxFileCount: 5,
             theme: 'fa4',
             allowedFileExtensions: ['jpg', 'png', 'gif'],
         });
+    </script>
+    <script type="text/javascript">
+        var path = (window.URL || window.webkitURL).createObjectURL(file);
+        console.log('path', path);
     </script>
 {{/section}}
 
@@ -107,7 +111,7 @@
     </div>
 </div>
 
-<form method="post" id="frmInputCourse" class="container-fluid py-10">
+<form method="post" id="frmInputCourse" class="container-fluid py-10" enctype="multipart/form-data">
     <div class="container">
         <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -116,7 +120,7 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="/public/img/teachers/{{this.teacher.Username}}.jpg" alt="/public/img/teachers/{{this.teacher.avatar}}">
+                                    <img src="/public/img/teachers/{{this.teacher.Avatar}}" alt="">
                                 </div>
                                 <h5 class="user-name">{{this.teacher.Name}}</h5>
                                 <h6 class="user-email">{{this.teacher.Email}}</h6>
@@ -152,7 +156,7 @@
                                 <div class="form-group">
                                     <label for="example">Day of birth</label>
                                     <i class="fas fa-calendar input-prefix"></i>
-                                    <input placeholder="Select date" type="text" id="txtDOB" name="DOB" class="form-control" value="{{#convertDate this.teacher.DOB}} {{/convertDate}}">
+                                    <input placeholder="Select date" type="" id="txtDOB" name="DOB" class="form-control" value="{{#convertDate this.teacher.DOB}} {{/convertDate}}">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -164,7 +168,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtPhone">Phone</label>
-                                    <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.teacher.SDT}}">
+                                    <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.teacher.SDT}}" maxlength="11">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -184,22 +188,10 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="mt-3 mb-2 text-primary">Address</h6>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="txtStreet">Street</label>
-                                    <input name="Street" type="name" class="form-control" id="txtStreet" placeholder="227 Nguyen Van Cu">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="txtCity">City</label>
-                                    <input name="City" type="name" class="form-control" id="txtCity" placeholder="Ho Chi Minh City">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="sTate">State</label>
-                                    <input name="State" type="text" class="form-control" id="sTate" placeholder="Enter State">
+                                    <label for="txtStreet">Address</label>
+                                    <input name="DiaChi" type="text" class="form-control" id="txtDiaChi" value="{{this.teacher.DiaChi}}">
                                 </div>
                             </div>
                         </div>
@@ -209,8 +201,8 @@
                             </div>
                             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="fuMain">Choose avatar</label>
-                                    <input type="file" multiple id="fuMain" name="Avatar">
+                                    <label for="Avatar">Choose avatar</label>
+                                    <input type="file" multiple id="Avatar" name="Avatar">
                                 </div>
                             </div>
                         </div>
