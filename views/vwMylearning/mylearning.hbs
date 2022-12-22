@@ -1,6 +1,6 @@
 {{#section 'css'}}
     <style>
-        #navbar, #topBar {
+        #navbar, #topbar {
             display: none !important;
         }
 
@@ -347,26 +347,59 @@
             margin-bottom: -20px;
             text-align: right;
         }
-        .des-input .btn-review .btn-submit-review,
+
+        .des-input .btn-review .btn-review-next,
+        .container-review .btn-review-back,
+        .container-review .btn-submit-save,
+        .container-review .btn-review-delete,
         .container-review .btn-review-edit,
-        .container-review .btn-review-save{
+        .container-review .btn-review-cancel,
+        .container-review .btn-submit-delete{
             border: 1px solid #444;
             outline: none;
             background: #222;
             color: #fff;
             font-size: 17px;
             font-weight: 500;
-            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
             padding: 10px 20px;
         }
 
+        .container-review .btn-review-delete,
+        .container-review .btn-review-cancel{
+            background-color: transparent;
+            color: #000;
+            border: none;
+            font-weight: 700;
+        }
 
-        .des-input .btn-review btn-submit-review:hover,
+        .des-input .btn-review btn-review-next:hover,
+        .container-review .btn-review-back:hover,
+        .container-review .btn-submit-save:hover,
         .container-review .btn-review-edit:hover,
-        .container-review .btn-review-save:hover{
-            background: #1b1b1b;
+        .container-review .btn-submit-delete:hover{
+            background-color: #1b1b1b;
+        }
+
+        .has-reviewed {
+            /*display: block;*/
+            align-items: flex-start;
+            padding: 0 30px;
+        }
+        .review-title {
+            text-align: left;
+            width: 100%;
+        }
+        .btn-has-reviewed {
+            width: 100%;
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        .edit-review,
+        .delete-review {
+            display: none;
         }
 
     </style>
@@ -478,12 +511,25 @@
             });
         });
 
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+
         var modal = document.querySelector(".modal-review");
         var trigger = document.querySelector(".trigger");
         var closeButton = document.querySelector(".close-review-button");
 
+        const editReview = document.querySelector(".edit-review");
+        const deleteReview = document.querySelector(".delete-review");
+        const reviewed = document.querySelector(".has-reviewed");
+        const title = document.querySelector(".review-title")
+
         function toggleModal() {
             modal.classList.toggle("show-modal-review");
+            reviewed.style.display = "block";
+            editReview.style.display = "none";
+            deleteReview.style.display = "none";
+            title.style.display = "block";
         }
 
         function windowOnClick(event) {
@@ -496,24 +542,67 @@
         closeButton.addEventListener("click", toggleModal);
         window.addEventListener("click", windowOnClick);
 
-        const btn = document.querySelector(".btn-submit-review");
+        const nextBtn = document.querySelector(".btn-review-next");
         const post = document.querySelector(".post");
         const widget = document.querySelector(".star-widget");
-        const editBtn = document.querySelector(".btn-review-edit");
-        const deleteBtn = document.querySelector(".btn-review-save");
-        const title = document.querySelector(".review-title")
-        btn.onclick = ()=>{
+        const backBtn = document.querySelector(".btn-review-back");
+        const saveBtn = document.querySelector(".btn-submit-save");
+        nextBtn.onclick = ()=>{
             widget.style.display = "none";
             post.style.display = "block";
             title.style.display = "none";
-            editBtn.onclick = ()=>{
+            backBtn.onclick = ()=>{
+                title.style.display = "block";
                 widget.style.display = "block";
                 post.style.display = "none";
             }
-            deleteBtn.onclick = ()=>{
+            saveBtn.onclick = ()=>{
                 modal.style.display = "none";
             }
             return false;
+        }
+
+
+        const editBtn = document.querySelector(".btn-review-edit");
+        const deleteBtn = document.querySelector(".btn-review-delete")
+        const deleteSubmitBtn = document.querySelector(".btn-submit-delete");
+        const editTitle = document.querySelector(".edit-review-title")
+        const deleteTitle = document.querySelector(".delete-review-title")
+        const cancelBtn = document.querySelector(".btn-review-cancel");
+
+
+        editBtn.onclick = () => {
+            editReview.style.display = "block";
+            deleteReview.style.display = "none";
+            reviewed.style.display = "none";
+            nextBtn.onclick = ()=>{
+                widget.style.display = "none";
+                post.style.display = "block";
+                editTitle.style.display = "none";
+                backBtn.onclick = ()=>{
+                    editTitle.style.display = "block";
+                    widget.style.display = "block";
+                    post.style.display = "none";
+                }
+                saveBtn.onclick = ()=>{
+                    modal.style.display = "none";
+                }
+                return false;
+            }
+        }
+
+        deleteBtn.onclick = () => {
+            deleteReview.style.display = "block";
+            reviewed.style.display = "none";
+
+            cancelBtn.onclick = ()=>{
+                reviewed.style.display = "block";
+                deleteReview.style.display = "none";
+            }
+
+            deleteSubmitBtn.onclick = () => {
+                modal.style.display = "none";
+            }
         }
     </script>
 {{/section}}
@@ -532,10 +621,17 @@
         </div>
 
         <div class="col-lg-4 text-right">
-            <a class="trigger text-primary" href="#">
-                <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
-                Leave a rating
-            </a>
+            {{#if this.checkStudentReview}}
+                <a class="trigger text-primary" href="#">
+                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                    Leave a rating
+                </a>
+            {{else}}
+                <a class="trigger text-primary" href="#">
+                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                    Edit your rating
+                </a>
+            {{/if}}
         </div>
     </div>
 </div>
@@ -1056,47 +1152,119 @@
         </span>
     </button>
 </div>
-<div class="modal-review">
-    <div class="modal-review-content">
-        <div class="close-review-button">&#10005;</div>
-        <form method="post" action="">
-            <div class="container-review">
-                <div class="review-title text-center">
-                    <h2 class="font-weight-bold">How would you rate this course?</h2>
-                    <p class="font-weight-bold">Select Rating</p>
-                </div>
-                <div class="post">
-                    <div class="text">Thanks for rating us!</div>
-                    <div class="btn-review">
-                        <button class="btn-review-edit" type="button">Edit</button>
-                        <button class="btn-review-save" type="submit">Save and exit</button>
+{{#if this.checkStudentReview}}
+    <div class="modal-review">
+        <div class="modal-review-content">
+            <div class="close-review-button">&#10005;</div>
+            <form method="post" action="">
+                <div class="container-review">
+                    <div class="review-title text-center">
+                        <h2 class="font-weight-bold">How would you rate this course?</h2>
+                        <p class="font-weight-bold">Select Rating</p>
                     </div>
-                </div>
-                <div class="star-widget">
-                    <input type="radio" name="Rate" value="5" id="rate-5">
-                    <label for="rate-5" class="far fa-star" style="margin-right: 120px"></label>
-                    <input type="radio" name="Rate" value="4" id="rate-4">
-                    <label for="rate-4" class="far fa-star"></label>
-                    <input type="radio" name="Rate" value="3" id="rate-3">
-                    <label for="rate-3" class="far fa-star"></label>
-                    <input type="radio" name="Rate" value="2" id="rate-2">
-                    <label for="rate-2" class="far fa-star"></label>
-                    <input type="radio" name="Rate" value="1" id="rate-1">
-                    <label for="rate-1" class="far fa-star" style="margin-left: 120px"></label>
-                    <div class="des-input">
-                        <header></header>
-                        <div class="textarea">
-                            <textarea cols="64" rows="5" name="Comment" placeholder="Tell us about your own personal experience taking this course. Was it a good match for you?"></textarea>
-                        </div>
+                    <div class="post">
+                        <div class="text">Thanks for rating us!</div>
                         <div class="btn-review">
-                            <button class="btn-submit-review" type="button">Post</button>
+                            <button class="btn-review-back" type="button">Back</button>
+                            <button class="btn-submit-save" type="submit">Save and exit</button>
                         </div>
                     </div>
+                    <div class="star-widget">
+                        <input type="radio" name="Rate" value="5" id="rate-5">
+                        <label for="rate-5" class="far fa-star" style="margin-right: 120px"></label>
+                        <input type="radio" name="Rate" value="4" id="rate-4">
+                        <label for="rate-4" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="3" id="rate-3">
+                        <label for="rate-3" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="2" id="rate-2">
+                        <label for="rate-2" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="1" id="rate-1">
+                        <label for="rate-1" class="far fa-star" style="margin-left: 120px"></label>
+                        <div class="des-input">
+                            <header></header>
+                            <div class="textarea">
+                                <textarea cols="64" rows="5" name="Comment" placeholder="Tell us about your own personal experience taking this course. Was it a good match for you?"></textarea>
+                            </div>
+                            <div class="btn-review">
+                                <button class="btn-review-next" type="button">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{{else}}
+    <div class="modal-review">
+        <div class="modal-review-content">
+            <div class="close-review-button">&#10005;</div>
+            <div class="container-review has-reviewed">
+                <div class="review-title">
+                    <h2 class="font-weight-bold mb-3">Your Review</h2>
+                    <div class="mb-2">
+                        <span class="stars" data-rating="{{this.userRating.Rate}}" data-num-stars="5" ></span>
+                    </div>
+                    <p>{{this.userRating.Comment}}</p>
+                </div>
+                <div class="btn-has-reviewed">
+                    <button class="btn-review-delete" type="button">Delete</button>
+                    <button class="btn-review-edit" type="button">Edit Review</button>
                 </div>
             </div>
-        </form>
+            <form method="post" action="" class="edit-review">
+                <div class="container-review">
+                    <div class="edit-review-title text-center">
+                        <h2 class="font-weight-bold">How would you rate this course?</h2>
+                        <p class="font-weight-bold">Select Rating</p>
+                    </div>
+                    <div class="post">
+                        <div class="text">Thanks for rating us!</div>
+                        <div class="btn-review">
+                            <button class="btn-review-back" type="button">Back</button>
+                            <button class="btn-submit-save" type="submit" name="submitBtn" value="edit">Save and exit</button>
+                        </div>
+                    </div>
+                    <div class="star-widget">
+                        <input type="radio" name="Rate" value="5" id="rate-5">
+                        <label for="rate-5" class="far fa-star" style="margin-right: 120px"></label>
+                        <input type="radio" name="Rate" value="4" id="rate-4">
+                        <label for="rate-4" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="3" id="rate-3">
+                        <label for="rate-3" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="2" id="rate-2">
+                        <label for="rate-2" class="far fa-star"></label>
+                        <input type="radio" name="Rate" value="1" id="rate-1">
+                        <label for="rate-1" class="far fa-star" style="margin-left: 120px"></label>
+                        <div class="des-input">
+                            <header></header>
+                            <div class="textarea">
+                                <textarea cols="64" rows="5" name="Comment" placeholder="Tell us about your own personal experience taking this course. Was it a good match for you?"></textarea>
+                            </div>
+                            <div class="btn-review">
+                                <button class="btn-review-next" type="button">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form method="post" action="" class="delete-review">
+                <div class="container-review">
+                    <div class="delete-review-title text-center">
+                        <h2 class="font-weight-bold">Delete your review?</h2>
+                        <p class="font-weight-bold">Are you sure you want to delete your review?</p>
+                    </div>
+                    <div class="btn-review " style="margin-right: 20px">
+                        <button class="btn-review-cancel" type="button">Cancel</button>
+                        <button class="btn-submit-delete" type="submit" name="submitBtn" value="delete">Yes, Delete My Review</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
-</div>
+{{/if}}
+
+
 
 
 

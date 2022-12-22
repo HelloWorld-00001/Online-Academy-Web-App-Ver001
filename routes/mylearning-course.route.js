@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/:id', async function (req, res) {
     let makhoahoc = req.params.id || 0;
-    // console.log(makhoahoc)
+    const mahocvien = 3;
     const course = await courseService.findDetailCourseByID(makhoahoc);
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
 
@@ -22,11 +22,6 @@ router.get('/:id', async function (req, res) {
     const fiveStarRate = await mylearningService.countStarRate(makhoahoc,5);
 
     const amountStudentRating = await mylearningService.countStudentRating(makhoahoc);
-    // const sumRating = oneStarRate + twoStarRate + threeStarRate + fourStarRate + fiveStarRate;
-    // const totalRate = await  mylearningService.sumStudentRating(makhoahoc);
-    //
-    // const RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
-    // const ret = await mylearningService.addRating(makhoahoc, RateTB, amountStudentRating);
 
     const oneStarRatePer = Math.round(oneStarRate / amountStudentRating * 100)
     const twoStarRatePer = Math.round(twoStarRate / amountStudentRating * 100)
@@ -36,33 +31,46 @@ router.get('/:id', async function (req, res) {
 
     const starRatingList  = {oneStarRatePer, twoStarRatePer, threeStarRatePer, fourStarRatePer, fiveStarRatePer};
     const firstVideo = courseVideoList[0].Link;
+    const userRating = await mylearningService.getUserRating(makhoahoc, mahocvien);
+    const checkStudentReview = userRating ===  null ? true : false;
+    console.log(1, checkStudentReview);
     res.render('vwMylearning/mylearning', {
         courseVideoList,
         course,
         firstVideo,
         starRatingList,
         inforStudentsOfTeacher,
+        userRating,
+        checkStudentReview,
     });
 });
 
 router.post('/:id', async function (req, res) {
     let makhoahoc1 = req.params.id || 0;
-    const course = await courseService.findDetailCourseByID(makhoahoc1);
-    const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
-
-    if (course === null) {
-        return res.redirect('/');
-    }
+    const mahocvien = 3;
 
     const result = req.body;
     const data = {
-        'MaHocVien': 2,
+        'MaHocVien': mahocvien,
         'MaKhoaHoc': makhoahoc1,
         'Rate': result.Rate,
         'Comment': result.Comment,
     }
 
-    const ret1 = await mylearningService.addBangDanhGia(data);
+    const userRating = await mylearningService.getUserRating(makhoahoc1, mahocvien)
+    let checkStudentReview = userRating ===  null ? true : false;
+
+    if (checkStudentReview) {
+        const ret1 = await mylearningService.addBangDanhGia(data);
+        checkStudentReview = false;
+    }
+    else {
+        if(result.submitBtn === 'delete') {
+            const ret1 = await mylearningService.delBangDanhGia(makhoahoc1, mahocvien);
+        } else {
+            const ret1 = await mylearningService.updateBangDanhGia(data);
+        }
+    }
 
     const courseVideoList = await courseService.findCourseVideoList(makhoahoc1);
     const oneStarRate = await mylearningService.countStarRate(makhoahoc1,1);
@@ -84,12 +92,11 @@ router.post('/:id', async function (req, res) {
 
     const sumRating = oneStarRate + twoStarRate + threeStarRate + fourStarRate + fiveStarRate;
     const totalRate = await  mylearningService.sumStudentRating(makhoahoc1);
-    console.log({totalRate, amountStudentRating})
     const RateTB = Math.round(totalRate / amountStudentRating *10) / 10  || 0;
 
-
-    console.log({RateTB, amountStudentRating})
     const ret2 = await mylearningService.updateKhoaHoc(makhoahoc1, RateTB, amountStudentRating);
+    const course = await courseService.findDetailCourseByID(makhoahoc1);
+    const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
 
     res.render('vwMylearning/mylearning', {
         courseVideoList,
@@ -97,6 +104,8 @@ router.post('/:id', async function (req, res) {
         firstVideo,
         starRatingList,
         inforStudentsOfTeacher,
+        userRating,
+        checkStudentReview,
     });
 });
 
