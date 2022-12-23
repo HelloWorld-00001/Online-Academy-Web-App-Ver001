@@ -42,6 +42,7 @@ router.post('/profile/:id', function (req, res){
         }
     });
 
+
     const upload = multer({ storage: storage });
     upload.array('Avatar', 5)(req, res, async function (err) {
         console.log(req.body);
