@@ -41,4 +41,50 @@ export default {
             .select('taikhoan.Avatar').where('taikhoan.MaTaiKhoan', accountId)
         return list[0];
     },
+
+    async findIdTeacher(Username) {
+        const list = await db('taikhoan')
+        .select('MaTaiKhoan'
+        ).where('Username', Username)
+        //.limit(3);
+        return list;
+    },
+
+
+    addAccount(entity) {
+        return db('taikhoan').insert({
+            Username: entity.Username,
+            Password: entity.Password,
+            Name: entity.Name,
+            Email: entity.Email,
+            DOB: '2002-08-12',
+            LoaiTaiKhoan: entity.LoaiTaiKhoan,
+            Avatar: entity.Avatar,
+            SDT: entity.SDT,
+            DiaChi: entity.DiaChi,
+        });
+    },
+
+    add(entity, MaTk) {
+        return db('giaovien').insert({
+            MaTaiKhoan: MaTk.MaTaiKhoan,
+            MoTa: entity.MoTa,
+            SLKhoaHoc: entity.SLKhoaHoc
+        });
+     },
+ 
+    delTeacher(idtk) {
+         return  db('giaovien').where('MaTaiKhoan', idtk).del();
+    },
+    delAccount(id) {
+        return  db('taikhoan').where('MaTaiKhoan', id).del();
+   },
+    patch(entity) {
+         return  db('categories').where('CatID', entity.CatID).update('CatName', entity.CatName);
+ 
+         //or
+         //const id = entity.CatID;
+         //delete entity.CatID;
+         //return  db('categories').where('CatID', id).update(entity;
+     },
 }
