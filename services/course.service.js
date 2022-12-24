@@ -122,6 +122,7 @@ export default {
                             .select(
                                 'khoahoc.*',
                                 'taikhoan.Username',
+                                'taikhoan.Avatar',
                                 'linhvuc.TenLinhVuc'
                             )
                             .where('LinhVuc', field)
@@ -287,6 +288,21 @@ export default {
         amountCourse[0]['ratings'] = Math.round(amountCourse[0]['ratings'] / amountCourse[0]['amountCourses'] *10) / 10
         return amountCourse[0];
     },
+
+    async getStudentReviewList(idCourse) {
+        const userReview = await db('bangdanhgia')
+            .select('bangdanhgia.Rate', 'bangdanhgia.Comment', 'taikhoan.Avatar', 'taikhoan.Name')
+            .innerJoin('hocvien', {'bangdanhgia.MaHocVien': 'hocvien.MaHocVien'})
+            .innerJoin('taikhoan', {'hocvien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .where('bangdanhgia.MaKhoaHoc', idCourse)
+            // .limit(limit)
+        if(userReview.length === 0) {
+            return null;
+        }
+        console.log(userReview)
+        return userReview;
+    },
+
 
     async courseFullTextSearch(name) {
         const sql = `SELECT *

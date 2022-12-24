@@ -1,12 +1,47 @@
 import mylearningService from "../services/myleaning.service.js";
-import courseService from "../services/course.service.js";
+import courseService from '../services/course.service.js';
+
 import express from "express";
 const router = express.Router();
 
+router.get('/', async function (req, res) {
+    const idStudent = 1;
+    const limit = 6;
+    const page = req.query.page || 1;
+    const offset = (page - 1) * limit;
+
+    const total = await mylearningService.countStudentCourseAll(idStudent);
+    let nPages = Math.ceil(total / limit);
+
+    const pageNumbers = [];
+    for(let i = 1; i <= nPages; i++) {
+        pageNumbers.push({
+            value: i,
+            isCurrent: i === +page,
+        })
+    }
+    const nextPageNumber = {
+        value: +page + 1,
+        isNextPage:   +page + 1 <= +nPages,
+    }
+    const previousPageNumber = {
+        value: +page - 1,
+        isPreviousPage:   +page - 1 > 0,
+    }
+    // const list = await mylearningService.findCourseList(limit, offset)
+    const courses = await mylearningService.findPageStudentCourseAll(idStudent,limit, offset);
+    res.render('vwMylearning/index' , {
+        courses,
+        empty: courses.length === 0,
+        pageNumbers,
+        nextPageNumber,
+        previousPageNumber,
+    });
+});
 
 router.get('/:id', async function (req, res) {
     let makhoahoc = req.params.id || 0;
-    const mahocvien = 3;
+    const mahocvien = 10;
     const course = await courseService.findDetailCourseByID(makhoahoc);
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
 
@@ -33,6 +68,10 @@ router.get('/:id', async function (req, res) {
     const firstVideo = courseVideoList[0].Link;
     const userRating = await mylearningService.getUserRating(makhoahoc, mahocvien);
     const checkStudentReview = userRating ===  null ? true : false;
+
+    let limit = 2;
+    const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
+
     res.render('vwMylearning/mylearning', {
         courseVideoList,
         course,
@@ -41,12 +80,13 @@ router.get('/:id', async function (req, res) {
         inforStudentsOfTeacher,
         userRating,
         checkStudentReview,
+        studentReviewList,
     });
 });
 
 router.post('/:id', async function (req, res) {
     let makhoahoc1 = req.params.id || 0;
-    const mahocvien = 3;
+    const mahocvien = 10;
 
     const result = req.body;
     const data = {
