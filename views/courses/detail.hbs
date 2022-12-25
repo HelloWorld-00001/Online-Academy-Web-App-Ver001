@@ -288,10 +288,23 @@
                         {{/if}}
                     </div>
                     <div>
-                        <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a>
+                        {{#isStudent authUser.LoaiTaiKhoan}}
+                            {{#if isCoursesRegister}}
+                                {{!-- <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a> --}}
+                                <a>hahaha</a>
+                            {{else}}
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a>
+                            {{/if}}
+                        {{else}}
+                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Add to cart</a>
+                        {{/isStudent}}
                     </div>
                     <div class="mt-3">
-                        <a class="btn btn-dark w-100 pt-3 pb-3" href="#" role="button">Buy now</a>
+                        {{#if auth}}
+                            <a class="btn btn-dark w-100 pt-3 pb-3" href="#" role="button">Buy now</a>
+                        {{else}}
+                            <a class="btn btn-dark w-100 pt-3 pb-3" href="#" role="button">Buy now</a>
+                        {{/if}}
                     </div>
                     <div class="mt-5">
                         <p class="font-weight-bold">This course includes:</p>

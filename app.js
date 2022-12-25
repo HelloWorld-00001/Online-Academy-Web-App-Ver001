@@ -84,6 +84,13 @@ app.engine('hbs', engine({
             if (x >= y)
                 return options.fn(this);
             return options.inverse(this);
+        },
+        
+        isStudent(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Học Viên") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
         }
     }
 }));

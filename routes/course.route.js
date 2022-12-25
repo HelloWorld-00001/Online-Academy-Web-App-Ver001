@@ -1,5 +1,6 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
+import studentService from '../services/student.service.js';
 const router = express.Router();
 
 router.post('/search', async function (req, res) {
@@ -81,7 +82,17 @@ router.get('/detail/:id', async function (req, res) {
         }
     }
 
+    var isCoursesRegister = false;
+    if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
+        const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+        const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+        if(courseRegistered !== null)
+            isCoursesRegister = true;
+
+    }
+
     res.render('courses/detail', {
+        isCoursesRegister,
         course,
         courseVideoList,
         isVideoListEmpty: courseVideoList.length === 0,

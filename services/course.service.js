@@ -312,5 +312,14 @@ export default {
         AGAINST('` + name + `');`
         const rel = await db.raw(sql);
         return rel;
-    }
+    },
+
+    async isCourseRegister(maKhoaHoc, maHocVien) {
+        const list = await db('DanhSachDangKi')
+        .where('MaKhoaHoc', maKhoaHoc).andWhere('MaHocVien', maHocVien);
+        
+        if(list.length === 0) 
+            return null;
+        return list[0];
+    },
 }
