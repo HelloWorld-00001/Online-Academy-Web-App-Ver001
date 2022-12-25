@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <title>DO AN</title>
 </head>
 <body>
@@ -35,7 +33,7 @@
                 <label for="txtUsername">Username
                     <font class="inval-text" id="invalUsername"> * </font>
                 </label>
-                <input name="username" type="text" id="txtUsername" class="form-control" autofocus placeholder= "abc">      
+                <input name="username" type="text" id="txtUsername" class="form-control" autofocus placeholder= "leviCool">      
               </div>
               <div class="input-box">
                 <i class="fa fa-key" aria-hidden="true"></i>
@@ -43,6 +41,7 @@
                     <font class="inval-text" id="invalPassword"> * </font>
                 </label>
                 <input name="password" type="password" class="form-control" id="txtPassword" placeholder="●●●●●●●●●●">
+                <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
               </div>
               <div class="column">
                 <div class="input-box">
@@ -50,14 +49,14 @@
                   <label for="txtName">Fullname
                       <font class="inval-text" id="invalName"> * </font>
                   </label>
-                  <input name="name" type="text" class="form-control" id="txtName" placeholder="Nguyễn Văn A">
+                  <input name="name" type="text" class="form-control" id="txtName" placeholder="Levi Ackerman">
                 </div>
                 <div class="input-box">
                   <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
-                  <label for="txtDOB">Date Of Birth
+                  <label for="txtDOB">Birthday
                       <font class="inval-text" id="invalDOB"> * </font>
                   </label>
-                  <input name="dob" input type="date" class="form-control" id="txtDOB">
+                  <input name="dob" type="text" class="form-control" id="txtDOB">
                 </div>
               </div>
               <div class="input-box">
@@ -81,10 +80,10 @@
       </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script>
       function checkEmpty(property) {
         if(property.length === 0) {
@@ -94,7 +93,7 @@
       }
 
       function checkEmail(email) {
-        var filter = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        var filter = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if(email.length === 0) {
             return false;
         }
@@ -152,34 +151,64 @@
         else 
             document.querySelector('#invalEmail').style.visibility = 'hidden';
 
-        $.getJSON(`/account/is-available-username?user=${username}`, function (data) {
-          if (data === false) {
-            document.getElementById("invalUsername").innerHTML = " * your username is already exists";
-            document.querySelector('#invalUsername').style.visibility = 'visible';
-            check = false;
-          }
-        });
-
-        /* check Email trung
-        $.getJSON(`/account/is-available-email?user=${email}`, function (data) {
-          if (data === false) {
-            document.getElementById("invalEmail").innerHTML = " * your email is already exists";
-            document.querySelector('#invalEmail').style.visibility = 'visible';
-            check = false;
-          }
-        }); */
-
         if(document.getElementById("myCheck").checked === false) {
           check = false;
           alert('Accept my condition to continue');
         }
 
-        if(check === true) {   
-          $('#frmRegister').off('submit').submit();
-        }
+        //Check sự tồn tại
+        $.getJSON(`/account/is-available?username=${username}&email=${email}`, function (data) {
+          if(data === 'EmailNotExist') {
+              document.getElementById("invalEmail").innerHTML = " * Email does not exist";
+              document.querySelector('#invalEmail').style.visibility = 'visible';
+              check = false;
+          }
+
+          if(data === 'FailTwo') {
+            document.getElementById("invalUsername").innerHTML = " * your username is already exists";
+            document.querySelector('#invalUsername').style.visibility = 'visible';
+            document.getElementById("invalEmail").innerHTML = " * your email is already exists";
+            document.querySelector('#invalEmail').style.visibility = 'visible';
+            check = false;
+          }
+
+          if (data === 'FailUsername') {
+            document.getElementById("invalUsername").innerHTML = " * your username is already exists";
+            document.querySelector('#invalUsername').style.visibility = 'visible';
+            check = false;
+          }
+
+          /* check email trung
+          if (data === 'FailEmail') {
+              document.getElementById("invalEmail").innerHTML = " * your email is already exists";
+              document.querySelector('#invalEmail').style.visibility = 'visible';
+              check = false;
+          }
+          */
+
+          if(check === true) {   
+            $('#frmRegister').off('submit').submit();
+          }
+        });
+      });
+
+      $('#txtDOB').datetimepicker({
+        timepicker:false,
+        format:'d/m/Y',
+        mask: true
       });
 
       $('#txtUsername').select();
+
+      $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+          input.attr("type", "text");
+        } else {
+          input.attr("type", "password");
+        }
+      });
     </script>
 </body>
 </html>
