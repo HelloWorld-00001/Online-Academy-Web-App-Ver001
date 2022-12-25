@@ -4,6 +4,7 @@ import fbStrategy from 'passport-facebook';
 import ggStrategy from 'passport-google-oauth2';
 import db from '../utils/db.js';
 import accountService from '../services/account.service.js';
+import studentService from '../services/student.service.js';
 
 const router = express.Router();
 
@@ -49,17 +50,23 @@ router.get('/profile/facebook', async function (req, res) {
         SDT: null,
         DiaChi: null
     }
-    const check = await accountService.findByUsername(req.user.id);
 
-    if(check === null)
-        db('TaiKhoan').insert(NewUser);
+    var user = await accountService.findByUsername(req.user.id);
+    if(user === null) {
+      await accountService.add(NewUser);
+    }
+    user = await accountService.findByUsername(req.user.id);
+
+    const NewStudent = {
+      MaTaiKhoan: user.MaTaiKhoan,
+      SLKhoaHoc: 0
+    }
+    await studentService.add(NewStudent);
     
     req.session.auth = true;
-    req.session.authUser = NewUser;
+    req.session.authUser = user;
     res.locals.auth = true;
-    res.locals.authUser = NewUser;
-
-    res.redirect('/account/profile');
+    res.locals.authUser = user;
 });
 
 const GoogleStrategy = ggStrategy.Strategy;
@@ -97,14 +104,22 @@ router.get('/profile/google', async function (req, res) {
         SDT: null,
         DiaChi: null
     }
-    const check = await accountService.findByUsername(req.user.id);
-    if(check === null)
-        await db('TaiKhoan').insert(NewUser);
-    
+    var user = await accountService.findByUsername(req.user.id);
+    if(user === null) {
+      await accountService.add(NewUser);
+    }
+    user = await accountService.findByUsername(req.user.id);
+
+    const NewStudent = {
+      MaTaiKhoan: user.MaTaiKhoan,
+      SLKhoaHoc: 0
+    }
+    await studentService.add(NewStudent);
+
     req.session.auth = true;
-    req.session.authUser = NewUser;
+    req.session.authUser = user;
     res.locals.auth = true;
-    res.locals.authUser = NewUser;
+    res.locals.authUser = user;
 
     res.redirect('/account/profile');
 });

@@ -83,12 +83,15 @@ router.get('/detail/:id', async function (req, res) {
     }
 
     var isCoursesRegister = false;
-    if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
-        const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
-        const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
-        if(courseRegistered !== null)
-            isCoursesRegister = true;
-
+    
+    if(req.session.auth === true){
+        if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
+            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+            if(courseRegistered !== null)
+                isCoursesRegister = true;
+    
+        }
     }
 
     res.render('courses/detail', {

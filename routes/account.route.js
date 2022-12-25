@@ -4,6 +4,7 @@ import moment from 'moment';
 import randomInteger from 'random-int';
 
 import accountService from '../services/account.service.js';
+import studentService from '../services/student.service.js';
 import mailer from '../services/mail.service.js';
 
 const router = express.Router();
@@ -75,8 +76,14 @@ router.get('/sendOTP', regis, async function (req, res) {
 
 router.post('/sendOTP', async function (req, res) {
   const newUser = req.session.temp;  
-  console.log(newUser);
   await accountService.add(newUser);
+
+  const user = await accountService.findByUsername(newUser.Username);
+  const NewStudent = {
+    MaTaiKhoan: user.MaTaiKhoan,
+    SLKhoaHoc: 0
+  }
+  await studentService.add(NewStudent);
 
   req.session.regis = false;
   req.session.temp = null;

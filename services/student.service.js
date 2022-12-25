@@ -6,5 +6,9 @@ export default {
         if(student.length === 0) 
             return null;
         return student[0];
-    }
+    },
+
+    add(student) {
+        return db('HocVien').insert(student);
+    },
 }
