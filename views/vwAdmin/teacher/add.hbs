@@ -1,167 +1,381 @@
 {{#section 'css'}}
-<style>
-    .card-body {
-        margin: 0;
-        padding-top: 40px;
-        color: #2e323c;
-        background: #f5f6fa;
-        position: relative;
-        height: 100%;
-    }
+    <style>
+        /*CSS FOR INPUT COURSE*/
+        .btn_round {
+            width: 35px;
+            height: 35px;
+            display: inline-block;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .btn_round:hover {
+            color: #fff;
+            background: #6b4acc;
+            border: 1px solid #6b4acc;
+        }
 
-    .account-settings .user-profile {
-        margin: 0 0 1rem 0;
-        padding-bottom: 1rem;
-        text-align: center;
-    }
+        .btn_content_outer {
+            display: inline-block;
+            width: 85%;
+        }
+        .close_c_btn {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            right: 10px;
+            top: 0px;
+            line-height: 30px;
+            border-radius: 50%;
+            background: #ededed;
+            border: 1px solid #ccc;
+            color: #ff5c5c;
+            text-align: center;
+            cursor: pointer;
+        }
 
-    .account-settings .user-profile .user-avatar {
-        margin: 0 0 1rem 0;
-    }
+        .add_icon {
+            padding: 10px;
+            border: 1px dashed #aaa;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .add_group_btn {
+            display: flex;
+        }
+        .add_group_btn i {
+            font-size: 32px;
+            display: inline-block;
+            margin-right: 10px;
+        }
 
-    .account-settings .user-profile .user-avatar img {
-        width: 90px;
-        height: 90px;
-        -webkit-border-radius: 100px;
-        -moz-border-radius: 100px;
-        border-radius: 100px;
-    }
+        .add_group_btn span {
+            margin-top: 8px;
+        }
+        .add_group_btn,
+        .clone_sub_task {
+            cursor: pointer;
+        }
 
-    .account-settings .user-profile h5.user-name {
-        margin: 0 0 0.5rem 0;
-    }
+        .sub_task_append_area .custom_square {
+            cursor: move;
+        }
 
-    .account-settings .user-profile h6.user-email {
-        margin: 0;
-        font-size: 0.8rem;
-        font-weight: 400;
-        color: #9fa8b9;
-    }
+        .del_btn_d {
+            display: inline-block;
+            position: absolute;
+            right: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
+    <style>
+        .ques {
+            color: darkslateblue;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 560px;
+            height: 30px;
+        }
 
-    .account-settings .about {
-        margin: 2rem 0 0 0;
-        text-align: center;
-    }
+        .switch input {display:none;}
 
-    .account-settings .about h5 {
-        margin: 0 0 15px 0;
-        color: #007ae1;
-    }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #f2f2f2;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-    .account-settings .about p {
-        font-size: 0.825rem;
-    }
+        .slider:before {
+            position: absolute;
+            z-index: 2;
+            content: "";
+            height: 32px;
+            width: 32px;
+            left: 0px;
+            bottom: 0px;
+            background-color: darkslategrey;
+            -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+            -webkit-transition: .4s;
+            transition: all 0.4s ease-in-out;
+        }
+        .slider:after {
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            content: "Completed";
+            font-size: 15px;
+            text-align: left !important;
+            line-height: 30px;
+            padding-left: 0;
+            width: 600px;
+            color: #fff;
+            height: 100px;
+            border-radius: 100px;
+            background-color: #ff6418;
+            -webkit-transform: translateX(-460px);
+            -ms-transform: translateX(-460px);
+            transform: translateX(-460px);
+            transition: all 0.4s ease-in-out;
+        }
 
-    .form-control {
-        border: 1px solid #cfd1d8;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        border-radius: 2px;
-        font-size: .825rem;
-        background: #ffffff;
-        color: #2e323c;
-    }
+        input:checked + .slider:after {
+            -webkit-transform: translateX(60px);
+            -ms-transform: translateX(60px);
+            transform: translateX(60px);
+            /*width: 235px;*/
+            padding-left: 50px;
+        }
 
-    .card {
-        background: #ffffff;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        border: 0;
-        margin-bottom: 1rem;
-    }
-</style>
+        input:checked + .slider:before {
+            background-color: darkslategrey;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(530px);
+            -ms-transform: translateX(530px);
+            transform: translateX(530px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 100px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .absolute-no {
+            position: absolute;
+            left: 0;
+            color: darkslategrey;
+            text-align: right !important;
+            font-size: 15px;
+            width: calc(100% - 25px);
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 {{/section}}
 
-<form method="post" id="frmInputCourse" class="container-fluid py-10 mt-3">
-<section class="pcoded-main-container">
-    <div class="pcoded-wrapper">
-        <div class="pcoded-content">
-            <div class="pcoded-inner-content m-3">
-                <div class="main-body mt-3">
-                    <div class="page-wrapper">
-                        <div class="row mt-3">
-                        <div class="col-xl-12 ml-3">
-                            <div class="card">
-            
-                                <div class="card-header mt-3">
-                                    <h6 class="mb-2 text-primary">Enter information of teacher</h6>
-                                </div>
-                                <div class="card-body table-border-style">
-                                    <div class="row">
-                                                <div class="form-group col-6">
-                                                    <label for="txtName">Full Name</label>
-                                                    <input name="name" type="text" class="form-control" id="txtName"
-                                                        value="{{this.teacher.Name}}">
-                                                </div>
-                                                <div class="form-group col-6">
-                                                    <label for="txtEmail">Email</label>
-                                                    <input name="email" type="email" class="form-control" id="txtEmail"
-                                                        value="{{this.teacher.Email}}">
-                                                </div>
-                                     </div>
-                                </div>
-                                            <div class="card-body table-border-style">
-                                                <div class="row">
-                                                <div class="form-group col-6">
-                                                    <label for="txtPhone">Phone</label>
-                                                    <input name="phone" type="text" class="form-control" id="txtPhone"
-                                                        value="{{this.teacher.SDT}}">
-                                                </div>
-                                                <div class="form-group col-6">
-                                                    <label for="txtWebsite">Website URL</label>
-                                                    <input name="website" type="url" class="form-control"
-                                                        id="txtWebsite" value="Website url">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h6 class="mt-3 mb-2 text-primary ml-4">Address</h6>
-                                            </div>
-                                            <div class="card-body table-border-style">
-                                                <div class="form-group">
-                                                    <label for="txtStreet">Street</label>
-                                                    <input name="street" type="name" class="form-control" id="txtStreet"
-                                                        value="227 Nguyen Van Cu">
-                                                </div>
-                                            </div>
-                                            <div class="card-body table-border-style">
-                                                <div class="form-group">
-                                                    <label for="txtCity">City</label>
-                                                    <input name="city" type="name" class="form-control" id="txtCity"
-                                                        value="Ho Chi Minh City">
-                                                </div>
-                                            </div>
-                                            <div class="card-body table-border-style">
-                                                <div class="form-group">
-                                                    <label for="sTate">State</label>
-                                                    <input type="text" class="form-control" id="sTate"
-                                                        value="Enter State">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <div class="text-right">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        onclick="location.href='/teacher'">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                                        Add
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{#section 'js'}}
+    <script>
+        ///======Clone method
+        $(document).ready(function () {
+            $("body").on("click", ".add_node_btn_frm_field", function (e) {
+                var index = $(e.target).closest(".form_field_outer").find(".form_field_outer_row").length + 1;
+                var cloned_el = $(e.target).closest(".form_field_outer_row").clone(true);
+
+                $(e.target).closest(".form_field_outer").last().append(cloned_el).find(".remove_node_btn_frm_field:not(:first)").prop("disabled", false);
+
+                $(e.target).closest(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", true);
+                //change id
+                $(e.target)
+                        .closest(".form_field_outer")
+                        .find(".form_field_outer_row")
+                        .last()
+                        .find("input[type='text']")
+                        .attr("id", "topic_no_" + index);
+
+                $(e.target)
+                        .closest(".form_field_outer")
+                        .find(".form_field_outer_row")
+                        .last()
+                        .find("select")
+                        .attr("id", "url_no_" + index);
+
+                console.log(cloned_el);
+                //count++;
+            });
+        });
+
+        $(document).ready(function(){ $("body").on("click",".add_new_frm_field_btn", function (){ console.log("clicked"); var index = $(".form_field_outer").find(".form_field_outer_row").length + 1; $(".form_field_outer").append(`
+            <div class="row form_field_outer_row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_${index}" placeholder="Enter topic" />
+              </div>
+              <div class="form-group col-md-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon3">URL:</span>
                         </div>
+                            <input name= "url_no[]" type="text" class="form-control" id="url_no_${index}" aria-describedby="basic-addon3">
                     </div>
-                    </div>
-                </div>
+              </div>
+              <div class="form-group col-md-2 add_del_btn_outer">
+                <button class="btn_round add_node_btn_frm_field" title="Copy or clone this row">
+                  <i class="fas fa-copy"></i>
+                </button>
+
+                <button class="btn_round remove_node_btn_frm_field" disabled>
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
             </div>
+        `); $(".form_field_outer").find(".remove_node_btn_frm_field:not(:first)").prop("disabled", false); $(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", true); }); });
+
+        $(document).ready(function () {
+            //===== delete the form fieed row
+            $("body").on("click", ".remove_node_btn_frm_field", function () {
+                $(this).closest(".form_field_outer_row").remove();
+                console.log("success");
+            });
+        });
+    </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+                .create(document.querySelector('#MoTaChiTiet'))
+                .catch(error => {
+                    console.error(error)
+                });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $('#txtDateStart').datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y',
+            mask: true
+        });
+
+        $('#txtDateEnd').datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y',
+            mask: true
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
+    <script>
+        $('#fuMain').fileinput({
+            dropZoneEnabled: false,
+            maxFileCount: 5,
+            theme: 'fa4',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+    </script>
+{{/section}}
+
+
+<form method="post" id="frmInputCourse" class="container-fluid py-10">
+    <section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+
+    <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
+            
+    <div class="page-header-title mt-3">
+        <h5 class="m-b-10"><h2>Products list</h2></h5>
+    </div> 
+<!--        NameCourse-->
+        <div class="form-group row">
+
+        <div class="col-6">
+            <label for="txtNameCourse">UserName</label>
+            <input name="Username" type="text" class="form-control" id="txtNameCourse" autofocus>
         </div>
+        <div class="col-6">
+            <label for="txtNameCourse">Password</label>
+            <input name="Password" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+
+        </div>
+        <div class="form-group row">
+
+        <div class="col-6">
+            <label for="txtNameCourse" >Name</label>
+            <input name="Name" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+        <div class="col-6">
+            <label for="txtNameCourse">Email</label>
+            <input name="Email" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+
+        </div>
+
+        <div class="form-group row">
+
+        <div class="col-6">
+            <label for="txtNameCourse">Account type</label>
+            <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="Giáo viên" readonly>
+        </div>
+        <div class="col-3">
+            <label for="example">Date of bird</label>
+            <i class="fas fa-calendar input-prefix"></i>
+            <input placeholder="Select date" type="text" id="txtDateStart" name="DOB" class="form-control">
+        </div>
+        
+        <div class="col-3">
+            <label for="fuMain">Avatar</label>
+            <input type="file" multiple id="fuMain" name="Avatar">
+        </div>
+        </div>
+
+        <div class="form-group row">
+
+        <div class="col-6">
+            <label for="txtNameCourse" >Address</label>
+            <input name="DiaChi" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+        <div class="col-4">
+            <label for="txtNameCourse">Phone number</label>
+            <input name="SDT" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+
+        <div class="col-2">
+            <label for="txtNameCourse">Course quantity</label>
+            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse" autofocus>
+        </div>
+
+        </div>
+<!--        Description-->
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="MoTaChiTiet" name="description" placeholder="Your description">
+            </textarea>
+        </div>
+
+        
+
+<!--        Button Save-->
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+    </div>
     </div>
 </section>
 </form>

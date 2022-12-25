@@ -1,6 +1,6 @@
 import express from 'express';
 import adminService from '../services/admin.service.js';
-// import teacherService from '../services/teacher.service.js';
+import teacherService from '../services/teacher.service.js';
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -50,19 +50,61 @@ router.get('/teachers', async function(req, res) {
     });
 });
 
-router.post('/teachers/add', function (req, res){
-
-    res.render('vwAdmin/teacher/add', {
-        layout: 'adminLayout',
-
-    });
-});
-
 router.get('/addTeacher', function (req, res){
     res.render('vwAdmin/teacher/add', {
         layout: 'adminLayout',
     });
 });
+
+router.post('/addTeacher', async function (req, res){
+    const x = await teacherService.addAccount(req.body);
+    const MaTk = await teacherService.findIdTeacher(req.body.Username);
+    const y = await teacherService.add(req.body, MaTk[0]);
+    res.render('vwAdmin/teacher/add', {
+        layout: 'adminLayout',
+    });
+});
+
+router.post('/delTeacher', async function (req, res){
+    console.log(req.body);
+    //await teacherService.del(req.body.MaGiaoVien);
+    //await teacherService.delAccount(req.body.MaTaiKhoan);
+
+    res.render('vwAdmin/teacher/teachers', {
+        layout: 'adminLayout',
+    });
+});
+
+router.get('/delTeacher', async function (req, res){
+    const id = req.query.id;
+    await teacherService.delTeacher(id);
+    await teacherService.delAccount(id);
+
+    res.redirect('/admin/teachers');
+});
+
+router.get('/editTeacher', async function (req, res){
+    const id = req.query.id;
+    const teacher = await teacherService.findTeacherById(id);
+    console.log(teacher);
+
+
+    res.render('vwAdmin/teacher/edit', {
+        layout: 'adminLayout',
+        teacher: teacher
+    });
+
+    });
+router.post('/teachers', async function(req, res) {
+
+    //await teacherService.del(req.body.MaGiaoVien);
+    //await teacherService.delAccount(req.body.MaTaiKhoan);
+
+    res.render('vwAdmin/teacher/teachers', {
+        layout: 'adminLayout',
+    });
+});
+
 
 router.get('/categories', async function(req, res) {
     const categories = await adminService.findAllCategory();

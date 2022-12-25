@@ -11,7 +11,7 @@ export const connectionInfo = {
 const knex = knexObj({
     client: 'mysql2',
     connection: connectionInfo,
-    pool: { min: 0, max: 10 }    
+    pool: { min: 0, max: 10 }
 });
 
 export default knex;

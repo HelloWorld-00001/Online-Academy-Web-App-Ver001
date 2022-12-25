@@ -155,6 +155,9 @@
         });
 
         $(function () {
+            if($(".course-review:hidden").length < 4) {
+                $(".load-more").css('visibility', 'hidden');
+            }
             $(".course-review").slice(0, 4).show();
             $("body").on('click touchstart', '.load-more', function (e) {
                 e.preventDefault();
@@ -513,7 +516,7 @@
                     <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
-                            <img src="/public/img/teachers/{{this.course.Username}}.jpg" alt="student 1">
+                            <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
                         </div>
                         <div class="ml-3">
                             <p class="mb-2 row">
@@ -627,285 +630,26 @@
                 <div class="card-body h-auto">
                     <div class="w-100">
                         <div class="row" id="review-list">
-                            <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-1.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Oscar Javier</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
+                            {{#each this.studentReviewList}}
+                                <div class="col-md-6 mb-3 mw-100 course-review">
+                                    <div class="card card--feedback h-100">
+                                        <div class="card-body h-auto">
+                                            <div class="card__top">
+                                                <div class="card__avatar">
+                                                    <img src="/public/img/team-1.jpg" alt="student 1">
+                                                </div>
+                                                <div>
+                                                    <p class="card__name">{{Name}}</p>
+                                                    <div class="card__stars">
+                                                        <span class="stars" data-rating="{{Rate}}" data-num-stars="5" ></span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <p class="card-text">{{Comment}}</p>
                                         </div>
-                                        <p class="card-text">
-                                            I had a couple of months of experience trading
-                                            without consistent
-                                            results. After taking this
-                                            course I'm pretty confident that I'll be a
-                                            better trader and know better when to enter a
-                                            trade, how to put my stop
-                                            loss and take profit, how many lots to trade and
-                                            much more.
-                                        </p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-1.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Estelle</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            My first complete Photoshop for Designing
-                                            t-shirts course done! I am
-                                            not a designer at all, but
-                                            after taking this course I really felt like a
-                                            professional with enough confidence to now
-                                            go out and design for the
-                                            real world. Learned SO much! thank you!
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-3.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Mrinal</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            Great course for beginners as well as working
-                                            professionals. I'm
-                                            working as a UI developer for
-                                            last 2 years and worked on different javascript
-                                            frameworks but the clarity of concepts
-                                            which I got after taking
-                                            this course is exceptional which I was not
-                                            having previously.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-2.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Flávio</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            Very explained even for a short course. It's not
-                                            for full
-                                            understanding, but it works perfectly as
-                                            an introduction for the subject. And you can
-                                            really build a robot after taking this
-                                            course.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-3.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Angeles</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            I didn't know anything at all about FB ads for
-                                            this course and have a
-                                            client that is wanting to
-                                            start using them. After taking this course i
-                                            feel like I can help them and so much more
-                                            confident in coming up with
-                                            a strategy.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-4.jpg" alt="student 4">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Carol</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            After studying German for about six months my
-                                            spelling and grammar is
-                                            good, but I was having
-                                            trouble with some pronunciation. After taking
-                                            this course it has really helped me
-                                            pronounce certain words I was
-                                            having trouble with and also have better
-                                            listening skill of German speakers.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-2.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Flávio</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            Very explained even for a short course. It's not
-                                            for full
-                                            understanding, but it works perfectly as
-                                            an introduction for the subject. And you can
-                                            really build a robot after taking this
-                                            course.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-3.jpg" alt="student 1">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Angeles</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            I didn't know anything at all about FB ads for
-                                            this course and have a
-                                            client that is wanting to
-                                            start using them. After taking this course i
-                                            feel like I can help them and so much more
-                                            confident in coming up with
-                                            a strategy.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3 mw-100 course-review ">
-                                <div class="card card--feedback h-100">
-                                    <div class="card-body h-auto">
-                                        <div class="card__top">
-                                            <div class="card__avatar">
-                                                <img src="/public/img/team-4.jpg" alt="student 4">
-                                            </div>
-                                            <div>
-                                                <p class="card__name">Carol</p>
-                                                <div class="card__stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-half"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="card-text">
-                                            After studying German for about six months my
-                                            spelling and grammar is
-                                            good, but I was having
-                                            trouble with some pronunciation. After taking
-                                            this course it has really helped me
-                                            pronounce certain words I was
-                                            having trouble with and also have better
-                                            listening skill of German speakers.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            {{/each}}
                         </div>
                         <div class="row">
                             <button type="button" class="btn btn-outline-primary load-more" style="margin-left: 16px;">Load More</button>

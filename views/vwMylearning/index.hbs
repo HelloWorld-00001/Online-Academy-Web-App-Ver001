@@ -1,0 +1,98 @@
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+            <h1>My Learning</h1>
+        </div>
+        {{#if this.empty}}
+            <h5 class="card-title">Không có dữ liệu</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        {{else}}
+            <div class="row d-flex justify-content-center">
+                {{#each this.courses}}
+                    <div class="col-lg-4 mb-3">
+                        <div class="form_course">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <small class="m-0">
+                                            <i class="fa fa-users text-primary mr-2"></i>
+                                            {{LuotXem}} Students
+                                        </small>
+                                        <small class="m-0">
+                                            <i class="far fa-clock text-primary mr-2"></i>
+                                            {{SoLuongVideo}}
+                                        </small>
+                                    </div>
+                                    <a class="card-title text-log h5" href="/mylearning/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                    {{#if isFieldType}}
+                                        <p class="card-text">
+                                            <i class="fa fa-globe" aria-hidden="true"></i>
+                                            {{TenLinhVuc}}
+                                        </p>
+                                    {{else}}
+                                        <p class="card-text">
+                                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                                            {{TenLinhVuc}}
+                                        </p>
+                                    {{/if}}
+                                    <p class="card-text">{{Username}}</p>
+                                    <div class="d-flex align-content-center">
+                                        <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                        <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>
+                                        <span class="">({{SLHocSinhDanhGia}} ratings)</span>
+                                    </div>
+                                </div>
+<!--                                <div class="border-top card-footer d-flex align-content-center">-->
+<!--                                    <div class="card__price h5">-->
+<!--                                        {{#if isNoDiscount}}-->
+<!--                                            <span class="align-self-center">${{format_number Gia}}</span>-->
+<!--                                        {{else}}-->
+<!--                                            <span style="text-decoration: line-through; font-weight: 10;" class="align-self-center">${{format_number Gia}}</span>-->
+<!--                                            <span class="align-self-center">${{format_number finalPrice}}</span>-->
+<!--                                        {{/if}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {{#if this.previousPageNumber.isPreviousPage}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{this.previousPageNumber.value}}">Previous</a>
+                        </li>
+                    {{else}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:;">Previous</a>
+                        </li>
+                    {{/if}}
+                    </li>
+                    {{#each this.pageNumbers}}
+                        {{#if isCurrent}}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">{{value}}</a>
+                            </li>
+                        {{else}}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{value}}">{{value}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    {{#if this.nextPageNumber.isNextPage}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{this.nextPageNumber.value}}">Next</a>
+                        </li>
+                    {{else}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:;">Next</a>
+                        </li>
+                    {{/if}}
+                </ul>
+            </nav>
+        {{/if}}
+    </div>
+</div>

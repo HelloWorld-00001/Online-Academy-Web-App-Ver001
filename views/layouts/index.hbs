@@ -30,7 +30,7 @@
 
 <body>
 <!-- Topbar Start -->
-<div class="container-fluid d-none d-lg-block">
+<div class="container-fluid d-none d-lg-block" id="topbar">
     <div class="row align-items-center py-4 px-xl-5">
         <div class="col-lg-3">
             <a href="" class="text-decoration-none">
@@ -127,6 +127,7 @@
                                 Hi, {{authUser.Name}}
                             </button>
                             <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/mylearning">My learning</a>
                                 <a class="dropdown-item" href="/account/profile">Profile</a>
                                 <form id="frmLogout" action="/account/logout" method="post">
                                     <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Logout</a>
