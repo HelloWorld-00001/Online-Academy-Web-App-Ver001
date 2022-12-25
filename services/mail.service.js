@@ -1,4 +1,7 @@
 import nodemailer from 'nodemailer';
+import hbs from 'nodemailer-express-handlebars';
+import path from 'path';
+import emailValidator from 'deep-email-validator';
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -8,19 +11,39 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const handlebarOptions = {
+    viewEngine: {
+        extname: '.hbs',
+        partialsDir: path.resolve('./views/vwAccount/'),
+        defaultLayout: false
+    },
+    viewPath: path.resolve('./views/vwAccount/'),
+    extName: '.hbs'
+};
+
+transporter.use('compile', hbs(handlebarOptions));
+
 export default {
     sendMail(email , otp){
         const details = {
-            from: 'khongtontai231@gmail.com', // sender address same as above
+            from: ' "IGE Online Course" <khongtontai231@gmail.com>', // sender address same as above
             to: email, 					// Receiver's email id
-            subject: 'Your demo OTP is ', // Subject of the mail.
-            html: otp					// Sending OTP 
+            subject: 'Code OTP', // Subject of the mail.
+            template: 'email',
+            context: {
+                otp: otp,
+                email: email
+            }
         };
         transporter.sendMail(details, function (error, data) {
             if(error)
-                console.log(error)
+                console.log(error);
             // else
                 // console.log(data);
         });
-    }  
+    },  
+
+    async isEmailValid(email) {
+        return await emailValidator.validate(email);
+    }
 }

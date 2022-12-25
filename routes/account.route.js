@@ -12,11 +12,11 @@ router.get('/register', async function (req, res) {
   res.render('vwAccount/register', {layout: false});
 });
 
-router.post('/register', async function (req, res) {
+router.post('/register', function (req, res) {
   const rawPassword = req.body.password;
-  const salt = await bcrypt.genSaltSync(10);
+  const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(rawPassword, salt);
-  const dob = req.body.dob;
+  const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
   
   const user = {
     Username: req.body.username,
@@ -39,35 +39,43 @@ router.post('/register', async function (req, res) {
   res.redirect('/account/sendOTP');
 });
 
-router.get('/is-available-username', async function (req, res) {
-  const username = req.query.user;
+router.get('/is-available', async function (req, res) {
+  const username = req.query.username;
+  const email = req.query.email;
 
-  const user = await accountService.findByUsername(username);
-  if (user === null) {
-    return res.json(true);
-  }
+  const checkMailExist = await mailer.isEmailValid(email);
+  if(checkMailExist.valid === false)
+    return res.json('EmailNotExist');
 
-  res.json(false);
+  var checkUsername = true;
+  var checkMail = true;
+
+  const user1 = await accountService.findByUsername(username);
+  if (user1 !== null) 
+    checkUsername = false;
+
+  const user2 = await accountService.findByEmail(email);
+  if(user2 !== null)
+    checkMail = false;
+
+  if(checkUsername === false && checkMail === false) 
+    return res.json('FailTwo');
+  if(checkUsername === false)
+    return res.json('FailUsername');
+  if(checkMail === false)
+    return res.json('FailEmail');
+  
+  res.json(true);
 });
 
-router.get('/is-available-email', async function (req, res) {
-  const email = req.query.user;
-
-  const user = await accountService.findByEmail(email);
-  if (user === null) {
-    return res.json(true);
-  }
-
-  res.json(false);
-});
-
-//Email
+//otp
 router.get('/sendOTP', regis, async function (req, res) {
   res.render('vwAccount/handleOTP', {layout: false});
 });
 
 router.post('/sendOTP', async function (req, res) {
   const newUser = req.session.temp;  
+  console.log(newUser);
   await accountService.add(newUser);
 
   req.session.regis = false;
@@ -93,6 +101,7 @@ router.get('/login', async function (req, res) {
 
 router.post('/login', async function (req, res) {
   const user = await accountService.findByUsername(req.body.username);
+  console.log(user);
   if (user === null) {
     return res.render('vwAccount/login', {
       layout: false,
@@ -109,9 +118,9 @@ router.post('/login', async function (req, res) {
   }
   delete user.Password;
 
+  user.DOB = moment(user.DOB, 'YYYY-MM-DD').format('DD/MM/YYYY');
   req.session.auth=true;
   req.session.authUser=user;
-  console.log(user);
 
   const url = req.session.retUrl || '/';
   res.redirect(url);
