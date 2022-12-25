@@ -86,7 +86,6 @@ router.get('/delTeacher', async function (req, res){
 router.get('/editTeacher', async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
-    console.log(teacher);
 
 
     res.render('vwAdmin/teacher/edit', {
@@ -94,7 +93,21 @@ router.get('/editTeacher', async function (req, res){
         teacher: teacher
     });
 
+});
+
+
+router.get('/viewTeacher', async function (req, res){
+    const id = req.query.id;
+    const teacher = await teacherService.findTeacherById(id);
+    console.log(teacher);
+
+    res.render('vwAdmin/teacher/view', {
+        layout: 'adminLayout',
+        teacher: teacher
     });
+
+});
+
 router.post('/teachers', async function(req, res) {
 
     //await teacherService.del(req.body.MaGiaoVien);
