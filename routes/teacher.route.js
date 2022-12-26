@@ -8,8 +8,12 @@ router.get('/', function (req, res) {
     res.render('teacher');
 });
 
-router.get('/input', function (req, res){
-   res.render('vwTeacher/inputcourse');
+router.get('/input', async function (req, res){
+   const field = await teacherService.findField();
+   console.log(field);
+   res.render('vwTeacher/inputcourse', {
+       linhVuc: field,
+    });
 });
 
 router.post('/input', function (req, res){

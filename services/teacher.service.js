@@ -50,6 +50,12 @@ export default {
         return list;
     },
 
+    async findField() {
+        const list = await db('linhvuc')
+            .select('MaLinhVuc', 'TenLinhVuc')
+        return list;
+    },
+
 
     addAccount(entity) {
         return db('taikhoan').insert({

@@ -320,6 +320,15 @@
             <label for="txtNameCourse">Name course</label>
             <input name="TenKhoaHoc" type="text" class="form-control" id="txtNameCourse" autofocus>
         </div>
+<!--        Field-->
+        <div class="form-group">
+            <label for="txtFieldCourse">Field course</label>
+            <select name="field" id="txtFieldCourse" class="form-control">
+                {{#each this.linhVuc}}
+                    <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                {{/each}}
+            </select>
+        </div>
 <!--        Image of course-->
         <div class="form-group">
             <label for="fuMain">Photo</label>
