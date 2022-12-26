@@ -10,7 +10,6 @@ router.get('/', function (req, res) {
 
 router.get('/input', async function (req, res){
    const field = await teacherService.findField();
-   console.log(field);
    res.render('vwTeacher/inputcourse', {
        linhVuc: field,
     });
