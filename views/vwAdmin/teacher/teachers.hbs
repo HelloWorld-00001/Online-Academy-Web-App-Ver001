@@ -1,3 +1,22 @@
+{{#section 'css'}}
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+    }
+    .text-black {
+        color: black;
+    }
+</style>
+    
+{{/section}}
+
 <section class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <div class="pcoded-content">
@@ -5,54 +24,69 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <div class="row">
-                        <div class="col-xl-12 ml-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Teacher Table</h5>
-                                    <a name="" id="" class="btn btn-outline-primary float-right"
-                                            href="/admin/addTeacher" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add more</a>
-                                    <span class="d-block m-t-5">Danh sach cac <code>Giao vien</code> cua he thong
-                                       </span>
-                                </div>
-                                <div class="card-body table-border-style">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ma Giao Vien</th>
-                                                    <th>Ma tai khoan</th>
-                                                    <th>Ten</th>
-                                                    <th>Username</th>
-                                                    <th>email</th>
-                                                    <th>SLKH</th>
-                                                    <th colspan="3">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                 {{#each this.teacher}}
-                                                <form method="post" action="">
-                                                <tr>
-                                                    <td>{{MaGiaoVien}}</td>
-                                                    <td>{{MaTaiKhoan}}</td>
-                                                    <td>{{Name}}</td>
-                                                    <td>{{Username}}</td>
-                                                    <td>{{Email}}</td>
-                                                    <td>{{SLKhoaHoc}}</td>
-                                                    <td colspan="3">
-                                                        <a href="/admin/viewTeacher?id={{MaGiaoVien}}" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-sm" aria-hidden="true"></i></a>
-                                                        <a href="/admin/editTeacher?id={{MaGiaoVien}}" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fas fa-pencil-alt ml-2 " aria-hidden="true"></i></i></a>
-                                                        <a name="id" id="" class="btn btn-outline-danger btn-sm" href="/admin/delTeacher?id={{MaTaiKhoan}}" role="button"><i class="material-icons"></i></a>
-                                                    </td>
-                                                </tr>
-                                                </form>
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
+                            <div class="col-xl-12 ml-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Teacher Table</h5>
+                                        <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/addTeacher" role="button"><i class="fa fa-plus"
+                                                aria-hidden="true"></i> Add more</a>
+                                        <span class="d-block m-t-5">Danh sach cac <code>Giao vien</code> cua he thong
+                                        </span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ma Giao Vien</th>
+                                                        <th>Ma tai khoan</th>
+                                                        <th>Ten</th>
+                                                        <th>Username</th>
+                                                        <th>email</th>
+                                                        <th>SLKH</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    {{#each this.teacher}}
+                                                    <form method="post" action="">
+                                                        <tr>
+                                                            <td>{{MaGiaoVien}}</td>
+                                                            <td>{{MaTaiKhoan}}</td>
+                                                            <td>{{Name}}</td>
+                                                            <td>{{Username}}</td>
+                                                            <td>{{Email}}</td>
+                                                            <td>{{SLKhoaHoc}}</td>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a href="/admin/viewTeacher?id={{MaGiaoVien}}" class="view dropdown-item text-c-info" title="View" data-toggle="tooltip">
+                                                                            <i class="fa fa-eye fa-sm" aria-hidden="true"></i> <span class="f-16 m-2">View</span>
+                                                                        </a>
+                                                                        <a href="/admin/editTeacher?id={{MaGiaoVien}}" class="view dropdown-item text-c-blue" title="View" data-toggle="tooltip">
+                                                                            <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
+                                                                        </a>
+                                                                        <a name="id" id="" class="view text-c-red dropdown-item" href="/admin/delTeacher?id={{MaTaiKhoan}}" role="button">
+                                                                            <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

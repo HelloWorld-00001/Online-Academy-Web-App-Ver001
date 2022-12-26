@@ -43,6 +43,7 @@ router.get('/allTable', async function(req, res) {
     });
 });
 
+/* Teacher Management Section */
 router.get('/teachers', async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
     res.render('vwAdmin/teacher/teachers', {layout: 'adminLayout',
@@ -64,7 +65,6 @@ router.post('/addTeacher', async function (req, res){
         layout: 'adminLayout',
     });
 });
-
 router.post('/delTeacher', async function (req, res){
     console.log(req.body);
     //await teacherService.del(req.body.MaGiaoVien);
@@ -74,7 +74,6 @@ router.post('/delTeacher', async function (req, res){
         layout: 'adminLayout',
     });
 });
-
 router.get('/delTeacher', async function (req, res){
     const id = req.query.id;
     await teacherService.delTeacher(id);
@@ -95,7 +94,6 @@ router.get('/editTeacher', async function (req, res){
 
 });
 
-
 router.get('/viewTeacher', async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
@@ -107,24 +105,34 @@ router.get('/viewTeacher', async function (req, res){
     });
 
 });
-
 router.post('/teachers', async function(req, res) {
-
     //await teacherService.del(req.body.MaGiaoVien);
     //await teacherService.delAccount(req.body.MaTaiKhoan);
-
     res.render('vwAdmin/teacher/teachers', {
         layout: 'adminLayout',
     });
 });
 
 
+/* Category Management Section */
 router.get('/categories', async function(req, res) {
     const categories = await adminService.findAllCategory();
     res.render('vwAdmin/categories', {layout: 'adminLayout',
         categories: categories
     });
 });
+router.get('/addCategory', function (req, res){
+    res.render('vwAdmin/categories', {
+        layout: 'adminLayout',
+    });
+});
+router.post('/addCategory', async function (req, res){
+    const addCate = await adminService.addCategory(req.body)
+    res.render('vwAdmin/categories', {
+        layout: 'adminLayout',
+    });
+});
+
 
 router.get('/courses', async function(req, res) {
     const courses = await adminService.findAllCourse();
