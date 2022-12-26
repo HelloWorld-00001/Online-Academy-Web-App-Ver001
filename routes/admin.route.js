@@ -46,7 +46,8 @@ router.get('/allTable', async function(req, res) {
 /* Teacher Management Section */
 router.get('/teachers', async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
-    res.render('vwAdmin/teacher/teachers', {layout: 'adminLayout',
+    res.render('vwAdmin/teacher/teachers', {
+        layout: 'adminLayout',
         teacher: teacherList
     });
 });
@@ -117,27 +118,38 @@ router.post('/teachers', async function(req, res) {
 /* Category Management Section */
 router.get('/categories', async function(req, res) {
     const categories = await adminService.findAllCategory();
-    res.render('vwAdmin/categories', {layout: 'adminLayout',
+    res.render('vwAdmin/categories', {
+        layout: 'adminLayout',
         categories: categories
     });
 });
-router.get('/addCategory', function (req, res){
+router.post('/categories', async function(req, res) {
+    await adminService.addCategory(req.body.Name);
+    const categories = await adminService.findAllCategory();
     res.render('vwAdmin/categories', {
         layout: 'adminLayout',
+        categories: categories
     });
 });
-router.post('/addCategory', async function (req, res){
-    const addCate = await adminService.addCategory(req.body)
+
+router.get('/delCategory', async function(req, res) {
+    const id = req.query.id;
+    await adminService.delCategory(id);
+    res.redirect('/admin/categories');
+});
+router.post('/delCategory', async function(req, res) {
     res.render('vwAdmin/categories', {
         layout: 'adminLayout',
     });
 });
 
-
+/* Course Management Section */
 router.get('/courses', async function(req, res) {
     const courses = await adminService.findAllCourse();
-    res.render('vwAdmin/courses', {layout: 'adminLayout',
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
         courses: courses
     });
 });
+
 export default router;

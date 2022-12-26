@@ -25,6 +25,10 @@ export default {
         const list = await db('linhvuc').count({amount: '*'});
         return list[0].amount
     },
+    async countCoursebyCateID(idlv) {
+        return db('khoahoc').count({amount: 'MaKhoaHoc'}).where('LinhVuc', idlv);
+    },
+
     vwAllVideo() {
         return db('danhsachvideo');
     },
@@ -103,9 +107,17 @@ export default {
         //.limit(3);
         return list;
     },
+
+    // Category management
     addCategory(entity) {
         return db('linhvuc').insert({
-            TenLinhVuc: entity.TenLinhVuc,
+            TenLinhVuc: entity,
         });
+    },
+    delCategory(id) {
+        return db('linhvuc').where('MaLinhVuc', id).del();
+    },
+    async findCatebyID(id) {
+        return db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
     },
 }

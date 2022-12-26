@@ -9,7 +9,7 @@
         line-height: 1.428571429;
         border-radius: 15px;
         background: rgb(255, 255, 255);
-    }
+    },
     .text-black {
         color: black;
     }
@@ -44,31 +44,6 @@
                                         <a name="" id="" class="btn btn-outline-primary float-right" role="button" data-toggle="modal" data-target="#ModalAddCategory">  
                                             <i class="fa fa-plus text-c-blue" aria-hidden="true"></i> <span class="text-c-blue">Add more</span> 
                                         </a>
-                                        <!-- cửa sổ nhập  -->
-                                        <div class="modal fade" id="ModalAddCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle"><h3>Add Category</h3></h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="form-group flex-row">
-                                                                <label for="txtNameCategory"><h4>New Category</h4></label>
-                                                                <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer text-muted">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" id="paramsSubmit">Save</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>      
                                 </div>
                                 <div class="card-body table-border-style">
@@ -93,10 +68,10 @@
                                                                 <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a href="/admin/categories" class="view dropdown-item text-c-blue" title="View" data-toggle="tooltip">
+                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory">
                                                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
                                                                 </a>
-                                                                <a href="/admin/categories" name="id" id="" class="view text-c-red dropdown-item" role="button">
+                                                                <a href="/admin/delCategory?id={{MaLinhVuc}}" name="id" id="" class="view text-c-red dropdown-item" role="button">
                                                                     <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
                                                                 </a>
                                                             </div>
@@ -118,3 +93,55 @@
         </div>
     </div>
 </section>
+
+<!-- Khung nhập  -->
+<div class="modal fade" id="ModalAddCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Add Category</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group flex-row">
+                        <label for="txtNameCategory"><h4>New Category</h4></label>
+                        <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Khung edit  -->
+<div class="modal fade" id="ModalEditCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Edit Category</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group flex-row">
+                        <label for="NameCate"><h4></h4></label>
+                        <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
