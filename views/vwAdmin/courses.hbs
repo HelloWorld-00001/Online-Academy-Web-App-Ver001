@@ -1,3 +1,21 @@
+{{#section 'css'}}
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+    },
+    .text-black {
+        color: black;
+    }
+</style>
+{{/section}}
+
 <section class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <div class="pcoded-content">
@@ -9,7 +27,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
-                                        <h4>Courses Table</h4>
+                                        <h4>Course Table</h4>
                                         <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
                                     </div>
                                     <div>
@@ -27,9 +45,9 @@
                                                     <th>ID</th>
                                                     <th>Name</th>
                                                     <th>Category</th>
-                                                    <th>Vid Quantity</th>
+                                                    <th>Video Quantity</th>
                                                     <th>Attendance Quantity</th>
-                                                    <th colspan="2">Action</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -41,9 +59,20 @@
                                                     <td>{{TenLinhVuc}}</td>
                                                     <td>{{SoLuongVideo}}</td>
                                                     <td>{{SLHocVien}}</td>
-                                                    <td colspan="2" class="">
-                                                        <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fas fa-pen fa-sm ml-2 " aria-hidden="true"></i></i></a>
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm ml-4" ><center><i class="material-icons">&#xE872;</i></center></button>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a href="/admin/categories" class="view dropdown-item text-c-blue" title="View" data-toggle="tooltip">
+                                                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
+                                                                </a>
+                                                                <a href="/admin/categories" name="id" id="" class="view text-c-red dropdown-item" role="button">
+                                                                    <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 </form>

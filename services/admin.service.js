@@ -103,4 +103,9 @@ export default {
         //.limit(3);
         return list;
     },
+    addCategory(entity) {
+        return db('linhvuc').insert({
+            TenLinhVuc: entity.TenLinhVuc,
+        });
+    },
 }

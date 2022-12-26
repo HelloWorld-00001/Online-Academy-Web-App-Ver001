@@ -1,3 +1,31 @@
+{{#section 'css'}}
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+    },
+    .text-black {
+        color: black;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function(){
+            $('#ModalAddCategory').on('click', '#paramsSubmit', function(e) {
+                console.log($('#txtNameCategory').val());
+            });
+        })
+    </script>
+{{/section}}
+
 <section class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <div class="pcoded-content">
@@ -13,11 +41,35 @@
                                         <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
                                     </div>
                                     <div>
-                                        <a name="" id="" class="btn btn-outline-primary float-right"
-                                            href="/admin/teacher" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add more</a>
-                                    
-                                    </div>
-                                    
+                                        <a name="" id="" class="btn btn-outline-primary float-right" role="button" data-toggle="modal" data-target="#ModalAddCategory">  
+                                            <i class="fa fa-plus text-c-blue" aria-hidden="true"></i> <span class="text-c-blue">Add more</span> 
+                                        </a>
+                                        <!-- cửa sổ nhập  -->
+                                        <div class="modal fade" id="ModalAddCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle"><h3>Add Category</h3></h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-group flex-row">
+                                                                <label for="txtNameCategory"><h4>New Category</h4></label>
+                                                                <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer text-muted">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary" id="paramsSubmit">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>      
                                 </div>
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
@@ -26,7 +78,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Name</th>
-                                                    <th colspan="2">Action</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -35,9 +87,20 @@
                                                 <tr class="">
                                                     <td>{{MaLinhVuc}}</td>
                                                     <td>{{TenLinhVuc}}</td>
-                                                    <td colspan="2" class="">
-                                                        <a href="#" class="view fa-2x" title="View" data-toggle="tooltip"><i class="fas fa-pen fa-sm ml-2 " aria-hidden="true"></i></i></a>
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm ml-4" ><center><i class="material-icons">&#xE872;</i></center></button>
+                                                    <td class="d-flex justify-content-end align-content-center">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a href="/admin/categories" class="view dropdown-item text-c-blue" title="View" data-toggle="tooltip">
+                                                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
+                                                                </a>
+                                                                <a href="/admin/categories" name="id" id="" class="view text-c-red dropdown-item" role="button">
+                                                                    <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 </form>
