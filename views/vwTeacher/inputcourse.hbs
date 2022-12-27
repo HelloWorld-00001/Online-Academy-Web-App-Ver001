@@ -249,8 +249,6 @@
             });
         });
 
-        $(document).className("")
-
     </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script>
@@ -282,7 +280,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js"></script>
     <script>
-        $('#fuMain').fileinput({
+        $('#Image').fileinput({
             dropZoneEnabled: false,
             maxFileCount: 5,
             theme: 'fa4',
@@ -307,7 +305,7 @@
     </div>
 </div>
 
-<form method="post" id="frmInputCourse" class="container-fluid py-10">
+<form method="post" id="frmInputCourse" class="container-fluid py-10" enctype="multipart/form-data">
     <h1> New Course</h1>
     <div class="card container-fluid py-5 px-5">
 <!--        Status-->
@@ -331,7 +329,7 @@
 <!--        Field-->
         <div class="form-group">
             <label for="txtFieldCourse">Field course</label>
-            <select name="field" id="txtFieldCourse" class="form-control">
+            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
                 {{#each this.linhVuc}}
                     {{#if isChoose}}
                         <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
@@ -343,8 +341,8 @@
         </div>
 <!--        Image of course-->
         <div class="form-group">
-            <label for="fuMain">Photo</label>
-            <input type="file" multiple id="fuMain" name="Image">
+            <label for="Image">Photo</label>
+            <input type="file" multiple id="Image" name="Image">
         </div>
 <!--        Start Day-->
         <div class="form-group">

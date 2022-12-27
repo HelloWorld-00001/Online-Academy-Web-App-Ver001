@@ -36,9 +36,53 @@ export default {
                             DiaChi: account.Diachi
             })
     },
+    async editKhoaHoc(courseId, obj) {
+        return db('khoahoc')
+            .where({MaKhoaHoc: courseId})
+            .update({
+                TenKhoaHoc: obj.TenKhoaHoc,
+                LinhVuc: obj.MaLinhVuc,
+                Gia: obj.Gia,
+                KhuyenMai: obj.KhuyenMai,
+                MoTaNgan: obj.MoTaNgan,
+                Image: obj.Image,
+            })
+    },
+    async editChiTietKhoaHoc(courseId, obj) {
+        return db('chitietkhoahoc')
+            .where({MaKhoaHoc: courseId})
+            .update({
+                NgayCapNhat: obj.dateTime,
+                MoTaChiTiet: obj.description,
+                NgayBD: obj.NgayBD,
+                NgayKT: obj.NgayKT,
+                TrangThai: obj.isDone,
+            })
+    },
+    async deleteDanhSachVideoById(courseId, obj) {
+        return db('danhsachvideo')
+            .delete()
+            .where('MaKhoaHoc', courseId);
+    },
+    async insertDanhSachVideo(MaKhoaHoc, STT, Link, NgayCapNhat, TenVideo, MoTaVideo) {
+        return db('danhsachvideo')
+            .insert({
+                MaKhoaHoc: MaKhoaHoc,
+                STT: STT,
+                Link: Link,
+                NgayCapNhat: NgayCapNhat,
+                TenVideo: TenVideo,
+                MoTaVideo: MoTaVideo,
+            })
+    },
     async getNameImage(accountId) {
         const list = await db('taikhoan')
             .select('taikhoan.Avatar').where('taikhoan.MaTaiKhoan', accountId)
+        return list[0];
+    },
+    async getNameCourseImage(courseId) {
+        const list = await db('khoahoc')
+            .select('khoahoc.Image').where('khoahoc.MaKhoaHoc', courseId)
         return list[0];
     },
 

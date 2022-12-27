@@ -37,10 +37,59 @@ router.get('/input/:id', async function (req, res){
     });
 });
 
-router.post('/input/:id', async function (req, res) {
-    const courseId = req.params.id || 0;
-    console.log(req.body);
-    res.redirect('/teacher/input/' + courseId);
+router.post('/input/:id', function (req, res){
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/courses');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
+    });
+
+
+    const upload = multer({ storage: storage });
+    upload.array('Image', 5)(req, res, async function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            const obj = JSON.parse(JSON.stringify(req.body));
+            const courseId = req.params.id || 0;
+
+            if (obj.Image === '') {
+                obj.Image = await teacherService.getNameCourseImage(courseId).Image;
+            } else {
+                obj.Image = file_name;
+            }
+
+            if (obj.check === 'on')
+                obj.isDone = 'Đã hoàn thành';
+            else
+                obj.isDone = 'Chưa hoàn thành';
+
+            var currentdate = new Date();
+            var datetime = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+            obj.dateTime = datetime;
+
+            const affected_rows_khoahoc = await teacherService.editKhoaHoc(courseId, obj);
+            const affected_rows_chitietkhoahoc = await teacherService.editChiTietKhoaHoc(courseId, obj);
+            const affected_rows_del_danhsachvideo = await teacherService.deleteDanhSachVideoById(courseId);
+            for(let i = 0; i < obj.topic_no.length; i++) {
+                if (obj.topic_no[i] === '')
+                    continue;
+                    await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "");
+            }
+            console.log(obj);
+            res.redirect('/teacher/input/' + courseId);
+        }
+    })
 });
 
 router.post('/input', function (req, res){
@@ -84,7 +133,7 @@ router.post('/profile/:id', function (req, res){
             const teacherId = req.params.id || 0;
             const affected_rows = await teacherService.editGiaovien(obj.Mota, teacherId);
             const accountId = await teacherService.findAccountByIdTeacher(teacherId);
-            if (obj.Avatar === '') {
+            if (obj.Avatar === null) {
                 obj.Avatar = await teacherService.getNameImage(accountId).Avatar;
             } else {
                 obj.Avatar = file_name;
