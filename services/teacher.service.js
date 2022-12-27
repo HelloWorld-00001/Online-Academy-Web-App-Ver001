@@ -56,6 +56,48 @@ export default {
         return list;
     },
 
+    async findFieldById(courseId) {
+        const list = await db('linhvuc')
+            .select('MaLinhVuc', 'TenLinhVuc')
+        const choose = await db('khoahoc')
+            .select('LinhVuc')
+            .where('MaKhoaHoc', courseId)
+
+        for (let i = 0; i < list.length; i++) {
+            if(list[i].MaLinhVuc === choose[0].LinhVuc) {
+                Object.assign(list[i], {isChoose: true});
+            } else {
+                Object.assign(list[i], {isChoose: false});
+            }
+        }
+        return list;
+    },
+
+    async findInfoCourseById(courseId) {
+      const list = await db('khoahoc')
+          .select ('chitietkhoahoc.TrangThai',
+              'khoahoc.TenKhoaHoc',
+              'khoahoc.Image',
+              'chitietkhoahoc.NgayBD',
+              'chitietkhoahoc.NgayKT',
+              'khoahoc.MoTaNgan',
+              'chitietkhoahoc.MoTaChiTiet',
+              'khoahoc.Gia',
+              'khoahoc.KhuyenMai'
+          )
+          .where('khoahoc.MaKhoaHoc', courseId)
+          .innerJoin('chitietkhoahoc', {'chitietkhoahoc.MaKhoaHoc' : 'khoahoc.MaKhoaHoc'})
+      return list[0];
+    },
+    async findVideoById(courseId) {
+        const list = await db('danhsachvideo')
+            .select ('danhsachvideo.TenVideo', 'danhsachvideo.Link')
+            .where('danhsachvideo.MaKhoaHoc', courseId)
+        for (let i = 0; i < list.length; i++) {
+            Object.assign(list[i], {index: i + 2});
+        }
+        return list;
+    },
 
     addAccount(entity) {
         return db('taikhoan').insert({

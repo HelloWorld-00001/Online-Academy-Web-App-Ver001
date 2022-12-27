@@ -15,6 +15,34 @@ router.get('/input', async function (req, res){
     });
 });
 
+router.get('/input/:id', async function (req, res){
+    const courseId = req.params.id || 0;
+    const field = await teacherService.findFieldById(courseId);
+    const info = await teacherService.findInfoCourseById(courseId);
+    const video = await teacherService.findVideoById(courseId);
+    let checked = true;
+    if (info.TrangThai === 'Chưa hoàn thành') {
+        checked = false;
+    }
+    const numVideo = video.length;
+    // console.log(field);
+    // console.log(info);
+    // console.log(video);
+    res.render('vwTeacher/inputcourse', {
+        linhVuc: field,
+        info: info,
+        checked,
+        video: video,
+        numVideo: numVideo,
+    });
+});
+
+router.post('/input/:id', async function (req, res) {
+    const courseId = req.params.id || 0;
+    console.log(req.body);
+    res.redirect('/teacher/input/' + courseId);
+});
+
 router.post('/input', function (req, res){
     console.log(req.body);
     res.render('vwTeacher/inputcourse');
@@ -27,7 +55,7 @@ router.get('/profile', function (req, res){
 router.get('/profile/:id', async function (req, res){
     const teacherId = req.params.id || 0;
     const teacher = await teacherService.findTeacherById(teacherId);
-    // console.log(teacher);
+
     res.render('vwTeacher/profile', {
         teacher: teacher
     });

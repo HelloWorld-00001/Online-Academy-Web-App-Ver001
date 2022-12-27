@@ -195,7 +195,7 @@
 
                 $(e.target).closest(".form_field_outer").last().append(cloned_el).find(".remove_node_btn_frm_field:not(:first)").prop("disabled", false);
 
-                $(e.target).closest(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", true);
+                $(e.target).closest(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled", false);
                 //change id
                 $(e.target)
                         .closest(".form_field_outer")
@@ -230,11 +230,11 @@
                     </div>
               </div>
               <div class="form-group col-md-2 add_del_btn_outer">
-                <button class="btn_round add_node_btn_frm_field" title="Copy or clone this row">
+                <button class="btn_round add_node_btn_frm_field" title="Copy or clone this row" type="button">
                   <i class="fas fa-copy"></i>
                 </button>
 
-                <button class="btn_round remove_node_btn_frm_field" disabled>
+                <button class="btn_round remove_node_btn_frm_field" type="button">
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </div>
@@ -248,6 +248,9 @@
                 console.log("success");
             });
         });
+
+        $(document).className("")
+
     </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script>
@@ -261,13 +264,13 @@
     <script>
         $('#txtDateStart').datetimepicker({
             timepicker: false,
-            format: 'd/m/Y',
+            format: 'Y/m/d',
             mask: true
         });
 
         $('#txtDateEnd').datetimepicker({
             timepicker: false,
-            format: 'd/m/Y',
+            format: 'Y/m/d',
             mask: true
         });
     </script>
@@ -307,10 +310,15 @@
 <form method="post" id="frmInputCourse" class="container-fluid py-10">
     <h1> New Course</h1>
     <div class="card container-fluid py-5 px-5">
+<!--        Status-->
         <div class="status">
             <label>Status</label>
             <label class="switch">
-                <input type="checkbox" name="check" id="txtCheck">
+                {{#if this.checked}}
+                    <input type="checkbox" name="check" id="txtCheck" checked>
+                {{else}}
+                    <input type="checkbox" name="check" id="txtCheck">
+                {{/if}}
                 <span class="slider round"></span>
                 <span class="absolute-no">Incomplete</span>
             </label>
@@ -318,14 +326,18 @@
 <!--        NameCourse-->
         <div class="form-group">
             <label for="txtNameCourse">Name course</label>
-            <input name="TenKhoaHoc" type="text" class="form-control" id="txtNameCourse" autofocus>
+            <input name="TenKhoaHoc" type="text" class="form-control" id="txtNameCourse" value="{{this.info.TenKhoaHoc}}" autofocus>
         </div>
 <!--        Field-->
         <div class="form-group">
             <label for="txtFieldCourse">Field course</label>
             <select name="field" id="txtFieldCourse" class="form-control">
                 {{#each this.linhVuc}}
-                    <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                    {{#if isChoose}}
+                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                    {{else}}
+                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                    {{/if}}
                 {{/each}}
             </select>
         </div>
@@ -338,30 +350,31 @@
         <div class="form-group">
             <label for="example">Start Date</label>
             <i class="fas fa-calendar input-prefix"></i>
-            <input placeholder="Select date" type="text" id="txtDateStart" name="NgayBD" class="form-control">
+            <input placeholder="Select date" type="text" id="txtDateStart" name="NgayBD" class="form-control" value="{{#convertDate this.info.NgayBD}} {{/convertDate}}">
         </div>
 <!--        End Day-->
         <div class="form-group">
             <label for="example">End Date</label>
             <i class="fas fa-calendar input-prefix"></i>
-            <input placeholder="Select date" type="text" id="txtDateEnd" name="NgayKT" class="form-control">
+            <input placeholder="Select date" type="text" id="txtDateEnd" name="NgayKT" class="form-control" value="{{#convertDate this.info.NgayKT}} {{/convertDate}}">
         </div>
 <!--        Short Description-->
         <div class="form-group">
             <label>Short Description</label>
-            <textarea name="MoTaNgan" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            <textarea name="MoTaNgan" class="form-control" id="exampleFormControlTextarea1" rows="2">{{this.info.MoTaNgan}}</textarea>
         </div>
 <!--        Description-->
         <div class="form-group">
             <label>Description</label>
             <textarea id="MoTaChiTiet" name="description" placeholder="Your description">
+                {{this.info.MoTaChiTiet}}
             </textarea>
         </div>
 <!--        Price-->
         <div class="form-group">
             <label for="txtPrice">Fee  </label>
             <div class="input-group mb-2">
-                <input name="Gia" type="number" class="form-control" id="txtPrice" autofocus>
+                <input name="Gia" type="number" class="form-control" id="txtPrice" value="{{this.info.Gia}}">
                 <div class="input-group-append">
                     <span class="input-group-text">$</span>
                 </div>
@@ -371,7 +384,7 @@
         <div class="form-group">
             <label for="txtDiscount">Discount</label>
             <div class="input-group mb-2">
-                <input name="KhuyenMai" type="number" class="form-control" id="txtDiscount" autofocus>
+                <input name="KhuyenMai" type="number" class="form-control" id="txtDiscount" value="{{this.info.KhuyenMai}}">
                 <div class="input-group-append">
                     <span class="input-group-text">%</span>
                 </div>
@@ -400,32 +413,56 @@
                             <label> Link</label>
                         </div>
                     </div>
-                    <div class="col-md-12 p-0">
-                        <div class="col-md-12 form_field_outer p-0">
-                            <div class="row form_field_outer_row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_1" placeholder="Enter topic" />
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon3">URL:</span>
-                                        </div>
-                                        <input name= "url_no[]" type="url" class="form-control" id="url_no_1" aria-describedby="basic-addon3">
+                <div class="col-md-12 p-0">
+                    <div class="col-md-12 form_field_outer p-0">
+                    {{#each this.video}}
+                        <div class="row form_field_outer_row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_{{index}}" placeholder="Enter topic" value="{{this.TenVideo}}" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">URL:</span>
                                     </div>
+                                    <input name= "url_no[]" type="url" class="form-control" id="url_no_{{index}}" aria-describedby="basic-addon3" value="{{this.Link}}">
                                 </div>
-                                <div class="form-group col-md-2 add_del_btn_outer">
-                                    <button class="btn_round add_node_btn_frm_field" title="Copy this line">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
+                            </div>
+                            <div class="form-group col-md-2 add_del_btn_outer">
+                                <button class="btn_round add_node_btn_frm_field" title="Copy this line" type="button">
+                                    <i class="fas fa-copy"></i>
+                                </button>
 
-                                    <button class="btn_round remove_node_btn_frm_field" title="Delete this line" disabled>
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
+                                <button class="btn_round remove_node_btn_frm_field" title="Delete this line" type="button">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    {{/each}}
+                        <div class="row form_field_outer_row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_1" placeholder="Enter topic" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">URL:</span>
+                                    </div>
+                                    <input name= "url_no[]" type="url" class="form-control" id="url_no_1" aria-describedby="basic-addon3">
                                 </div>
+                            </div>
+                            <div class="form-group col-md-2 add_del_btn_outer">
+                                <button class="btn_round add_node_btn_frm_field" title="Copy this line" type="button">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+
+                                <button class="btn_round remove_node_btn_frm_field" title="Delete this line" type="button" disabled>
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <div class="row ml-0 bg-light mt-3 border py-3">
                     <div class="col-md-12">
