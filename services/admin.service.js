@@ -26,7 +26,8 @@ export default {
         return list[0].amount
     },
     async countCoursebyCateID(idlv) {
-        return db('khoahoc').count({amount: 'MaKhoaHoc'}).where('LinhVuc', idlv);
+        const list = await db('khoahoc').count({amount: 'MaKhoaHoc'}).where('LinhVuc', idlv);
+        return list[0];
     },
 
     vwAllVideo() {

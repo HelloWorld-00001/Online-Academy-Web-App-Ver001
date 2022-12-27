@@ -124,24 +124,60 @@ router.get('/categories', async function(req, res) {
     });
 });
 router.post('/categories', async function(req, res) {
-    await adminService.addCategory(req.body.Name);
-    const categories = await adminService.findAllCategory();
-    res.render('vwAdmin/categories', {
-        layout: 'adminLayout',
-        categories: categories
-    });
+    console.log(req.body);
+    const result = req.body;
+    
+    if (result.addCategory === 'add') {
+        console.log(result.Name);
+        await adminService.addCategory(result.Name);
+        const categories = await adminService.findAllCategory();
+        return res.render('vwAdmin/categories', {
+            layout: 'adminLayout',
+            categories: categories
+        });
+    }
+    if (result.btnDelete === 'delete') {
+        const id = result.id;
+        const amountC = await adminService.countCoursebyCateID(id);
+        if (amountC.amount === 0) {
+            await adminService.delCategory(id);
+            res.redirect('/admin/categories');
+        }
+        else {
+            console.log(amountC.amount);
+            const categories = await adminService.findAllCategory();
+            return res.render('vwAdmin/categories', {
+                layout: 'adminLayout',
+                categories: categories,
+                err_message: true,
+            });
+        }
+    }
 });
 
-router.get('/delCategory', async function(req, res) {
-    const id = req.query.id;
-    await adminService.delCategory(id);
-    res.redirect('/admin/categories');
-});
-router.post('/delCategory', async function(req, res) {
-    res.render('vwAdmin/categories', {
-        layout: 'adminLayout',
-    });
-});
+// router.post('/delCategory', async function(req, res) {
+//     const id = req.body.id;
+//     const amountC = await adminService.countCoursebyCateID(id);
+//     console.log(amountC.amount);
+//     if (amountC.amount === 0) {
+//         await adminService.delCategory(id);
+//         res.redirect('/admin/categories');
+//     }
+//     else {
+//         const categories = await adminService.findAllCategory();
+//         return res.render('vwAdmin/categories', {
+//             layout: 'adminLayout',
+//             categories: categories,
+//             err_message: true,
+//         });
+//     }
+//     //
+// });
+// router.get('/delCategory', async function(req, res) {
+//     res.render('vwAdmin/categories', {
+//         layout: 'adminLayout',
+//     });
+// });
 
 /* Course Management Section */
 router.get('/courses', async function(req, res) {

@@ -24,6 +24,11 @@
             });
         })
     </script>
+    {{#if err_message}}
+        <script>
+            $('#ModalAlert').addClass('shown.bs.modal')
+        </script>
+    {{/if}} 
 {{/section}}
 
 <section class="pcoded-main-container">
@@ -41,7 +46,7 @@
                                         <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
                                     </div>
                                     <div>
-                                        <a name="" id="" class="btn btn-outline-primary float-right" role="button" data-toggle="modal" data-target="#ModalAddCategory">  
+                                        <a name="Name" value="" id="" class="btn btn-outline-primary float-right" role="button" data-toggle="modal" data-target="#ModalAddCategory">  
                                             <i class="fa fa-plus text-c-blue" aria-hidden="true"></i> <span class="text-c-blue">Add more</span> 
                                         </a>
                                     </div>      
@@ -71,9 +76,10 @@
                                                                 <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory">
                                                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
                                                                 </a>
-                                                                <a href="/admin/delCategory?id={{MaLinhVuc}}" name="id" id="" class="view text-c-red dropdown-item" role="button">
+                                                                <input name="id" type="hidden" value="{{MaLinhVuc}}">
+                                                                <button name="btnDelete" value="delete" class="view text-c-red dropdown-item" role="button" type="submit">
                                                                     <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
-                                                                </a>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -113,7 +119,7 @@
                 </div>
                 <div class="modal-footer text-muted">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>
+                    <button type="submit" name="addCategory" value="add" class="btn btn-primary" id="paramsSubmit">Save</button>
                 </div>
             </form>
         </div>
@@ -145,3 +151,26 @@
         </div>
     </div>
 </div>
+
+<!-- Khung alert  -->
+<div class="modal fade" id="ModalAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Alert</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <p>This Field have courses</p>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
