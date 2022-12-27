@@ -46,14 +46,14 @@ router.get('/allTable', async function(req, res) {
 /* Teacher Management Section */
 router.get('/teachers', async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
-    res.render('vwAdmin/teacher/teachers', {
+    res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
         teacher: teacherList
     });
 });
 
 router.get('/addTeacher', function (req, res){
-    res.render('vwAdmin/teacher/add', {
+    res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
     });
 });
@@ -62,7 +62,7 @@ router.post('/addTeacher', async function (req, res){
     const x = await teacherService.addAccount(req.body);
     const MaTk = await teacherService.findIdTeacher(req.body.Username);
     const y = await teacherService.add(req.body, MaTk[0]);
-    res.render('vwAdmin/teacher/add', {
+    res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
     });
 });
@@ -71,7 +71,7 @@ router.post('/delTeacher', async function (req, res){
     //await teacherService.del(req.body.MaGiaoVien);
     //await teacherService.delAccount(req.body.MaTaiKhoan);
 
-    res.render('vwAdmin/teacher/teachers', {
+    res.render('vwAdmin/manage/teachers', {
         layout: 'adminLayout',
     });
 });
@@ -88,7 +88,7 @@ router.get('/editTeacher', async function (req, res){
     const teacher = await teacherService.findTeacherById(id);
 
 
-    res.render('vwAdmin/teacher/edit', {
+    res.render('vwAdmin/manage/edit', {
         layout: 'adminLayout',
         teacher: teacher
     });
@@ -100,7 +100,7 @@ router.get('/viewTeacher', async function (req, res){
     const teacher = await teacherService.findTeacherById(id);
     console.log(teacher);
 
-    res.render('vwAdmin/teacher/view', {
+    res.render('vwAdmin/manage/view', {
         layout: 'adminLayout',
         teacher: teacher
     });
@@ -109,7 +109,7 @@ router.get('/viewTeacher', async function (req, res){
 router.post('/teachers', async function(req, res) {
     //await teacherService.del(req.body.MaGiaoVien);
     //await teacherService.delAccount(req.body.MaTaiKhoan);
-    res.render('vwAdmin/teacher/teachers', {
+    res.render('vwAdmin/manage/teachers', {
         layout: 'adminLayout',
     });
 });
