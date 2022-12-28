@@ -237,5 +237,4 @@ router.get('/courses', async function (req, res){
         courses: courses,
     });
 });
-
 export default router;
