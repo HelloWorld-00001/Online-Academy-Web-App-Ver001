@@ -58,6 +58,7 @@ app.use(async function(req, res, next) {
     res.locals.temp = req.session.temp;
     res.locals.auth = req.session.auth;
     res.locals.authUser = req.session.authUser;
+
     next();
 });
 
@@ -94,6 +95,12 @@ app.engine('hbs', engine({
         },
         isTeacherAndAdmin(LoaiTaiKhoan, options) {
             if(LoaiTaiKhoan === "Giáo Viên" || LoaiTaiKhoan === "Admin") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
+        isTeacher(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Giáo Viên") {
                 return options.fn(this);
             }
             return options.inverse(this);
