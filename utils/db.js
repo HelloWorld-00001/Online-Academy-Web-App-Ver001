@@ -13,5 +13,4 @@ const knex = knexObj({
     connection: connectionInfo,
     pool: { min: 0, max: 10 }
 });
-
 export default knex;

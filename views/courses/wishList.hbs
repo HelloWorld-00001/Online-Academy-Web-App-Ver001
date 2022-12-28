@@ -1,57 +1,36 @@
-{{#section 'css'}}
-<style>
-.background{
-    background-color: chocolate;
-    padding: 5px;
-    border-radius: 7px;
-    animation: bordercolor 7s linear infinite;
-}
-.foreground{
-    background-color: white;
-    color: cornflowerblue;
-    padding: 5px;
-    border-radius: 7px;
-}
-
-@keyframes bordercolor{
-    0%{background-color: rgb(100, 243, 202);
-        box-shadow: 0 12px 14px 0 rgba(100, 243, 203, 0.7);
-    }
-    60%{background-color: rgb(217, 157, 36);
-        box-shadow: 0 12px 14px 0 rgba(255, 155, 32, 0.35);}
-    40%{background-color: yellow;
-        box-shadow: 0 12px 14px 0 rgba(235, 247, 8, 0.7);}
-    20%{background-color: chartreuse;
-        box-shadow: 0 12px 14px 0 rgba(206, 250, 48, 0.7);}
-    80%{background-color: deepskyblue;
-        box-shadow: 0 12px 14px 0 rgba(79, 178, 254, 0.7);}
-    100%{background-color: rgb(221, 70, 251);
-        box-shadow: 0 12px 14px 0 rgba(255, 97, 226, 0.35);}
-
-}
-
-</style>
-{{/section}}
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">Wish list</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">Wish list</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
 
 
+<!-- Courses Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Wow</h5>
-            <h1>That is what i found</h1>
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
+            <h1>Your wish list courses</h1>
         </div>
-        {{#if this.isNull}}
-            <h5 class="card-title">I am so sorry. I found nothing T.T</h5>
+        {{#if this.empty}}
+            <h5 class="card-title">Không có dữ liệu</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         {{else}}
-
-            <div class="row ">
+            <div class="row">
                 {{#each this.courses}}
                     <div class="col-lg-4 mb-3">
                         <div class="form_course">
-                            <div class="card h-100 background cardCus" >
-                                <div class="foreground" >
-                                <img class="card-img-top p-0" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-2">
                                         <small class="m-0">
@@ -94,10 +73,9 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
                 {{/each}}
-                </div>
+            </div>
             <nav>
                 <ul class="pagination justify-content-center">
                     {{#if this.previousPageNumber.isPreviousPage}}
@@ -135,3 +113,4 @@
         {{/if}}
     </div>
 </div>
+<!-- Courses End -->

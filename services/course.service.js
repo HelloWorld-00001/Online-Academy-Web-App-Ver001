@@ -299,7 +299,6 @@ export default {
         if(userReview.length === 0) {
             return null;
         }
-        console.log(userReview)
         return userReview;
     },
 
@@ -313,6 +312,29 @@ export default {
         const rel = await db.raw(sql);
         return rel;
     },
+    async SearchOrderByPrice(name) {
+        const sql = `SELECT * from
+        (SELECT MaKhoaHoc
+        FROM khoahoc
+        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
+        AGAINST('` + name + `')) M
+        INNER JOIN khoahoc k USING(MaKhoaHoc)
+        ORDER BY k.Gia`
+        const rel = await db.raw(sql);
+        return rel;
+    },
+    async SearchOrderByRate(name) {
+        const sql = `SELECT * from
+        (SELECT MaKhoaHoc
+        FROM khoahoc
+        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
+        AGAINST('` + name + `')) M
+        INNER JOIN khoahoc k USING(MaKhoaHoc)
+        ORDER BY k.RateTB DESC `
+        const rel = await db.raw(sql);
+        return rel;
+    },
+
 
     async isCourseRegister(maKhoaHoc, maHocVien) {
         const list = await db('DanhSachDangKi')
@@ -322,4 +344,5 @@ export default {
             return null;
         return list[0];
     },
+
 }

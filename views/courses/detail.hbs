@@ -293,10 +293,10 @@
                                 {{!-- <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a> --}}
                                 <a>hahaha</a>
                             {{else}}
-                                <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a>
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/course/addToWishList?MaKH={{this.course.MaKhoaHoc}}&MaTK={{authUser.MaTaiKhoan}}" role="button">Add to wish list</a>
                             {{/if}}
                         {{else}}
-                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Add to cart</a>
+                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Add to wish list</a>
                         {{/isStudent}}
                     </div>
                     <div class="mt-3">

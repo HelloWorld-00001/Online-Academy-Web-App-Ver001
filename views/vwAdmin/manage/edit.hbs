@@ -303,11 +303,17 @@
                
         <div class="col-6">
             <label for="txtNameCourse">UserName</label>
-            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Username}}" autofocus>
+            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.Username}}" autofocus readonly>
         </div>
-        <div class="col-6">
-            <label for="txtNameCourse">Password</label>
-            <input name="Password" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Password}}" autofocus>
+        <div class="col-4">
+            <label for="txtNameCourse">Phone number</label>
+            <input name="SDT" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.SDT}}" autofocus>
+        </div>
+
+        <div class="col-2">
+            <label for="txtNameCourse">Course quantity</label>
+            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.SLKhoaHoc}}" autofocus readonly>
+
         </div>
 
         </div>
@@ -348,18 +354,7 @@
             <label for="txtNameCourse" >Address</label>
             <input name="DiaChi" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.DiaChi}}" autofocus>
         </div>
-        <div class="col-4">
-            <label for="txtNameCourse">Phone number</label>
-            <input name="SDT" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SDT}}" autofocus>
-        </div>
-
-        {{#if isStudent}}
-        {{else}}
-        <div class="col-2">
-            <label for="txtNameCourse">Course quantity</label>
-            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SLKhoaHoc}}" autofocus>
-        </div>
-        {{/if}}
+        
 
         </div>
 <!--        Description-->
