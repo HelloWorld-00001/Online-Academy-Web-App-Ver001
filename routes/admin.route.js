@@ -3,6 +3,9 @@ import adminService from '../services/admin.service.js';
 import studentService from '../services/student.service.js';
 import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
+
+import bcrypt from 'bcryptjs';
+
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -61,6 +64,11 @@ router.get('/addTeacher', function (req, res){
 });
 
 router.post('/addTeacher', async function (req, res){
+    const rawPassword = req.body.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawPassword, salt);
+    req.body.Password = hash;
+
     const x = await teacherService.addAccount(req.body);
     const MaTk = await teacherService.findIdTeacher(req.body.Username);
     const y = await teacherService.add(req.body, MaTk[0]);
@@ -68,6 +76,7 @@ router.post('/addTeacher', async function (req, res){
         layout: 'adminLayout',
     });
 });
+
 router.post('/delTeacher', async function (req, res){
     console.log(req.body);
     //await teacherService.del(req.body.MaGiaoVien);
@@ -88,7 +97,6 @@ router.get('/delTeacher', async function (req, res){
 router.get('/editTeacher', async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
-
 
     res.render('vwAdmin/manage/edit', {
         layout: 'adminLayout',
@@ -119,7 +127,7 @@ router.get('/viewTeacher', async function (req, res){
 
     res.render('vwAdmin/manage/view', {
         layout: 'adminLayout',
-        teacher: teacher
+        info: teacher
     });
 
 });
@@ -148,10 +156,7 @@ router.post('/categories', async function(req, res) {
         console.log(result.Name);
         await adminService.addCategory(result.Name);
         const categories = await adminService.findAllCategory();
-        return res.render('vwAdmin/categories', {
-            layout: 'adminLayout',
-            categories: categories
-        });
+        res.redirect('/admin/categories');
     }
     if (result.btnDelete === 'delete') {
         const id = result.id;
@@ -209,6 +214,7 @@ router.get('/courses', async function(req, res) {
 //Student
 router.get('/students', async function(req, res) {
     const studentList = await studentService.findAll();
+    
     res.render('vwAdmin/student/students', {layout: 'adminLayout',
         teacher: studentList
     });
@@ -227,7 +233,7 @@ router.post('/students', async function(req, res) {
     }
 
     if(result.grantStudent === 'grant') {
-        await accountService.grant(idAccount);
+        await accountService.grantTeacher(idAccount);
         await studentService.delBangDanhGia(id);
         await studentService.delDanhSachDangKi(id);
         await studentService.del(id);
@@ -240,15 +246,52 @@ router.post('/students', async function(req, res) {
         await teacherService.addTeacher(teacher);
     }
     
+    if(result.grantAdmin === 'grant') {
+        await accountService.grantAdmin(idAccount);
+        await studentService.delBangDanhGia(id);
+        await studentService.delDanhSachDangKi(id);
+        await studentService.del(id);
+    }
+
     const studentList = await studentService.findAll();
     res.render('vwAdmin/student/students', {layout: 'adminLayout',
         teacher: studentList
     });
 });
 
+
+router.get('/addStudent', async function (req, res){
+    res.render('vwAdmin/manage/add', {
+        layout: 'adminLayout',
+        isStudent: true,
+    });
+});
+
+router.post('/addStudent', async function (req, res){
+    const student = req.body;
+    console.log(student);
+
+    const rawPassword = student.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(rawPassword, salt);
+    student.Password = hash;
+
+    await accountService.add(student);
+    const account = await accountService.findByUsername(student.Username);
+    console.log(account);
+    await studentService.add(account.MaTaiKhoan);
+
+    res.render('vwAdmin/manage/add', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
+    });
+});
+
 router.get('/editStudent', async function (req, res){
     const id = req.query.id;
     const student = await studentService.findByID(id);
+    console.log(student);
 
     res.render('vwAdmin/manage/edit', {
         layout: 'adminLayout',
@@ -280,27 +323,6 @@ router.get('/viewStudent', async function (req, res){
         isStudent
     });
 
-});
-
-router.get('/addStudent', async function (req, res){
-    const id = req.query.id;
-
-    res.render('vwAdmin/manage/add', {
-        layout: 'adminLayout',
-        isStudent: true
-    });
-});
-
-router.post('/addStudent', async function (req, res){
-    const student = req.body;
-    console.log(student);
-    await accountService.edit(student.MaTaiKhoan, student);
-
-    res.render('vwAdmin/manage/edit', {
-        layout: 'adminLayout',
-        info: student,
-        isStudent: true
-    });
 });
 
 export default router;
