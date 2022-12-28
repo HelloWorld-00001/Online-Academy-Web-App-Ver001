@@ -13,6 +13,18 @@ export default {
         return list[0];
     },
 
+    async findCoursesByIdTeacher(id) {
+        const list = await db('khoahoc')
+            .select(
+                'khoahoc.*',
+                'chitietkhoahoc.*',
+                'linhvuc.*',
+            ).where('khoahoc.GiaoVien', id)
+            .innerJoin('chitietkhoahoc', {'chitietkhoahoc.MaKhoaHoc': 'khoahoc.MaKhoaHoc'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+        return list;
+    },
+
     async findTeacherIdByAccountId(AccountId) {
         const list = await db('giaovien')
             .select('giaovien.MaGiaoVien').where('giaovien.MaTaiKhoan', AccountId)
@@ -24,6 +36,7 @@ export default {
             .select('giaovien.MaTaiKhoan').where('giaovien.MaGiaoVien', id)
         return list[0];
     },
+
     async findCourseId(obj) {
         const list = await db('khoahoc')
             .select('khoahoc.MaKhoaHoc')
@@ -52,6 +65,7 @@ export default {
                             DiaChi: account.Diachi
             })
     },
+
     async editKhoaHoc(courseId, obj) {
         return db('khoahoc')
             .where({MaKhoaHoc: courseId})

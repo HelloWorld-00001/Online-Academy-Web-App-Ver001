@@ -26,9 +26,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>STT</th>
+                    <th>ID</th>
                     <th>Name course</th>
+                    <th> Start Day</th>
+                    <th> End Day </th>
                     <th>Status</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -36,49 +37,25 @@
                 <tbody>
                 {{#each this.courses}}
                     <tr>
-                        <td scope="row">{{CatID}}</td>
-                        <td>{{CatName}}</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/admin/categories/edit?id={{CatID}}" role="button" title="Edit
-                            Category">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                        </td>
+                        <td scope="row">{{MaKhoaHoc}}</td>
+                        <td>{{TenKhoaHoc}}</td>
+                        <td>{{#convertDate NgayBD}} {{/convertDate}}</td>
+                        <td>{{#convertDate NgayKT}} {{/convertDate}}</td>
+                        <td>{{TrangThai}}</td>
                         <td>
-                            <a class="btn btn-sm btn-outline-primary" href="/admin/categories/add" role="button">
+                            <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{MaKhoaHoc}}" role="button">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                 Edit
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-primary btn-sm" href="/course/detail/{{MaKhoaHoc}}" role="button" title="View
+                            Category">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                View
                             </a>
                         </td>
                     </tr>
                 {{/each}}
-                    <tr>
-                    <td scope="row">ID01</td>
-                    <td>01</td>
-                    <td>
-                        Web Design Course
-                    </td>
-                    <td>Done</td>
-                    <td>
-                        <a class="btn btn-sm btn-outline-primary" href="/admin/categories/add" role="button">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                            Edit
-                        </a>
-                    </td>
-                <tr>
-                    <td scope="row">ID02</td>
-                    <td>02</td>
-                    <td>
-                        HTML & CSS Cash Course Tutorial
-                    </td>
-                    <td>Inprogress</td>
-                    <td>
-                        <a class="btn btn-sm btn-outline-primary" href="/admin/categories/add" role="button">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                            Edit
-                        </a>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
