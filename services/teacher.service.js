@@ -13,6 +13,12 @@ export default {
         return list[0];
     },
 
+    async findTeacherIdByAccountId(AccountId) {
+        const list = await db('giaovien')
+            .select('giaovien.MaGiaoVien').where('giaovien.MaTaiKhoan', AccountId)
+        return list[0].MaGiaoVien;
+    },
+
     async findAccountByIdTeacher(id) {
         const list = await db('giaovien')
             .select('giaovien.MaTaiKhoan').where('giaovien.MaGiaoVien', id)
@@ -24,16 +30,9 @@ export default {
             .where({
                 TenKhoaHoc: obj.TenKhoaHoc,
                 LinhVuc: obj.MaLinhVuc,
-                Gia: obj.Gia,
-                SoLuongVideo: obj.SoLuongVideo,
                 GiaoVien: obj.GiaoVien,
-                KhuyenMai: obj.KhuyenMai,
-                RateTB: 0,
-                SLHocSinhDanhGia: 0,
-                MoTaNgan: obj.MoTaNgan,
-                Image: obj.Image,
-                LuotXem: 0,})
-        return list[0];
+            })
+        return list[0].MaKhoaHoc;
     },
 
     async editGiaovien(account, idTeacher) {
@@ -107,6 +106,19 @@ export default {
                 MoTaNgan: obj.MoTaNgan,
                 Image: obj.Image,
                 LuotXem: 0,
+            })
+    },
+    async insertChiTietKhoaHoc(courseId, obj) {
+        return db('chitietkhoahoc')
+            .insert({
+                MaKhoaHoc: courseId,
+                NgayCapNhat: obj.dateTime,
+                MoTaChiTiet: obj.description,
+                Link: '',
+                SLHocVien: 0,
+                NgayBD: obj.NgayBD,
+                NgayKT: obj.NgayKT,
+                TrangThai: obj.isDone,
             })
     },
     async getNameImage(accountId) {
