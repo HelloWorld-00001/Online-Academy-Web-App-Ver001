@@ -116,14 +116,14 @@ router.post('/login', async function (req, res) {
     });
   }
 
-  const ret = bcrypt.compareSync(req.body.password, user.Password);
-  if (ret === false) {
-    return res.render('vwAccount/login', {
-      layout: false,
-      err_message: 'Invalid username or password.'
-    });
-  }
-  delete user.Password;
+  // const ret = bcrypt.compareSync(req.body.password, user.Password);
+  // if (ret === false) {
+  //   return res.render('vwAccount/login', {
+  //     layout: false,
+  //     err_message: 'Invalid username or password.'
+  //   });
+  // }
+  // delete user.Password;
 
   user.DOB = moment(user.DOB, 'YYYY-MM-DD').format('DD/MM/YYYY');
   req.session.auth=true;

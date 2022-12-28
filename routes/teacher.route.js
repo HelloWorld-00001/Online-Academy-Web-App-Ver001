@@ -227,8 +227,8 @@ router.post('/profile', function (req, res){
 });
 
 router.get('/courses', async function (req, res){
-    // const accountId = req.session.authUser.MaTaiKhoan || 0;
-    const accountId = 1; // temp
+    const accountId = req.session.authUser.MaTaiKhoan || 0;
+    // const accountId = 1; // temp
     const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
     const courses = await teacherService.findCoursesByIdTeacher(teacherId);
     console.log(courses);

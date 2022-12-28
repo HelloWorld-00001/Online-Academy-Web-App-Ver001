@@ -127,7 +127,13 @@
                                 Hi, {{authUser.Name}}
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/mylearning">My learning</a>
+                                {{#isTeacher authUser.LoaiTaiKhoan}}
+                                    <a class="dropdown-item" href="/teacher/input">Post new course</a>
+                                    <a class="dropdown-item" href="/teacher/courses">My courses</a>
+                                {{/isTeacher}}
+                                {{#isStudent authUser.LoaiTaiKhoan}}
+                                    <a class="dropdown-item" href="/mylearning">My learning</a>
+                                {{/isStudent}}
                                 <a class="dropdown-item" href="/account/profile">Profile</a>
                                 <form id="frmLogout" action="/account/logout" method="post">
                                     <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Logout</a>
