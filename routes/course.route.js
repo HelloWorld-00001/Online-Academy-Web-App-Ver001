@@ -105,8 +105,8 @@ router.get('/detail/course', async function (req, res) {
     });
 });
 
-router.post('/detail/:id', async function (req, res) {
-    const makhoahoc = req.params.id || 0;
+router.post('/detail/course', async function (req, res) {
+    const makhoahoc = req.query.id || 0;
 
 
     const today = new Date().toISOString().slice(0, 10);
