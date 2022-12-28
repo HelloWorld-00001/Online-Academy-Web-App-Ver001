@@ -107,14 +107,15 @@ router.get('/profile/google', async function (req, res) {
     var user = await accountService.findByUsername(req.user.id);
     if(user === null) {
       await accountService.add(NewUser);
-    }
-    user = await accountService.findByUsername(req.user.id);
 
-    const NewStudent = {
-      MaTaiKhoan: user.MaTaiKhoan,
-      SLKhoaHoc: 0
+      user = await accountService.findByUsername(req.user.id);
+
+      const NewStudent = {
+        MaTaiKhoan: user.MaTaiKhoan,
+        SLKhoaHoc: 0
+      }
+      await studentService.add(NewStudent);
     }
-    await studentService.add(NewStudent);
 
     req.session.auth = true;
     req.session.authUser = user;
