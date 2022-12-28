@@ -3,6 +3,10 @@ import adminService from '../services/admin.service.js';
 import studentService from '../services/student.service.js';
 import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
+
+import bcrypt from 'bcryptjs';
+
+import courseService from '../services/course.service.js';
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -316,4 +320,67 @@ router.post('/addStudent', async function (req, res){
     });
 });
 
+router.post('/delCourse', async function (req, res){
+    console.log(req.body);
+    //await teacherService.del(req.body.MaGiaoVien);
+    //await teacherService.delAccount(req.body.MaTaiKhoan);
+
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+    });
+});
+router.get('/delCourse', async function (req, res){
+    console.log(req.query);
+    const id = req.query.id;
+    await courseService.delAllVidCoursebyID(id);
+    await courseService.delDetailCoursebyID(id);
+    await courseService.delRegCoursebyID(id);
+    await courseService.delRatingCoursebyID(id);
+    await courseService.delCoursebyID(id)
+
+    res.redirect('/admin/courses');
+});
+
+router.get('/viewCourse', async function (req, res){
+    console.log(req.query);
+    const mkh = req.query.id;
+    const course = await courseService.findDetailCourseByID(mkh);
+    if (course === null) {
+        return res.redirect('/');
+    }
+
+    const courseVideoList = await courseService.findCourseVideoList(mkh);
+    const top5CousresMostView = await courseService.findTop5MostViewWithField(course.LinhVuc, mkh);
+    const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
+    const studentReviewList = await courseService.getStudentReviewList(mkh);
+
+    for(let i = 0; i < courseVideoList.length; i++) {
+        if(i === 0 || i === 1) {
+            Object.assign(courseVideoList[i], {isShowVideo: true});
+        }
+        else {
+            Object.assign(courseVideoList[i], {isShowVideo: false});
+        }
+    }
+
+    var isCoursesRegister = false;
+    
+    if(req.session.auth === true){
+        if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
+            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+            if(courseRegistered !== null)
+                isCoursesRegister = true;
+        }
+    }
+    res.render('vwAdmin/course/view', {
+        layout: 'adminLayout',
+        course: course,
+        courseVideoList: courseVideoList,
+        isVideoListEmpty: courseVideoList.length === 0,
+        top5CousresMostVie: top5CousresMostView,
+        inforStudentsOfTeacher: inforStudentsOfTeacher,
+        studentReviewList: studentReviewList,
+    });
+});
 export default router;
