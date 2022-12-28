@@ -305,8 +305,12 @@
                                     <h4> {{this.course.KhuyenMai}}% off</h4>
                                 {{/if}}
                             </div>
-                            <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
-                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
+                            {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                            {{else}}
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
+                            {{/isTeacherAndAdmin}}
                         {{/isStudent}}
                     </div>
 

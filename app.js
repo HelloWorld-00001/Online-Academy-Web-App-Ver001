@@ -91,7 +91,13 @@ app.engine('hbs', engine({
                 return options.fn(this);
             }
             return options.inverse(this);
-        }
+        },
+        isTeacherAndAdmin(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Giáo Viên" && LoaiTaiKhoan === "Admin") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
     }
 }));
 
