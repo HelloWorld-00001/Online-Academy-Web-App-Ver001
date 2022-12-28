@@ -179,4 +179,8 @@ export default {
          //delete entity.CatID;
          //return  db('categories').where('CatID', id).update(entity;
      },
+
+    addTeacher(teacher) {
+        return db('GiaoVien').insert(teacher);
+    }
 }
