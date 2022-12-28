@@ -345,4 +345,12 @@ export default {
         return list[0];
     },
 
+    addBangDanhSachDangKi(newDanhsachdangki) {
+        return db('danhsachdangki').insert(newDanhsachdangki);
+    },
+
+
+    updateSLKhoaHoc(idStudent, amountCourse) {
+        return db('hocvien').where('MaHocVien', idStudent).update({SLKhoaHoc: amountCourse});
+    },
 }

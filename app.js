@@ -21,9 +21,9 @@ import authRoute from "./routes/auth.route.js";
 import courseRoute from "./routes/course.route.js";
 import categoryUserRoute from "./routes/category-user.route.js";
 import teacherRoute from "./routes/teacher.route.js";
-import adminRoute from "./routes/admin.route.js";
-import mylearningRoute from "./routes/mylearning-course.route.js";
-
+import adminRoute from "./routes/admin.route.js"
+import mylearningRoute from './routes/mylearning-course.route.js'
+import studentService from "./services/student.service.js";
 
 const app = express();
 app.use(
@@ -61,12 +61,12 @@ app.use(async function (req, res, next) {
     req.session.wishList = [];
   }
 
-  res.locals.regis = req.session.regis;
-  res.locals.temp = req.session.temp;
-  res.locals.auth = req.session.auth;
-  res.locals.authUser = req.session.authUser;
-  res.locals.wishList = req.session.wishList;
-  next();
+    res.locals.regis = req.session.regis;
+    res.locals.temp = req.session.temp;
+    res.locals.auth = req.session.auth;
+    res.locals.authUser = req.session.authUser;
+
+    next();
 });
 
 app.engine(
@@ -75,34 +75,47 @@ app.engine(
     extname: "hbs",
     defaultLayout: "index",
     helpers: {
-      section: hbs_sections(),
-      format_number(val) {
-        return numeral(val).format("0,0");
-      },
-      convertDate(str) {
-        var date = new Date(str),
-          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-          day = ("0" + date.getDate()).slice(-2);
-        return [date.getFullYear(), mnth, day].join("/");
-      },
-      for(from, to, incr, block) {
-        var accum = "";
-        for (var i = from; i < to; i += incr) accum += block.fn(i);
-        return accum;
-      },
-      ifGreaterThan(x, y, options) {
-        if (x >= y) return options.fn(this);
-        return options.inverse(this);
-      },
-      isStudent(LoaiTaiKhoan, options) {
-        if (LoaiTaiKhoan === "Học Viên") {
-          return options.fn(this);
-        }
-        return options.inverse(this);
-      },
-    },
-  })
-);
+        section: hbs_sections(),
+        format_number(val) {
+            return numeral(val).format('0,0');
+        },
+        convertDate(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("/");
+        },
+        for(from, to, incr, block) {
+            var accum = '';
+            for(var i = from; i < to; i += incr)
+                accum += block.fn(i);
+            return accum;
+        },
+        ifGreaterThan(x, y, options) {
+            if (x >= y)
+                return options.fn(this);
+            return options.inverse(this);
+        },
+        isStudent(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Học Viên") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
+        isTeacherAndAdmin(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Giáo Viên" || LoaiTaiKhoan === "Admin") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
+        isTeacher(LoaiTaiKhoan, options) {
+            if(LoaiTaiKhoan === "Giáo Viên") {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
+    }
+}));
 
 app.set("view engine", "hbs");
 app.set("views", "./views");

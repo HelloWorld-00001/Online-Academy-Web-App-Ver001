@@ -117,24 +117,10 @@ router.post('/input', function (req, res){
             console.error(err);
         } else {
             const obj = JSON.parse(JSON.stringify(req.body));
-
-            if (obj.Image === '') {
-                obj.Image = '';
-            } else {
-                obj.Image = file_name;
-            }
-            if (obj.check === 'on')
-                obj.isDone = 'Đã hoàn thành';
-            else
-                obj.isDone = 'Chưa hoàn thành';
-
-            const accountId = req.section.authUser.MaTaiKhoan || 1;
-            const teacherId = await teacherService.findTeacherById(accountId).MaGiaoVien;
-            obj.GiaoVien = teacherId;
-            await teacherService.insertNewCourse(obj);
-            const courseId = await teacherService.findCourseId(obj).MaKhoaHoc || 0;
-
             var currentdate = new Date();
+            var date = currentdate.getFullYear() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getDate();
             var datetime = currentdate.getFullYear() + "-"
                 + (currentdate.getMonth()+1)  + "-"
                 + currentdate.getDate() + " "
@@ -142,8 +128,40 @@ router.post('/input', function (req, res){
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
             obj.dateTime = datetime;
+            if (typeof obj.Image === 'undefined' )
+                obj.Image = '';
 
-            const affected_rows_chitietkhoahoc = await teacherService.editChiTietKhoaHoc(courseId, obj);
+            console.log(obj.Image);
+
+            if (obj.check === 'on')
+                obj.isDone = 'Đã hoàn thành';
+            else
+                obj.isDone = 'Chưa hoàn thành';
+            if (obj.Gia === '')
+                obj.Gia = 0;
+            if (obj.KhuyenMai === '')
+                obj.KhuyenMai = 0;
+            if (obj.url_no[obj.url_no.length - 1] === '')
+                obj.SoLuongVideo = obj.url_no.length - 1;
+            else
+                obj.SoLuongVideo = obj.url_no.length;
+
+            if (obj.NgayBD === '____/__/__')
+                obj.NgayBD = date;
+            if (obj.NgayKT === '____/__/__')
+                obj.NgayKT = date;
+
+            const accountId = req.session.authUser.MaTaiKhoan || 1;
+            console.log(accountId);
+            const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
+            console.log(await teacherService.findTeacherIdByAccountId(accountId));
+            obj.GiaoVien = teacherId;
+            await teacherService.insertNewCourse(obj);
+            const courseId = await teacherService.findCourseId(obj) || 0;
+
+
+
+            const affected_rows_chitietkhoahoc = await teacherService.insertChiTietKhoaHoc(courseId, obj);
             const affected_rows_del_danhsachvideo = await teacherService.deleteDanhSachVideoById(courseId);
             for(let i = 0; i < obj.topic_no.length; i++) {
                 if (obj.topic_no[i] === '')
@@ -208,10 +226,15 @@ router.post('/profile', function (req, res){
     res.render('vwTeacher/profile');
 });
 
-router.get('/courses', function (req, res){
+router.get('/courses', async function (req, res){
+    const accountId = req.session.authUser.MaTaiKhoan || 0;
+    // const accountId = 1; // temp
+    const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
+    const courses = await teacherService.findCoursesByIdTeacher(teacherId);
+    console.log(courses);
     res.render('vwTeacher/courses', {
-        empty: false
+        empty: false,
+        courses: courses,
     });
 });
-
 export default router;

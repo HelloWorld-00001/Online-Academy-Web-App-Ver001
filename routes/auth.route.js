@@ -54,14 +54,14 @@ router.get('/profile/facebook', async function (req, res) {
     var user = await accountService.findByUsername(req.user.id);
     if(user === null) {
       await accountService.add(NewUser);
-    }
-    user = await accountService.findByUsername(req.user.id);
+      user = await accountService.findByUsername(req.user.id);
 
-    const NewStudent = {
-      MaTaiKhoan: user.MaTaiKhoan,
-      SLKhoaHoc: 0
+      const NewStudent = {
+        MaTaiKhoan: user.MaTaiKhoan,
+        SLKhoaHoc: 0
+      }
+      await studentService.add(NewStudent.MaTaiKhoan);
     }
-    await studentService.add(NewStudent);
     
     req.session.auth = true;
     req.session.authUser = user;
@@ -105,22 +105,21 @@ router.get('/profile/google', async function (req, res) {
     }
     var user = await accountService.findByUsername(req.user.id);
     if(user === null) {
-      await accountService.add(NewUser);
-
-      user = await accountService.findByUsername(req.user.id);
+        await accountService.add(NewUser);
+        user = await accountService.findByUsername(req.user.id);
 
       const NewStudent = {
         MaTaiKhoan: user.MaTaiKhoan,
         SLKhoaHoc: 0
       }
-      await studentService.add(NewStudent);
+      await studentService.add(NewStudent.MaTaiKhoan);
     }
 
     req.session.auth = true;
     req.session.authUser = user;
     res.locals.auth = true;
     res.locals.authUser = user;
-
+    
     res.redirect('/account/profile');
 });
 export default router;
