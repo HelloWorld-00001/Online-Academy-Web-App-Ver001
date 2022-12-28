@@ -296,18 +296,18 @@
     <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
             
     <div class="page-header-title mt-3">
-        <h5 class="m-b-10"><h2>Teacher information</h2></h5>
+        <h5 class="m-b-10"><h2>Information</h2></h5>
     </div> 
 <!--        NameCourse-->
         <div class="form-group row">
                
         <div class="col-6">
             <label for="txtNameCourse">UserName</label>
-            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.Username}}" autofocus>
+            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Username}}" autofocus>
         </div>
         <div class="col-6">
             <label for="txtNameCourse">Password</label>
-            <input name="Password" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.Password}}" autofocus>
+            <input name="Password" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Password}}" autofocus>
         </div>
 
         </div>
@@ -315,11 +315,11 @@
 
         <div class="col-6">
             <label for="txtNameCourse" >Name</label>
-            <input name="Name" type="text" class="form-control" id="txtNameCourse" value="{{this.teacher.Name}}" autofocus>
+            <input name="Name" type="text" class="form-control" id="txtNameCourse" value="{{this.info.Name}}" autofocus>
         </div>
         <div class="col-6">
             <label for="txtNameCourse">Email</label>
-            <input name="Email" type="text" class="form-control" id="txtNameCourse" value="{{this.teacher.Email}}" autofocus>
+            <input name="Email" type="text" class="form-control" id="txtNameCourse" value="{{this.info.Email}}" autofocus>
         </div>
 
         </div>
@@ -328,17 +328,17 @@
 
         <div class="col-6">
             <label for="txtNameCourse">Account type</label>
-            <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="Giáo viên" readonly>
+            <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="{{this.info.LoaiTaiKhoan}}" readonly>
         </div>
         <div class="col-3">
             <label for="example">Date of bird</label>
             <i class="fas fa-calendar input-prefix"></i>
-            <input type="text" id="txtDateStart" name="DOB"  value="{{this.teacher.DOB}}" class="form-control">
+            <input type="text" id="txtDateStart" name="DOB"  value="{{this.info.DOB}}" class="form-control">
         </div>
         
         <div class="col-3">
             <label for="fuMain">Avatar</label>
-            <input type="file" multiple id="fuMain" name="Avatar"  value="{{this.teacher.Avatar}}">
+            <input type="file" multiple id="fuMain" name="Avatar"  value="{{this.info.Avatar}}">
         </div>
         </div>
 
@@ -346,29 +346,34 @@
 
         <div class="col-6">
             <label for="txtNameCourse" >Address</label>
-            <input name="DiaChi" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.DiaChi}}" autofocus>
+            <input name="DiaChi" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.DiaChi}}" autofocus>
         </div>
         <div class="col-4">
             <label for="txtNameCourse">Phone number</label>
-            <input name="SDT" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.SDT}}" autofocus>
+            <input name="SDT" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SDT}}" autofocus>
         </div>
 
+        {{#if isStudent}}
+        {{else}}
         <div class="col-2">
             <label for="txtNameCourse">Course quantity</label>
-            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse"  value="{{this.teacher.SLKhoaHoc}}" autofocus>
-
+            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SLKhoaHoc}}" autofocus>
         </div>
+        {{/if}}
 
         </div>
 <!--        Description-->
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="MoTaChiTiet" name="description" placeholder="Your description" >{{this.teacher.MoTa}}
-            </textarea>
-        </div>
+        {{#if isStudent}}
+        {{else}}
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="MoTaChiTiet" name="MoTa" placeholder="Your description" >{{this.info.MoTa}}
+                </textarea>
+            </div>
+        {{/if}}
 
         
-
+        <input type="hidden" value="{{this.info.MaTaiKhoan}}" name="MaTaiKhoan">
 <!--        Button Save-->
         <div class="card-footer text-muted">
             <button type="submit" class="btn btn-primary btn-lg btn-block">

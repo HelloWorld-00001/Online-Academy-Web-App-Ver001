@@ -1,0 +1,111 @@
+{{#section 'css'}}
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+    }
+    .text-black {
+        color: black;
+    }
+</style>
+    
+{{/section}}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-xl-12 ml-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Student Table</h5>
+                                        <a name="" id="" class="btn btn-outline-primary float-right"
+                                            href="/admin/addStudent" role="button"><i class="fa fa-plus"
+                                                aria-hidden="true"></i> Add more</a>
+                                        <span class="d-block m-t-5">Danh sach cac <code>Hoc Vien</code> cua he thong
+                                        </span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Student ID</th>
+                                                        <th>Name</th>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Address</th>
+                                                        <th>SLKH</th>
+                                                        <th colspan="4">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    {{#each this.teacher}}
+                                                    <form method="post" action="">
+                                                        <tr>
+                                                            <td>{{MaHocVien}}</td>
+                                                            <td>{{Name}}</td>
+                                                            <td>{{Username}}</td>
+                                                            <td>{{Email}}</td>
+                                                            <td>{{SDT}}</td>
+                                                            <td>{{DiaChi}}</td>
+                                                            <td>{{SLKhoaHoc}}</td>
+                                                            <input type="hidden" value={{MaHocVien}} name="MaHocVien">
+                                                            <input type="hidden" value="{{Name}}" name="Name">
+                                                            <input type="hidden" value="{{Username}}" name="Username">
+                                                            <input type="hidden" value="{{Email}}" name="Email">
+                                                            <input type="hidden" value="{{SDT}}" name="SDT">
+                                                            <input type="hidden" value="{{DiaChi}}" name="DiaChi">
+                                                            <input type="hidden" value={{SLKhoaHoc}} name="SLKhoaHoc">
+                                                            <input type="hidden" value={{MaTaiKhoan}} name="MaTaiKhoan">
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a href="/admin/viewStudent?id={{MaHocVien}}" class="view text-c-info dropdown-item" name="viewStudent" value="view">
+                                                                             <i class="fa fa-eye fa-sm" aria-hidden="true"></i> <span class="f-16 m-2">View</span>    
+                                                                        </a>
+                                                                        <a href="/admin/editStudent?id={{MaHocVien}}" class="view text-c-blue dropdown-item" name="editStudent" value="edit">
+                                                                            <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
+                                                                        </a>
+                                                                        <button type="submit" class="view text-c-green dropdown-item" name="deleteStudent" value="delete">
+                                                                            <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                        </button>
+                                                                        <button type="submit" class="view text-c-red dropdown-item" name="grantStudent" value="grant">
+                                                                            <i class="fa fa-check" aria-hidden="true"></i><span> Teacher Grant</span>
+                                                                        </button>
+                                                                            <button type="submit" class="view text-c-yellow dropdown-item" name="grantAdmin" value="grant">
+                                                                            <i class="fa fa-user" aria-hidden="true"></i><span> Admin Grant</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
