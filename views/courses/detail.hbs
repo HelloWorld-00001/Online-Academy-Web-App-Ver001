@@ -278,24 +278,33 @@
 
             <div class="card mt-3">
                 <div class="card-body h-auto">
-                    <div class="mt-3">
-                        {{#if isNoDiscount}}
-                            <span class="align-self-center">${{format_number this.course.Gia}}</span>
-                        {{else}}
-                            <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
-                            <h4>$ {{format_number this.course.finalPrice}}</h4>
-                            <h4> {{this.course.KhuyenMai}}% off</h4>
-                        {{/if}}
-                    </div>
                     <div>
                         {{#isStudent authUser.LoaiTaiKhoan}}
                             {{#if isCoursesRegister}}
                                 <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
                             {{else}}
+                                <div class="mt-1">
+                                    {{#if isNoDiscount}}
+                                        <span class="align-self-center">${{format_number this.course.Gia}}</span>
+                                    {{else}}
+                                        <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
+                                        <h4>$ {{format_number this.course.finalPrice}}</h4>
+                                        <h4> {{this.course.KhuyenMai}}% off</h4>
+                                    {{/if}}
+                                </div>
                                 <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
                                 <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
                             {{/if}}
                         {{else}}
+                            <div class="mt-1">
+                                {{#if isNoDiscount}}
+                                    <span class="align-self-center">${{format_number this.course.Gia}}</span>
+                                {{else}}
+                                    <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
+                                    <h4>$ {{format_number this.course.finalPrice}}</h4>
+                                    <h4> {{this.course.KhuyenMai}}% off</h4>
+                                {{/if}}
+                            </div>
                             <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
                             <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
                         {{/isStudent}}
