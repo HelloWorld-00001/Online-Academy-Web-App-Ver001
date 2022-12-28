@@ -36,6 +36,7 @@ export default {
             .select('giaovien.MaTaiKhoan').where('giaovien.MaGiaoVien', id)
         return list[0];
     },
+
     async findCourseId(obj) {
         const list = await db('khoahoc')
             .select('khoahoc.MaKhoaHoc')
