@@ -65,6 +65,7 @@ export default {
                             DiaChi: account.Diachi
             })
     },
+
     async editKhoaHoc(courseId, obj) {
         return db('khoahoc')
             .where({MaKhoaHoc: courseId})
