@@ -69,6 +69,11 @@ router.post('/input/:id', function (req, res){
             else
                 obj.isDone = 'Chưa hoàn thành';
 
+            if (obj.url_no[obj.url_no.length - 1] === '')
+                obj.SoLuongVideo = obj.url_no.length - 1;
+            else
+                obj.SoLuongVideo = obj.url_no.length;
+
             var currentdate = new Date();
             var datetime = currentdate.getFullYear() + "-"
                 + (currentdate.getMonth()+1)  + "-"
@@ -77,6 +82,7 @@ router.post('/input/:id', function (req, res){
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
             obj.dateTime = datetime;
+
 
             const affected_rows_khoahoc = await teacherService.editKhoaHoc(courseId, obj);
             const affected_rows_chitietkhoahoc = await teacherService.editChiTietKhoaHoc(courseId, obj);
@@ -93,8 +99,79 @@ router.post('/input/:id', function (req, res){
 });
 
 router.post('/input', function (req, res){
-    console.log(req.body);
-    res.render('vwTeacher/inputcourse');
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/courses');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
+    });
+
+
+    const upload = multer({ storage: storage });
+    upload.array('Image', 5)(req, res, async function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            const obj = JSON.parse(JSON.stringify(req.body));
+            var currentdate = new Date();
+            var date = currentdate.getFullYear() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getDate();
+            var datetime = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+            obj.dateTime = datetime;
+            if (typeof obj.Image === 'undefined' )
+                obj.Image = '';
+
+            console.log(obj.Image);
+
+            if (obj.check === 'on')
+                obj.isDone = 'Đã hoàn thành';
+            else
+                obj.isDone = 'Chưa hoàn thành';
+            if (obj.Gia === '')
+                obj.Gia = 0;
+            if (obj.KhuyenMai === '')
+                obj.KhuyenMai = 0;
+            if (obj.url_no[obj.url_no.length - 1] === '')
+                obj.SoLuongVideo = obj.url_no.length - 1;
+            else
+                obj.SoLuongVideo = obj.url_no.length;
+
+            if (obj.NgayBD === '____/__/__')
+                obj.NgayBD = date;
+            if (obj.NgayKT === '____/__/__')
+                obj.NgayKT = date;
+
+            const accountId = req.session.authUser.MaTaiKhoan || 1;
+            console.log(accountId);
+            const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
+            console.log(await teacherService.findTeacherIdByAccountId(accountId));
+            obj.GiaoVien = teacherId;
+            await teacherService.insertNewCourse(obj);
+            const courseId = await teacherService.findCourseId(obj) || 0;
+
+
+
+            const affected_rows_chitietkhoahoc = await teacherService.insertChiTietKhoaHoc(courseId, obj);
+            const affected_rows_del_danhsachvideo = await teacherService.deleteDanhSachVideoById(courseId);
+            for(let i = 0; i < obj.topic_no.length; i++) {
+                if (obj.topic_no[i] === '')
+                    continue;
+                await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "");
+            }
+            console.log(obj);
+            res.redirect('/teacher/input/' + courseId);
+        }
+    })
 });
 
 router.get('/profile', function (req, res){

@@ -1,5 +1,7 @@
 import express from 'express';
 import adminService from '../services/admin.service.js';
+import studentService from '../services/student.service.js';
+import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
 const router = express.Router();
 
@@ -90,7 +92,22 @@ router.get('/editTeacher', async function (req, res){
 
     res.render('vwAdmin/manage/edit', {
         layout: 'adminLayout',
-        teacher: teacher
+        info: teacher
+    });
+
+});
+
+router.post('/editTeacher', async function (req, res){
+    const id = req.query.id;
+    var teacher = req.body;
+    
+    await accountService.edit(teacher.MaTaiKhoan, teacher);
+    await teacherService.editGiaovien(req.body.MoTa, id);
+
+    teacher = await teacherService.findTeacherById(id);
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: teacher
     });
 
 });
@@ -186,6 +203,103 @@ router.get('/courses', async function(req, res) {
     res.render('vwAdmin/course/courses', {
         layout: 'adminLayout',
         courses: courses
+    });
+});
+
+//Student
+router.get('/students', async function(req, res) {
+    const studentList = await studentService.findAll();
+    res.render('vwAdmin/student/students', {layout: 'adminLayout',
+        teacher: studentList
+    });
+});
+
+router.post('/students', async function(req, res) {
+    const result = req.body;
+    const idAccount = result.MaTaiKhoan;
+    const id = result.MaHocVien;
+
+    if(result.deleteStudent === 'delete') {
+        await studentService.delBangDanhGia(id);
+        await studentService.delDanhSachDangKi(id);
+        await studentService.del(id);
+        await accountService.del(idAccount);
+    }
+
+    if(result.grantStudent === 'grant') {
+        await accountService.grant(idAccount);
+        await studentService.delBangDanhGia(id);
+        await studentService.delDanhSachDangKi(id);
+        await studentService.del(id);
+    
+        const teacher = {
+            MaTaiKhoan: idAccount,
+            SLKhoaHoc: 0,
+            MoTa: ""
+        }
+        await teacherService.addTeacher(teacher);
+    }
+    
+    const studentList = await studentService.findAll();
+    res.render('vwAdmin/student/students', {layout: 'adminLayout',
+        teacher: studentList
+    });
+});
+
+router.get('/editStudent', async function (req, res){
+    const id = req.query.id;
+    const student = await studentService.findByID(id);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
+    });
+});
+
+router.post('/editStudent', async function (req, res){
+    const student = req.body;
+    console.log(student);
+    await accountService.edit(student.MaTaiKhoan, student);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
+    });
+});
+
+router.get('/viewStudent', async function (req, res){
+    const id = req.query.id;
+    const student = await studentService.findByID(id);
+    const isStudent = true;
+
+    res.render('vwAdmin/manage/view', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent
+    });
+
+});
+
+router.get('/addStudent', async function (req, res){
+    const id = req.query.id;
+
+    res.render('vwAdmin/manage/add', {
+        layout: 'adminLayout',
+        isStudent: true
+    });
+});
+
+router.post('/addStudent', async function (req, res){
+    const student = req.body;
+    console.log(student);
+    await accountService.edit(student.MaTaiKhoan, student);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
     });
 });
 

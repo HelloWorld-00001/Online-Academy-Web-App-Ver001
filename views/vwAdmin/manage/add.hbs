@@ -328,7 +328,11 @@
 
         <div class="col-6">
             <label for="txtNameCourse">Account type</label>
-            <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="Giáo viên" readonly>
+            {{#if isStudent}}
+                <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="Học Viên" readonly>
+            {{else}}
+                <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus value="Giáo Viên" readonly>
+            {{/if}}
         </div>
         <div class="col-3">
             <label for="example">Date of bird</label>
@@ -360,12 +364,14 @@
 
         </div>
 <!--        Description-->
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="MoTaChiTiet" name="description" placeholder="Your description">
-            </textarea>
-        </div>
-
+        {{#if isStudent}}
+        {{else}}
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="MoTa" name="description" placeholder="Your description">
+                </textarea>
+            </div>
+        {{/if}}
         
 
 <!--        Button Save-->
