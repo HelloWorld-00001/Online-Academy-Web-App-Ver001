@@ -79,11 +79,7 @@ router.post('/sendOTP', async function (req, res) {
   await accountService.add(newUser);
 
   const user = await accountService.findByUsername(newUser.Username);
-  const NewStudent = {
-    MaTaiKhoan: user.MaTaiKhoan,
-    SLKhoaHoc: 0
-  }
-  await studentService.add(NewStudent);
+  await studentService.add(user.MaTaiKhoan);
 
   req.session.regis = false;
   req.session.temp = null;
