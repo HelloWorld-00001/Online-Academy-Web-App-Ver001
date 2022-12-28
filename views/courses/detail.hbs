@@ -171,27 +171,6 @@
             });
         });
 
-        // $(function () {
-        //     if ($(".list-course:hidden").length <= 10) {
-        //         $(".more-section").css('visibility', 'hidden');
-        //
-        //     }
-        //     console.log($(".list-course:hidden").length)
-        //
-        //     $(".list-course").slice(0, 10).show();
-        //     $(".more-section").text($(".list-course:hidden").length + " more section");
-        //     $("body").on('click touchstart', '.more-section', function (e) {
-        //         e.preventDefault();
-        //         $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
-        //         if ($(".list-course:hidden").length === 0) {
-        //             $(".more-section").css('visibility', 'hidden');
-        //         }
-        //         $('html,body').animate({
-        //             scrollTop: $('.more-section').offset().top - 500
-        //         }, 1000);
-        //     });
-        // });
-
         $(function () {
             if ($(".list-course:hidden").length > 10) {
                 $(".more-section").removeClass('d-none').addClass('d-inline-block');

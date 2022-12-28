@@ -28,16 +28,11 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
                                         <h4>Course Table</h4>
-                                        <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
-                                    </div>
-                                    <div>
-                                        <a name="" id="" class="btn btn-outline-primary float-right"
-                                            href="/admin/teacher" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add more</a>
-                                    
+                                        <span class="d-block m-t-5">Danh sach cac <code>Khoa hoc</code> cua he thong</span>
                                     </div>
                                     
                                 </div>
-                                <div class="card-body table-border-style">
+                                <div class="card-body table-border-style p-2">
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -46,35 +41,35 @@
                                                     <th>Name</th>
                                                     <th>Category</th>
                                                     <th>Video Quantity</th>
-                                                    <th>Attendance Quantity</th>
+                                                    <th>Student Quantity</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {{#each this.courses}}
                                                 <form method="post" action="" >
-                                                <tr class="">
-                                                    <td>{{MaKhoaHoc}}</td>
-                                                    <td>{{TenKhoaHoc}}</td>
-                                                    <td>{{TenLinhVuc}}</td>
-                                                    <td>{{SoLuongVideo}}</td>
-                                                    <td>{{SLHocVien}}</td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
-                                                                <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="tooltip">
-                                                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
-                                                                </a>
-                                                                <a href="#" name="id" id="" class="view text-c-red dropdown-item" role="button">
-                                                                    <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
-                                                                </a>
+                                                    <tr>
+                                                        <td>{{MaKhoaHoc}}</td>
+                                                        <td>{{TenKhoaHoc}}</td>
+                                                        <td>{{TenLinhVuc}}</td>
+                                                        <td>{{SoLuongVideo}}</td>
+                                                        <td>{{SLHocVien}}</td>                                                
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                    <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a href="/admin/viewCourse?id={{MaKhoaHoc}}" class="view dropdown-item text-c-info" title="View" data-toggle="tooltip">
+                                                                        <i class="fa fa-eye fa-sm" aria-hidden="true"></i> <span class="f-16 m-2">View</span>
+                                                                    </a>
+                                                                    <a name="id" id="" class="view text-c-red dropdown-item" href="/admin/delCourse?id={{MaKhoaHoc}}" role="button">
+                                                                        <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
                                                 </form>
                                                 {{/each}}
                                             </tbody>

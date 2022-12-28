@@ -3,9 +3,6 @@ import adminService from '../services/admin.service.js';
 import studentService from '../services/student.service.js';
 import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
-
-import bcrypt from 'bcryptjs';
-
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -79,10 +76,7 @@ router.post('/addTeacher', async function (req, res){
 
 router.post('/delTeacher', async function (req, res){
     console.log(req.body);
-    //await teacherService.del(req.body.MaGiaoVien);
-    //await teacherService.delAccount(req.body.MaTaiKhoan);
-
-    res.render('vwAdmin/manage/teachers', {
+    res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
     });
 });
@@ -177,30 +171,6 @@ router.post('/categories', async function(req, res) {
         }
     }
 });
-
-// router.post('/delCategory', async function(req, res) {
-//     const id = req.body.id;
-//     const amountC = await adminService.countCoursebyCateID(id);
-//     console.log(amountC.amount);
-//     if (amountC.amount === 0) {
-//         await adminService.delCategory(id);
-//         res.redirect('/admin/categories');
-//     }
-//     else {
-//         const categories = await adminService.findAllCategory();
-//         return res.render('vwAdmin/categories', {
-//             layout: 'adminLayout',
-//             categories: categories,
-//             err_message: true,
-//         });
-//     }
-//     //
-// });
-// router.get('/delCategory', async function(req, res) {
-//     res.render('vwAdmin/categories', {
-//         layout: 'adminLayout',
-//     });
-// });
 
 /* Course Management Section */
 router.get('/courses', async function(req, res) {
@@ -323,6 +293,27 @@ router.get('/viewStudent', async function (req, res){
         isStudent
     });
 
+});
+
+router.get('/addStudent', async function (req, res){
+    const id = req.query.id;
+
+    res.render('vwAdmin/manage/add', {
+        layout: 'adminLayout',
+        isStudent: true
+    });
+});
+
+router.post('/addStudent', async function (req, res){
+    const student = req.body;
+    console.log(student);
+    await accountService.edit(student.MaTaiKhoan, student);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
+    });
 });
 
 export default router;

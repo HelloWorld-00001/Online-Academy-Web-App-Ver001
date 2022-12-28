@@ -348,9 +348,24 @@ export default {
     addBangDanhSachDangKi(newDanhsachdangki) {
         return db('danhsachdangki').insert(newDanhsachdangki);
     },
-
-
     updateSLKhoaHoc(idStudent, amountCourse) {
         return db('hocvien').where('MaHocVien', idStudent).update({SLKhoaHoc: amountCourse});
     },
+    // Process To Delete Course
+    delAllVidCoursebyID(idkh) {
+        return db('danhsachvideo').where('MaKhoaHoc', idkh).del();
+    },
+    delRatingCoursebyID(idkh) {
+        return db('bangdanhgia').where('MaKhoaHoc', idkh).del();
+    },
+    delRegCoursebyID(idkh) {
+        return db('danhsachdangki').where('MaKhoaHoc', idkh).del();
+    },
+    delDetailCoursebyID(idkh) {
+        return db('chitietkhoahoc').where('MaKhoaHoc', idkh).del();
+    },
+    delCoursebyID(idkh) {
+        return db('khoahoc').where('MaKhoaHoc', idkh).del();
+    },
+
 }
