@@ -299,7 +299,6 @@ export default {
         if(userReview.length === 0) {
             return null;
         }
-        console.log(userReview)
         return userReview;
     },
 
@@ -321,5 +320,14 @@ export default {
         if(list.length === 0) 
             return null;
         return list[0];
+    },
+
+    addBangDanhSachDangKi(newDanhsachdangki) {
+        return db('danhsachdangki').insert(newDanhsachdangki);
+    },
+
+
+    updateSLKhoaHoc(idStudent, amountCourse) {
+        return db('hocvien').where('MaHocVien', idStudent).update({SLKhoaHoc: amountCourse});
     },
 }

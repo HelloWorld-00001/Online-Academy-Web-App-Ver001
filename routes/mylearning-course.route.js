@@ -2,10 +2,14 @@ import mylearningService from "../services/myleaning.service.js";
 import courseService from '../services/course.service.js';
 
 import express from "express";
+import studentService from "../services/student.service.js";
 const router = express.Router();
 
 router.get('/', async function (req, res) {
-    const idStudent = 1;
+    // const idStudent = 1;
+    const student = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+    const idStudent = student.MaHocVien;
+
     const limit = 6;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
@@ -39,8 +43,8 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/:id', async function (req, res) {
-    let makhoahoc = req.params.id || 0;
+router.get('/course', async function (req, res) {
+    let makhoahoc = req.query.id || 0;
     const mahocvien = 10;
     const course = await courseService.findDetailCourseByID(makhoahoc);
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
@@ -84,8 +88,8 @@ router.get('/:id', async function (req, res) {
     });
 });
 
-router.post('/:id', async function (req, res) {
-    let makhoahoc1 = req.params.id || 0;
+router.post('/course', async function (req, res) {
+    let makhoahoc1 = req.query.id || 0;
     const mahocvien = 10;
 
     const result = req.body;

@@ -1,6 +1,7 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
 import studentService from '../services/student.service.js';
+import mylearningService from "../services/myleaning.service.js";
 const router = express.Router();
 
 router.post('/search', async function (req, res) {
@@ -49,7 +50,7 @@ router.get('/', async function (req, res) {
     }
     // const list = await courseService.findCourseList(limit, offset)
     const courses = await courseService.findPageCourseAll(limit, offset);
-    res.render('course' , {
+    res.render('courses/index' , {
         courses,
         empty: courses.length === 0,
         pageNumbers,
@@ -59,8 +60,8 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/detail/:id', async function (req, res) {
-    const makhoahoc = req.params.id || 0;
+router.get('/detail/course', async function (req, res) {
+    const makhoahoc = req.query.id || 0;
     // makhoahoc = +makhoahoc
     const course = await courseService.findDetailCourseByID(makhoahoc);
 
@@ -90,7 +91,6 @@ router.get('/detail/:id', async function (req, res) {
             const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
             if(courseRegistered !== null)
                 isCoursesRegister = true;
-    
         }
     }
 
@@ -103,6 +103,21 @@ router.get('/detail/:id', async function (req, res) {
         inforStudentsOfTeacher,
         studentReviewList,
     });
+});
+
+router.post('/detail/:id', async function (req, res) {
+    const makhoahoc = req.params.id || 0;
+
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+    const ret1 = await courseService.updateSLKhoaHoc(idStudent.MaHocVien, idStudent.SLKhoaHoc + 1);
+    const dangsachdangki = {MaHocVien: idStudent.MaHocVien, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
+    const ret2 = await courseService.addBangDanhSachDangKi(dangsachdangki);
+
+
+    return res.redirect('/mylearning');
 });
 
 export default router;

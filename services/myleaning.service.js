@@ -1,7 +1,6 @@
 import db from "../utils/db.js";
 
 export default {
-
     async countStudentCourseAll(idStudent) {
         const list = await db('danhsachdangki')
             .where('MaHocVien', idStudent)
@@ -75,6 +74,7 @@ export default {
     addBangDanhGia(newRating) {
         return db('bangdanhgia').insert(newRating);
     },
+
 
     updateKhoaHoc(idCourse, rateTB, amountStudentRating) {
         return db('khoahoc')
