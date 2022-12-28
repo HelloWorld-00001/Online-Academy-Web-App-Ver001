@@ -1,6 +1,7 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
 import studentService from '../services/student.service.js';
+import mylearningService from "../services/myleaning.service.js";
 const router = express.Router();
 
 router.post('/search', async function (req, res) {
@@ -90,7 +91,6 @@ router.get('/detail/:id', async function (req, res) {
             const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
             if(courseRegistered !== null)
                 isCoursesRegister = true;
-    
         }
     }
 
@@ -103,6 +103,74 @@ router.get('/detail/:id', async function (req, res) {
         inforStudentsOfTeacher,
         studentReviewList,
     });
+});
+
+// router.post('/detail/:id', async function (req, res) {
+//     const makhoahoc = req.params.id || 0;
+//     // makhoahoc = +makhoahoc
+//     const course = await courseService.findDetailCourseByID(makhoahoc);
+//
+//     if (course === null) {
+//         return res.redirect('/');
+//     }
+//
+//     const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
+//     const top5CousresMostView = await courseService.findTop5MostViewWithField(course.LinhVuc, makhoahoc);
+//     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
+//     const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
+//
+//     for(let i = 0; i < courseVideoList.length; i++) {
+//         if(i === 0 || i === 1) {
+//             Object.assign(courseVideoList[i], {isShowVideo: true});
+//         }
+//         else {
+//             Object.assign(courseVideoList[i], {isShowVideo: false});
+//         }
+//     }
+//
+//     const MaHocVien = req.session.authUser.MaHocVien;
+//     const today = new Date().toISOString().slice(0, 10);
+//
+//     const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+//     const ret1 = await courseService.updateSLKhoaHoc(idStudent.MaHocVien, idStudent.SLKhoaHoc + 1);
+//     const dangsachdangki = {MaHocVien: idStudent.MaHocVien, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
+//     const ret2 = await courseService.addBangDanhSachDangKi(dangsachdangki);
+//
+//     var isCoursesRegister = false;
+//
+//     if(req.session.auth === true){
+//         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
+//             const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+//             if(courseRegistered !== null)
+//                 isCoursesRegister = true;
+//
+//         }
+//     }
+//
+//     res.render('courses/detail', {
+//         isCoursesRegister,
+//         course,
+//         courseVideoList,
+//         isVideoListEmpty: courseVideoList.length === 0,
+//         top5CousresMostView,
+//         inforStudentsOfTeacher,
+//         studentReviewList,
+//     });
+// });
+
+router.post('/detail/:id', async function (req, res) {
+    const makhoahoc = req.params.id || 0;
+
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+    const ret1 = await courseService.updateSLKhoaHoc(idStudent.MaHocVien, idStudent.SLKhoaHoc + 1);
+    const dangsachdangki = {MaHocVien: idStudent.MaHocVien, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
+    const ret2 = await courseService.addBangDanhSachDangKi(dangsachdangki);
+
+
+    return res.redirect('/mylearning');
 });
 
 export default router;

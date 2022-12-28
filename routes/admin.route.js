@@ -140,11 +140,12 @@ router.post('/categories', async function(req, res) {
         const id = result.id;
         const amountC = await adminService.countCoursebyCateID(id);
         if (amountC.amount === 0) {
+            console.log(amountC.amount, '1');
             await adminService.delCategory(id);
             res.redirect('/admin/categories');
         }
         else {
-            console.log(amountC.amount);
+            console.log(amountC.amount, '2');
             const categories = await adminService.findAllCategory();
             return res.render('vwAdmin/categories', {
                 layout: 'adminLayout',

@@ -24,6 +24,7 @@ import categoryUserRoute from "./routes/category-user.route.js";
 import teacherRoute from "./routes/teacher.route.js";
 import adminRoute from "./routes/admin.route.js"
 import mylearningRoute from './routes/mylearning-course.route.js'
+import studentService from "./services/student.service.js";
 const app = express();
 app.use(express.urlencoded({
     extended: true

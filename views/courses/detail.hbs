@@ -290,22 +290,17 @@
                     <div>
                         {{#isStudent authUser.LoaiTaiKhoan}}
                             {{#if isCoursesRegister}}
-                                {{!-- <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a> --}}
-                                <a>hahaha</a>
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
                             {{else}}
-                                <a class="btn btn-primary w-100 pt-3 pb-3" href="#" role="button">Add to cart</a>
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
+                                <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
                             {{/if}}
                         {{else}}
-                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Add to cart</a>
+                            <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
+                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
                         {{/isStudent}}
                     </div>
-                    <div class="mt-3">
-                        {{#if auth}}
-                            <a class="btn btn-dark w-100 pt-3 pb-3" href="#" role="button">Buy now</a>
-                        {{else}}
-                            <a class="btn btn-dark w-100 pt-3 pb-3" href="#" role="button">Buy now</a>
-                        {{/if}}
-                    </div>
+
                     <div class="mt-5">
                         <p class="font-weight-bold">This course includes:</p>
                         <div class="row mt-2">
@@ -672,5 +667,27 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+
+            <div class="modal-footer">
+                <form method="post" action="" class="delete-review">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="subBtn" value="save">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
