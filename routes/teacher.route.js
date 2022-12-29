@@ -174,8 +174,10 @@ router.post('/input', function (req, res){
     })
 });
 
-router.get('/profile', function (req, res){
-    res.render('vwTeacher/profile');
+router.get('/profile', async function (req, res){
+    const accountId = req.session.authUser.MaTaiKhoan || 1;
+    const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
+    res.redirect('/teacher/profile/' + teacherId);
 });
 
 router.get('/profile/:id', async function (req, res){
