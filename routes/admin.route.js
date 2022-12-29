@@ -6,6 +6,7 @@ import teacherService from '../services/teacher.service.js';
 
 import bcrypt from 'bcryptjs';
 
+import courseService from '../services/course.service.js';
 const router = express.Router();
 
 router.get('/', async function (req, res) {
@@ -79,10 +80,7 @@ router.post('/addTeacher', async function (req, res){
 
 router.post('/delTeacher', async function (req, res){
     console.log(req.body);
-    //await teacherService.del(req.body.MaGiaoVien);
-    //await teacherService.delAccount(req.body.MaTaiKhoan);
-
-    res.render('vwAdmin/manage/teachers', {
+    res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
     });
 });
@@ -177,30 +175,6 @@ router.post('/categories', async function(req, res) {
         }
     }
 });
-
-// router.post('/delCategory', async function(req, res) {
-//     const id = req.body.id;
-//     const amountC = await adminService.countCoursebyCateID(id);
-//     console.log(amountC.amount);
-//     if (amountC.amount === 0) {
-//         await adminService.delCategory(id);
-//         res.redirect('/admin/categories');
-//     }
-//     else {
-//         const categories = await adminService.findAllCategory();
-//         return res.render('vwAdmin/categories', {
-//             layout: 'adminLayout',
-//             categories: categories,
-//             err_message: true,
-//         });
-//     }
-//     //
-// });
-// router.get('/delCategory', async function(req, res) {
-//     res.render('vwAdmin/categories', {
-//         layout: 'adminLayout',
-//     });
-// });
 
 /* Course Management Section */
 router.get('/courses', async function(req, res) {
@@ -325,4 +299,88 @@ router.get('/viewStudent', async function (req, res){
 
 });
 
+router.get('/addStudent', async function (req, res){
+    const id = req.query.id;
+
+    res.render('vwAdmin/manage/add', {
+        layout: 'adminLayout',
+        isStudent: true
+    });
+});
+
+router.post('/addStudent', async function (req, res){
+    const student = req.body;
+    console.log(student);
+    await accountService.edit(student.MaTaiKhoan, student);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: student,
+        isStudent: true
+    });
+});
+
+router.post('/delCourse', async function (req, res){
+    console.log(req.body);
+    //await teacherService.del(req.body.MaGiaoVien);
+    //await teacherService.delAccount(req.body.MaTaiKhoan);
+
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+    });
+});
+router.get('/delCourse', async function (req, res){
+    console.log(req.query);
+    const id = req.query.id;
+    await courseService.delAllVidCoursebyID(id);
+    await courseService.delDetailCoursebyID(id);
+    await courseService.delRegCoursebyID(id);
+    await courseService.delRatingCoursebyID(id);
+    await courseService.delCoursebyID(id)
+
+    res.redirect('/admin/courses');
+});
+
+router.get('/viewCourse', async function (req, res){
+    console.log(req.query);
+    const mkh = req.query.id;
+    const course = await courseService.findDetailCourseByID(mkh);
+    if (course === null) {
+        return res.redirect('/');
+    }
+
+    const courseVideoList = await courseService.findCourseVideoList(mkh);
+    const top5CousresMostView = await courseService.findTop5MostViewWithField(course.LinhVuc, mkh);
+    const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
+    const studentReviewList = await courseService.getStudentReviewList(mkh);
+
+    for(let i = 0; i < courseVideoList.length; i++) {
+        if(i === 0 || i === 1) {
+            Object.assign(courseVideoList[i], {isShowVideo: true});
+        }
+        else {
+            Object.assign(courseVideoList[i], {isShowVideo: false});
+        }
+    }
+
+    var isCoursesRegister = false;
+    
+    if(req.session.auth === true){
+        if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
+            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+            if(courseRegistered !== null)
+                isCoursesRegister = true;
+        }
+    }
+    res.render('vwAdmin/course/view', {
+        layout: 'adminLayout',
+        course: course,
+        courseVideoList: courseVideoList,
+        isVideoListEmpty: courseVideoList.length === 0,
+        top5CousresMostVie: top5CousresMostView,
+        inforStudentsOfTeacher: inforStudentsOfTeacher,
+        studentReviewList: studentReviewList,
+    });
+});
 export default router;

@@ -12,6 +12,15 @@ router.post('/search', async function (req, res) {
     });
 });
 
+// dang lam
+router.post('/orderByPrice', async function (req, res) {
+    const courseName = await courseService.courseFullTextSearch(req.body.courseFind);
+    res.render('courses/search.hbs', {
+        courses: courseName[0],
+        isNull: courseName[0].length === 0
+    });
+});
+
 router.get('/search', function (req, res) {
     
     //console.log(productList);
@@ -22,8 +31,36 @@ router.get('/search', function (req, res) {
     res.render('/');
 });
 
-``
-router.get('/', async function (req, res) {
+router.get('/wishList', async function (req, res) {
+    const wl = req.session.wisList;
+    const wish = [];
+    for (var d in wl) {
+        const course = await courseService.findDetailCourseByID(wl[d].MaKH);
+        wish.push(course);
+    }
+
+    res.render('courses/wishList', {
+        courses: wish
+    });
+});
+
+router.get('/addToWishList', function (req, res) {
+    const data = req.session.wisList;
+    var isAdd = false;
+    for (var d in data) {
+        if (data[d].MaKH === req.query.MaKH && data[d].MaTK === req.query.MaTK){
+            isAdd = true;
+        }
+    }
+    if (isAdd === false) {
+        data.push(req.query);
+    }
+    req.session.wisList = data;
+    res.redirect(`/course/detail/${req.query.MaKH}`);
+});
+
+
+router.get('/', async function (req, res) { 
     const fields = await courseService.countByField();
 
     const limit = 6;

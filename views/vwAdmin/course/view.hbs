@@ -1,0 +1,594 @@
+{{#section 'css'}}
+<style>
+    .accordion .fa {
+        margin-right: 0.5rem;
+        font-size: 24px;
+        font-weight: bold;
+        position: relative;
+        top: 2px;
+    }
+
+    .owl-stage:first-child {
+        margin-left: 15px;
+    }
+
+    .owl-carousel .nav-button {
+        height: 50px;
+        width: 25px;
+        cursor: pointer;
+        position: absolute;
+        top: 110px !important;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .owl-carousel .owl-prev.disabled,
+    .owl-carousel .owl-next.disabled {
+        pointer-events: none;
+        opacity: 0.25;
+    }
+
+    .owl-carousel .owl-prev {
+        left: -5px;
+    }
+
+    .owl-carousel .owl-next {
+        right: -35px;
+    }
+
+    .owl-theme .owl-nav [class*=owl-] {
+        color: #ffffff;
+        font-size: 39px;
+        background: #000000;
+        border-radius: 3px;
+    }
+
+    .owl-carousel .prev-carousel:hover {
+        background-position: 0px -53px;
+    }
+
+    .owl-carousel .next-carousel:hover {
+        background-position: -24px -53px;
+    }
+
+    .card--feedback {
+        height: 280px;
+    }
+
+    .card__top {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+    .card__avatar,
+    .card__avatar__teacher {
+        margin-right: 15px;
+    }
+
+    .card__avatar img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+    }
+
+    .card__avatar__teacher img {
+        width: 184px;
+        height: 184px;
+        border-radius: 50%;
+    }
+
+    .card__name {
+        margin-bottom: 0;
+    }
+
+    .card--feedback .card-body .card-text {
+        color: #29303b;
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    a.disabled {
+        color: gray;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    #review-list .course-review {
+        display: none;
+    }
+
+    .modal-dialog {
+        max-width: 800px;
+        margin: 50px auto;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 0px;
+    }
+
+    .close {
+        position: absolute;
+        right: -30px;
+        top: 0;
+        z-index: 999;
+        font-size: 2rem;
+        font-weight: normal;
+        color: #fff;
+        opacity: 1;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script>
+    $(document).ready(function () {
+        // Add down arrow icon for collapse element which is open by default
+        $(".collapse.show").each(function () {
+            $(this).prev(".card-header").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+        });
+
+        // Toggle right and down arrow icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function () {
+            $(this).prev(".card-header").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+        }).on('hide.bs.collapse', function () {
+            $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+        });
+    });
+
+    $('.owl-carousel').owlCarousel({
+        margin: 15,
+        nav: true,
+        autoplay: true,
+        loop: true,
+        navText: ["<div class='nav-button owl-prev bg-color'>‹</div>", "<div class='nav-button owl-next bg-color'>›</div>"],
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 2
+            }
+        }
+    });
+
+    $('.disabled').click(function (e) {
+        e.preventDefault();
+    });
+
+    $(function () {
+        if ($(".course-review:hidden").length < 4) {
+            $(".load-more").css('visibility', 'hidden');
+        }
+        $(".course-review").slice(0, 4).show();
+        $("body").on('click touchstart', '.load-more', function (e) {
+            e.preventDefault();
+            $(".course-review:hidden").slice(0, 4).slideDown();
+            if ($(".course-review:hidden").length === 0) {
+                $(".load-more").css('visibility', 'hidden');
+            }
+            $('html,body').animate({
+                scrollTop: $('.load-more').offset().top - 500
+            }, 1000);
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        // Gets the video src from the data-src on each button
+        var $videoSrc;
+        $('.video-btn').click(function () {
+            $videoSrc = $(this).data("src");
+        });
+        // when the modal is opened autoplay it
+        $('#myModal').on('shown.bs.modal', function (e) {
+
+            // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+        })
+        // stop playing the youtube video when I close the modal
+        $('#myModal').on('hide.bs.modal', function (e) {
+            // a poor man's stop video
+            $("#video").attr('src', $videoSrc);
+        })
+        // document ready
+    });
+
+
+</script>
+{{/section}}
+
+
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper p-0">
+        <div class="pcoded-content p-3">
+
+            <div class="row p-0">
+                <div class="col-xl-12 col-md-12">
+
+                    <div class="row m-0 p-0">
+                        <div class="col-md-3 m-0 p-1">
+                            <div class="card mb-2">
+                                <div class="card-body my-3 mx-3 p-0">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="">
+                                            <i class="fa fa-users text-primary"></i>
+                                            {{this.course.Luotxem}} Students
+                                        </p>
+                                        <p class="m-0">
+                                            <i class="far fa-clock text-primary"></i>
+                                            {{this.course.SoLuongVideo}}
+                                        </p>
+                                    </div>
+                                    <h5 class="card-title">{{this.course.TenKhoaHoc}}</h5>
+                                    {{#if this.course.isFieldType}}
+                                    <p class="card-text">
+                                        <i class="fa fa-globe" aria-hidden="true"></i>
+                                        {{this.course.TenLinhVuc}}
+                                    </p>
+                                    {{else}}
+                                    <p class="card-text">
+                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                        {{this.course.TenLinhVuc}}
+                                    </p>
+                                    {{/if}}
+
+                                    <p class="card-text">{{this.course.Name}}</p>
+                                    <div class="d-flex align-content-center">
+                                        <span class="stars" data-rating="{{this.course.RateTB}}"
+                                            data-num-stars="5"></span>
+                                        <h5 class="text-primary font-weight-bolder">{{this.course.RateTB}}</h5>
+                                        <span class="">({{this.course.SLHocSinhDanhGia}} ratings)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-2">
+                                <div class="card-body h-auto my-3 mx-3 p-0">
+                                    <div class="">
+                                        {{#if isNoDiscount}}
+                                        <span class="align-self-center">${{format_number
+                                            this.course.Gia}}</span>
+                                        {{else}}
+                                        <h2 style="text-decoration: line-through; font-weight: 10;">
+                                            ${{format_number this.course.Gia}}</h2>
+                                        <h4>$ {{format_number this.course.finalPrice}}</h4>
+                                        <h4> {{this.course.KhuyenMai}}% off</h4>
+                                        {{/if}}
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-primary w-100 px-3"
+                                            href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button"> <span
+                                                class="h4">Go to course</span> </a>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="font-weight-bold">This course includes:</p>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="far fa-clock text-primary"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                11 hours on-demand video
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-spinner text-primary" aria-hidden="true"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Effort: 2-5 hours per week
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-solid fa-graduation-cap  text-primary"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Web development
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-mobile text-primary" aria-hidden="true"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Access on mobile and TV
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-desktop text-primary" aria-hidden="true"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Access on mobile and TV
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-refresh text-primary" aria-hidden="true"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Always update course
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-regular fa-key  text-primary"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Full lifetime access
+                                            </p>
+                                        </div>
+                                        <div class="row my-4">
+                                            <p class="col-sm-2 m-0 pr-1">
+                                                <i class="fa fa-certificate  text-primary"></i>
+                                            </p>
+                                            <p class="col-sm-10 m-0 p-0">
+                                                Certificate of Completion
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9 mt-1 p-0">
+                            <img src="/public/img/courses/{{this.course.MaKhoaHoc}}.jpg" class="img-fluid w-100" alt=""
+                                style="border-radius: 8px">
+
+                            <div class="card my-2 w-auto p-0">
+                                <div class="card-header">
+                                    <h5 class="card-text text-primary">
+                                        Course Overview
+                                    </h5>
+                                </div>
+                                <div class="card-body h-auto">
+                                    <p class="card-title font-weight-bolder">
+                                        Short Course Description
+                                    </p>
+                                    <p class="card-text">
+                                        {{this.course.MoTaNgan}}
+                                    </p>
+
+                                    <p class="card-title font-weight-bolder">
+                                        Full Course Description
+                                    </p>
+
+                                    <p class="card-text">
+                                        {{this.course.MoTaChiTiet}}
+                                    </p>
+
+                                    <p class="card-title font-weight-bolder">
+                                        What you'll learn
+                                    </p>
+                                    <ul class="list-unstyled" style="column-count: 2">
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Become a UX designer.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            You will be able to add UX designer
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Become a UI designer.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Build & test a full website design.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Build & test a full mobile app.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Learn to design websites & mobile phone apps.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            You'll learn how to choose colors.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Prototype your designs with interactions.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Export production ready assets.
+                                        </li>
+                                        <li class="h-auto">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            All the techniques used by UX professionals
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card p-0 my-2 w-auto">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h5 class="card-text text-primary">
+                                        Course Content
+                                    </h5>
+                                    <p class="card-text">
+                                        Start Date: {{this.course.NgayBD}}
+                                    </p>
+                                </div>
+                                <div class="card-body h-auto px-3">
+                                    {{#if this.isVideoListEmpty}}
+                                    
+                                    {{else}}
+                                    <div id="accordion">
+                                        {{#each this.courseVideoList}}
+                                        <div class="card rounded-0 m-0 p-0">
+                                            <div class="card-header" style="cursor: pointer">
+                                                <h5 class="mb-0">
+                                                    <div href="#collapse{{STT}}" class="text-primary"
+                                                        data-toggle="collapse" data-parent="#accordion">
+                                                        <i class="fa fa-angle-down mr-3"></i>
+                                                        Video {{STT}}
+                                                    </div>
+                                                </h5>
+                                            </div>
+                                            
+                                            {{#if isShowVideo}}
+                                            <div id="collapse{{STT}}" class="collapse show">
+                                                <div class="card-body h-auto">
+                                                    <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}"
+                                                        data-target="#myModal">
+                                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                        <span>video</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {{else}}
+                                            <div id="collapse{{STT}}" class="collapse">
+                                                <div class="card-body h-auto">
+                                                    <span href="{{Link}}" class="disabled">
+                                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                        <span>video</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                    <button type="button"
+                                        class="btn btn-outline-primary more-section  w-100 mt-3 d-none">More-section</button>
+                                    {{/if}}
+                                </div>
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <!-- 16:9 aspect ratio -->
+                                                <div class="embed-responsive embed-responsive-16by9">
+                                                    <iframe class="embed-responsive-item" src="" id="video"
+                                                        allowscriptaccess="always" allow="autoplay"
+                                                        allowfullscreen="allowfullscreen"
+                                                        mozallowfullscreen="mozallowfullscreen"
+                                                        msallowfullscreen="msallowfullscreen"
+                                                        oallowfullscreen="oallowfullscreen"
+                                                        webkitallowfullscreen="webkitallowfullscreen">
+                                                    </iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card p-0 my-2 w-auto">
+                                <div class="card-header">
+                                    <h5 class="mb-3 text-primary">Instructor</h5>
+                                </div>
+                                <div class="card-body h-auto">
+                                    <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a>
+                                    </h5>
+                                    <div class="card__top">
+                                        <div class="card__avatar__teacher">
+                                            <img src="/public/img/teachers/{{this.course.Avatar}}"
+                                                alt="{{this.course.Username}}">
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fa fa-envelope text-primary"
+                                                    aria-hidden="true"></i>
+                                                <span col="10">{{this.course.Email}}</span>
+                                            </p>
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fa fa-birthday-cake text-primary"
+                                                    aria-hidden="true"></i>
+                                                <span col="10">{{this.course.DOB}}</span>
+                                            </p>
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
+                                                <span col="10">{{this.inforStudentsOfTeacher.ratings}}
+                                                    Instructor Rating</span>
+                                            </p>
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
+                                                <span col="10">{{this.inforStudentsOfTeacher.amountReview}}
+                                                    Reviews</span>
+                                            </p>
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fa fa-user-plus text-primary"
+                                                    aria-hidden="true"></i>
+                                                <span col="10">{{this.inforStudentsOfTeacher.amountStudents}}
+                                                    Students</span>
+                                            </p>
+                                            <p class="mb-2 row">
+                                                <i class="col-2 mr-2 fa fa-play-circle text-primary"
+                                                    aria-hidden="true"></i>
+                                                <span col="10">{{this.inforStudentsOfTeacher.amountCourses}}
+                                                    Courses</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">
+                                        I had a couple of months of experience trading
+                                        without consistent
+                                        results. After taking this
+                                        course I'm pretty confident that I'll be a
+                                        better trader and know better when to enter a
+                                        trade, how to put my stop
+                                        loss and take profit, how many lots to trade and
+                                        much more.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card p-0 my-2 w-auto">
+                                <div class="card-header">
+                                    <h5 class="text-primary">What our students have to say</h5>
+                                </div>
+                                <div class="card-body h-auto">
+                                    <div class="w-100">
+                                        <div class="row" id="review-list">
+                                            {{#each this.studentReviewList}}
+                                            <div class="col-md-6 mb-3 mw-100 course-review">
+                                                <div class="card card--feedback h-100">
+                                                    <div class="card-body h-auto">
+                                                        <div class="card__top">
+                                                            <div class="card__avatar">
+                                                                <img src="/public/img/team-1.jpg" alt="student 1">
+                                                            </div>
+                                                            <div>
+                                                                <p class="card__name">{{Name}}</p>
+                                                                <div class="card__stars">
+                                                                    <span class="stars" data-rating="{{Rate}}"
+                                                                        data-num-stars="5"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p class="card-text">{{Comment}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-outline-primary load-more"
+                                                style="margin-left: 16px;">Load More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

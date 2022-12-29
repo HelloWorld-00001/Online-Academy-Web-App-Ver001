@@ -296,14 +296,16 @@
     <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
             
     <div class="page-header-title mt-3">
-        <h5 class="m-b-10"><h2>Information</h2></h5>
+        <h5 class="m-b-10"><h2><a name="" id="" class="btn btn-outline-primary" href="/admin/teachers" title="Back"
+                                role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                            Information</h2></h5>
     </div> 
 <!--        NameCourse-->
         <div class="form-group row">
                
         <div class="col-6">
             <label for="txtNameCourse">UserName</label>
-            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Username}}" autofocus>
+            <input name="Username" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.Username}}" autofocus readonly>
         </div>
         <div class="col-6">
             <label for="txtNameCourse">Password</label>
@@ -348,18 +350,7 @@
             <label for="txtNameCourse" >Address</label>
             <input name="DiaChi" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.DiaChi}}" autofocus>
         </div>
-        <div class="col-4">
-            <label for="txtNameCourse">Phone number</label>
-            <input name="SDT" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SDT}}" autofocus>
-        </div>
-
-        {{#if isStudent}}
-        {{else}}
-        <div class="col-2">
-            <label for="txtNameCourse">Course quantity</label>
-            <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse"  value="{{this.info.SLKhoaHoc}}" autofocus>
-        </div>
-        {{/if}}
+        
 
         </div>
 <!--        Description-->

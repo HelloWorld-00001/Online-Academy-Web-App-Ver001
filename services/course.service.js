@@ -312,6 +312,29 @@ export default {
         const rel = await db.raw(sql);
         return rel;
     },
+    async SearchOrderByPrice(name) {
+        const sql = `SELECT * from
+        (SELECT MaKhoaHoc
+        FROM khoahoc
+        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
+        AGAINST('` + name + `')) M
+        INNER JOIN khoahoc k USING(MaKhoaHoc)
+        ORDER BY k.Gia`
+        const rel = await db.raw(sql);
+        return rel;
+    },
+    async SearchOrderByRate(name) {
+        const sql = `SELECT * from
+        (SELECT MaKhoaHoc
+        FROM khoahoc
+        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
+        AGAINST('` + name + `')) M
+        INNER JOIN khoahoc k USING(MaKhoaHoc)
+        ORDER BY k.RateTB DESC `
+        const rel = await db.raw(sql);
+        return rel;
+    },
+
 
     async isCourseRegister(maKhoaHoc, maHocVien) {
         const list = await db('DanhSachDangKi')
@@ -325,9 +348,24 @@ export default {
     addBangDanhSachDangKi(newDanhsachdangki) {
         return db('danhsachdangki').insert(newDanhsachdangki);
     },
-
-
     updateSLKhoaHoc(idStudent, amountCourse) {
         return db('hocvien').where('MaHocVien', idStudent).update({SLKhoaHoc: amountCourse});
     },
+    // Process To Delete Course
+    delAllVidCoursebyID(idkh) {
+        return db('danhsachvideo').where('MaKhoaHoc', idkh).del();
+    },
+    delRatingCoursebyID(idkh) {
+        return db('bangdanhgia').where('MaKhoaHoc', idkh).del();
+    },
+    delRegCoursebyID(idkh) {
+        return db('danhsachdangki').where('MaKhoaHoc', idkh).del();
+    },
+    delDetailCoursebyID(idkh) {
+        return db('chitietkhoahoc').where('MaKhoaHoc', idkh).del();
+    },
+    delCoursebyID(idkh) {
+        return db('khoahoc').where('MaKhoaHoc', idkh).del();
+    },
+
 }
