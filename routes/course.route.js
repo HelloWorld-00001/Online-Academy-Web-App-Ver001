@@ -32,31 +32,47 @@ router.get('/search', function (req, res) {
 });
 
 router.get('/wishList', async function (req, res) {
-    const wl = req.session.wisList;
-    const wish = [];
-    for (var d in wl) {
-        const course = await courseService.findDetailCourseByID(wl[d].MaKH);
-        wish.push(course);
+    let wl = [];
+    const storage = req.session.wisList;
+    if (storage) {
+        wl = JSON.parse(storage);
+    }
+    const myWL = [];
+    for (let i = 0; i < wl.length; i++) {
+        console.log(i);
+        if (wl[i].MaTK == req.session.authUser.MaTaiKhoan)
+            myWL.push(wl[i].course)
     }
 
     res.render('courses/wishList', {
-        courses: wish
+        courses: myWL
     });
 });
 
-router.get('/addToWishList', function (req, res) {
-    const data = req.session.wisList;
-    var isAdd = false;
-    for (var d in data) {
-        if (data[d].MaKH === req.query.MaKH && data[d].MaTK === req.query.MaTK){
-            isAdd = true;
-        }
+router.get('/addToWishList', async function (req, res) {
+    
+    let wishList = [];
+
+    let storage = req.session.wisList;
+    const MaTK = req.query.MaTK;
+    const MaKH = req.query.MaKH;
+    // Lay wl tu local storeage
+    if (storage) {
+        wishList = JSON.parse(storage);
     }
-    if (isAdd === false) {
-        data.push(req.query);
+
+    let courses = await courseService.findCourseById(MaKH);
+    const course = courses[0];
+    let item = wishList.find(c =>(c.course.MaKhoaHoc == MaKH && c.MaTK == MaTK));
+    if (item) {
+        console.log('Course was added')
     }
-    req.session.wisList = data;
-    res.redirect(`/course/detail/${req.query.MaKH}`);
+    else {
+        wishList.push({course, MaTK});
+    }
+
+    req.session.wisList = JSON.stringify(wishList);
+    res.redirect(`/course/detail/course?id=${req.query.MaKH}`);
 });
 
 

@@ -65,6 +65,7 @@ app.use(async function (req, res, next) {
     res.locals.temp = req.session.temp;
     res.locals.auth = req.session.auth;
     res.locals.authUser = req.session.authUser;
+    res.locals.wishList = req.session.wishList;
 
     next();
 });

@@ -302,6 +302,11 @@ export default {
         return userReview;
     },
 
+    async findCourseById(id){
+        const course = await db('KhoaHoc').where('MaKhoaHoc', id);
+        return course
+    },
+
 
     async courseFullTextSearch(name) {
         const sql = `SELECT *
