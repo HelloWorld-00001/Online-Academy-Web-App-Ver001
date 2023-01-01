@@ -12,7 +12,12 @@
 <body>
     <div class="frmContain">
         <div class="container">
-            <h2 class="my-4" style="color: aliceblue;">Have a nice day ●ω●</h2>
+            <div style="text-align:center">
+                <h2 style="color: aliceblue;">Have a nice day ●ω●</h2>
+                <h3 style="color:#041B35; font-weight: bold">Back to 
+                    <a href="/" style="color: #041B35; border-bottom: 2px solid #041B35"><strong>IGE HOMEPAGE</strong></a>
+                </h3>
+            </div>
         </div>
         <div class ="frmSign">
             <div class="center_ w-100 mx-4">
@@ -32,13 +37,19 @@
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <label for="txtUsername">Username</label>
                         <input name="username" type="text" class="form-control" 
-                        style="border-radius: 50px;" id="txtUsername" autofocus placeholder= "Enter your username">
+                        style="border-radius: 50px;" id="txtUsername" autofocus placeholder= "Enter your username"
+                        oninvalid="setCustomValidity('Empty! Please input username')" 
+                        oninput="setCustomValidity('')" 
+                        required>
                     </div>
                     <div class="mt-3 input-box">
                         <i class="fa fa-key" aria-hidden="true"></i>
                         <label for="txtPassword">Password</label>
                         <input name="password" type="password" class="form-control" 
-                        style="border-radius: 50px" id="txtPassword" placeholder="●●●●●●●●●●">
+                        style="border-radius: 50px" id="txtPassword" placeholder="●●●●●●●●●●" 
+                        oninvalid="setCustomValidity('Empty! Please input password');" 
+                        oninput="setCustomValidity('');"
+                        required>
                         <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password" style="color:rgb(95, 95, 95)"></span>
                     </div>
                     <div class="my-3 input-box" style="text-align: center;">

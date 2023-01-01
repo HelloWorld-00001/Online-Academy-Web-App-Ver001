@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="/public/css/style_sign.css">
     <title>Register</title>
 </head>
 <body>
@@ -33,9 +34,9 @@
                     Username
                 </label>
                 <input name="username" type="text" id="txtUsername" class="form-control" autofocus placeholder= "leviCool" 
-                required
                 oninvalid="setCustomValidity('Empty! Please input username')" 
-                oninput="setCustomValidity('')">      
+                oninput="setCustomValidity('')" 
+                required>      
               </div>
               <div class="input-box">
                 <i class="fa fa-key" aria-hidden="true"></i>
@@ -43,9 +44,9 @@
                   Password  
                 </label>
                 <input name="password" type="password" class="form-control" id="txtPassword" placeholder="●●●●●●●●●●"
-                required
                 oninvalid="setCustomValidity('Empty! Please input password');" 
-                oninput="setCustomValidity('');">
+                oninput="setCustomValidity('');"
+                required>
                 <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password" style="color:rgb(95, 95, 95)"></span>
               </div>
               <div class="column">
@@ -55,9 +56,9 @@
                     Fullname
                   </label>
                   <input name="name" type="text" class="form-control" id="txtName" placeholder="Levi Ackerman"
-                  required
                   oninvalid="setCustomValidity('Empty! Please input name')" 
-                  oninput="setCustomValidity('');">
+                  oninput="setCustomValidity('');"
+                  required>
                 </div>
                 <div class="input-box">
                   <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
@@ -65,9 +66,9 @@
                     Birthday
                   </label>
                   <input name="dob" type="text" class="form-control" id="txtDOB"
-                  
-                  oninvalid="invalidDOB(this)" required >
-                  {{!-- oninput="invalidDOB(this)"> --}}
+                  oninvalid="invalidDOB(this)"
+                  oninput="invalidDOB(this)"
+                  required>
                 </div>
               </div>
               <div class="input-box">
@@ -76,9 +77,9 @@
                   Email
                 </label>
                 <input name="email" type="text" class="form-control" id="txtEmail" placeholder="example@gmail.com"
-                  required
                   oninvalid="setCustomValidity('Empty! Please input email');" 
-                  oninput="setCustomValidity('');">
+                  oninput="setCustomValidity('');"
+                  required>
               </div>   
               <div class="check-box">
                 <input type="checkbox" id="myCheck" name="myCheck" value="Bike">
