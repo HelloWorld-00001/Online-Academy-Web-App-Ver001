@@ -565,6 +565,13 @@ INSERT INTO `DanhSachDangKi` VALUES (8, 15, '2022-12-27', '');
 INSERT INTO `DanhSachDangKi` VALUES (9, 9, '2022-12-22', '');
 INSERT INTO `DanhSachDangKi` VALUES (9, 7, '2022-12-27', '');
 INSERT INTO `DanhSachDangKi` VALUES (11, 12, '2022-12-29', '');
+
+insert into danhsachdangki values(1, 2, '2022-12-25', 'No');
+insert into danhsachdangki values(1, 15, '2022-12-25', 'No');
+insert into danhsachdangki values(1, 4, '2022-12-25', 'No');
+insert into danhsachdangki values(1, 7, '2022-12-25', 'No');
+insert into danhsachdangki values(2, 4, '2022-12-25', 'No');
+insert into danhsachdangki values(2, 7, '2022-12-25', 'No');
 COMMIT;
 
 ALTER TABLE khoahoc

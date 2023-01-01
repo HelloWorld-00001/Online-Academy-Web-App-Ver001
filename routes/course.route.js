@@ -6,8 +6,28 @@ const router = express.Router();
 
 router.post('/search', async function (req, res) {
     const courseName = await courseService.courseFullTextSearch(req.body.courseFind);
+    const courseList = courseName[0];
+    const bsl = await courseService.findTop5BestSeller();
+    const newCo = await courseService.findTop5new();
+
+    let checkBest = false, checkNew = false;
+    for (let i = 0; i < courseList.length; i++) {
+        for (let j = 0; j < bsl.length; j++) {
+            if (courseList[i].MaKhoaHoc === bsl[j].MaKhoaHoc) {
+                checkBest = true;
+            }
+            if (courseList[i].MaKhoaHoc === newCo[j].MaKhoaHoc){
+                checkNew = true;
+            }
+        }
+        courseList[i].isBestSeller = checkBest;
+        courseList[i].isNew = checkNew;
+        checkBest = false;
+        checkNew = false;
+    }
+
     res.render('courses/search.hbs', {
-        courses: courseName[0],
+        courses: courseList,
         isNull: courseName[0].length === 0
     });
 });
@@ -39,7 +59,6 @@ router.get('/wishList', async function (req, res) {
     }
     const myWL = [];
     for (let i = 0; i < wl.length; i++) {
-        console.log(i);
         if (wl[i].MaTK == req.session.authUser.MaTaiKhoan)
             myWL.push(wl[i].course)
     }
@@ -72,6 +91,7 @@ router.get('/addToWishList', async function (req, res) {
     }
 
     req.session.wisList = JSON.stringify(wishList);
+
     res.redirect(`/course/detail/course?id=${req.query.MaKH}`);
 });
 

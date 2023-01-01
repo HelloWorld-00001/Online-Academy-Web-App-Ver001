@@ -131,6 +131,7 @@ router.post('/login', async function (req, res) {
 
 //logout
 router.post('/logout', async function(req, res){
+  console.log(req.session.wishList);
   req.session.auth=false;
   req.session.authUser=null;
 

@@ -255,6 +255,24 @@ export default {
 
         return detailList[0];
     },
+    async findTop5BestSeller() {
+        const courseList = await db.select('MaKhoaHoc').count('MaKhoaHoc as sldk')
+        .from('danhsachdangki')
+        .groupBy('MaKhoaHoc')
+        .orderBy('sldk', 'desc')
+        .limit(5)
+
+        return courseList;
+    },
+    async findTop5new() {
+        const courseList = await db.select('MaKhoaHoc')
+        .from('khoahoc')
+        .orderBy('MaKhoaHoc', 'desc')
+        .limit(5)
+
+        return courseList;
+    },
+
 
     async findCourseVideoList(idCourse) {
         const videoList = await db('danhsachvideo').where('MaKhoaHoc', idCourse);
