@@ -383,4 +383,10 @@ router.get('/viewCourse', async function (req, res){
         studentReviewList: studentReviewList,
     });
 });
+
+router.get('/videos', function(req, res) {
+    res.render('vwAdmin/videos', {
+        layout: 'adminLayout'
+    })
+});
 export default router;
