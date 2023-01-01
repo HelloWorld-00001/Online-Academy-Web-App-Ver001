@@ -37,6 +37,7 @@ export default {
     return db('TaiKhoan').insert({
       Username: taikhoan.Username,
       Password: taikhoan.Password,
+      LoaiTaiKhoan: taikhoan.LoaiTaiKhoan,
       Name: taikhoan.Name,
       Email: taikhoan.Email,
       LoaiTaiKhoan: 'Học viên',
@@ -66,5 +67,9 @@ export default {
 
   grantAdmin(id) {
     return db('TaiKhoan').where('MaTaiKhoan', id).update({LoaiTaiKhoan: 'Admin'})
+  },
+
+  updatePassword(id, newPassword) {
+    return db('TaiKhoan').where('MaTaiKhoan', id).update({Password: newPassword});
   }
 }

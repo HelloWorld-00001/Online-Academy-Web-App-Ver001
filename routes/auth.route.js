@@ -2,6 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import fbStrategy from 'passport-facebook';
 import ggStrategy from 'passport-google-oauth2';
+import moment from 'moment';
 import db from '../utils/db.js';
 import accountService from '../services/account.service.js';
 import studentService from '../services/student.service.js';
@@ -39,7 +40,9 @@ router.get('/facebook/callback',
 );
 
 router.get('/profile/facebook', async function (req, res) {
-    const NewUser = {
+    var user = await accountService.findByUsername(req.user.id);
+    if(user === null) {
+      const NewUser = {
         Username: req.user.id,
         Password: '',
         Name: req.user.displayName,
@@ -49,12 +52,12 @@ router.get('/profile/facebook', async function (req, res) {
         Avatar: null,
         SDT: null,
         DiaChi: null
-    }
+      }
 
-    var user = await accountService.findByUsername(req.user.id);
-    if(user === null) {
       await accountService.add(NewUser);
       user = await accountService.findByUsername(req.user.id);
+      if(user.DOB != null)
+        user.DOB = moment(user.DOB).format('DD/MM/YYYY');
 
       const NewStudent = {
         MaTaiKhoan: user.MaTaiKhoan,
@@ -92,7 +95,9 @@ router.get('/google/callback',
 );
 
 router.get('/profile/google', async function (req, res) {
-    const NewUser = {
+    var user = await accountService.findByUsername(req.user.id);
+    if(user === null) {
+      const NewUser = {
         Username: req.user.id,
         Password: '',
         Name: req.user.displayName,
@@ -102,11 +107,12 @@ router.get('/profile/google', async function (req, res) {
         Avatar: null,
         SDT: null,
         DiaChi: null
-    }
-    var user = await accountService.findByUsername(req.user.id);
-    if(user === null) {
-        await accountService.add(NewUser);
-        user = await accountService.findByUsername(req.user.id);
+      }
+      
+      await accountService.add(NewUser);
+      user = await accountService.findByUsername(req.user.id);
+      if(user.DOB != null)
+        user.DOB = moment(user.DOB).format('DD/MM/YYYY');
 
       const NewStudent = {
         MaTaiKhoan: user.MaTaiKhoan,

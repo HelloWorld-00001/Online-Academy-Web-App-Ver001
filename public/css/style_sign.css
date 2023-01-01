@@ -13,7 +13,9 @@ body{
 }
 
 html, body{
-    background:linear-gradient(#FF7F50, #000033); 
+    background-image: url(/public/img/bg_account.png); 
+    background-size: 100% 100%;
+    font-family:'Poppins', sans-serif;
 }
 
 .frmContain {
@@ -36,11 +38,12 @@ html, body{
     background-image:  linear-gradient(rgba(0,0,0,.5), rgba(255,255,255,.3)), url("https://www.oberlo.com/media/1603898030-womans-hands-typing-laptop-scaled.jpg?fit=max&fm=jpg&w=1824");
     background-size: 100% 100%;
     position:relative;
+    font-family: sans-serif;
 }
 
 .frmSign .form-content .login {
     text-align: center; 
-    font-family:'Jost', sans-serif;
+    font-family:'Poppins', sans-serif;
     font-size: 35px;
     font-weight: bold;
     padding-left: 20px;
@@ -78,6 +81,7 @@ html, body{
 }
 
 .frmSign .form-content .input-box {
+    font-family:'Poppins', sans-serif;
     position: relative;
     width: 100%;
     font-size: 17px;
@@ -172,4 +176,14 @@ html, body{
     width: 100%;
     margin-left: 40px;
     margin-right: 40px;
+}
+
+.btnChange {
+    background-color: #646464;
+    font-size: 18px;
+    border: none
+}
+
+.btnChange:hover {
+    background-color: #545454;
 }

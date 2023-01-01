@@ -17,7 +17,7 @@ router.post('/register', function (req, res) {
   const rawPassword = req.body.password;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(rawPassword, salt);
-  const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const dob = moment(req.body.dob).format('YYYY-MM-DD');
   
   const user = {
     Username: req.body.username,
@@ -43,29 +43,40 @@ router.post('/register', function (req, res) {
 router.get('/is-available', async function (req, res) {
   const username = req.query.username;
   const email = req.query.email;
-
-  const checkMailExist = await mailer.isEmailValid(email);
-  if(checkMailExist.valid === false)
-    return res.json('EmailNotExist');
+  const check = req.query.check;
 
   var checkUsername = true;
   var checkMail = true;
 
   const user1 = await accountService.findByUsername(username);
-  if (user1 !== null) 
+  if (user1 !== null) {
     checkUsername = false;
+  }
 
   const user2 = await accountService.findByEmail(email);
-  if(user2 !== null)
+  if(user2 !== null) {
     checkMail = false;
+  }
 
-  if(checkUsername === false && checkMail === false) 
+  if(checkUsername === false && checkMail === false) { 
     return res.json('FailTwo');
-  if(checkUsername === false)
+  }
+  if(checkUsername === false) {
     return res.json('FailUsername');
-  if(checkMail === false)
-    return res.json('FailEmail');
+  }
+  if(checkMail === false) {
+    // return res.json('FailEmail');
+  }
   
+  const checkMailExist = await mailer.isEmailValid(email);
+  if(checkMailExist.valid === false) {
+    return res.json('EmailNotExist');
+  }
+
+  if(check === 'false') {
+    return res.json('FailCheck');
+  }
+    
   res.json(true);
 });
 
@@ -104,7 +115,7 @@ router.get('/login', async function (req, res) {
 
 router.post('/login', async function (req, res) {
   const user = await accountService.findByUsername(req.body.username);
-  console.log(user);
+  
   if (user === null) {
     return res.render('vwAccount/login', {
       layout: false,
@@ -112,16 +123,16 @@ router.post('/login', async function (req, res) {
     });
   }
 
-  // const ret = bcrypt.compareSync(req.body.password, user.Password);
-  // if (ret === false) {
-  //   return res.render('vwAccount/login', {
-  //     layout: false,
-  //     err_message: 'Invalid username or password.'
-  //   });
-  // }
-  // delete user.Password;
+  const ret = bcrypt.compareSync(req.body.password, user.Password);
+  if (ret === false) {
+    return res.render('vwAccount/login', {
+      layout: false,
+      err_message: 'Invalid username or password.'
+    });
+  }
+  delete user.Password;
 
-  user.DOB = moment(user.DOB, 'YYYY-MM-DD').format('DD/MM/YYYY');
+  user.DOB = moment(user.DOB).format('DD/MM/YYYY');
   req.session.auth=true;
   req.session.authUser=user;
 
@@ -160,6 +171,39 @@ function regis(req, res, next) {
 //profile
 router.get('/profile', auth, async function(req, res) {
   res.render('vwAccount/profile');
+})
+
+//changePassword
+router.get('/changePassword', auth, function(req, res) {
+  return res.render('vwAccount/changePassword');
+})
+
+router.post('/changePassword', auth, async function(req, res) {
+  const user = await accountService.findByUsername(req.session.authUser.Username);
+  const receivePassword = req.body.currentPassword;
+
+  const ret = bcrypt.compareSync(receivePassword, user.Password);
+  if(ret === false) {
+    return res.render('vwAccount/changePassword', {
+      err_message: "Current password you enter is wrong. Try Again"
+    });
+  }
+
+  const checkSame = (req.body.newPassword === req.body.confirmPassword);
+  if(checkSame === false) {
+    return res.render('vwAccount/changePassword', {
+      err_message: "New password and confirm password are not same. Try Again"
+    });
+  }
+
+  delete user.Password;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.newPassword, salt);
+  await accountService.updatePassword(user.MaTaiKhoan, hash);
+
+  res.render('vwAccount/changePassword', {
+    success_message: "Change Password Successful."
+  });
 })
 
 export default router;
