@@ -4,19 +4,14 @@ import studentService from '../services/student.service.js';
 import mylearningService from "../services/myleaning.service.js";
 const router = express.Router();
 
-router.post('/search', async function (req, res) {
-    const courseName = await courseService.courseFullTextSearch(req.body.courseFind);
-    const courseList = courseName[0];
-    const bsl = await courseService.findTop5BestSeller();
-    const newCo = await courseService.findTop5new();
-
+function assingNewBest(courseList, bsl, newList) {
     let checkBest = false, checkNew = false;
     for (let i = 0; i < courseList.length; i++) {
         for (let j = 0; j < bsl.length; j++) {
             if (courseList[i].MaKhoaHoc === bsl[j].MaKhoaHoc) {
                 checkBest = true;
             }
-            if (courseList[i].MaKhoaHoc === newCo[j].MaKhoaHoc){
+            if (courseList[i].MaKhoaHoc === newList[j].MaKhoaHoc){
                 checkNew = true;
             }
         }
@@ -26,10 +21,54 @@ router.post('/search', async function (req, res) {
         checkNew = false;
     }
 
+    return courseList;
+
+}
+
+
+
+router.post('/search', async function (req, res) {
+    const courseList = await courseService.courseFullTextSearch(req.body.courseFind);
+    const bsl = await courseService.findTop5BestSeller();
+    const newCo = await courseService.findTop5new();
+
+
+    const courseTemp = assingNewBest(courseList[0], bsl, newCo);
+    const courseFinal = courseService.assignDiscount(courseTemp);
+
+    const limit = 6;
+    const page = req.query.page || 1;
+    const offset = (page - 1) * limit;
+
+    const total =courseList.length;
+    let nPages = Math.ceil(total / limit);
+
+    const pageNumbers = [];
+    for(let i = 1; i <= nPages; i++) {
+        pageNumbers.push({
+            value: i,
+            isCurrent: i === +page,
+        })
+    }
+    const nextPageNumber = {
+        value: +page + 1,
+        isNextPage:   +page + 1 <= +nPages,
+    }
+    const previousPageNumber = {
+        value: +page - 1,
+        isPreviousPage:   +page - 1 > 0,
+    }
+
+
     res.render('courses/search.hbs', {
-        courses: courseList,
-        isNull: courseName[0].length === 0
+        courses: courseFinal,
+        isNull: courseFinal.length === 0,
+        pageNumbers,
+        nextPageNumber,
+        previousPageNumber
     });
+
+
 });
 
 // dang lam
@@ -92,7 +131,7 @@ router.get('/addToWishList', async function (req, res) {
 
     req.session.wisList = JSON.stringify(wishList);
 
-    res.redirect(`/course/detail/course?id=${req.query.MaKH}`);
+    res.redirect(`/course/detail?id=${req.query.MaKH}`);
 });
 
 
@@ -133,7 +172,7 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/detail/course', async function (req, res) {
+router.get('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
     // makhoahoc = +makhoahoc
     const course = await courseService.findDetailCourseByID(makhoahoc);
@@ -149,10 +188,10 @@ router.get('/detail/course', async function (req, res) {
 
     for(let i = 0; i < courseVideoList.length; i++) {
         if(i === 0 || i === 1) {
-            Object.assign(courseVideoList[i], {isShowVideo: true});
+            courseVideoList[i].isShowVideo= true;
         }
         else {
-            Object.assign(courseVideoList[i], {isShowVideo: false});
+            courseVideoList[i].isShowVideo = false;
         }
     }
 
@@ -178,7 +217,7 @@ router.get('/detail/course', async function (req, res) {
     });
 });
 
-router.post('/detail/course', async function (req, res) {
+router.post('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
 
 

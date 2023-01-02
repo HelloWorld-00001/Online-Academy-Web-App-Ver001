@@ -24,6 +24,7 @@ import teacherRoute from "./routes/teacher.route.js";
 import adminRoute from "./routes/admin.route.js"
 import mylearningRoute from './routes/mylearning-course.route.js'
 import studentService from "./services/student.service.js";
+import searchRoute from "./routes/search.route.js";
 
 const app = express();
 app.use(
@@ -193,6 +194,8 @@ app.use("/categories", categoryUserRoute);
 app.use("/teacher", teacherRoute);
 app.use("/admin", adminRoute);
 app.use("/mylearning", mylearningRoute);
+app.use("/search", searchRoute);
+
 
 //
 // app.get('/bs4', function (req, res) {

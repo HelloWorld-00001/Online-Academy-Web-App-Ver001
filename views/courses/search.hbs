@@ -63,15 +63,34 @@
 
 <div class="container-fluid py-5">
     <div class="container py-5">
-        <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Wow</h5>
-            <h1>That is what i found</h1>
-        </div>
+        
         {{#if this.isNull}}
         <h5 class="card-title">I am so sorry. I found nothing T.T</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text">Please try again</p>
         {{else}}
-
+        <div class="text-center mb-5">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Filter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Default<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search/orderByPrice?findName= {{this.findName}}">Price</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search/orderByRate?findName= {{this.findName}}">Rating</a>
+                </li>
+                </ul>
+            </div>
+            </nav>
+            <h1>That is what i found</h1>
+            
+        </div>
         <div class="row ">
             {{#each this.courses}}
             <div class="col-lg-4 mb-3">
@@ -89,7 +108,7 @@
                                             {{/if}}
 
                                             {{/if}}
-                                            <a href="/course/detail/{{MaKhoaHoc}}" class="img-prod new">
+                                            <a href="/course/detail?id={{MaKhoaHoc}}" class="img-prod new">
                                                 <img class="img-fluid" src="/public/img/courses/{{MaKhoaHoc}}.jpg"
                                                     alt="Colorlib Template">
                                             </a>
@@ -108,7 +127,7 @@
                                                     </small>
                                                 </div>
                                                 <a class="card-title text-log h5"
-                                                    href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                                    href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                                 {{#if isFieldType}}
                                                 <p class="card-text">
                                                     <i class="fa fa-globe" aria-hidden="true"></i>
@@ -158,28 +177,17 @@
                             <ul class="pagination justify-content-center">
                                 {{#if this.previousPageNumber.isPreviousPage}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{this.previousPageNumber.value}}">Previous</a>
+                                    <a class="page-link" href="?offset={{this.previousPageNumber.offset}}&findName={{this.findName}}">Previous</a>
                                 </li>
                                 {{else}}
                                 <li class="page-item disabled">
                                     <a class="page-link" href="javascript:;">Previous</a>
                                 </li>
                                 {{/if}}
-                                </li>
-                                {{#each this.pageNumbers}}
-                                {{#if isCurrent}}
-                                <li class="page-item active">
-                                    <a class="page-link" href="javascript:;">{{value}}</a>
-                                </li>
-                                {{else}}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{value}}">{{value}}</a>
-                                </li>
-                                {{/if}}
-                                {{/each}}
+                                
                                 {{#if this.nextPageNumber.isNextPage}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{this.nextPageNumber.value}}">Next</a>
+                                    <a class="page-link" href="?offset={{this.nextPageNumber.offset}}&findName={{this.findName}}">Next</a>
                                 </li>
                                 {{else}}
                                 <li class="page-item disabled">

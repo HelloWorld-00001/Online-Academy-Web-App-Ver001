@@ -45,6 +45,19 @@ export default {
         res.push(temp5);
         return res;
     },
+    assignDiscount(courses) {
+        for(let i = 0; i < courses.length; i++) {
+            const ele1 = courses[i].LinhVuc === 1;
+            const ele2 = courses[i].KhuyenMai === 0;
+            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+    
+            courses[i].isFieldType = ele1;
+            courses[i].isNoDiscount= ele2;
+            courses[i].finalPrice= ele3;
+        }
+        return courses;
+    
+    },
 
     async findTop3LastWeek() {
         const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
@@ -57,16 +70,7 @@ export default {
                      ORDER BY Day ASC, SLHocVien DESC
                      LIMIT 3`;
         const ret = await db.raw(sql);
-        const courses = ret[0];
-        for(let i = 0; i < courses.length; i++) {
-            const ele1 = courses[i].LinhVuc === 1;
-            const ele2 = courses[i].KhuyenMai === 0;
-            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
-
-            Object.assign(courses[i], {isFieldType: ele1});
-            Object.assign(courses[i], {isNoDiscount: ele2});
-            Object.assign(courses[i], {finalPrice: ele3});
-        }
+        const courses = this.assignDiscount(ret[0]);
 
         return courses;
     },
@@ -133,16 +137,8 @@ export default {
 
                             .limit(5);
 
-        for(let i = 0; i < courses.length; i++) {
-            const ele1 = courses[i].LinhVuc === 1;
-            const ele2 = courses[i].KhuyenMai === 0;
-            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
-
-            Object.assign(courses[i], {isFieldType: ele1});
-            Object.assign(courses[i], {isNoDiscount: ele2});
-            Object.assign(courses[i], {finalPrice: ele3});
-        }
-        return courses;
+        const course = this.assignDiscount(courses);
+        return course;
     },
 
     async findTopFiedls() {
@@ -187,16 +183,8 @@ export default {
                     .limit(limit)
                     .offset(offset);
 
-        for(let i = 0; i < courses.length; i++) {
-            const ele1 = courses[i].LinhVuc === 1;
-            const ele2 = courses[i].KhuyenMai === 0;
-            const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
-
-            Object.assign(courses[i], {isFieldType: ele1});
-            Object.assign(courses[i], {isNoDiscount: ele2});
-            Object.assign(courses[i], {finalPrice: ele3});
-        }
-        return courses;
+        const course = this.assignDiscount(courses);
+        return course;
     },
 
     async findPageByField(linhVuc, limit, offset) {
@@ -213,16 +201,8 @@ export default {
             .limit(limit)
             .offset(offset);
 
-        for(let i = 0; i < courseField.length; i++) {
-            const ele1 = courseField[i].LinhVuc === 1;
-            const ele2 = courseField[i].KhuyenMai === 0;
-            const ele3 = courseField[i].Gia * (1 - courseField[i].KhuyenMai / 100);
-
-            Object.assign(courseField[i], {isFieldType: ele1});
-            Object.assign(courseField[i], {isNoDiscount: ele2});
-            Object.assign(courseField[i], {finalPrice: ele3});
-        }
-        return courseField;
+        const course = this.assignDiscount(courseField);
+        return course;
     },
 
     /// find by name --  not full text search
@@ -249,9 +229,9 @@ export default {
         if (detailList.length === 0)
             return null;
 
-        Object.assign(detailList, {isFieldType: detailList.LinhVuc === 1});
-        Object.assign(detailList, {isNoDiscount: detailList.KhuyenMai === 0});
-        Object.assign(detailList, {finalPrice: detailList.Gia * (1 - detailList.KhuyenMai / 100)});
+        Object.assign(detailList[0], {isFieldType: detailList[0].LinhVuc === 1});
+        Object.assign(detailList[0], {isNoDiscount: detailList[0].KhuyenMai === 0});
+        Object.assign(detailList[0], {finalPrice: detailList[0].Gia * (1 - detailList[0].KhuyenMai / 100)});
 
         return detailList[0];
     },
@@ -326,34 +306,40 @@ export default {
     },
 
 
-    async courseFullTextSearch(name) {
+    async courseFullTextSearch(name, limit, offset) {
         const sql = `SELECT *
         FROM khoahoc
         WHERE 
         MATCH(TenKhoaHoc, MoTaNgan) 
-        AGAINST('` + name + `');`
+        AGAINST('` + name + `')
+        LIMIT ${limit}
+        OFFSET ${offset};`
         const rel = await db.raw(sql);
         return rel;
     },
-    async SearchOrderByPrice(name) {
+    async SearchOrderByPrice(name, limit, offset) {
         const sql = `SELECT * from
         (SELECT MaKhoaHoc
         FROM khoahoc
         WHERE MATCH(TenKhoaHoc, MoTaNgan) 
         AGAINST('` + name + `')) M
         INNER JOIN khoahoc k USING(MaKhoaHoc)
-        ORDER BY k.Gia`
+        ORDER BY k.Gia
+        LIMIT ${limit}
+        OFFSET ${offset};`
         const rel = await db.raw(sql);
         return rel;
     },
-    async SearchOrderByRate(name) {
+    async SearchOrderByRate(name, limit, offset) {
         const sql = `SELECT * from
         (SELECT MaKhoaHoc
         FROM khoahoc
         WHERE MATCH(TenKhoaHoc, MoTaNgan) 
         AGAINST('` + name + `')) M
         INNER JOIN khoahoc k USING(MaKhoaHoc)
-        ORDER BY k.RateTB DESC `
+        ORDER BY k.RateTB DESC
+        LIMIT ${limit}
+        OFFSET ${offset};`
         const rel = await db.raw(sql);
         return rel;
     },
