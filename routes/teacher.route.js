@@ -15,8 +15,11 @@ function authTeacher(req, res, next) {
     next();
 }
 
-router.get('/', function (req, res) {
-    res.render('teacher');
+router.get('/', async function (req, res) {
+    const teacher = await teacherService.findAllTeacher();
+    res.render('vwTeacher/teacher', {
+        teacher : teacher
+    });
 });
 
 router.get('/input', authTeacher, async function (req, res){
