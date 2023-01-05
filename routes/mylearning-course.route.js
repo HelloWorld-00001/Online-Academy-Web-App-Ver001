@@ -1,6 +1,5 @@
 import mylearningService from "../services/myleaning.service.js";
 import courseService from '../services/course.service.js';
-
 import express from "express";
 import studentService from "../services/student.service.js";
 const router = express.Router();
@@ -97,7 +96,7 @@ router.get('/course', async function (req, res) {
             }
         }
         else {
-            return res.redirect(`/course/detail/course?id=${makhoahoc}`);
+            return res.redirect(`/mylearning/course?id=${makhoahoc}`);
         }
     }
     else {

@@ -339,6 +339,19 @@
                 {{/each}}
             </select>
         </div>
+<!--        NgonNgu-->
+        <div class="form-group">
+            <label for="txtNgonNgu">Language</label>
+            <select name="NgonNgu" id="txtFieldCourse" class="form-control">
+                {{#each this.ngonNgu}}
+                    {{#if isChoose}}
+                        <option value="{{NgonNgu}}" selected>{{NgonNgu}}</option>
+                    {{else}}
+                        <option value="{{NgonNgu}}">{{NgonNgu}}</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+        </div>
 <!--        Image of course-->
         <div class="form-group">
             <label for="Image">Photo</label>

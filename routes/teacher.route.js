@@ -24,14 +24,18 @@ router.get('/', async function (req, res) {
 
 router.get('/input', authTeacher, async function (req, res){
    const field = await teacherService.findField();
+   const ngonNgu = await teacherService.findNgonNgu();
+   console.log(ngonNgu);
    res.render('vwTeacher/inputcourse', {
        linhVuc: field,
+       ngonNgu: ngonNgu,
     });
 });
 
 router.get('/input/:id', authTeacher, async function (req, res){
     const courseId = req.params.id || 0;
     const field = await teacherService.findFieldById(courseId);
+    const ngonNgu = await teacherService.findNgonNguById(courseId);
     const info = await teacherService.findInfoCourseById(courseId);
     const video = await teacherService.findVideoById(courseId);
     let checked = true;
@@ -44,6 +48,7 @@ router.get('/input/:id', authTeacher, async function (req, res){
     // console.log(video);
     res.render('vwTeacher/inputcourse', {
         linhVuc: field,
+        ngonNgu: ngonNgu,
         info: info,
         checked,
         video: video,

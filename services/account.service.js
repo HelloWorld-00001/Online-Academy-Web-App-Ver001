@@ -40,7 +40,6 @@ export default {
       LoaiTaiKhoan: taikhoan.LoaiTaiKhoan,
       Name: taikhoan.Name,
       Email: taikhoan.Email,
-      LoaiTaiKhoan: 'Học viên',
       DOB: taikhoan.DOB,
       Avatar: taikhoan.Avatar,
       DiaChi: taikhoan.DiaChi,

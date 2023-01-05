@@ -28,6 +28,25 @@ export default {
         return studentCourse;
     },
 
+    async findPageTeacherCourseAll(limit, offset) {
+        const studentCourse = await db('danhsachdangki')
+            .select(
+                'khoahoc.*',
+                'taikhoan.Username',
+                'linhvuc.TenLinhVuc'
+            )
+            .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachdangki.MaKhoaHoc'})
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .limit(limit)
+            .offset(offset);
+        for(let i = 0; i < studentCourse.length; i++) {
+            Object.assign(studentCourse[i], {isFieldType: studentCourse[i].LinhVuc === 1});
+        }
+        return studentCourse;
+    },
+
 
     async countStarRate(idCourse, numberRate) {
         const numberStar= await db('bangdanhgia')

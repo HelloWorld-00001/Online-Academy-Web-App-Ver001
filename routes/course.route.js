@@ -186,7 +186,7 @@ router.get('/detail', async function (req, res) {
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
     const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
 
-    for(let i = 0; i < courseVideoList.length; i++) {
+    for(let i = 0; (courseVideoList !== null)  && i < courseVideoList.length; i++) {
         if(i === 0 || i === 1) {
             courseVideoList[i].isShowVideo= true;
         }
@@ -210,7 +210,7 @@ router.get('/detail', async function (req, res) {
         isCoursesRegister,
         course,
         courseVideoList,
-        isVideoListEmpty: courseVideoList.length === 0,
+        isVideoListEmpty: courseVideoList === null,
         top5CousresMostView,
         inforStudentsOfTeacher,
         studentReviewList,
