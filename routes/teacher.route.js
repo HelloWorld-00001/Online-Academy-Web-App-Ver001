@@ -3,19 +3,33 @@ import multer from 'multer';
 import teacherService from '../services/teacher.service.js';
 const router = express.Router();
 
+function authTeacher(req, res, next) {
+    if(req.session.auth === false) {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/');
+    }
+    if (req.session.authUser.LoaiTaiKhoan !== "Giáo Viên") {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/');
+    }
+    next();
+}
 
-router.get('/', function (req, res) {
-    res.render('teacher');
+router.get('/', async function (req, res) {
+    const teacher = await teacherService.findAllTeacher();
+    res.render('vwTeacher/teacher', {
+        teacher : teacher
+    });
 });
 
-router.get('/input', async function (req, res){
+router.get('/input', authTeacher, async function (req, res){
    const field = await teacherService.findField();
    res.render('vwTeacher/inputcourse', {
        linhVuc: field,
     });
 });
 
-router.get('/input/:id', async function (req, res){
+router.get('/input/:id', authTeacher, async function (req, res){
     const courseId = req.params.id || 0;
     const field = await teacherService.findFieldById(courseId);
     const info = await teacherService.findInfoCourseById(courseId);
@@ -174,11 +188,13 @@ router.post('/input', function (req, res){
     })
 });
 
-router.get('/profile', function (req, res){
-    res.render('vwTeacher/profile');
+router.get('/profile', authTeacher, async function (req, res){
+    const accountId = req.session.authUser.MaTaiKhoan || 1;
+    const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
+    res.redirect('/teacher/profile/' + teacherId);
 });
 
-router.get('/profile/:id', async function (req, res){
+router.get('/profile/:id', authTeacher, async function (req, res){
     const teacherId = req.params.id || 0;
     const teacher = await teacherService.findTeacherById(teacherId);
 
@@ -221,14 +237,14 @@ router.post('/profile/:id', function (req, res){
     })
 });
 
-router.post('/profile', function (req, res){
+router.post('/profile', authTeacher, function (req, res){
     console.log(req.body);
     res.render('vwTeacher/profile');
 });
 
-router.get('/courses', async function (req, res){
-    // const accountId = req.session.authUser.MaTaiKhoan || 0;
-    const accountId = 1; // temp
+router.get('/courses', authTeacher, async function (req, res){
+    const accountId = req.session.authUser.MaTaiKhoan || 0;
+    // const accountId = 1; // temp
     const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
     const courses = await teacherService.findCoursesByIdTeacher(teacherId);
     console.log(courses);

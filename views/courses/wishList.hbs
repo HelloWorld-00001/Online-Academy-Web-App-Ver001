@@ -2,11 +2,11 @@
 <div class="container-fluid page-header" style="margin-bottom: 90px;">
     <div class="container">
         <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-            <h3 class="display-4 text-white text-uppercase">Courses</h3>
+            <h3 class="display-4 text-white text-uppercase">Wish list</h3>
             <div class="d-inline-flex text-white">
                 <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
                 <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Courses</p>
+                <p class="m-0 text-uppercase">Wish list</p>
             </div>
         </div>
     </div>
@@ -14,36 +14,12 @@
 <!-- Header End -->
 
 
-<!-- Category Start -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-            <h1>Explore Top Subjects</h1>
-        </div>
-        <div class="row d-flex justify-content-lg-center">
-            {{#each this.fields}}
-                <div class="col-lg-4 col-md-6 mb-3">
-                    <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                        <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="">
-                        <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
-                            <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
-                            <span>{{SLKhoaHoc}} Courses</span>
-                        </a>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</div>
-<!-- Category End -->
-
 <!-- Courses Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-            <h1>Our Popular Courses</h1>
+            <h1>Your wish list courses</h1>
         </div>
         {{#if this.empty}}
             <h5 class="card-title">Không có dữ liệu</h5>
@@ -66,7 +42,7 @@
                                             {{SoLuongVideo}}
                                         </small>
                                     </div>
-                                    <a class="card-title text-log h5" href="/course/detail/course?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                    <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                     {{#if isFieldType}}
                                         <p class="card-text">
                                             <i class="fa fa-globe" aria-hidden="true"></i>

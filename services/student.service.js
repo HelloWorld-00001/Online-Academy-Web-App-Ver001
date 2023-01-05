@@ -24,8 +24,11 @@ export default {
         return list[0];
     },
     
-    add(student) {
-        return db('HocVien').insert(student);
+    add(accountID) {
+        return db('HocVien').insert({
+            MaTaiKhoan: accountID,
+            SLKhoaHoc: 0
+        });
     },
 
     del(studentID) {

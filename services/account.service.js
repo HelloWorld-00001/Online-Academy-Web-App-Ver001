@@ -34,7 +34,18 @@ export default {
   },
 
   add(taikhoan) {
-    return db('TaiKhoan').insert(taikhoan);
+    return db('TaiKhoan').insert({
+      Username: taikhoan.Username,
+      Password: taikhoan.Password,
+      LoaiTaiKhoan: taikhoan.LoaiTaiKhoan,
+      Name: taikhoan.Name,
+      Email: taikhoan.Email,
+      LoaiTaiKhoan: 'Học viên',
+      DOB: taikhoan.DOB,
+      Avatar: taikhoan.Avatar,
+      DiaChi: taikhoan.DiaChi,
+      SDT: taikhoan.SDT      
+    });
   },
 
   edit(id, entity) {
@@ -50,7 +61,15 @@ export default {
     })
   },
 
-  grant(id) {
+  grantTeacher(id) {
     return db('TaiKhoan').where('MaTaiKhoan', id).update({LoaiTaiKhoan: 'Giáo Viên'})
+  },
+
+  grantAdmin(id) {
+    return db('TaiKhoan').where('MaTaiKhoan', id).update({LoaiTaiKhoan: 'Admin'})
+  },
+
+  updatePassword(id, newPassword) {
+    return db('TaiKhoan').where('MaTaiKhoan', id).update({Password: newPassword});
   }
 }

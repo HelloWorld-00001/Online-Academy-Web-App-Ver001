@@ -25,7 +25,7 @@
     <link href="/public/css/style.css" rel="stylesheet">
     <!-- Customized mysefl for notfound product and notfound page-->
     <link href="/public/css/notfound.css" rel="stylesheet">
-    {{{_sections.css}}}
+        {{{_sections.css}}}
 </head>
 
 <body>
@@ -116,8 +116,8 @@
                         <a href="/contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="nav-item">
-                        <form class="form-inline my-2 my-lg-0" method="post" action="/course/search">
-                            <input class="form-control mr-sm-2" name="courseFind" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" method="post" action="/search">
+                            <input class="form-control mr-sm-2" name="findName" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn borderColor changeColor my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
@@ -127,8 +127,17 @@
                                 Hi, {{authUser.Name}}
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/mylearning">My learning</a>
+                                {{#isTeacher authUser.LoaiTaiKhoan}}
+                                    <a class="dropdown-item" href="/teacher/input">Post new course</a>
+                                    <a class="dropdown-item" href="/teacher/courses">My courses</a>
+                                    <a class="dropdown-item" href="/teacher/profile">Edit profile</a>
+                                {{/isTeacher}}
+                                {{#isStudent authUser.LoaiTaiKhoan}}
+                                    <a class="dropdown-item" href="/mylearning">My learning</a>
+                                {{/isStudent}}
                                 <a class="dropdown-item" href="/account/profile">Profile</a>
+                                <a class="dropdown-item" href="/account/changePassword">Change Password</a>
+                                <a class="dropdown-item" href="/course/wishList">My wish list</a>
                                 <form id="frmLogout" action="/account/logout" method="post">
                                     <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Logout</a>
                                 </form>

@@ -1,7 +1,13 @@
 import db from '../utils/db.js';
 
 export default {
-    
+    async findAllTeacher() {
+        const list = await db('taikhoan')
+            .select('taikhoan.*')
+            .where('taikhoan.LoaiTaiKhoan', 'Giáo viên')
+        return list;
+    },
+
     async findTeacherById(id) {
         const list = await db('giaovien')
         .select(
