@@ -25,7 +25,6 @@ router.get('/', async function (req, res) {
 router.get('/input', authTeacher, async function (req, res){
    const field = await teacherService.findField();
    const ngonNgu = await teacherService.findNgonNgu();
-   console.log(ngonNgu);
    res.render('vwTeacher/inputcourse', {
        linhVuc: field,
        ngonNgu: ngonNgu,
@@ -68,7 +67,6 @@ router.post('/input/:id', function (req, res){
         }
     });
 
-
     const upload = multer({ storage: storage });
     upload.array('Image', 5)(req, res, async function (err) {
         if (err) {
@@ -76,7 +74,6 @@ router.post('/input/:id', function (req, res){
         } else {
             const obj = JSON.parse(JSON.stringify(req.body));
             const courseId = req.params.id || 0;
-
             if (obj.Image === '') {
                 obj.Image = await teacherService.getNameCourseImage(courseId).Image;
             } else {
@@ -129,7 +126,6 @@ router.post('/input', function (req, res){
         }
     });
 
-
     const upload = multer({ storage: storage });
     upload.array('Image', 5)(req, res, async function (err) {
         if (err) {
@@ -147,10 +143,7 @@ router.post('/input', function (req, res){
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
             obj.dateTime = datetime;
-            if (typeof obj.Image === 'undefined' )
-                obj.Image = '';
-
-            console.log(obj.Image);
+            obj.Image = file_name;
 
             if (obj.check === 'on')
                 obj.isDone = 'Đã hoàn thành';
@@ -188,7 +181,7 @@ router.post('/input', function (req, res){
                 await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "");
             }
             console.log(obj);
-            res.redirect('/teacher/input/' + courseId);
+            res.redirect(`/teacher/input/${courseId}`);
         }
     })
 });
