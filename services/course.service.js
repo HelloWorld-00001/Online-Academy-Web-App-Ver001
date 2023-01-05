@@ -300,12 +300,22 @@ export default {
         }
         return userReview;
     },
-
+    async findByIDStudentAccount(idUser) {
+        const student = await db('HocVien').where('MaTaiKhoan', idUser);
+        if(student.length === 0)
+            return null;
+        return student[0].MaHocVien;
+    },
+    async findByIDTeacherAccount(idUser) {
+        const teacher = await db('GiaoVien').where('MaTaiKhoan', idUser);
+        if(teacher.length === 0)
+            return null;
+        return teacher[0].MaGiaoVien;
+    },
     async findCourseById(id){
         const course = await db('KhoaHoc').where('MaKhoaHoc', id);
         return course
     },
-
 
     async courseFullTextSearch(name, limit, offset) {
         const sql = `SELECT *

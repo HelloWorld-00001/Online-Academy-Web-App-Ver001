@@ -86,6 +86,15 @@ export default {
         }
         return userReview[0];
     },
+    async checkCourseOfTeacher(idCourse,idTeacher){
+        const course = await db('KhoaHoc')
+            .where('MaKhoaHoc', idCourse)
+            .where('GiaoVien', idTeacher);
+        if(course.length === 0)
+            return false;
+        console.log(course);
+        return true;
+    },
 
     addBangDanhGia(newRating) {
         return db('bangdanhgia').insert(newRating);

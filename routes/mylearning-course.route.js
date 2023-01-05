@@ -72,8 +72,8 @@ router.get('/course', async function (req, res) {
         const firstVideo = courseVideoList[0].Link;
         const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
-            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
-            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+            const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent);
             if(courseRegistered !== null) {
                 const mahocvien = idStudent.MaHocVien;
                 const userRating = await mylearningService.getUserRating(makhoahoc, mahocvien);
@@ -88,6 +88,25 @@ router.get('/course', async function (req, res) {
                     inforStudentsOfTeacher,
                     userRating,
                     checkStudentReview,
+                    studentReviewList,
+                });
+            }
+            else {
+                return res.redirect(`/course/detail?id=${makhoahoc}`);
+            }
+        }
+        else if(req.session.authUser.LoaiTaiKhoan === 'Giáo Viên') {
+            const idTeacher = await courseService.findByIDTeacherAccount(req.session.authUser.MaTaiKhoan);
+            console.log(req.session.authUser.MaTaiKhoan,makhoahoc, idTeacher);
+            const checkCourseOfTeacher = await  mylearningService.checkCourseOfTeacher(makhoahoc, idTeacher);
+            if(checkCourseOfTeacher) {
+                res.render('vwMylearning/mylearning', {
+                    checkCanRating: false,
+                    courseVideoList,
+                    course,
+                    firstVideo,
+                    starRatingList,
+                    inforStudentsOfTeacher,
                     studentReviewList,
                 });
             }
