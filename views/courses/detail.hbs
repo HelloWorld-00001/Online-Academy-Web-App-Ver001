@@ -292,7 +292,7 @@
                                         <h4> {{this.course.KhuyenMai}}% off</h4>
                                     {{/if}}
                                 </div>
-                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/course/addToWishList?MaKH={{this.course.MaKhoaHoc}}&MaTK={{authUser.MaTaiKhoan}}" role="button">Add to wish list</a>
                                 <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
                             {{/if}}
                         {{else}}
@@ -305,8 +305,12 @@
                                     <h4> {{this.course.KhuyenMai}}% off</h4>
                                 {{/if}}
                             </div>
-                            <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="#" role="button">Add to cart</a>
-                            <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
+                            {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                            {{else}}
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/course/wishList" role="button">Add to wish list</a>
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
+                            {{/isTeacherAndAdmin}}
                         {{/isStudent}}
                     </div>
 
@@ -598,7 +602,7 @@
                                                     {{SoLuongVideo}}
                                                 </small>
                                             </div>
-                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            <a class="card-title text-log h5" href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                             {{#if isFieldType}}
                                                 <p class="card-text">
                                                     <i class="fa fa-globe" aria-hidden="true"></i>
