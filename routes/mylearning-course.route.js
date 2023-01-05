@@ -1,5 +1,6 @@
 import mylearningService from "../services/myleaning.service.js";
 import courseService from '../services/course.service.js';
+
 import express from "express";
 import studentService from "../services/student.service.js";
 const router = express.Router();
@@ -45,42 +46,41 @@ router.get('/', async function (req, res) {
 router.get('/course', async function (req, res) {
     let makhoahoc = req.query.id || 0;
     if(req.session.auth === true){
+        const course = await courseService.findDetailCourseByID(makhoahoc);
+        const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
+
+        if (course === null) {
+            return res.redirect('/');
+        }
+
+        const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
+        const oneStarRate = await mylearningService.countStarRate(makhoahoc,1);
+        const twoStarRate = await mylearningService.countStarRate(makhoahoc,2);
+        const threeStarRate = await mylearningService.countStarRate(makhoahoc,3);
+        const fourStarRate = await mylearningService.countStarRate(makhoahoc,4);
+        const fiveStarRate = await mylearningService.countStarRate(makhoahoc,5);
+
+        const amountStudentRating = await mylearningService.countStudentRating(makhoahoc);
+
+        const oneStarRatePer = Math.round(oneStarRate / amountStudentRating * 100)
+        const twoStarRatePer = Math.round(twoStarRate / amountStudentRating * 100)
+        const threeStarRatePer = Math.round(threeStarRate / amountStudentRating * 100)
+        const fourStarRatePer = Math.round(fourStarRate / amountStudentRating * 100)
+        const fiveStarRatePer = Math.round(fiveStarRate / amountStudentRating * 100)
+
+        const starRatingList  = {oneStarRatePer, twoStarRatePer, threeStarRatePer, fourStarRatePer, fiveStarRatePer};
+        const firstVideo = courseVideoList[0].Link;
+        const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
             const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
             const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
             if(courseRegistered !== null) {
                 const mahocvien = idStudent.MaHocVien;
-                const course = await courseService.findDetailCourseByID(makhoahoc);
-                const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
-
-                if (course === null) {
-                    return res.redirect('/');
-                }
-
-                const courseVideoList = await courseService.findCourseVideoList(makhoahoc);
-                const oneStarRate = await mylearningService.countStarRate(makhoahoc,1);
-                const twoStarRate = await mylearningService.countStarRate(makhoahoc,2);
-                const threeStarRate = await mylearningService.countStarRate(makhoahoc,3);
-                const fourStarRate = await mylearningService.countStarRate(makhoahoc,4);
-                const fiveStarRate = await mylearningService.countStarRate(makhoahoc,5);
-
-                const amountStudentRating = await mylearningService.countStudentRating(makhoahoc);
-
-                const oneStarRatePer = Math.round(oneStarRate / amountStudentRating * 100)
-                const twoStarRatePer = Math.round(twoStarRate / amountStudentRating * 100)
-                const threeStarRatePer = Math.round(threeStarRate / amountStudentRating * 100)
-                const fourStarRatePer = Math.round(fourStarRate / amountStudentRating * 100)
-                const fiveStarRatePer = Math.round(fiveStarRate / amountStudentRating * 100)
-
-                const starRatingList  = {oneStarRatePer, twoStarRatePer, threeStarRatePer, fourStarRatePer, fiveStarRatePer};
-                const firstVideo = courseVideoList[0].Link;
                 const userRating = await mylearningService.getUserRating(makhoahoc, mahocvien);
                 const checkStudentReview = userRating ===  null ? true : false;
 
-                let limit = 2;
-                const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
-
                 res.render('vwMylearning/mylearning', {
+                    checkCanRating: true,
                     courseVideoList,
                     course,
                     firstVideo,
@@ -92,15 +92,23 @@ router.get('/course', async function (req, res) {
                 });
             }
             else {
-                return res.redirect(`/course/detail/course?id=${makhoahoc}`);
+                return res.redirect(`/course/detail?id=${makhoahoc}`);
             }
         }
         else {
-            return res.redirect(`/mylearning/course?id=${makhoahoc}`);
+            res.render('vwMylearning/mylearning', {
+                checkCanRating: false,
+                courseVideoList,
+                course,
+                firstVideo,
+                starRatingList,
+                inforStudentsOfTeacher,
+                studentReviewList,
+            });
         }
     }
     else {
-        return res.redirect(`/course/detail/course?id=${makhoahoc}`);
+        return res.redirect(`/course/detail?id=${makhoahoc}`);
     }
 
 });

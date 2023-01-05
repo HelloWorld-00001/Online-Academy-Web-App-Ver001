@@ -26,7 +26,8 @@
     </script>
     {{#if err_message}}
         <script>
-            $('#ModalAlert').addClass('shown.bs.modal')
+            // window.location.reload();
+            $('#ModalAlert').modal('show')
         </script>
     {{/if}} 
 {{/section}}

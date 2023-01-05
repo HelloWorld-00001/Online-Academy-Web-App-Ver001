@@ -666,20 +666,23 @@
                 {{this.course.TenKhoaHoc}}
             </a>
         </div>
+        {{#if checkCanRating}}
+            <div class="col-header-1 col-lg-4 text-right">
+                {{#if this.checkStudentReview}}
+                    <a class="trigger text-primary" href="#">
+                        <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                        Leave a rating
+                    </a>
+                {{else}}
+                    <a class="trigger text-primary" href="#">
+                        <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                        Edit your rating
+                    </a>
+                {{/if}}
+            </div>
+        {{else}}
 
-        <div class="col-header-1 col-lg-4 text-right">
-            {{#if this.checkStudentReview}}
-                <a class="trigger text-primary" href="#">
-                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
-                    Leave a rating
-                </a>
-            {{else}}
-                <a class="trigger text-primary" href="#">
-                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
-                    Edit your rating
-                </a>
-            {{/if}}
-        </div>
+        {{/if}}
     </div>
 </div>
 

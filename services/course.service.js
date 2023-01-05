@@ -174,7 +174,7 @@ export default {
         const courses = await db('khoahoc')
                     .select(
                         'khoahoc.*',
-                        'taikhoan.Username',
+                        'taikhoan.Name',
                         'linhvuc.TenLinhVuc'
                     )
                     .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
@@ -191,7 +191,7 @@ export default {
         const courseField = await db('khoahoc')
             .select(
                 'khoahoc.*',
-                'taikhoan.Username',
+                'taikhoan.Name',
                 'linhvuc.TenLinhVuc'
             )
             .where('LinhVuc', linhVuc)
