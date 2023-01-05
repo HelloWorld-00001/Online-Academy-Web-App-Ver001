@@ -60,7 +60,7 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/detail/course', async function (req, res) {
+router.get('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
     // makhoahoc = +makhoahoc
     const course = await courseService.findDetailCourseByID(makhoahoc);
@@ -105,10 +105,8 @@ router.get('/detail/course', async function (req, res) {
     });
 });
 
-router.post('/detail/course', async function (req, res) {
+router.post('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
-
-
     const today = new Date().toISOString().slice(0, 10);
 
     const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);

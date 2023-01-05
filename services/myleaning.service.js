@@ -22,9 +22,6 @@ export default {
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)
             .offset(offset);
-        if(studentCourse.length === 0) {
-            return null;
-        }
         for(let i = 0; i < studentCourse.length; i++) {
             Object.assign(studentCourse[i], {isFieldType: studentCourse[i].LinhVuc === 1});
         }

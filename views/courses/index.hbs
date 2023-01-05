@@ -54,7 +54,8 @@
                     <div class="col-lg-4 mb-3">
                         <div class="form_course">
                             <div class="card h-100">
-                                <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+
+                                <img class="card-img-top" src="/public/img/courses/{{Image}}" alt="">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-2">
                                         <small class="m-0">
@@ -66,7 +67,7 @@
                                             {{SoLuongVideo}}
                                         </small>
                                     </div>
-                                    <a class="card-title text-log h5" href="/course/detail/course?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                    <a class="card-title text-log h5" href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                     {{#if isFieldType}}
                                         <p class="card-text">
                                             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -78,7 +79,7 @@
                                             {{TenLinhVuc}}
                                         </p>
                                     {{/if}}
-                                    <p class="card-text">{{Username}}</p>
+                                    <p class="card-text">{{Name}}</p>
                                     <div class="d-flex align-content-center">
                                         <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
                                         <h5 class="text-primary font-weight-bolder ml-2">{{RateTB}}</h5>

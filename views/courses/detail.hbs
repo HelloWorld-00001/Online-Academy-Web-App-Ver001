@@ -52,7 +52,12 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            width: 100%;
             margin-bottom: 15px;
+        }
+
+        .teacher__infor {
+            width: 100%;
         }
 
         .card__avatar,
@@ -110,6 +115,43 @@
             font-weight: normal;
             color:#fff;
             opacity:1;
+        }
+
+        .course-img-mobile {
+            display: none;
+        }
+
+        /* Mobile: width < 740 px*/
+        @media only screen and (max-width: 46.1875em){
+            .course-img {
+                display: none;
+            }
+
+            .course-img-mobile {
+                display: block;
+            }
+
+            .card__top {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .teacher__infor {
+                margin-top: 1rem;
+            }
+
+            .course-content-header {
+                flex-direction: column;
+            }
+
+            .course-infor {
+                display: none;
+            }
+        }
+        /* Tablet: width >= 740px and width < 1024px */
+        @media (max-width: 63.9375em) and (min-width:   46.25em) {
+
+
         }
 
     </style>
@@ -171,27 +213,6 @@
             });
         });
 
-        // $(function () {
-        //     if ($(".list-course:hidden").length <= 10) {
-        //         $(".more-section").css('visibility', 'hidden');
-        //
-        //     }
-        //     console.log($(".list-course:hidden").length)
-        //
-        //     $(".list-course").slice(0, 10).show();
-        //     $(".more-section").text($(".list-course:hidden").length + " more section");
-        //     $("body").on('click touchstart', '.more-section', function (e) {
-        //         e.preventDefault();
-        //         $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
-        //         if ($(".list-course:hidden").length === 0) {
-        //             $(".more-section").css('visibility', 'hidden');
-        //         }
-        //         $('html,body').animate({
-        //             scrollTop: $('.more-section').offset().top - 500
-        //         }, 1000);
-        //     });
-        // });
-
         $(function () {
             if ($(".list-course:hidden").length > 10) {
                 $(".more-section").removeClass('d-none').addClass('d-inline-block');
@@ -207,9 +228,6 @@
                 if ($(".list-course:hidden").length === 0) {
                     $(".more-section").removeClass('d-inline-block').addClass('d-none');
                 }
-                // $('html,body').animate({
-                //     scrollTop: $('.more-section').offset().top - 500
-                // }, 1000);
             });
         });
 
@@ -242,6 +260,7 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-md-4">
+            <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 course-img-mobile" alt="" style="border-radius: 8px">
             <div class="card">
                 <div class="card-body h-auto">
                     <div class="d-flex justify-content-between mb-2">
@@ -310,7 +329,7 @@
                         {{/isStudent}}
                     </div>
 
-                    <div class="mt-5">
+                    <div class="mt-5 course-infor">
                         <p class="font-weight-bold">This course includes:</p>
                         <div class="row mt-2">
                             <p class="col-sm-2">
@@ -334,14 +353,6 @@
                             </p>
                             <p class="col-sm-10">
                                 Web development
-                            </p>
-                        </div>
-                        <div class="row">
-                            <p class="col-sm-2">
-                                <i class="fa fa-mobile text-primary" aria-hidden="true"></i>
-                            </p>
-                            <p class="col-sm-10">
-                                Access on mobile and TV
                             </p>
                         </div>
                         <div class="row">
@@ -382,7 +393,7 @@
         </div>
 
         <div class="col-md-8">
-            <img src="/public/img/courses/{{this.course.MaKhoaHoc}}.jpg" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
+            <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 course-img" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
                 <div class="card-header">
@@ -452,7 +463,7 @@
                 </div>
             </div>
             <div class="card mt-3 w-auto">
-                <div class="card-header d-flex justify-content-between">
+                <div class="course-content-header card-header d-flex justify-content-between">
                     <h5 class="card-text text-primary">
                         Course Content
                     </h5>
@@ -533,32 +544,32 @@
                     <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
-                            <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
+                            <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Name}}">
                         </div>
-                        <div class="ml-3">
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-envelope text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.course.Email}}</span>
+                        <div class="ml-3 teacher__infor">
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fa fa-envelope text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.course.Email}}</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.course.DOB}}</span>
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fa fa-birthday-cake text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.course.DOB}}</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fa fa-star text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fas fa-trophy text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-user-plus text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fa fa-user-plus text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-play-circle text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                            <p class="mb-2 row align-items-center">
+                                <i class="col-1 fa fa-play-circle text-primary" style="line-height: 1.5; font-size: 1rem;" aria-hidden="true"></i>
+                                <span class="col-10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                             </p>
                         </div>
                     </div>
@@ -586,7 +597,7 @@
                             <div class="col-md-6 mb-3 mw-100">
                                 <div class="form_course">
                                     <div class="card h-100">
-                                        <img class="card-img-top" src="/public/img/courses/{{MaKhoaHoc}}.jpg" alt="">
+                                        <img class="card-img-top" src="/public/img/courses/{{Image}}" alt="">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between mb-2">
                                                 <small class="m-0">
@@ -598,7 +609,7 @@
                                                     {{SoLuongVideo}}
                                                 </small>
                                             </div>
-                                            <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                            <a class="card-title text-log h5" href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                             {{#if isFieldType}}
                                                 <p class="card-text">
                                                     <i class="fa fa-globe" aria-hidden="true"></i>
@@ -610,7 +621,7 @@
                                                     {{TenLinhVuc}}
                                                 </p>
                                             {{/if}}
-                                            <p class="card-text">{{Username}}</p>
+                                            <p class="card-text">{{Name}}</p>
                                             <div class="card__stars">
                                         <span>
                                             <i class="fa fa-star text-primary"></i>
@@ -648,10 +659,10 @@
                     <div class="w-100">
                         <div class="row" id="review-list">
                             {{#each this.studentReviewList}}
-                                <div class="col-md-6 mb-3 mw-100 course-review">
+                                <div class="col-md-12 mb-3 mw-100 course-review">
                                     <div class="card card--feedback h-100">
                                         <div class="card-body h-auto">
-                                            <div class="card__top">
+                                            <div class="d-flex">
                                                 <div class="card__avatar">
                                                     <img src="/public/img/team-1.jpg" alt="student 1">
                                                 </div>
