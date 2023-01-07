@@ -452,10 +452,12 @@
                     <h5 class="card-text text-primary">
                         Course Overview
                     </h5>
-                    <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{this.course.MaKhoaHoc}}" role="button">
-                        <i class="fa fa-edit" aria-hidden="true"></i>
-                        Edit this course
-                    </a>
+                    {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
+                        <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{this.course.MaKhoaHoc}}" role="button">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            Edit this course
+                        </a>
+                    {{/isTeacherAndAdmin}}
                 </div>
                 <div class="card-body h-auto">
                     <p class="card-title font-weight-bolder">
@@ -595,10 +597,12 @@
             <div class="card mt-3">
                 <div class="card-header" style="display: flex; justify-content: space-between">
                     <h5 class="mb-3 text-primary">Instructor</h5>
-                    <a class="btn btn-sm btn-outline-primary" href="/teacher/profile" role="button">
-                        <i class="fa fa-edit" aria-hidden="true"></i>
-                        Edit profile
-                    </a>
+                    {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
+                        <a class="btn btn-sm btn-outline-primary" href="/teacher/profile/{{this.course.GiaoVien}}" role="button">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            Edit profile
+                        </a>
+                    {{/isTeacherAndAdmin}}
                 </div>
                 <div class="card-body h-auto course-teacher-infor">
                     <h5 class="card__name mb-3"><a href="/account/profile" class="text-info">{{this.course.Name}}</a></h5>
