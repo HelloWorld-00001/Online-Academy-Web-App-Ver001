@@ -389,10 +389,14 @@
             <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
-                <div class="card-header">
+                <div class="card-header" style="display: flex; justify-content: space-between">
                     <h5 class="card-text text-primary">
                         Course Overview
                     </h5>
+                    <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{this.course.MaKhoaHoc}}" role="button">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                        Edit this course
+                    </a>
                 </div>
                 <div class="card-body h-auto">
                     <p class="card-title font-weight-bolder">
@@ -530,11 +534,15 @@
                 </div>
             </div>
             <div class="card mt-3">
-                <div class="card-header">
+                <div class="card-header" style="display: flex; justify-content: space-between">
                     <h5 class="mb-3 text-primary">Instructor</h5>
+                    <a class="btn btn-sm btn-outline-primary" href="/teacher/profile" role="button">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                        Edit profile
+                    </a>
                 </div>
                 <div class="card-body h-auto">
-                    <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
+                    <h5 class="card__name mb-3"><a href="/account/profile" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
                             <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
