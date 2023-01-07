@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import moment from 'moment';
 import teacherService from '../services/teacher.service.js';
 const router = express.Router();
 
@@ -213,8 +214,8 @@ router.get('/profile/:id', authTeacher, isYourProfile, async function (req, res)
     const teacherId = req.params.id || 0;
     const teacher = await teacherService.findTeacherById(teacherId);
 
-    res.render('vwTeacher/profile', {
-        teacher: teacher
+    res.render('vwAccount/editProfile', {
+        info: teacher
     });
 });
 
@@ -247,6 +248,15 @@ router.post('/profile/:id', function (req, res){
                 obj.Avatar = file_name;
             }
             const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+            
+            var user = await teacherService.findTeacherById(teacherId);
+            delete user.Password;
+            user.DOB = moment(user.DOB, 'YYYY/MM/DD').format('DD/MM/YYYY');
+            user.Mota = obj.Mota;
+            user.Website = obj.Website;
+            console.log(user);
+
+            req.session.authUser = user;
             res.redirect('/teacher/profile/' + teacherId);
         }
     })
@@ -254,7 +264,7 @@ router.post('/profile/:id', function (req, res){
 
 router.post('/profile', authTeacher, function (req, res){
     console.log(req.body);
-    res.render('vwTeacher/profile');
+    res.render('vwAccount/editProfile');
 });
 
 router.get('/courses', authTeacher, async function (req, res){

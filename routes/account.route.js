@@ -133,6 +133,7 @@ router.post('/login', async function (req, res) {
   delete user.Password;
 
   user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+  
   req.session.auth=true;
   req.session.authUser=user;
 
@@ -177,7 +178,20 @@ function regis(req, res, next) {
 
 //profile
 router.get('/profile', auth, async function(req, res) {
-  res.render('vwAccount/profile');
+  const user = req.session.authUser;
+  var MoTa = null;
+  if(user.LoaiTaiKhoan === 'Giáo Viên') {
+    const teacher = await accountService.findTeacherByID(user.MaTaiKhoan);
+    console.log(user.MaTaiKhoan);
+    MoTa = teacher.MoTa;
+  }
+
+  user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+
+  res.render('vwAccount/profile',{
+    MoTa,
+    user
+  });
 })
 
 //changePassword

@@ -5,6 +5,8 @@ import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
 
 import bcrypt from 'bcryptjs';
+import moment from 'moment';
+import multer from 'multer';
 
 import courseService from '../services/course.service.js';
 const router = express.Router();
@@ -104,24 +106,43 @@ router.get('/editTeacher', async function (req, res){
 });
 
 router.post('/editTeacher', async function (req, res){
-    const id = req.query.id;
-    var teacher = req.body;
-    
-    await accountService.edit(teacher.MaTaiKhoan, teacher);
-    await teacherService.editGiaovien(req.body.MoTa, id);
-
-    teacher = await teacherService.findTeacherById(id);
-    res.render('vwAdmin/manage/edit', {
-        layout: 'adminLayout',
-        info: teacher
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/teachers');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
     });
 
+
+    const upload = multer({ storage: storage });
+    upload.array('Avatar', 5)(req, res, async function (err) {
+        console.log(req.body);
+        if (err) {
+            console.error(err);
+        } else {
+            const obj = JSON.parse(JSON.stringify(req.body));
+            const teacherId = req.query.id || 0;
+            const affected_rows = await teacherService.editGiaovien(obj.Mota, teacherId);
+            const accountId = await teacherService.findAccountByIdTeacher(teacherId);
+            if (obj.Avatar === null) {
+                obj.Avatar = await teacherService.getNameImage(accountId).Avatar;
+            } else {
+                obj.Avatar = file_name;
+            }
+            const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+            res.redirect('/admin/editTeacher?id=' + teacherId);
+        }
+    })
 });
 
 router.get('/viewTeacher', async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
-    console.log(teacher);
+    teacher.DOB = moment(teacher.DOB).format('DD/MM/YYYY');
 
     res.render('vwAdmin/manage/view', {
         layout: 'adminLayout',
@@ -275,22 +296,44 @@ router.get('/editStudent', async function (req, res){
 });
 
 router.post('/editStudent', async function (req, res){
-    const student = req.body;
-    console.log(student);
-    await accountService.edit(student.MaTaiKhoan, student);
-
-    res.render('vwAdmin/manage/edit', {
-        layout: 'adminLayout',
-        info: student,
-        isStudent: true
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/students');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
     });
+
+
+    const upload = multer({ storage: storage });
+    upload.array('Avatar', 5)(req, res, async function (err) {
+        console.log(req.body);
+        if (err) {
+            console.error(err);
+        } else {
+            const obj = JSON.parse(JSON.stringify(req.body));
+            const studentId = req.query.id || 0;
+            const accountId = await studentService.findAccountIdByIdStudent(studentId);
+            if (obj.Avatar === null) {
+                obj.Avatar = await studentService.getNameImage(accountId).Avatar;
+            } else {
+                obj.Avatar = file_name;
+            }
+            const affected_rows_= await studentService.editTaikhoan(obj, accountId.MaTaiKhoan);
+            
+            res.redirect('/admin/editStudent?id=' + studentId);
+        }
+    })
 });
 
 router.get('/viewStudent', async function (req, res){
     const id = req.query.id;
     const student = await studentService.findByID(id);
     const isStudent = true;
-
+    student.DOB = moment(student.DOB, 'YYYY-MM-DD').format('DD-MM-YYYY');
     res.render('vwAdmin/manage/view', {
         layout: 'adminLayout',
         info: student,

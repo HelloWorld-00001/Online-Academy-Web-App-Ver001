@@ -40,5 +40,45 @@ export default {
         return db('HocVien')
         .where({MaHocVien: studentID})
         .update({SLKhoaHoc: slkh});
-    }
+    },
+
+    async findStudentById(id) {
+        const list = await db('hocvien')
+        .select(
+            'hocvien.*',
+            'taikhoan.*'
+        ).where('hocvien.MaHocVien', id)
+        .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
+        return list[0];
+    },
+
+    async findStudentIdByAccountId(AccountId) {
+        const list = await db('HocVien')
+            .select('hocvien.MaHocVien').where('hocvien.MaTaiKhoan', AccountId)
+        return list[0].MaHocVien;
+    },
+
+    async findAccountIdByIdStudent(id) {
+        const list = await db('hocvien')
+            .select('hocvien.MaTaiKhoan').where('hocvien.MaHocVien', id)
+        return list[0];
+    },
+
+    async getNameImage(accountId) {
+        const list = await db('taikhoan')
+            .select('taikhoan.Avatar').where('taikhoan.MaTaiKhoan', accountId)
+        return list[0];
+    },
+
+    async editTaikhoan(account, idAccount) {
+        return db('taikhoan')
+            .where({MaTaiKhoan: idAccount})
+            .update({  Name: account.Name,
+                            Email: account.Email,
+                            DOB: account.DOB,
+                            Avatar: account.Avatar,
+                            SDT: account.SDT,
+                            DiaChi: account.DiaChi
+            })
+    },
 }
