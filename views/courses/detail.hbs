@@ -112,6 +112,66 @@
             opacity:1;
         }
 
+        .img-course-mobile {
+            display: none;
+        }
+
+        /* Mobile: width < 740 px*/
+        @media only screen and (max-width: 46.1875em){
+            .img-course {
+                display: none;
+            }
+            .img-course-mobile {
+                display: block;
+            }
+
+            .course-includes {
+                display: none;
+            }
+
+            .course-content-title {
+                flex-direction: column;
+            }
+
+            .course-teacher-infor .card__top {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .course-teacher-infor .card__top img {
+                margin-bottom: 1rem;
+            }
+
+            /*.col-header-1, col-header-3 {*/
+            /*    display: none;*/
+            /*}*/
+
+            /*.card__top {*/
+            /*    flex-direction: column;*/
+            /*    align-items: center;*/
+            /*}*/
+
+            /*.teacher__infor {*/
+            /*    margin-top: 6px;*/
+            /*}*/
+            /*.nav-course-content {*/
+            /*    display: block;*/
+            /*}*/
+            /*.video-content-section {*/
+            /*    display: block;*/
+            /*}*/
+        }
+        /* Tablet: width >= 740px and width < 1024px */
+        @media (max-width: 63.9375em) and (min-width:   46.25em) {
+            .col-header-1, col-header-3 {
+                display: none;
+            }
+            .mylearning-header{
+                display: block;
+            }
+
+        }
+
     </style>
 {{/section}}
 
@@ -234,12 +294,12 @@
             // document ready
         });
 
-
     </script>
 {{/section}}
 
 
 <div class="container py-5">
+    <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 img-course-mobile" alt="" style="border-radius: 8px">
     <div class="row">
         <div class="col-md-4">
             <div class="card">
@@ -250,7 +310,7 @@
                             {{this.course.Luotxem}} Students
                         </p>
                         <p class="m-0">
-                            <i class="far fa-clock text-primary mr-2"></i>
+                            <i class="far fa-play-circle text-primary mr-2"></i>
                             {{this.course.SoLuongVideo}}
                         </p>
                     </div>
@@ -314,11 +374,11 @@
                         {{/isStudent}}
                     </div>
 
-                    <div class="mt-5">
+                    <div class="mt-5 course-includes">
                         <p class="font-weight-bold">This course includes:</p>
                         <div class="row mt-2">
                             <p class="col-sm-2">
-                                <i class="far fa-clock  text-primary"></i>
+                                <i class="far fa-play-circle  text-primary"></i>
                             </p>
                             <p class="col-sm-10">
                                 11 hours on-demand video
@@ -386,7 +446,7 @@
         </div>
 
         <div class="col-md-8">
-            <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0" alt="" style="border-radius: 8px">
+            <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 img-course" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
                 <div class="card-header" style="display: flex; justify-content: space-between">
@@ -460,7 +520,7 @@
                 </div>
             </div>
             <div class="card mt-3 w-auto">
-                <div class="card-header d-flex justify-content-between">
+                <div class="card-header d-flex justify-content-between course-content-title">
                     <h5 class="card-text text-primary">
                         Course Content
                     </h5>
@@ -541,36 +601,36 @@
                         Edit profile
                     </a>
                 </div>
-                <div class="card-body h-auto">
+                <div class="card-body h-auto course-teacher-infor">
                     <h5 class="card__name mb-3"><a href="/account/profile" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
                             <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
                         </div>
-                        <div class="ml-3">
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-envelope text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.course.Email}}</span>
+                        <div class="ml-3 w-100">
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fa fa-envelope text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.course.Email}}</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.course.DOB}}</span>
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.course.DOB}}</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fa fa-star text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fas fa-trophy text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-user-plus text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fa fa-user-plus text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                             </p>
-                            <p class="mb-2 row">
-                                <i class="col-2 mr-2 fa fa-play-circle text-primary" aria-hidden="true"></i>
-                                <span col="10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                            <p class="mb-2 row d-flex align-items-center">
+                                <i class="col-1 mr-1 fa fa-play-circle text-primary" aria-hidden="true"></i>
+                                <span col="col-11">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                             </p>
                         </div>
                     </div>
@@ -606,7 +666,7 @@
                                                     {{LuotXem}} Students
                                                 </small>
                                                 <small class="m-0">
-                                                    <i class="far fa-clock text-primary mr-2"></i>
+                                                    <i class="far fa-play-circle text-primary mr-2"></i>
                                                     {{SoLuongVideo}}
                                                 </small>
                                             </div>

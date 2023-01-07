@@ -168,7 +168,14 @@ export default {
         return raw[0];
     },
 
-
+    async countByLanguage() {
+        const sql =  `select k.NgonNgu , lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
+                        from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
+                        Group by k.NgonNgu,lv.MaLinhVuc, lv.TenLinhVuc`;
+        const raw = await db.raw(sql);
+        console.log(raw[0])
+        return raw[0];
+    },
 
     async findPageCourseAll(limit, offset) {
         const courses = await db('khoahoc')
@@ -205,6 +212,24 @@ export default {
         return course;
     },
 
+    async findPageByLanguage(language, limit, offset) {
+        const courseField = await db('khoahoc')
+            .select(
+                'khoahoc.*',
+                'taikhoan.Name',
+                'linhvuc.TenLinhVuc'
+            )
+            .where('NgonNgu', language)
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .limit(limit)
+            .offset(offset);
+
+        const course = this.assignDiscount(courseField);
+        return course;
+    },
+
     /// find by name --  not full text search
     async findByName(name) {
         const sql = await db('KhoaHoc')
@@ -220,15 +245,14 @@ export default {
                                 .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
                                 .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
                                 .where('khoahoc.MaKHoaHoc', idCourse)
+        if (detailList.length === 0)
+            return null;
         if(detailList[0]['DOB'] !== null) {
             detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
             detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
             detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
             detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
         }
-
-        if (detailList.length === 0)
-            return null;
 
         Object.assign(detailList[0], {isFieldType: detailList[0].LinhVuc === 1});
         Object.assign(detailList[0], {isNoDiscount: detailList[0].KhuyenMai === 0});
