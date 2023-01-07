@@ -119,6 +119,17 @@ export default {
         return db('linhvuc').where('MaLinhVuc', id).del();
     },
     async findCatebyID(id) {
-        return db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
+        return await db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
     },
+    async findAllVideo() {
+        const sql = `select dsvd.TenVideo, kh.TenKhoaHoc, tk.Name, lv.TenLinhVuc, dsvd.NgayCapNhat
+                        from danhsachvideo dsvd
+                        join khoahoc kh on dsvd.MaKhoaHoc = kh.MaKhoaHoc
+                        join giaovien gv on gv.MaGiaoVien = kh.GiaoVien
+                        join taikhoan tk on gv.MaTaiKhoan = tk.MaTaiKhoan
+                        join linhvuc lv on lv.MaLinhVuc = kh.LinhVuc`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    }
+
 }

@@ -53,8 +53,11 @@
                                                     <form method="post" action="">
                                                         <tr>
                                                             <td>{{MaGiaoVien}}</td>
+                                                            <input type="hidden" value={{MaGiaoVien}} name="MaGiaoVien">
                                                             <td>{{MaTaiKhoan}}</td>
+                                                            <input type="hidden" value={{MaTaiKhoan}} name="MaTaiKhoan">
                                                             <td>{{Name}}</td>
+                                                            <input type="hidden" value={{Name}} name="Name">
                                                             <td>{{Username}}</td>
                                                             <td>{{Email}}</td>
                                                             <td>{{SLKhoaHoc}}</td>
@@ -73,8 +76,11 @@
                                                                         <a name="id" id="" class="view text-c-red dropdown-item" href="/admin/delTeacher?id={{MaTaiKhoan}}" role="button">
                                                                             <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
                                                                         </a>
-                                                                        <button type="submit" class="view text-c-yellow dropdown-item" name="grantStudent" value="grant">
-                                                                            <i class="fas fa fa-arrow-down" aria-hidden="true"></i><span> Denote</span>
+                                                                        <button type="submit" class="view text-c-yellow dropdown-item" name="denoteStudent" value="grant">
+                                                                            <i class="fas fa fa-arrow-down" aria-hidden="true"></i><span> Student Grant</span>
+                                                                        </button>
+                                                                        <button type="submit" class="view text-c-yellow dropdown-item" name="grantAdmin" value="grant">
+                                                                            <i class="fa fa-user" aria-hidden="true"></i><span> Admin Grant</span>
                                                                         </button>
                                                                     </div>
                                                                 </div>

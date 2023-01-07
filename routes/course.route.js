@@ -219,6 +219,8 @@ router.get('/detail', async function (req, res) {
 
 router.post('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
+
+
     const today = new Date().toISOString().slice(0, 10);
 
     const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);

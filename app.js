@@ -64,13 +64,13 @@ app.use(async function (req, res, next) {
     req.session.wishList = [];
   }
 
-    res.locals.regis = req.session.regis;
-    res.locals.temp = req.session.temp;
-    res.locals.auth = req.session.auth;
-    res.locals.authUser = req.session.authUser;
-    res.locals.wishList = req.session.wishList;
+  res.locals.regis = req.session.regis;
+  res.locals.temp = req.session.temp;
+  res.locals.auth = req.session.auth;
+  res.locals.authUser = req.session.authUser;
+  res.locals.wishList = req.session.wishList;
 
-    next();
+  next();
 });
 
 app.engine(
@@ -123,9 +123,8 @@ app.engine(
               return options.fn(this);
           }
           return options.inverse(this);
-      },
-    }
-}));
+        }
+  }}));
 
 app.set("view engine", "hbs");
 app.set("views", "./views");

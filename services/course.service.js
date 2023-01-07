@@ -2,7 +2,7 @@ import db from '../utils/db.js';
 
 export default {
     async findTop10MostViewCourse() {
-        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc
+        const sql = `SELECT KH.*, TK.Username, LV.TenLinhVuc
                      FROM khoahoc KH
                               INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -60,7 +60,7 @@ export default {
     },
 
     async findTop3LastWeek() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -76,7 +76,7 @@ export default {
     },
 
     async findTop10LastedCourse() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -125,7 +125,7 @@ export default {
         const courses = await db('khoahoc')
                             .select(
                                 'khoahoc.*',
-                                'taikhoan.Name',
+                                'taikhoan.Username',
                                 'taikhoan.Avatar',
                                 'linhvuc.TenLinhVuc'
                             )
