@@ -189,15 +189,31 @@
         cursor: pointer;
     }
 
+    #frmEdit {
+        background-image: url(/public/img/bg_account.png);
+        background-size: 100% 100%;
+    }
+
+    #frmAdd {
+        background-color: white;
+    }
+
     .status {
         display: flex;
         justify-content: space-between;
     }
+    
 </style>
 {{/section}}
 
 {{#section 'js'}}
 <script>
+    {{!-- $('#myModal').modal('hide') --}}
+    $('#frmAdd').on('submit', function(e) {
+        e.preventDefault();
+        alert({{this.info.Username}});
+    });
+
     ///======Clone method
     $(document).ready(function () {
         $("body").on("click", ".add_node_btn_frm_field", function (e) {
@@ -304,25 +320,21 @@
 </script>
 {{/section}}
 
-
-<form method="post" id="frmInputCourse" class="container-fluid py-10">
-    <section class="pcoded-main-container">
+<section class="pcoded-main-container">
         <div class="pcoded-wrapper">
-
-            <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
-
-                <div class="page-header-title mt-3">
+            <div class="card container-fluid py-3 px-5 ml-3" id="frmEdit" style="font-size:20px">
+                <form method="post" id="frmAdd" class="container-fluid">
+                <div class="page-header-title">
                     <h5 class="m-b-10">
-                        <h2><a name="" id="" class="btn btn-outline-primary" href="/admin/teachers" title="Back"
-                                role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-                            Information</h2>
+                        <h2 class="my-3" style="text-align:center; color:#212529">Information</h2>
                     </h5>
                 </div>
+
                 <!--        NameCourse-->
                 <div class="form-group row">
 
                     <div class="col-6">
-                        <label for="txtNameCourse">UserName</label>
+                        <label for="txtNameCourse">Username</label>
                         <input name="Username" type="text" class="form-control" id="txtNameCourse"
                             value="{{this.info.Username}}" autofocus readonly>
                     </div>
@@ -349,40 +361,38 @@
                 </div>
 
                 <div class="form-group row">
-
                     <div class="col-6">
                         <label for="txtNameCourse">Account type</label>
                         <input name="LoaiTaiKhoan" type="text" class="form-control" id="txtNameCourse" autofocus
                             value="{{this.info.LoaiTaiKhoan}}" readonly>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <label for="example">Date of bird</label>
                         <i class="fas fa-calendar input-prefix"></i>
                         <input type="text" id="txtDateStart" name="DOB" value="{{this.info.DOB}}" class="form-control">
                     </div>
-
-                    <div class="col-3">
-                        <label for="fuMain">Avatar</label>
-                        <input type="file" multiple id="fuMain" name="Avatar" value="{{this.info.Avatar}}">
-                    </div>
                 </div>
 
                 <div class="form-group row">
-
-                    <div class="col-6">
+                    <div class="col-12">
                         <label for="txtNameCourse">Address</label>
                         <input name="DiaChi" type="text" class="form-control" id="txtNameCourse"
                             value="{{this.info.DiaChi}}" autofocus>
                     </div>
+                </div>
 
-
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label for="fuMain">Avatar</label>
+                        <input type="file" multiple id="fuMain" name="Avatar" value="{{this.info.Avatar}}">
+                    </div>
                 </div>
                 <!--        Description-->
                 {{#if isStudent}}
                 {{else}}
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="MoTaChiTiet" name="MoTa" placeholder="Your description">{{this.info.MoTa}}
+                    <textarea rows="5" id="MoTaChiTiet" name="MoTa" placeholder="Your description">{{this.info.MoTa}}
                 </textarea>
                 </div>
                 {{/if}}
@@ -390,13 +400,32 @@
 
                 <input type="hidden" value="{{this.info.MaTaiKhoan}}" name="MaTaiKhoan">
                 <!--        Button Save-->
-                <div class="card-footer text-muted">
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                         <i class="fa fa-check" aria-hidden="true"></i>
                         Save
                     </button>
                 </div>
+                </form>
             </div>
         </div>
-    </section>
-</form>
+</section>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius:0; border:none">
+        <div class="modal-header" style="border-radius:0; background-color:#F80040">
+        <h4 class="modal-title" style="color: white;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Fail Registeration</h4>    
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+        <p id="err_msg" style="font-size:17px"></p>
+        </div>
+        <div class="modal-footer" style="border: none;">
+        <button type="button" style="border: none;" class="btn btn-primary btnChange" data-dismiss="modal">
+            Try Again
+        </button>
+        </div>
+    </div>
+    </div>
+</div>  
