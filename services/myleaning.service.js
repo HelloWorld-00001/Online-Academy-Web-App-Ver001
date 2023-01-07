@@ -22,9 +22,25 @@ export default {
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)
             .offset(offset);
-        if(studentCourse.length === 0) {
-            return null;
+        for(let i = 0; i < studentCourse.length; i++) {
+            Object.assign(studentCourse[i], {isFieldType: studentCourse[i].LinhVuc === 1});
         }
+        return studentCourse;
+    },
+
+    async findPageTeacherCourseAll(limit, offset) {
+        const studentCourse = await db('danhsachdangki')
+            .select(
+                'khoahoc.*',
+                'taikhoan.Username',
+                'linhvuc.TenLinhVuc'
+            )
+            .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachdangki.MaKhoaHoc'})
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .limit(limit)
+            .offset(offset);
         for(let i = 0; i < studentCourse.length; i++) {
             Object.assign(studentCourse[i], {isFieldType: studentCourse[i].LinhVuc === 1});
         }
@@ -69,6 +85,15 @@ export default {
             return null;
         }
         return userReview[0];
+    },
+    async checkCourseOfTeacher(idCourse,idTeacher){
+        const course = await db('KhoaHoc')
+            .where('MaKhoaHoc', idCourse)
+            .where('GiaoVien', idTeacher);
+        if(course.length === 0)
+            return false;
+        console.log(course);
+        return true;
     },
 
     addBangDanhGia(newRating) {

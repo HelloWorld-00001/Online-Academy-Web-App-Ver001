@@ -83,6 +83,7 @@ export default {
                 MoTaNgan: obj.MoTaNgan,
                 Image: obj.Image,
                 SoLuongVideo: obj.SoLuongVideo,
+                NgonNgu: obj.NgonNgu,
             })
     },
     async editChiTietKhoaHoc(courseId, obj) {
@@ -126,6 +127,7 @@ export default {
                 MoTaNgan: obj.MoTaNgan,
                 Image: obj.Image,
                 LuotXem: 0,
+                NgonNgu: obj.NgonNgu,
             })
     },
     async insertChiTietKhoaHoc(courseId, obj) {
@@ -166,6 +168,13 @@ export default {
         return list;
     },
 
+    async findNgonNgu() {
+        const list = await db('khoahoc')
+            .select('NgonNgu')
+            .distinct()
+        return list;
+    },
+
     async findFieldById(courseId) {
         const list = await db('linhvuc')
             .select('MaLinhVuc', 'TenLinhVuc')
@@ -175,6 +184,25 @@ export default {
 
         for (let i = 0; i < list.length; i++) {
             if(list[i].MaLinhVuc === choose[0].LinhVuc) {
+                Object.assign(list[i], {isChoose: true});
+            } else {
+                Object.assign(list[i], {isChoose: false});
+            }
+        }
+        return list;
+    },
+
+    async findNgonNguById(courseId) {
+        const list = await db('khoahoc')
+            .select('NgonNgu')
+            .distinct()
+
+        const choose = await db('khoahoc')
+            .select('NgonNgu')
+            .where('MaKhoaHoc', courseId)
+
+        for (let i = 0; i < list.length; i++) {
+            if(list[i].NgonNgu === choose[0].NgonNgu) {
                 Object.assign(list[i], {isChoose: true});
             } else {
                 Object.assign(list[i], {isChoose: false});

@@ -186,7 +186,7 @@ router.get('/detail', async function (req, res) {
     const inforStudentsOfTeacher = await courseService.inforStudentsOfTeacher(course.GiaoVien);
     const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
 
-    for(let i = 0; i < courseVideoList.length; i++) {
+    for(let i = 0; (courseVideoList !== null)  && i < courseVideoList.length; i++) {
         if(i === 0 || i === 1) {
             courseVideoList[i].isShowVideo= true;
         }
@@ -199,8 +199,8 @@ router.get('/detail', async function (req, res) {
     
     if(req.session.auth === true){
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
-            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
-            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
+            const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent);
             if(courseRegistered !== null)
                 isCoursesRegister = true;
         }
@@ -210,7 +210,7 @@ router.get('/detail', async function (req, res) {
         isCoursesRegister,
         course,
         courseVideoList,
-        isVideoListEmpty: courseVideoList.length === 0,
+        isVideoListEmpty: courseVideoList === null,
         top5CousresMostView,
         inforStudentsOfTeacher,
         studentReviewList,
@@ -219,13 +219,11 @@ router.get('/detail', async function (req, res) {
 
 router.post('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
-
-
     const today = new Date().toISOString().slice(0, 10);
 
-    const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
-    const ret1 = await courseService.updateSLKhoaHoc(idStudent.MaHocVien, idStudent.SLKhoaHoc + 1);
-    const dangsachdangki = {MaHocVien: idStudent.MaHocVien, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
+    const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);
+    const ret1 = await courseService.updateSLKhoaHoc(idStudent, idStudent.SLKhoaHoc + 1);
+    const dangsachdangki = {MaHocVien: idStudent, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
     const ret2 = await courseService.addBangDanhSachDangKi(dangsachdangki);
 
 

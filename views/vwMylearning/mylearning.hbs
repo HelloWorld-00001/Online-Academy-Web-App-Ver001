@@ -71,9 +71,13 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            width: 100%;
             margin-bottom: 15px;
         }
 
+        .teacher__infor {
+            width: 100%;
+        }
         .card__avatar,
         .card__avatar__teacher {
             margin-right: 15px;
@@ -108,8 +112,8 @@
 
         iframe {
             width: 100%;
-            height: 85vh;
-            /*aspect-ratio: 16 / 9;*/
+            aspect-ratio: 16 / 9;
+            /*height: 85vh;*/
         }
 
         .sidebarMini {
@@ -403,6 +407,45 @@
             display: none;
         }
 
+        .nav-course-content {
+            display: none !important;
+        }
+
+        .video-content-section {
+            display: none;
+        }
+        /* Mobile: width < 740 px*/
+        @media only screen and (max-width: 46.1875em){
+            .col-header-1, col-header-3 {
+                display: none;
+            }
+
+            .card__top {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .teacher__infor {
+                margin-top: 6px;
+            }
+            .nav-course-content {
+                display: block;
+            }
+            .video-content-section {
+                display: block;
+            }
+        }
+        /* Tablet: width >= 740px and width < 1024px */
+        @media (max-width: 63.9375em) and (min-width:   46.25em) {
+            .col-header-1, col-header-3 {
+                display: none;
+            }
+            .mylearning-header{
+                display: block;
+            }
+
+        }
+
     </style>
 {{/section}}
 
@@ -446,6 +489,10 @@
         });
 
         $(function () {
+            if($(".course-review:hidden").length < 4) {
+                $(".load-more").css('visibility', 'hidden');
+            }
+
             $(".course-review").slice(0, 4).show();
             $("body").on('click touchstart', '.load-more', function (e) {
                 e.preventDefault();
@@ -606,33 +653,36 @@
         }
     </script>
 {{/section}}
-<div class="container-fluid d-none d-lg-block">
-    <div class="row align-items-center px-xl-5 mylearning-header">
-        <div class="col-lg-2">
+<div class="container-fluid d-lg-block">
+    <div class="row align-items-center px-3 mylearning-header">
+        <div class="col-header-1 col-lg-2">
             <a href="/" class="text-decoration-none">
                 <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
             </a>
         </div>
 
-        <div class="col-lg-6 course-name d-flex align-items-center">
+        <div class="col-header-1 col-lg-6 course-name d-flex align-items-center">
             <a href="/">
                 {{this.course.TenKhoaHoc}}
             </a>
         </div>
+        {{#if checkCanRating}}
+            <div class="col-header-1 col-lg-4 text-right">
+                {{#if this.checkStudentReview}}
+                    <a class="trigger text-primary" href="#">
+                        <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                        Leave a rating
+                    </a>
+                {{else}}
+                    <a class="trigger text-primary" href="#">
+                        <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
+                        Edit your rating
+                    </a>
+                {{/if}}
+            </div>
+        {{else}}
 
-        <div class="col-lg-4 text-right">
-            {{#if this.checkStudentReview}}
-                <a class="trigger text-primary" href="#">
-                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
-                    Leave a rating
-                </a>
-            {{else}}
-                <a class="trigger text-primary" href="#">
-                    <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
-                    Edit your rating
-                </a>
-            {{/if}}
-        </div>
+        {{/if}}
     </div>
 </div>
 
@@ -644,6 +694,9 @@
                 <iframe id="show" name="myFrame" src="{{this.firstVideo}}" allowfullscreen ></iframe>
             </div>
             <ul class="nav nav-tabs " role="tablist">
+                <li class="nav-item nav-course-content">
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#course-content" role="tab">Course content</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link rounded-0" data-toggle="tab" href="#home" role="tab">Home</a>
                 </li>
@@ -660,6 +713,13 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
+                <div class="tab-pane" id="course-content" role="tabpanel">
+                    <div class="mt-3 container">
+                        <div class="h-auto video-content-section">
+                            
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane" id="home" role="tabpanel">
                     <div class="container mt-3">
                         <div class="card-body h-auto">
@@ -696,10 +756,10 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="overview" role="tabpanel">
-                  <div class="mt-3 container">
-                      <div class="card-body h-auto">
-                      </div>
-                  </div>
+                    <div class="mt-3 container">
+                        <div class="card-body h-auto">
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane" id="inforTeacher" role="tabpanel">
                     <div class="container mt-3">
@@ -711,30 +771,30 @@
                                 <div class="card__avatar__teacher">
                                     <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
                                 </div>
-                                <div class="ml-3">
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fa fa-envelope text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.course.Email}}</span>
+                                <div class="ml-3 teacher__infor">
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fa fa-envelope text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.course.Email}}</span>
                                     </p>
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.course.DOB}}</span>
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fa fa-birthday-cake text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.course.DOB}}</span>
                                     </p>
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fa fa-star text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fa fa-star text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                                     </p>
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fas fa-trophy text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fas fa-trophy text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                                     </p>
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fa fa-user-plus text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fa fa-user-plus text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                                     </p>
-                                    <p class="mb-2 row">
-                                        <i class="col-2 mr-2 fa fa-play-circle text-primary" aria-hidden="true"></i>
-                                        <span col="10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                                    <p class="mb-2 row align-items-center">
+                                        <i class="col-1 fa fa-play-circle text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
+                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                                     </p>
                                 </div>
                             </div>
@@ -843,7 +903,7 @@
         </div>
         <div class="col-md-3" id="courseDiv">
             <div class="w-auto">
-                <div class="d-flex justify-content-between  card-header">
+                <div class="d-flex justify-content-between card-header">
                     <h5 class="card-text text-primary">
                         Course Content
                     </h5>
@@ -1004,7 +1064,6 @@
         </div>
     </div>
 {{/if}}
-
 
 
 

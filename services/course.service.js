@@ -2,7 +2,7 @@ import db from '../utils/db.js';
 
 export default {
     async findTop10MostViewCourse() {
-        const sql = `SELECT KH.*, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                               INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -60,7 +60,7 @@ export default {
     },
 
     async findTop3LastWeek() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -76,7 +76,7 @@ export default {
     },
 
     async findTop10LastedCourse() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -125,7 +125,7 @@ export default {
         const courses = await db('khoahoc')
                             .select(
                                 'khoahoc.*',
-                                'taikhoan.Username',
+                                'taikhoan.Name',
                                 'taikhoan.Avatar',
                                 'linhvuc.TenLinhVuc'
                             )
@@ -174,7 +174,7 @@ export default {
         const courses = await db('khoahoc')
                     .select(
                         'khoahoc.*',
-                        'taikhoan.Username',
+                        'taikhoan.Name',
                         'linhvuc.TenLinhVuc'
                     )
                     .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
@@ -191,7 +191,7 @@ export default {
         const courseField = await db('khoahoc')
             .select(
                 'khoahoc.*',
-                'taikhoan.Username',
+                'taikhoan.Name',
                 'linhvuc.TenLinhVuc'
             )
             .where('LinhVuc', linhVuc)
@@ -220,11 +220,12 @@ export default {
                                 .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
                                 .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
                                 .where('khoahoc.MaKHoaHoc', idCourse)
-
-        detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
-        detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
-        detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
-        detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
+        if(detailList[0]['DOB'] !== null) {
+            detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
+            detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
+            detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
+            detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
+        }
 
         if (detailList.length === 0)
             return null;
@@ -299,12 +300,22 @@ export default {
         }
         return userReview;
     },
-
+    async findByIDStudentAccount(idUser) {
+        const student = await db('HocVien').where('MaTaiKhoan', idUser);
+        if(student.length === 0)
+            return null;
+        return student[0].MaHocVien;
+    },
+    async findByIDTeacherAccount(idUser) {
+        const teacher = await db('GiaoVien').where('MaTaiKhoan', idUser);
+        if(teacher.length === 0)
+            return null;
+        return teacher[0].MaGiaoVien;
+    },
     async findCourseById(id){
         const course = await db('KhoaHoc').where('MaKhoaHoc', id);
         return course
     },
-
 
     async courseFullTextSearch(name, limit, offset) {
         const sql = `SELECT *

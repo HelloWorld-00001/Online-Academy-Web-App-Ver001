@@ -7,13 +7,6 @@ export default {
         .innerJoin('HocVien', {'TaiKhoan.MaTaiKhoan': 'HocVien.MaTaiKhoan'});
     },
 
-    async findByIDAccount(idAccount) {
-        const student = await db('HocVien').where('MaTaiKhoan', idAccount);
-        if(student.length === 0) 
-            return null;
-        return student[0];
-    },
-
     async findByID(id) {
         const list = await db('HocVien')
         .select(
