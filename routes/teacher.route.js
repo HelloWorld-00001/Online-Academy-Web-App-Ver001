@@ -16,6 +16,23 @@ function authTeacher(req, res, next) {
     next();
 }
 
+async function isYourCourse(req, res, next) {
+    const courseId = req.params.id || 0;
+    if (await teacherService.isTeacherOfThisCourse(req.session.authUser.MaTaiKhoan, courseId) === false) {
+        return res.redirect('/');
+    }
+    next();
+}
+
+async function isYourProfile(req, res, next) {
+    const teacherId = req.params.id || 0;
+    const accountID = await teacherService.findAccountByIdTeacher(teacherId);
+    console.log(req.session.authUser.MaTaiKhoan, '      ', accountID.MaTaiKhoan);
+    if (req.session.authUser.MaTaiKhoan !== accountID.MaTaiKhoan)
+        return res.redirect('/');
+    next();
+}
+
 router.get('/', async function (req, res) {
     const teacher = await teacherService.findAllTeacher();
     res.render('vwTeacher/teacher', {
@@ -32,7 +49,7 @@ router.get('/input', authTeacher, async function (req, res){
     });
 });
 
-router.get('/input/:id', authTeacher, async function (req, res){
+router.get('/input/:id', authTeacher, isYourCourse,async function (req, res){
     const courseId = req.params.id || 0;
     const field = await teacherService.findFieldById(courseId);
     const ngonNgu = await teacherService.findNgonNguById(courseId);
@@ -193,7 +210,7 @@ router.get('/profile', authTeacher, async function (req, res){
     res.redirect('/teacher/profile/' + teacherId);
 });
 
-router.get('/profile/:id', authTeacher, async function (req, res){
+router.get('/profile/:id', authTeacher, isYourProfile, async function (req, res){
     const teacherId = req.params.id || 0;
     const teacher = await teacherService.findTeacherById(teacherId);
 

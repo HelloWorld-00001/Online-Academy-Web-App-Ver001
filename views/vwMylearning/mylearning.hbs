@@ -407,10 +407,6 @@
             display: none;
         }
 
-        .nav-course-content {
-            display: none !important;
-        }
-
         .video-content-section {
             display: none;
         }
@@ -428,11 +424,11 @@
             .teacher__infor {
                 margin-top: 6px;
             }
-            .nav-course-content {
-                display: block;
-            }
             .video-content-section {
                 display: block;
+            }
+            .nav-link {
+                padding: 0.5rem 0.5rem;
             }
         }
         /* Tablet: width >= 740px and width < 1024px */
@@ -651,6 +647,10 @@
                 modal.style.display = "none";
             }
         }
+
+        $(function() {
+            $('#navlink-reviews').tab('show');
+        });
     </script>
 {{/section}}
 <div class="container-fluid d-lg-block">
@@ -693,10 +693,7 @@
             <div class="video-container">
                 <iframe id="show" name="myFrame" src="{{this.firstVideo}}" allowfullscreen ></iframe>
             </div>
-            <ul class="nav nav-tabs " role="tablist">
-                <li class="nav-item nav-course-content">
-                    <a class="nav-link rounded-0" data-toggle="tab" href="#course-content" role="tab">Course content</a>
-                </li>
+            <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link rounded-0" data-toggle="tab" href="#home" role="tab">Home</a>
                 </li>
@@ -704,7 +701,7 @@
                     <a class="nav-link rounded-0" data-toggle="tab" href="#overview" role="tab">Overview</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link rounded-0" data-toggle="tab" href="#inforTeacher" role="tab">Information Teacher</a>
+                    <a class="nav-link rounded-0" data-toggle="tab" href="#inforTeacher" role="tab">Teacher</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link rounded-0" id="navlink-reviews" data-toggle="tab" href="#reviews" role="tab">Reviews</a>
@@ -720,7 +717,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="home" role="tabpanel">
+                <div class="tab-pane active" id="home" role="tabpanel">
                     <div class="container mt-3">
                         <div class="card-body h-auto">
                             <div class="d-flex justify-content-between mb-2">
@@ -771,30 +768,30 @@
                                 <div class="card__avatar__teacher">
                                     <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
                                 </div>
-                                <div class="ml-3 teacher__infor">
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fa fa-envelope text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.course.Email}}</span>
+                                <div class="ml-3 w-100">
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-1 fa fa-envelope text-primary" aria-hidden="true"></i>
+                                        <span col="col-11">{{this.course.Email}}</span>
                                     </p>
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fa fa-birthday-cake text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.course.DOB}}</span>
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-1 fa fa-birthday-cake text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <span col="col-11">{{this.course.DOB}}</span>
                                     </p>
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fa fa-star text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-1 fa fa-star text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <span col="col-11">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                                     </p>
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fas fa-trophy text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-1 fas fa-trophy text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <span col="col-11">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                                     </p>
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fa fa-user-plus text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-1 fa fa-user-plus text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <span col="col-11">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                                     </p>
-                                    <p class="mb-2 row align-items-center">
-                                        <i class="col-1 fa fa-play-circle text-primary" style="line-height: 1.5; font-size: 1rem" aria-hidden="true"></i>
-                                        <span class="col-10">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                                    <p class="mb-2 row d-flex align-items-center">
+                                        <i class="col-1 text-right mr-3 fa fa-play-circle text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <span col="col-11">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                                     </p>
                                 </div>
                             </div>
@@ -897,7 +894,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -25,6 +25,7 @@ import studentRoute from "./routes/student.route.js";
 import adminRoute from "./routes/admin.route.js"
 import mylearningRoute from './routes/mylearning-course.route.js'
 import studentService from "./services/student.service.js";
+import teacherService from "./services/teacher.service.js";
 import searchRoute from "./routes/search.route.js";
 
 const app = express();

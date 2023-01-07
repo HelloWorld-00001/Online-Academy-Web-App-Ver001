@@ -47,4 +47,48 @@ router.get('/:id', async function (req, res) {
     });
 });
 
+router.get('/language/:type', async function (req, res) {
+    const language = req.params.type || 'HTML';
+    console.log(language)
+    const fields = await courseService.countByLanguage();
+
+    const limit = 6;
+    const page = req.query.page || 1;
+    const offset = (page - 1) * limit;
+    let total = 0;
+
+    for(let i = 0; i < fields.length; i++) {
+        if( language === fields[i].NgonNgu) {
+            total = fields[i].SLKhoaHoc;
+            break;
+        }
+    }
+    const nPages = Math.ceil(total / limit);
+    const pageNumbers = [];
+    for(let i = 1; i <= nPages; i++) {
+        pageNumbers.push({
+            value: i,
+            isCurrent: i === +page,
+        })
+    }
+    const nextPageNumber = {
+        value: +page + 1,
+        isNextPage:   +page + 1 <= +nPages,
+    }
+    const previousPageNumber = {
+        value: +page - 1,
+        isPreviousPage:   +page - 1 > 0,
+    }
+
+    const courses = await courseService.findPageByLanguage(language, limit, offset);
+
+    res.render('vwCategories/index' , {
+        courses: courses,
+        empty: courses.length === 0,
+        pageNumbers,
+        nextPageNumber,
+        previousPageNumber,
+        fields,
+    });
+});
 export default router;

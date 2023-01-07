@@ -237,6 +237,19 @@ export default {
         return list;
     },
 
+    async isTeacherOfThisCourse(MaTaiKhoan, MaKhoaHoc) {
+        const list = await db('khoahoc')
+            .select('khoahoc.MaKhoaHoc', 'taiKhoan.MaTaiKhoan')
+            .where('taikhoan.MaTaiKhoan', MaTaiKhoan)
+            .where('khoahoc.MaKhoaHoc', MaKhoaHoc)
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
+        for (let i = 0; i < list.length;i++) {
+            return true;
+        }
+        return false;
+    },
+
     addAccount(entity) {
         return db('taikhoan').insert({
             Username: entity.Username,
