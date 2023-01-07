@@ -44,9 +44,8 @@
                   Password  
                 </label>
                 <input name="password" type="password" class="form-control" id="txtPassword" placeholder="●●●●●●●●●●"
-                oninvalid="setCustomValidity('Empty! Please input password');" 
-                oninput="setCustomValidity('');"
-                required>
+                oninvalid="invalidPassword(this)"
+                oninput="invalidPassword(this)">
                 <span toggle="#txtPassword" class="fa fa-fw fa-eye field-icon toggle-password" style="color:rgb(95, 95, 95)"></span>
               </div>
               <div class="column">
@@ -85,10 +84,13 @@
                 <input type="checkbox" id="myCheck" name="myCheck" value="Bike">
                 <label for="myCheck"> I agree with your condition</label><br>
               </div>
-              <div class="mb-3" style="text-align: center;">
+              <div class="" style="text-align: center;">
                 <button type="submit" class="btn btn-primary" style="background: linear-gradient(120deg, #4876FF, #000080); border-radius: 50px; font-size: 20px; border:none">
                   Sign up
                 </button>
+              </div>
+              <div class="mb-3 mt-2" id="signIn">
+                  Have an account? <a href="/account/login" style="font-weight:bold; color:dodgerblue">Sign In</a>
               </div>
           </form>
         </div>
@@ -126,6 +128,23 @@
       function invalidDOB(textbox) {
         if(textbox.value === null) {
           textbox.setCustomValidity('Empty! Please input birthday');
+        } else {
+          textbox.setCustomValidity('');
+        }
+        return true
+      }
+
+      function invalidPassword(textbox) {
+        var checkLower = /[a-z]+/.test(textbox.value);
+        var checkUpper = /[A-Z]+/.test(textbox.value);
+        if(textbox.value.length === 0) {
+          textbox.setCustomValidity('Empty! Please input password');
+        } else if(textbox.value.length < 8) {
+          textbox.setCustomValidity('Password length is at least 8.');
+        } else if(checkLower === false) {
+          textbox.setCustomValidity('Password has at least one lowercase.');
+        } else if(checkUpper === false) {
+          textbox.setCustomValidity('Password has at least one uppercase.');
         } else {
           textbox.setCustomValidity('');
         }

@@ -70,6 +70,15 @@
         border: 0;
         margin-bottom: 1rem;
     }
+
+    #frmView {
+        background-image: url(/public/img/bg_account.png);
+        background-size: 100% 100%;
+    }
+
+    .form-group {
+        font-size: 16px;
+    }
 </style>
 
 <link rel="stylesheet"
@@ -107,22 +116,25 @@
     console.log('path', path);
 </script>
 {{/section}}
-<form method="post" id="frmInputCourse" class="container-fluid py-10">
-    <section class="pcoded-main-container">
-        <div class="pcoded-wrapper">
+<section class="pcoded-main-container">
+        <div class="pcoded-wrapper" >
+            <div class="card container-fluid" style="font-size:20px" id="frmView">
 
-            <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
-
-                <form method="post" id="frmInputCourse" class="container-fluid py-10" enctype="multipart/form-data">
+                <form method="post" id="frmInputCourse" class="container-fluid py-3" enctype="multipart/form-data">
                     <div class="container">
-                        <div class="row gutters">
-                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                <div class="card h-100">
+                        <div class="card">
+                        <div class="row gutters" style="background-color: white; border-radius: 5px; min-height:80vh">
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 pr-3" style="padding:0">
+                                <div class="card h-100" style="border-radius: 0;">
                                     <div class="card-body">
                                         <div class="account-settings">
                                             <div class="user-profile">
                                                 <div class="user-avatar">
-                                                    <img src="/public/img/teachers/{{this.info.Avatar}}" alt="">
+                                                    {{#if this.info.Avatar}}
+                                                        <img src="/public/img/teachers/{{this.info.Avatar}}" alt="">
+                                                    {{else}}
+                                                        <img src="/public/img/emptyAva.png" alt="">
+                                                    {{/if}}
                                                 </div>
                                                 <h5 class="user-name">{{this.info.Name}}</h5>
                                                 <h6 class="user-email">{{this.info.Email}}</h6>
@@ -132,19 +144,19 @@
                                             {{else}}
                                                 <div class="about">
                                                     <h5>About</h5>
-                                                    <p>{{this.info.MoTa}}</p>
+                                                    <p>{{{this.info.MoTa}}}</p>
                                                 </div>
                                             {{/if}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 pl-3" style="padding:0">
                                 <div class="card h-100">
                                     <div class="card-body">
                                         <div class="row gutters">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h6 class="mb-2 text-primary">Personal Details</h6>
+                                                <h3 class="mb-2 text-primary">Personal Details</h3>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="form-group">
@@ -192,9 +204,6 @@
                                             </div>
                                         </div>
                                         <div class="row gutters">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h6 class="mt-3 mb-2 text-primary">Address</h6>
-                                            </div>
                                             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="form-group">
                                                     <label for="txtStreet">Address</label>
@@ -203,18 +212,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h6 class="mt-3 mb-2 text-primary">Avatar</h6>
-                                            </div>
+                                        {{!-- <div class="row gutters">
                                             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="Avatar">Choose avatar</label>
+                                                    <label for="Avatar">Avatar</label>
                                                     <input type="file" multiple id="Avatar" name="Avatar">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row gutters">
+                                        </div> --}}
+                                        {{!-- <div class="row gutters">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="text-right">
                                                     {{#if isStudent}}
@@ -230,15 +236,15 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-    </section>
-
-</form>
+    </form>
+</section>

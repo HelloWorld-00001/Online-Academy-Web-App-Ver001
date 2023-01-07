@@ -9,7 +9,7 @@ import mailer from '../services/mail.service.js';
 
 const router = express.Router();
 //Register
-router.get('/register', async function (req, res) {
+router.get('/register', NotAuth, async function (req, res) {
   res.render('vwAccount/register', {layout: false});
 });
 
@@ -17,7 +17,7 @@ router.post('/register', function (req, res) {
   const rawPassword = req.body.password;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(rawPassword, salt);
-  const dob = moment(req.body.dob).format('YYYY-MM-DD');
+  const dob = moment(req.body.dob, 'DD-MM-YYYY').format('YYYY-MM-DD');
   
   const user = {
     Username: req.body.username,
@@ -109,7 +109,7 @@ router.get('/is-true-otp', async function (req, res) {
 });
 
 //login
-router.get('/login', async function (req, res) {
+router.get('/login', NotAuth, async function (req, res) {
   res.render('vwAccount/login', {layout: false});
 });
 
@@ -159,9 +159,16 @@ function auth(req, res, next) {
   next();
 }
 
+function NotAuth(req, res, next) {
+  if(req.session.auth === true) {
+    return res.redirect('/');
+  }
+
+  next();
+}
+
 function regis(req, res, next) {
   if(req.session.regis === false) {
-    req.session.retUrl = req.originalUrl;
     return res.redirect('/');
   }
 
@@ -205,5 +212,64 @@ router.post('/changePassword', auth, async function(req, res) {
     success_message: "Change Password Successful."
   });
 })
+
+//Forgot Password 
+router.get('/forgotPassword', NotAuth, async function (req, res) {
+  res.render('vwAccount/forgotPassword', {layout: false});
+});
+
+router.get('/is-exist', async function (req, res) {
+  const info = req.query.user;
+
+  var user = await accountService.findByEmail(info);
+  if(user !== null) {
+    req.session.temp = user;
+    return res.json(true);
+  }
+
+  user = await accountService.findByUsername(info);
+  if(user !== null) {
+    req.session.temp = user;
+    return res.json(true);
+  }
+
+  res.json(false);
+});
+
+router.post('/forgotPassword', NotAuth, async function (req, res) {
+  const email = req.session.temp.Email;
+  const otp = randomInteger(100000, 999999).toString();
+  mailer.sendMailChangePassword(email);
+
+  return res.render('vwAccount/forgotPassword', {
+    layout:false,
+    sendMail: true
+  });
+});
+
+router.get('/newPassword', NotAuth, function (req, res) {
+  res.render('vwAccount/newPassword', {layout:false});
+});
+
+router.post('/newPassword', NotAuth, async function (req, res) {
+  const checkSame = (req.body.newPassword === req.body.confirmPassword);
+  if(checkSame === false) {
+    return res.render('vwAccount/newPassword', {
+      layout:false,
+      err_message: "New password and confirm password are not same. Try Again"
+    });
+  }
+  
+  const user = await accountService.findByEmail(req.query.email);
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.newPassword, salt);
+  await accountService.updatePassword(user.MaTaiKhoan, hash);
+  delete user.Password;
+  
+  res.render('vwAccount/newPassword', {
+    layout:false,
+    success_message: "Change Password Successful."
+  });
+});
 
 export default router;

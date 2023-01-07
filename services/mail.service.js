@@ -14,10 +14,10 @@ const transporter = nodemailer.createTransport({
 const handlebarOptions = {
     viewEngine: {
         extname: '.hbs',
-        partialsDir: path.resolve('./views/vwAccount/'),
+        partialsDir: path.resolve('./views/vwEmail/'),
         defaultLayout: false
     },
-    viewPath: path.resolve('./views/vwAccount/'),
+    viewPath: path.resolve('./views/vwEmail/'),
     extName: '.hbs'
 };
 
@@ -32,6 +32,24 @@ export default {
             template: 'email',
             context: {
                 otp: otp,
+                email: email
+            }
+        };
+        transporter.sendMail(details, function (error, data) {
+            if(error)
+                console.log(error);
+            // else
+                // console.log(data);
+        });
+    },  
+
+    sendMailChangePassword(email){
+        const details = {
+            from: ' "IGE Online Course" <khongtontai231@gmail.com>', // sender address same as above
+            to: email, 					// Receiver's email id
+            subject: 'Change Password', // Subject of the mail.
+            template: 'email_changepw',
+            context: {
                 email: email
             }
         };

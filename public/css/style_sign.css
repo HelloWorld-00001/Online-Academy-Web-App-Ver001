@@ -141,6 +141,12 @@ html, body{
     background: linear-gradient(45deg, #4876FF, #000080); 
 }
 
+#signIn {
+    text-align: center; 
+    color:grey; 
+    visibility:hidden;
+}
+
 @media only screen and (max-width: 930px){
     .frmSign .form-content .column {
         display: inline;
@@ -153,6 +159,10 @@ html, body{
     }
     .frmLogin {
         border-radius: 20px;
+    }
+
+    #signIn {
+        visibility:visible;
     }
     
     .frmSign {
@@ -185,4 +195,9 @@ html, body{
 
 .btnChange:hover {
     background-color: #545454;
+}    
+
+#frmOTP {
+    border-radius: 25px;
+    font-family:'Poppins', sans-serif;
 }

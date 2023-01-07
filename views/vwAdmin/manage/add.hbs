@@ -199,6 +199,14 @@
         display: flex;
         justify-content: space-between;
     }
+
+    #frmAdd {
+        background-image: url(/public/img/bg_account.png);
+    }
+
+    #frmInputCourse {
+        background-color: white;
+    }
 </style>
 {{/section}}
 
@@ -280,18 +288,18 @@
 </script>
 {{/section}}
 
-<form method="post" id="frmInputCourse" class="container-fluid py-10">
-    <section class="pcoded-main-container">
+<section class="pcoded-main-container">
         <div class="pcoded-wrapper">
-
-            <div class="card container-fluid py-5 px-5 ml-3" style="font-size:20px">
-
+            <div class="card container-fluid py-3 px-5 ml-3" style="font-size:20px"  id="frmAdd">
+                <form method="post" id="frmInputCourse" class="container-fluid">
                 <div class="page-header-title mt-3">
                     <h5 class="m-b-10">
-                        <h2>
-                            <a name="" id="" class="btn btn-outline-primary" href="/admin/teachers" title="Back"
-                                role="button"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
-                            Enter teacher information
+                        <h2 style="text-align: center;">
+                            {{#if isStudent}}
+                                Add Student Information
+                            {{else}}
+                                Add Teacher Information
+                            {{/if}}
                         </h2>
                     </h5>
                 </div>
@@ -299,7 +307,7 @@
                 <div class="form-group row">
 
                     <div class="col-6">
-                        <label for="txtNameCourse">UserName</label>
+                        <label for="txtNameCourse">Username</label>
                         <input name="Username" type="text" class="form-control" id="txtNameCourse" autofocus />
                     </div>
                     <div class="col-6">
@@ -333,16 +341,11 @@
                             value="Giáo Viên" readonly />
                         {{/if}}
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <label for="example">Date of bird</label>
                         <i class="fas fa-calendar input-prefix"></i>
                         <input placeholder="Select date" type="text" id="txtDateStart" name="DOB"
                             class="form-control" />
-                    </div>
-
-                    <div class="col-3">
-                        <label for="fuMain">Avatar</label>
-                        <input type="file" multiple id="fuMain" name="Avatar" />
                     </div>
                 </div>
 
@@ -352,34 +355,34 @@
                         <label for="txtNameCourse">Address</label>
                         <input name="DiaChi" type="text" class="form-control" id="txtNameCourse" autofocus />
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <label for="txtNameCourse">Phone number</label>
                         <input name="SDT" type="text" class="form-control" id="txtNameCourse" autofocus />
-                    </div>
-
-                    <div class="col-2">
-                        <label for="txtNameCourse">Course quantity</label>
-                        <input name="SLKhoaHoc" type="text" class="form-control" id="txtNameCourse" autofocus />
                     </div>
                     <!--        Description-->
 
                 </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label for="fuMain">Avatar</label>
+                        <input type="file" multiple id="fuMain" name="Avatar" />
+                    </div>
+                </div>
                 <div class="form-group">
-                    {{#if isStudent}}{{else}}
+                    {{#if isStudent}}
+                    {{else}}
                     <label>Description</label>
-                    <textarea id="MoTaChiTiet" name="MoTa" placeholder="Your description">{{this.info.MoTa}}
-            </textarea>
+                    <textarea id="MoTaChiTiet" name="MoTa" placeholder="Your description">{{this.info.MoTa}}</textarea>
                     {{/if}}
                 </div>
 
-                <div class="form-group row justify-content-center">
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
                         <i class="fa fa-check" aria-hidden="true"></i>
                         Save
                     </button>
                 </div>
+                </form>
             </div>
-
         </div>
-    </section>
-</form>
+</section>
