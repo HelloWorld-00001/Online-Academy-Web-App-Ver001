@@ -68,7 +68,7 @@ export default {
                             DOB: account.DOB,
                             Avatar: account.Avatar,
                             SDT: account.SDT,
-                            DiaChi: account.Diachi
+                            DiaChi: account.DiaChi
             })
     },
 

@@ -70,5 +70,13 @@ export default {
 
   updatePassword(id, newPassword) {
     return db('TaiKhoan').where('MaTaiKhoan', id).update({Password: newPassword});
+  },
+
+  async findTeacherByID(id) {
+    const list = await db('GiaoVien').where('MaTaiKhoan', id);
+    if(list.length === 0) {
+      return null;
+    }
+    return list[0];
   }
 }

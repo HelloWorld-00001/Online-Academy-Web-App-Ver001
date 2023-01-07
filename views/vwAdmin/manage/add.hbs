@@ -89,117 +89,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" />
 <style>
-    .ques {
-        color: darkslateblue;
-    }
-
-    .switch {
-        position: relative;
-        display:
-            inline-block;
-        width: 560px;
-        height: 30px;
-    }
-
-    .switch input {
-        display: none;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        overflow: hidden;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #f2f2f2;
-        -webkit-transition:
-            .4s;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        z-index: 2;
-        content: "";
-        height: 32px;
-        width: 32px;
-        left: 0px;
-        bottom: 0px;
-        background-color: darkslategrey;
-        -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0,
-                0.22);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
-        -webkit-transition: .4s;
-        transition: all 0.4s ease-in-out;
-    }
-
-    .slider:after {
-        position: absolute;
-        left: 0;
-        z-index: 1;
-        content: "Completed";
-        font-size: 15px;
-        text-align: left !important;
-        line-height: 30px;
-        padding-left: 0;
-        width: 600px;
-        color: #fff;
-        height: 100px;
-        border-radius: 100px;
-        background-color: #ff6418;
-        -webkit-transform: translateX(-460px);
-        -ms-transform: translateX(-460px);
-        transform: translateX(-460px);
-        transition: all 0.4s ease-in-out;
-    }
-
-    input:checked+.slider:after {
-        -webkit-transform: translateX(60px);
-        -ms-transform: translateX(60px);
-        transform: translateX(60px);
-        /*width:
-    235px;*/
-        padding-left: 50px;
-    }
-
-    input:checked+.slider:before {
-        background-color: darkslategrey;
-    }
-
-    input:checked+.slider:before {
-        -webkit-transform: translateX(530px);
-        -ms-transform: translateX(530px);
-        transform: translateX(530px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 100px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-
-    .absolute-no {
-        position: absolute;
-        left: 0;
-        color: darkslategrey;
-        text-align: right !important;
-        font-size: 15px;
-        width: calc(100% - 25px);
-        height: 30px;
-        line-height: 30px;
-        cursor: pointer;
-    }
-
-    .status {
-        display: flex;
-        justify-content: space-between;
-    }
-
     #frmAdd {
         background-image: url(/public/img/bg_account.png);
     }
@@ -211,67 +100,13 @@
 {{/section}}
 
 {{#section "js"}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
-    ///======Clone method $(document).ready(function () { $("body").on("click",
-    ".add_node_btn_frm_field", function (e) {
-        var index =
-            $(e.target).closest(".form_field_outer").find(".form_field_outer_row").length
-            + 1; var cloned_el =
-                $(e.target).closest(".form_field_outer_row").clone(true);
-        $(e.target).closest(".form_field_outer").last().append(cloned_el).find(".remove_node_btn_frm_field:not(:first)").prop("disabled",
-            false);
-        $(e.target).closest(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled",
-            true); //change id $(e.target) .closest(".form_field_outer")
-    .find(".form_field_outer_row").last().find("input[type='text']")
-            .attr("id", "topic_no_" + index); $(e.target).closest(".form_field_outer")
-                .find(".form_field_outer_row").last().find("select").attr("id", "url_no_"
-                    + index); console.log(cloned_el); //count++; }); });
-        $(document).ready(function () {
-            $("body").on("click", ".add_new_frm_field_btn",
-                function () {
-                    console.log("clicked"); var index =
-                        $(".form_field_outer").find(".form_field_outer_row").length + 1;
-                    $(".form_field_outer").append(` <div class="row form_field_outer_row"> <div
-    class="form-group col-md-6"> <input type="text" class="form-control w_90"
-    name="topic_no[]" id="topic_no_${index}" placeholder="Enter topic" /> </div>
-    <div class="form-group col-md-4"> <div class="input-group mb-3"> <div
-    class="input-group-prepend"> <span class="input-group-text"
-    id="basic-addon3">URL:</span> </div> <input name= "url_no[]" type="text"
-    class="form-control" id="url_no_${index}" aria-describedby="basic-addon3">
-    </div> </div> <div class="form-group col-md-2 add_del_btn_outer"> <button
-    class="btn_round add_node_btn_frm_field" title="Copy or clone this row"> <i
-    class="fas fa-copy"></i> </button> <button class="btn_round
-    remove_node_btn_frm_field" disabled> <i class="fas fa-trash-alt"></i>
-    </button> </div> </div> `);
-                    $(".form_field_outer").find(".remove_node_btn_frm_field:not(:first)").prop("disabled",
-                        false);
-                    $(".form_field_outer").find(".remove_node_btn_frm_field").first().prop("disabled",
-                        true);
-                });
-        }); $(document).ready(function () { //===== delete the form fieed
-    row $("body").on("click", ".remove_node_btn_frm_field", function () {
-            $(this).closest(".form_field_outer_row").remove(); console.log("success");
-        });
-        });
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-                .create(document.querySelector('#MoTaChiTiet'))
-                .catch(error => {
-                    console.error(error)
-                });
-    </script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-<script>
-        $('#txtDateStart').datetimepicker({
-            timepicker: false, format: 'd/m/Y',
-            mask: true
-        }); $('#txtDateEnd').datetimepicker({
-            timepicker: false, format:
-                'd/m/Y', mask: true
-        });
+    $('#txtDOB').datetimepicker({
+    timepicker:false,
+    format:'d/m/Y',
+    mask: true
+    });
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
@@ -344,7 +179,7 @@
                     <div class="col-6">
                         <label for="example">Date of bird</label>
                         <i class="fas fa-calendar input-prefix"></i>
-                        <input placeholder="Select date" type="text" id="txtDateStart" name="DOB"
+                        <input placeholder="Select date" type="text" id="txtDOB" name="DOB"
                             class="form-control" />
                     </div>
                 </div>
@@ -371,8 +206,10 @@
                 <div class="form-group">
                     {{#if isStudent}}
                     {{else}}
-                    <label>Description</label>
-                    <textarea id="MoTaChiTiet" name="MoTa" placeholder="Your description">{{this.info.MoTa}}</textarea>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="Mota" class="form-control" id="txtMota" rows="4" >{{this.info.MoTa}}</textarea>
+                    </div>
                     {{/if}}
                 </div>
 

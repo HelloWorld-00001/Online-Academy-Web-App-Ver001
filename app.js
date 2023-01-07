@@ -21,6 +21,7 @@ import authRoute from "./routes/auth.route.js";
 import courseRoute from "./routes/course.route.js";
 import categoryUserRoute from "./routes/category-user.route.js";
 import teacherRoute from "./routes/teacher.route.js";
+import studentRoute from "./routes/student.route.js";
 import adminRoute from "./routes/admin.route.js"
 import mylearningRoute from './routes/mylearning-course.route.js'
 import studentService from "./services/student.service.js";
@@ -195,6 +196,7 @@ app.use("/teacher", teacherRoute);
 app.use("/admin", adminRoute);
 app.use("/mylearning", mylearningRoute);
 app.use("/search", searchRoute);
+app.use("/student", studentRoute);
 
 
 //
