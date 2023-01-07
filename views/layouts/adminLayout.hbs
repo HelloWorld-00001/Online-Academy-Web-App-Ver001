@@ -221,15 +221,20 @@
 							<div class="pro-head">
 								<img src="../public/admin/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
 								<span>John Doe</span>
-								<a href="auth-signin.html" class="dud-logout" title="Logout">
+								{{!-- <a href="auth-signin.html" class="dud-logout" title="Logout">
 									<i class="feather icon-log-out"></i>
-								</a>
+								</a> --}}
 							</div>
 							<ul class="pro-body">
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a></li>
-								<li><a href="#!" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> My Messages</a></li>
-								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
+								<li><a href="/admin/profile" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+								<li><a href="/admin/editProfile" class="dropdown-item"><i class="feather icon-settings"></i>Edit Profile</a></li>
+								<li><a href="/admin/changePassword" class="dropdown-item"><i class="feather icon-lock"></i>Change Password</a></li>
+								<li><a href="/" class="dropdown-item"><i class="feather icon-user"></i>View As Guest</a></li>
+								<li>
+									<form id="frmLogout" action="/account/logout" method="post">
+                                    	<a href="javascript: $('#frmLogout').submit();" class="dropdown-item"><i class="feather icon-log-out"></i>Log Out</a>
+                                	</form>
+								</li>
 							</ul>
 						</div>
 					</div>

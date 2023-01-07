@@ -78,5 +78,11 @@ export default {
       return null;
     }
     return list[0];
+  },
+
+  async getNameImage(accountId) {
+    const list = await db('taikhoan')
+        .select('taikhoan.Avatar').where('taikhoan.MaTaiKhoan', accountId)
+    return list[0];
   }
 }

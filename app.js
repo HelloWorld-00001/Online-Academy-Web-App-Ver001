@@ -118,6 +118,12 @@ app.engine(
             }
             return options.inverse(this);
         },
+        isAdmin(LoaiTaiKhoan, options) {
+          if(LoaiTaiKhoan === "Admin") {
+              return options.fn(this);
+          }
+          return options.inverse(this);
+      },
     }
 }));
 

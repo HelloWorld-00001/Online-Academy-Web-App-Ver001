@@ -358,22 +358,25 @@
                     <div class="col-md-4 frmAvatar">
                         <div class="profile-img">
                             {{#if this.info.Avatar}}
-                                {{#if isStudent}}
+                                {{#isStudent this.info.LoaiTaiKhoan}}
                                     <img src="/public/img/students/{{this.info.Avatar}}" alt="" class="rounded-circle">
                                 {{else}}
-                                    <img src="/public/img/teachers/{{this.info.Avatar}}" alt="" class="rounded-circle">
-                                {{/if}}
+                                    {{#isAdmin this.info.LoaiTaiKhoan}}
+                                        <img src="/public/img/admins/{{this.info.Avatar}}" alt="" class="rounded-circle">
+                                    {{else}}
+                                        <img src="/public/img/teachers/{{this.info.Avatar}}" alt="" class="rounded-circle">
+                                    {{/isAdmin}}
+                                {{/isStudent}}
                             {{else}}
                                 <img src="/public/img/emptyAva.png" alt="/" class="rounded-circle">
                             {{/if}}
                             <h4 class="my-3" style="color:white">{{this.info.Name}}</h4>
                         </div>
-                        {{#if isStudent}}
-                        {{else}}
+                        {{#isTeacher this.info.LoaiTaiKhoan}}
                             <div style="color:aliceblue;">
                                {{this.info.MoTa}}
                             </div>
-                        {{/if}}
+                        {{/isTeacher}}
                     </div>
                     <div class="col-md" id="temp">
                         <div class="profile-head">

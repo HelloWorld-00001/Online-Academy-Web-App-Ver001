@@ -11,6 +11,18 @@ import multer from 'multer';
 import courseService from '../services/course.service.js';
 const router = express.Router();
 
+function authAdmin(req, res, next) {
+    if(req.session.auth === false) {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/');
+    }
+    if (req.session.authUser.LoaiTaiKhoan !== "Admin") {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/');
+    }
+    next();
+}
+
 router.get('/', async function (req, res) {
     const numofAcc = await adminService.countAllUser();
     const numofTeacher = await adminService.countAllTeacher();
@@ -26,12 +38,6 @@ router.get('/', async function (req, res) {
         numofCate,
         numofCourse,
         numofVideo
-    });
-});
-
-router.get('/profile', function(req, res) {
-    res.render('vwAdmin/profile', {
-        layout: 'adminLayout'
     });
 });
 
@@ -430,6 +436,103 @@ router.get('/viewCourse', async function (req, res){
 router.get('/videos', function(req, res) {
     res.render('vwAdmin/videos', {
         layout: 'adminLayout'
+    })
+});
+
+//admin info
+router.get('/profile', function(req, res) {
+    const user = req.session.authUser;
+  
+    user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+  
+    res.render('vwAdmin/manage/view',{
+        layout: 'adminLayout',
+        info: user
+    });
+});
+
+router.get('/changePassword', authAdmin, function(req, res) {
+    return res.render('vwAdmin/changePassword', {
+        layout:'adminLayout'
+    });
+})
+  
+  router.post('/changePassword', async function(req, res) {
+    const user = await accountService.findByUsername(req.session.authUser.Username);
+    const receivePassword = req.body.currentPassword;
+  
+    const ret = bcrypt.compareSync(receivePassword, user.Password);
+    if(ret === false) {
+      return res.render('vwAdmin/changePassword', {
+        layout: 'adminLayout',
+          err_message: "Current password you enter is wrong. Try Again"
+      });
+    }
+  
+    const checkSame = (req.body.newPassword === req.body.confirmPassword);
+    if(checkSame === false) {
+      return res.render('vwAdmin/changePassword', {
+        layout: 'adminLayout',
+          err_message: "New password and confirm password are not same. Try Again"
+      });
+    }
+  
+    delete user.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.newPassword, salt);
+    await accountService.updatePassword(user.MaTaiKhoan, hash);
+  
+    res.render('vwAdmin/changePassword', {
+        layout: 'adminLayout',
+        success_message: "Change Password Successful."
+    });
+})
+
+router.get('/editProfile', authAdmin, async function (req, res){
+    const admin = await accountService.findByID(req.session.authUser.MaTaiKhoan);
+
+    res.render('vwAdmin/manage/edit', {
+        layout: 'adminLayout',
+        info: admin,
+        isAdmin: true
+    });
+});
+
+router.post('/editProfile', function (req, res){
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/img/admins');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
+    });
+
+
+    const upload = multer({ storage: storage });
+    upload.array('Avatar', 5)(req, res, async function (err) {
+        console.log(req.body);
+        if (err) {
+            console.error(err);
+        } else {
+            const obj = JSON.parse(JSON.stringify(req.body));
+            const accountID = req.session.authUser.MaTaiKhoan;
+            if (obj.Avatar === null) {
+                obj.Avatar = await studentService.getNameImage(accountID).Avatar;
+            } else {
+                obj.Avatar = file_name;
+            }
+            const affected_rows_= await accountService.edit(accountID, obj);
+            
+            const user = await accountService.findByID(accountID);
+            delete user.Password;
+            user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+            
+            req.session.authUser = user;
+            res.redirect('/admin/editProfile');
+        }
     })
 });
 export default router;

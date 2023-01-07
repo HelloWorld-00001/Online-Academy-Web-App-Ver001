@@ -146,11 +146,15 @@
                             <div class="user-profile">
                                 <div class="user-avatar">
                                     {{#if this.info.Avatar}}
-                                        {{#if isStudent}}
+                                        {{#isStudent this.info.LoaiTaiKhoan}}
                                             <img src="/public/img/students/{{this.info.Avatar}}" alt="">
                                         {{else}}
-                                            <img src="/public/img/teachers/{{this.info.Avatar}}" alt="">
-                                        {{/if}}
+                                            {{#isAdmin this.info.LoaiTaiKhoan}}
+                                                <img src="/public/img/admins/{{this.info.Avatar}}" alt="">
+                                            {{else}}
+                                                <img src="/public/img/teachers/{{this.info.Avatar}}" alt="">
+                                            {{/isAdmin}}
+                                        {{/isStudent}}
                                     {{else}}
                                             <img src="/public/img/emptyAva.png" alt="">
                                     {{/if}}
@@ -158,13 +162,12 @@
                                 <h5 class="user-name">{{this.info.Name}}</h5>
                                 <h6 class="user-email">{{this.info.Email}}</h6>
                             </div>
-                            {{#isStudent this.info.LoaiTaiKhoan}}
-                            {{else}}
-                            <div class="about">
+                            {{#isTeacher this.info.LoaiTaiKhoan}}
+                                <div class="about">
                                 <h5>About</h5>
                                 <p>{{this.info.MoTa}}</p>
                             </div>
-                            {{/isStudent}}
+                            {{/isTeacher}}
                         </div>
                     </div>
                 </div>
@@ -207,25 +210,23 @@
                                     <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.info.SDT}}" maxlength="11">
                                 </div>
                             </div>
-                            {{#isStudent this.info.LoaiTaiKhoan}}
-                            {{else}}
+                            {{#isTeacher this.info.LoaiTaiKhoan}}
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtWebsite">Website URL</label>
                                     <input name="Website" type="url" class="form-control" id="txtWebsite" placeholder="Website url">
                                 </div>
                             </div>
-                            {{/isStudent}}
+                            {{/isTeacher}}
                             
-                            {{#isStudent this.info.LoaiTaiKhoan}}
-                            {{else}}
+                            {{#isTeacher this.info.LoaiTaiKhoan}}
                             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Description</label>
                                     <textarea name="Mota" class="form-control" id="txtMota" rows="4" >{{this.info.MoTa}}</textarea>
                                 </div>
                             </div>
-                            {{/isStudent}}
+                            {{/isTeacher}}
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
