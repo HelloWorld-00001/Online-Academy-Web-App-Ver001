@@ -52,7 +52,7 @@ export default {
     },
     
     async findAllCourse() {
-        const sql = `SELECT kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo, COUNT(b.MaHocVien) as SLHocVien
+        const sql = `SELECT kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo, COUNT(b.MaHocVien) as SLHocVien, kh.TinhTrang
                         FROM khoahoc kh LEFT JOIN danhsachdangki b on kh.MaKhoaHoc = b.MaKhoaHoc
                         JOIN linhvuc lv on kh.LinhVuc = lv.MaLinhVuc
                         GROUP BY kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo`;
@@ -143,5 +143,13 @@ export default {
         return db('TaiKhoan')
         .where({MaTaiKhoan: id})
         .update({TinhTrang: 1});
+    },
+
+    disableCourse(id) {
+        return db('KhoaHoc').where({MaKhoaHoc: id}).update({TinhTrang: 0});
+    },
+    enableCouse(id) {
+        return db('KhoaHoc').where({MaKhoaHoc: id}).update({TinhTrang: 1});
     }
+
 }

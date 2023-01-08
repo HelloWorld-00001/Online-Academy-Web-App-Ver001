@@ -131,7 +131,7 @@ app.engine(
             return options.fn(this);
         }
         return options.inverse(this);
-        }
+        },
   }}));
 
 app.set("view engine", "hbs");
@@ -221,7 +221,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
-  // console.error(err.stack);
+  //console.error(err.stack);
   res.status(500).render('500', {
     stack: err.stack,
     layout: false

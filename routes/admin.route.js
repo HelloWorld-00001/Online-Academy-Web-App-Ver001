@@ -66,25 +66,6 @@ router.get('/teachers', authAdmin, async function(req, res) {
     });
 });
 
-router.post('/teachers', async function(req, res) {
-    const result = req.body;
-    const id = result.MaHocVien;
-
-    if(result.lockAccount === "lock") {
-        await adminService.lockAccount(req.body.MaTaiKhoan);
-    }
-
-    if(result.unlockAccount === "unlock") {
-        await adminService.unlockAccount(req.body.MaTaiKhoan);
-    }
-
-    const teacherList = await adminService.findAllTeacher();
-    res.render('vwAdmin/teachers', {
-        layout: 'adminLayout',
-        teacher: teacherList
-    });
-});
-
 router.get('/addTeacher', authAdmin, function (req, res){
     res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
@@ -175,6 +156,11 @@ router.get('/viewTeacher', authAdmin, async function (req, res){
     });
 
 });
+router.post('/teachers', async function(req, res) {
+    res.render('vwAdmin/manage/teachers', {
+        layout: 'adminLayout',
+    });
+});
 
 
 /* Category Management Section */
@@ -215,20 +201,14 @@ router.post('/categories', async function(req, res) {
     }
 });
 
-/* Course Management Section */
-router.get('/courses', async function(req, res) {
-    const courses = await adminService.findAllCourse();
-    res.render('vwAdmin/course/courses', {
-        layout: 'adminLayout',
-        courses: courses
-    });
-});
+
 
 //Student
 router.get('/students', authAdmin, async function(req, res) {
     const studentList = await studentService.findAll();
     
-    res.render('vwAdmin/student/students', {layout: 'adminLayout',
+    res.render('vwAdmin/student/students', {
+        layout: 'adminLayout',
         teacher: studentList
     });
 });
@@ -237,7 +217,6 @@ router.post('/students', async function(req, res) {
     const result = req.body;
     const idAccount = result.MaTaiKhoan;
     const id = result.MaHocVien;
-
     if(result.deleteStudent === 'delete') {
         await studentService.delBangDanhGia(id);
         await studentService.delDanhSachDangKi(id);
@@ -266,16 +245,9 @@ router.post('/students', async function(req, res) {
         await studentService.del(id);
     }
 
-    if(result.lockAccount === "lock") {
-        await adminService.lockAccount(req.body.MaTaiKhoan);
-    }
-
-    if(result.unlockAccount === "unlock") {
-        await adminService.unlockAccount(req.body.MaTaiKhoan);
-    }
-
     const studentList = await studentService.findAll();
-    res.render('vwAdmin/student/students', {layout: 'adminLayout',
+    res.render('vwAdmin/student/students', {
+        layout: 'adminLayout',
         teacher: studentList
     });
 });
@@ -389,6 +361,32 @@ router.post('/addStudent', async function (req, res){
     });
 });
 
+
+/* Course Management Section */
+router.get('/courses', authAdmin, async function(req, res) {
+    const courses = await adminService.findAllCourse();
+    console.log(courses);
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+        courses: courses
+    });
+});
+router.post('/courses', async function(req, res) {
+    const result = req.body;
+    const id = result.MaKhoaHoc;
+    console.log(result.buttonEnable);
+    if (result.buttonDisable === "true"){
+        await adminService.disableCourse(id);
+    }
+    if (result.buttonEnable === "true"){
+        await adminService.enableCouse(id);
+    }
+    const courses = await adminService.findAllCourse();
+    return res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+        courses: courses
+    });
+})
 router.post('/delCourse', async function (req, res){
     console.log(req.body);
     //await teacherService.del(req.body.MaGiaoVien);
@@ -453,9 +451,13 @@ router.get('/viewCourse', async function (req, res){
     });
 });
 
-router.get('/videos', function(req, res) {
+// video
+router.get('/videos', async function(req, res) {
+    const list = await adminService.findAllVideo();
+    //console.log(list);
     res.render('vwAdmin/videos', {
-        layout: 'adminLayout'
+        layout: 'adminLayout',
+        videos: list
     })
 });
 
