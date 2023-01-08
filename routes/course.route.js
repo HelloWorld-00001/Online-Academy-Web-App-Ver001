@@ -127,6 +127,23 @@ router.get('/', async function (req, res) {
     });
 });
 
+function isInWishList(req, id) {
+    let wishList = [];
+    const storage = req.session.wishList;
+
+    if (storage.length != 0) {
+        wishList = JSON.parse(storage);
+        const user = req.session.authUser.Username;
+
+        for (let i = 0; i < wishList.length; i++) {
+            if (wishList[i].courseID === id && wishList[i].user === user && typeof wishList[i].courseID != 'undefined') {
+                return true;
+            }
+        }
+    } 
+
+    return false;
+}
 
 router.get('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
@@ -161,7 +178,8 @@ router.get('/detail', async function (req, res) {
                 isCoursesRegister = true;
         }
     }
-
+    const isInWL = isInWishList(req, makhoahoc);
+    console.log(isInWL);
     res.render('courses/detail', {
         isCoursesRegister,
         course,
@@ -170,7 +188,8 @@ router.get('/detail', async function (req, res) {
         top5CousresMostView,
         inforStudentsOfTeacher,
         studentReviewList,
-        auth: req.session.auth
+        auth: req.session.auth,
+        isInWL: isInWL
     });
 });
 

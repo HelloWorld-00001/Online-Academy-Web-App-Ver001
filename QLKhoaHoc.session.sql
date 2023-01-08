@@ -444,6 +444,11 @@ INSERT INTO `TaiKhoan` VALUES (28, 'bakugoKatsuki', '123', 'Bakugo Katsuki', 'ka
 INSERT INTO `TaiKhoan` VALUES (29, 'sidKagenou', '123', 'Sid Kagenou', 'shadowClown@gmail.com', '2006-08-13', 'Học Viên', '29.jpg', '0123456789', '12345 TPHCM', 1);
 INSERT INTO `TaiKhoan` VALUES (30, 'sakamotoDesu', '123', 'Sakamoto Desu', 'sakamotoPerfect@gmail.com', '2003-06-01', 'Học Viên', '30.jpg', '0123456789', '12345 TPHCM', 1);
 INSERT INTO `TaiKhoan` VALUES (31, 'yukihiraSoma', '123', 'Yukihira Soma', 'somaCook@gmail.com', '2003-02-05', 'Học Viên', '31.jpg', '0123456789', '12345 TPHCM', 1);
+INSERT INTO `TaiKhoan` VALUES (99, 'admin', '$2a$10$zKrIRVL0h9eBKUSxMDhzWOxOsNgKz83cetwYcBfh9qbnCPOSH3BVi', 'Yukihira Soma', 'somaCook23@gmail.com', '2003-02-05', 'Admin', '31.jpg', '0123496789', '12345 TPHCM', 1);
+INSERT INTO `TaiKhoan` VALUES (98, 'student', '$2a$10$zKrIRVL0h9eBKUSxMDhzWOxOsNgKz83cetwYcBfh9qbnCPOSH3BVi', 'Uzumaki Naruto', 'somaCook273@gmail.com', '2003-02-05', 'Học Viên', '98.jpg', '0923496789', '12345 TPHCM', 1);
+INSERT INTO `TaiKhoan` VALUES (97, 'student2', '$2a$10$zKrIRVL0h9eBKUSxMDhzWOxOsNgKz83cetwYcBfh9qbnCPOSH3BVi', 'Uchiha Sasuke', 'somaCook274@gmail.com', '2003-02-05', 'Học Viên', '97.jpg', '0823496789', '12345 TPHCM', 1);
+INSERT INTO `TaiKhoan` VALUES (96, 'teacher', '$2a$10$zKrIRVL0h9eBKUSxMDhzWOxOsNgKz83cetwYcBfh9qbnCPOSH3BVi', 'Uzumaki Kushina', 'somaCook2qw3@gmail.com', '2003-02-05', 'Giáo Viên', '96.jpg', '0723496789', '12345 TPHCM', 1);
+
 COMMIT;
 
 

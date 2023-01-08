@@ -21,12 +21,13 @@
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
             <h1>Your wish list courses</h1>
         </div>
-        {{#if this.empty}}
-            <h5 class="card-title">Không có dữ liệu</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        {{#if this.isNull}}
+            <h5 class="card-title">Opp! có vẻ như bạn chưa thích môn học nào</h5>
+            <p class="card-text">Tìm xem một vài khóa học yêu thích ngay nhé</p>
+            <a href="/course">Go now</a>
         {{else}}
             <div class="row">
-                {{#each this.courses}}
+                {{#each this.wishList}}
                     <div class="col-lg-4 mb-3">
                         <div class="form_course">
                             <div class="card h-100">
@@ -42,7 +43,7 @@
                                             {{SoLuongVideo}}
                                         </small>
                                     </div>
-                                    <a class="card-title text-log h5" href="/course/detail/{{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
+                                    <a class="card-title text-log h5" href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
                                     {{#if isFieldType}}
                                         <p class="card-text">
                                             <i class="fa fa-globe" aria-hidden="true"></i>
