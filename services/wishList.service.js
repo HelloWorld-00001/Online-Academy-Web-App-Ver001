@@ -6,7 +6,7 @@ export default {
     },
  
     del(id, user) {
-         return  db('wishlist').where({
+        return  db('wishlist').where({
             MaKhoaHoc: id,
             Username: user
         }).del();
@@ -14,7 +14,7 @@ export default {
 
     add(wl) {
         return db('wishList').insert({
-            MaKhoaHoc: wl.MaKhoaHoc, Username: wl.MaKhoaHoc
+            MaKhoaHoc: wl.MaKhoaHoc, Username: wl.Username
         });
     }
 }
