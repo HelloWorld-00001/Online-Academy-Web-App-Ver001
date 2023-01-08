@@ -102,7 +102,7 @@ export default {
             .delete()
             .where('MaKhoaHoc', courseId);
     },
-    async insertDanhSachVideo(MaKhoaHoc, STT, Link, NgayCapNhat, TenVideo, MoTaVideo) {
+    async insertDanhSachVideo(MaKhoaHoc, STT, Link, NgayCapNhat, TenVideo, MoTaVideo, File) {
         return db('danhsachvideo')
             .insert({
                 MaKhoaHoc: MaKhoaHoc,
@@ -111,6 +111,7 @@ export default {
                 NgayCapNhat: NgayCapNhat,
                 TenVideo: TenVideo,
                 MoTaVideo: MoTaVideo,
+                File: File,
             })
     },
     async insertNewCourse(obj) {
@@ -221,7 +222,8 @@ export default {
               'khoahoc.MoTaNgan',
               'chitietkhoahoc.MoTaChiTiet',
               'khoahoc.Gia',
-              'khoahoc.KhuyenMai'
+              'khoahoc.KhuyenMai',
+              'khoahoc.MaKhoaHoc',
           )
           .where('khoahoc.MaKhoaHoc', courseId)
           .innerJoin('chitietkhoahoc', {'chitietkhoahoc.MaKhoaHoc' : 'khoahoc.MaKhoaHoc'})
@@ -229,7 +231,7 @@ export default {
     },
     async findVideoById(courseId) {
         const list = await db('danhsachvideo')
-            .select ('danhsachvideo.TenVideo', 'danhsachvideo.Link')
+            .select ('danhsachvideo.TenVideo', 'danhsachvideo.Link', 'danhsachvideo.File')
             .where('danhsachvideo.MaKhoaHoc', courseId)
         for (let i = 0; i < list.length; i++) {
             Object.assign(list[i], {index: i + 2});

@@ -4,6 +4,7 @@ import moment from 'moment';
 import mailer from '../services/mail.service.js';
 import teacherService from '../services/teacher.service.js';
 import accountService from '../services/account.service.js';
+import courseService from "../services/course.service.js";
 const router = express.Router();
 
 function authTeacher(req, res, next) {
@@ -45,9 +46,11 @@ router.get('/', async function (req, res) {
 router.get('/input', authTeacher, async function (req, res){
    const field = await teacherService.findField();
    const ngonNgu = await teacherService.findNgonNgu();
+   let notIsKhoaHocMoi = false;
    res.render('vwTeacher/inputcourse', {
        linhVuc: field,
        ngonNgu: ngonNgu,
+       notIsKhoaHocMoi,
     });
 });
 
@@ -62,9 +65,7 @@ router.get('/input/:id', authTeacher, isYourCourse,async function (req, res){
         checked = false;
     }
     const numVideo = video.length;
-    // console.log(field);
-    // console.log(info);
-    // console.log(video);
+    let notIsKhoaHocMoi = true;
     res.render('vwTeacher/inputcourse', {
         linhVuc: field,
         ngonNgu: ngonNgu,
@@ -72,6 +73,7 @@ router.get('/input/:id', authTeacher, isYourCourse,async function (req, res){
         checked,
         video: video,
         numVideo: numVideo,
+        notIsKhoaHocMoi,
     });
 });
 
@@ -126,7 +128,7 @@ router.post('/input/:id', function (req, res){
             for(let i = 0; i < obj.topic_no.length; i++) {
                 if (obj.topic_no[i] === '')
                     continue;
-                    await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "");
+                    await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "", obj.file_no[i]);
             }
             console.log(obj);
             res.redirect('/teacher/input/' + courseId);
@@ -185,6 +187,7 @@ router.post('/input', function (req, res){
 
             const accountId = req.session.authUser.MaTaiKhoan || 1;
             console.log(accountId);
+            console.log(obj.NgayBD);
             const teacherId = await teacherService.findTeacherIdByAccountId(accountId);
             console.log(await teacherService.findTeacherIdByAccountId(accountId));
             obj.GiaoVien = teacherId;
@@ -198,9 +201,44 @@ router.post('/input', function (req, res){
             for(let i = 0; i < obj.topic_no.length; i++) {
                 if (obj.topic_no[i] === '')
                     continue;
-                await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "");
+                await teacherService.insertDanhSachVideo(courseId, i, obj.url_no[i], datetime, obj.topic_no[i], "", obj.file_no[i]);
             }
             console.log(obj);
+            res.redirect(`/teacher/input/${courseId}`);
+        }
+    })
+});
+
+router.post('/getvideo/:id', function (req, res){
+    var file_name;
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, './public/videos');
+        },
+        filename: function (req, file, cb) {
+            file_name = file.originalname;
+            cb(null, file.originalname);
+        }
+    });
+
+    const upload = multer({ storage: storage });
+    upload.array('Video', 5)(req, res, async function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(req.body);
+            const obj = JSON.parse(JSON.stringify(req.body));
+            const courseId = req.params.id || 0;
+            var currentdate = new Date();
+            var datetime = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+            const video = await teacherService.findVideoById(courseId);
+            const numberVideo = video.length;
+            await teacherService.insertDanhSachVideo(courseId, numberVideo, "", datetime, obj.TenKhoaHocMoi, "", file_name);
             res.redirect(`/teacher/input/${courseId}`);
         }
     })

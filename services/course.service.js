@@ -2,7 +2,7 @@ import db from '../utils/db.js';
 
 export default {
     async findTop10MostViewCourse() {
-        const sql = `SELECT KH.*, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                               INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -45,22 +45,23 @@ export default {
         res.push(temp5);
         return res;
     },
+
     assignDiscount(courses) {
         for(let i = 0; i < courses.length; i++) {
             const ele1 = courses[i].LinhVuc === 1;
             const ele2 = courses[i].KhuyenMai === 0;
             const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
-    
+
             courses[i].isFieldType = ele1;
             courses[i].isNoDiscount= ele2;
             courses[i].finalPrice= ele3;
         }
         return courses;
-    
+
     },
 
     async findTop3LastWeek() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -76,7 +77,7 @@ export default {
     },
 
     async findTop10LastedCourse() {
-        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Username, LV.TenLinhVuc
+        const sql = `SELECT *, DATEDIFF(CURDATE(), CTKH.NgayBD) AS Day, TK.Name, LV.TenLinhVuc
                      FROM khoahoc KH
                          INNER JOIN giaovien GV ON GV.MaGiaoVien = KH.GiaoVien
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
@@ -123,19 +124,19 @@ export default {
 
     async findTop5MostViewWithField(field, idCourse) {
         const courses = await db('khoahoc')
-                            .select(
-                                'khoahoc.*',
-                                'taikhoan.Username',
-                                'taikhoan.Avatar',
-                                'linhvuc.TenLinhVuc'
-                            )
-                            .where('LinhVuc', field)
-                            .whereNot('MaKhoaHoc', +idCourse)
-                            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
-                            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
-                            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .select(
+                'khoahoc.*',
+                'taikhoan.Name',
+                'taikhoan.Avatar',
+                'linhvuc.TenLinhVuc'
+            )
+            .where('LinhVuc', field)
+            .whereNot('MaKhoaHoc', +idCourse)
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
 
-                            .limit(5);
+            .limit(5);
 
         const course = this.assignDiscount(courses);
         return course;
@@ -143,9 +144,9 @@ export default {
 
     async findTopFiedls() {
         const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
-                        from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
-                        Group by lv.MaLinhVuc, lv.TenLinhVuc
-                        LIMIT 1`;
+                      from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
+                      Group by lv.MaLinhVuc, lv.TenLinhVuc
+                          LIMIT 1`;
         const raw = await db.raw(sql);
         return raw[0] ;
     },
@@ -162,16 +163,16 @@ export default {
 
     async countByField() {
         const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
-                        from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
-                        Group by lv.MaLinhVuc, lv.TenLinhVuc`;
+                      from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
+                      Group by lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
         return raw[0];
     },
 
     async countByLanguage() {
         const sql =  `select k.NgonNgu , lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
-                        from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
-                        Group by k.NgonNgu,lv.MaLinhVuc, lv.TenLinhVuc`;
+                      from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
+                      Group by k.NgonNgu,lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
         console.log(raw[0])
         return raw[0];
@@ -179,16 +180,16 @@ export default {
 
     async findPageCourseAll(limit, offset) {
         const courses = await db('khoahoc')
-                    .select(
-                        'khoahoc.*',
-                        'taikhoan.Name',
-                        'linhvuc.TenLinhVuc'
-                    )
-                    .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
-                    .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
-                    .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
-                    .limit(limit)
-                    .offset(offset);
+            .select(
+                'khoahoc.*',
+                'taikhoan.Name',
+                'linhvuc.TenLinhVuc'
+            )
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .limit(limit)
+            .offset(offset);
 
         const course = this.assignDiscount(courses);
         return course;
@@ -233,18 +234,18 @@ export default {
     /// find by name --  not full text search
     async findByName(name) {
         const sql = await db('KhoaHoc')
-        .where('TenKhoaHoc', name );
+            .where('TenKhoaHoc', name );
         return sql;
     },
 
     async findDetailCourseByID(idCourse) {
         const detailList = await db.select('*')
-                                .from('khoahoc')
-                                .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
-                                .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
-                                .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
-                                .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
-                                .where('khoahoc.MaKHoaHoc', idCourse)
+            .from('khoahoc')
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+            .where('khoahoc.MaKHoaHoc', idCourse)
         if (detailList.length === 0)
             return null;
         if(detailList[0]['DOB'] !== null) {
@@ -262,18 +263,18 @@ export default {
     },
     async findTop5BestSeller() {
         const courseList = await db.select('MaKhoaHoc').count('MaKhoaHoc as sldk')
-        .from('danhsachdangki')
-        .groupBy('MaKhoaHoc')
-        .orderBy('sldk', 'desc')
-        .limit(5)
+            .from('danhsachdangki')
+            .groupBy('MaKhoaHoc')
+            .orderBy('sldk', 'desc')
+            .limit(5)
 
         return courseList;
     },
     async findTop5new() {
         const courseList = await db.select('MaKhoaHoc')
-        .from('khoahoc')
-        .orderBy('MaKhoaHoc', 'desc')
-        .limit(5)
+            .from('khoahoc')
+            .orderBy('MaKhoaHoc', 'desc')
+            .limit(5)
 
         return courseList;
     },
@@ -318,27 +319,34 @@ export default {
             .innerJoin('hocvien', {'bangdanhgia.MaHocVien': 'hocvien.MaHocVien'})
             .innerJoin('taikhoan', {'hocvien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .where('bangdanhgia.MaKhoaHoc', idCourse)
-            // .limit(limit)
+        // .limit(limit)
         if(userReview.length === 0) {
             return null;
         }
         return userReview;
     },
-    async findByIDStudentAccount(idUser) {
-        const student = await db('HocVien').where('MaTaiKhoan', idUser);
-        if(student.length === 0)
-            return null;
-        return student[0].MaHocVien;
-    },
+
     async findByIDTeacherAccount(idUser) {
         const teacher = await db('GiaoVien').where('MaTaiKhoan', idUser);
         if(teacher.length === 0)
             return null;
         return teacher[0].MaGiaoVien;
     },
-    async findCourseById(id){
-        const course = await db('KhoaHoc').where('MaKhoaHoc', id);
-        return course
+
+    async findCourseById(id) {
+        const courses = await db('khoahoc')
+            .select(
+                'khoahoc.*',
+                'taikhoan.Name',
+                'linhvuc.TenLinhVuc'
+            )
+            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+            .where('khoahoc.MaKhoaHoc', id);
+
+        const course = this.assignDiscount(courses);
+        return course;
     },
 
     async courseFullTextSearch(name, limit, offset) {
@@ -382,9 +390,9 @@ export default {
 
     async isCourseRegister(maKhoaHoc, maHocVien) {
         const list = await db('DanhSachDangKi')
-        .where('MaKhoaHoc', maKhoaHoc).andWhere('MaHocVien', maHocVien);
-        
-        if(list.length === 0) 
+            .where('MaKhoaHoc', maKhoaHoc).andWhere('MaHocVien', maHocVien);
+
+        if(list.length === 0)
             return null;
         return list[0];
     },
@@ -411,8 +419,5 @@ export default {
     delCoursebyID(idkh) {
         return db('khoahoc').where('MaKhoaHoc', idkh).del();
     },
-    test500err() {
-        return db('nothing').where('MaKhoaHoc', idkh);
-    }
 
 }

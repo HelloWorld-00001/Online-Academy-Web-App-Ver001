@@ -38,6 +38,7 @@ router.get('/:id', async function (req, res) {
     const courses = await courseService.findPageByField(linhVuc, limit, offset);
 
     res.render('vwCategories/index' , {
+        isField: true,
         courses: courses,
         empty: courses.length === 0,
         pageNumbers,

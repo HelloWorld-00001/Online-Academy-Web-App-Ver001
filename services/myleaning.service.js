@@ -12,7 +12,7 @@ export default {
         const studentCourse = await db('danhsachdangki')
             .select(
                 'khoahoc.*',
-                'taikhoan.Username',
+                'taikhoan.Name',
                 'linhvuc.TenLinhVuc'
             )
             .where('danhsachdangki.MaHocVien', idStudent)
@@ -32,7 +32,7 @@ export default {
         const studentCourse = await db('danhsachdangki')
             .select(
                 'khoahoc.*',
-                'taikhoan.Username',
+                'taikhoan.Name',
                 'linhvuc.TenLinhVuc'
             )
             .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachdangki.MaKhoaHoc'})

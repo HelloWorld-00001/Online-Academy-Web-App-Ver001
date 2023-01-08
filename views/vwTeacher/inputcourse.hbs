@@ -218,10 +218,13 @@
 
         $(document).ready(function(){ $("body").on("click",".add_new_frm_field_btn", function (){ console.log("clicked"); var index = $(".form_field_outer").find(".form_field_outer_row").length + 1; $(".form_field_outer").append(`
             <div class="row form_field_outer_row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-5">
                 <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_${index}" placeholder="Enter topic" />
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
+                <input type="text" class="form-control w_90" name="file_no[]" id="file_no_${index}" placeholder="Enter file name" />
+              </div>
+              <div class="form-group col-md-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon3">URL:</span>
@@ -285,6 +288,12 @@
             maxFileCount: 5,
             theme: 'fa4',
             allowedFileExtensions: ['jpg', 'png', 'gif'],
+        });
+        $('#Video').fileinput({
+            dropZoneEnabled: false,
+            maxFileCount: 5,
+            theme: 'fa4',
+            allowedFileExtensions: ['mp4', 'mov', 'avi', 'flv', 'wmv'],
         });
     </script>
 {{/section}}
@@ -417,10 +426,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label>Topic</label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
+                            <label> File Name</label>
+                        </div>
+                        <div class="col-md-3">
                             <label> Link</label>
                         </div>
                     </div>
@@ -428,10 +440,13 @@
                     <div class="col-md-12 form_field_outer p-0">
                     {{#each this.video}}
                         <div class="row form_field_outer_row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-5">
                                 <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_{{index}}" placeholder="Enter topic" value="{{this.TenVideo}}" />
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
+                                <input type="text" class="form-control w_90" name="file_no[]" id="file_no_{{index}}" placeholder="Enter file name" value="{{this.File}}" />
+                            </div>
+                            <div class="form-group col-md-3">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">URL:</span>
@@ -451,10 +466,13 @@
                         </div>
                     {{/each}}
                         <div class="row form_field_outer_row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-5">
                                 <input type="text" class="form-control w_90" name="topic_no[]" id="topic_no_1" placeholder="Enter topic" />
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-2">
+                                <input type="text" class="form-control w_90" name="file_no[]" id="file_no_1" placeholder="Enter file name" />
+                            </div>
+                            <div class="form-group col-md-3">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">URL:</span>
@@ -482,6 +500,41 @@
                 </div>
             </div>
         </div>
+        {{#if notIsKhoaHocMoi}}
+        <div class="form-group">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add Video
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="txtNameCourseNew">Name course</label>
+                                <input form="frmVideo" name="TenKhoaHocMoi" type="text" class="form-control" id="txtNameCourseNew" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="Video">Video</label>
+                                <input type="file" multiple id="Video" name="Video" form="frmVideo">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button name="btnVideo" type="submit" class="btn btn-primary" value="upload" form="frmVideo" form="frmInputCourse">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
 <!--        Button Save-->
         <div class="card-footer text-muted">
             <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -490,4 +543,7 @@
             </button>
         </div>
     </div>
+</form>
+
+<form method="post" id="frmVideo" class="container-fluid py-10" enctype="multipart/form-data" action="/teacher/getvideo/{{this.info.MaKhoaHoc}}">
 </form>

@@ -755,6 +755,20 @@
                 <div class="tab-pane" id="overview" role="tabpanel">
                     <div class="mt-3 container">
                         <div class="card-body h-auto">
+                            <p class="card-title font-weight-bolder">
+                                Short Course Description
+                            </p>
+                            <p class="card-text">
+                                {{this.course.MoTaNgan}}
+                            </p>
+
+                            <p class="card-title font-weight-bolder">
+                                Full Course Description
+                            </p>
+
+                            <p class="card-text">
+                                {{{this.course.MoTaChiTiet}}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -790,7 +804,7 @@
                                         <span col="col-11">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                                     </p>
                                     <p class="mb-2 row d-flex align-items-center">
-                                        <i class="col-1 text-right mr-3 fa fa-play-circle text-primary" aria-hidden="true" style="width: 20px"></i>
+                                        <i class="col-1 text-right mr-1 fa fa-play-circle text-primary" aria-hidden="true" style="width: 20px"></i>
                                         <span col="col-11">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                                     </p>
                                 </div>
@@ -813,14 +827,14 @@
                         <div class="card-body h-auto">
                             <h3 class="mb-5">Student feedback</h3>
                             <div class="row flex align-items-center">
-                                <div class="col-md-2 text-center">
+                                <div class="col-lg-2 col-md-5 text-center">
                                     <div class="text-primary font-weight-bold" style="font-size: 80px">{{this.course.RateTB}}</div>
                                     <div class="mb-1">
                                         <span class="stars" data-rating="{{this.course.RateTB}}" data-num-stars="5" ></span>
                                     </div>
                                     <p class="font-weight-bold text-primary" style="letter-spacing: -0.8px">Course Rating</p>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-lg-10 col-md-7">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="progress rounded-0" style="margin-top: 5px">
@@ -918,12 +932,14 @@
                                         <h5 class="mb-0">
                                             <div href="#collapse{{STT}}" class="text-primary" data-toggle="collapse" data-parent="#accordion">
                                                 <i class="fa fa-angle-down mr-3"></i>
-                                                Video {{STT}}
+                                                Lesson {{STT}}
                                             </div>
                                         </h5>
                                     </div>
                                     <div id="collapse{{STT}}" class="collapse">
                                         <div class="card-body h-auto">
+                                            <p>{{TenVideo}}</p>
+                                            <p>{{convertDate NgayCapNhat}}</p>
                                             <a href="{{Link}}" class="video-btn" target="myFrame">
                                                 <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                 <span>video</span>

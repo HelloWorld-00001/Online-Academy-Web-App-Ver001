@@ -28,10 +28,4 @@ yarn-error.log*
 *.log
 utils/db.js
 utils/db.js
-data.sql
-QLKhoaHoc.sql
-QLKhoaHoc.session.sql
-QLKhoaHoc_inputData.sql
-QLKhoaHoc.session.sql
-QLKhoaHoc.session.sql
-QLKhoaHoc.session.sql
+

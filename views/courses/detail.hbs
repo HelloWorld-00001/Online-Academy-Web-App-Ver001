@@ -142,6 +142,10 @@
                 margin-bottom: 1rem;
             }
 
+            .infor-line span {
+                margin-left: 12px!important;
+            }
+
             /*.col-header-1, col-header-3 {*/
             /*    display: none;*/
             /*}*/
@@ -163,12 +167,25 @@
         }
         /* Tablet: width >= 740px and width < 1024px */
         @media (max-width: 63.9375em) and (min-width:   46.25em) {
-            .col-header-1, col-header-3 {
-                display: none;
+            .course-teacher-infor .card__top {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
-            .mylearning-header{
-                display: block;
+
+            .course-teacher-infor .card__top img {
+                margin-bottom: 1rem;
             }
+
+            .infor-line span {
+                margin-left: 12px!important;
+            }
+            /*.col-header-1, col-header-3 {*/
+            /*    display: none;*/
+            /*}*/
+            /*.mylearning-header{*/
+            /*    display: block;*/
+            /*}*/
 
         }
 
@@ -180,14 +197,14 @@
         $(document).ready(function(){
             // Add down arrow icon for collapse element which is open by default
             $(".collapse.show").each(function(){
-                $(this).prev(".card-header").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+                $(this).prev(".card-header").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-up");
             });
 
-            // Toggle right and down arrow icon on show hide of collapse element
+            // Toggle up and down arrow icon on show hide of collapse element
             $(".collapse").on('show.bs.collapse', function(){
-                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-up").addClass("fa-angle-down");
             }).on('hide.bs.collapse', function(){
-                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-up");
             });
         });
 
@@ -297,10 +314,11 @@
     </script>
 {{/section}}
 
+
 <div class="container py-5">
     <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 img-course-mobile" alt="" style="border-radius: 8px">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-5">
             <div class="card">
                 <div class="card-body h-auto">
                     <div class="d-flex justify-content-between mb-2">
@@ -361,6 +379,7 @@
                                     <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/account/login" role="button">Add to wish list</a>
                                 {{/if}}
                                 <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
+
                             {{/if}}
                         {{else}}
                             <div class="mt-1">
@@ -385,7 +404,7 @@
                         <p class="font-weight-bold">This course includes:</p>
                         <div class="row mt-2">
                             <p class="col-sm-2">
-                                <i class="far fa-play-circle  text-primary"></i>
+                                <i class="far fa-play-circle text-primary"></i>
                             </p>
                             <p class="col-sm-10">
                                 11 hours on-demand video
@@ -401,18 +420,10 @@
                         </div>
                         <div class="row">
                             <p class="col-sm-2">
-                                <i class="fa fa-solid fa-graduation-cap  text-primary"></i>
+                                <i class="fa fa-solid fa-graduation-cap text-primary"></i>
                             </p>
                             <p class="col-sm-10">
                                 Web development
-                            </p>
-                        </div>
-                        <div class="row">
-                            <p class="col-sm-2">
-                                <i class="fa fa-mobile text-primary" aria-hidden="true"></i>
-                            </p>
-                            <p class="col-sm-10">
-                                Access on mobile and TV
                             </p>
                         </div>
                         <div class="row">
@@ -424,16 +435,17 @@
                             </p>
                         </div>
                         <div class="row">
-                            <p class="col-sm-2">
+                            <p class="col-sm-3">
                                 <i class="fa fa-refresh text-primary" aria-hidden="true"></i>
+
                             </p>
-                            <p class="col-sm-10">
+                            <p class="col-sm-9">
                                 Always update course
                             </p>
                         </div>
                         <div class="row">
                             <p class="col-sm-2">
-                                <i class="fa fa-regular fa-key  text-primary"></i>
+                                <i class="fa fa-regular fa-key text-primary"></i>
                             </p>
                             <p class="col-sm-10">
                                 Full lifetime access
@@ -441,7 +453,7 @@
                         </div>
                         <div class="row">
                             <p class="col-sm-2">
-                                <i class="fa fa-certificate  text-primary"></i>
+                                <i class="fa fa-certificate text-primary"></i>
                             </p>
                             <p class="col-sm-10">
                                 Certificate of Completion
@@ -452,11 +464,11 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-7">
             <img src="/public/img/courses/{{this.course.Image}}" class="img-fluid w-100 mt-0 img-course" alt="" style="border-radius: 8px">
 
             <div class="card mt-3">
-                <div class="card-header" style="display: flex; justify-content: space-between">
+                <div class="card-header">
                     <h5 class="card-text text-primary">
                         Course Overview
                     </h5>
@@ -480,52 +492,8 @@
                     </p>
 
                     <p class="card-text">
-                        {{this.course.MoTaChiTiet}}
+                        {{{this.course.MoTaChiTiet}}}
                     </p>
-
-                    <p class="card-title font-weight-bolder">
-                        What you'll learn
-                    </p>
-                    <ul class="list-unstyled" style="column-count: 2">
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Become a UX designer.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            You will be able to add UX designer</li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Become a UI designer.</li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Build & test a full website design.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Build & test a full mobile app.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Learn to design websites & mobile phone apps.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            You'll learn how to choose colors.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Prototype your designs with interactions.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            Export production ready assets.
-                        </li>
-                        <li class="h-auto">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                            All the techniques used by UX professionals
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="card mt-3 w-auto">
@@ -548,13 +516,15 @@
                                         <h5 class="mb-0">
                                             <div href="#collapse{{STT}}" class="text-primary" data-toggle="collapse" data-parent="#accordion">
                                                 <i class="fa fa-angle-down mr-3"></i>
-                                                Video {{STT}}
+                                                <span>Lesson {{STT}}</span>
+                                                <span class="float-right"><small>{{convertDate NgayCapNhat}}</small></span>
                                             </div>
                                         </h5>
                                     </div>
                                     {{#if isShowVideo}}
                                         <div id="collapse{{STT}}" class="collapse show">
                                             <div class="card-body h-auto">
+                                                <p>{{TenVideo}}</p>
                                                 <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                                     <span>video</span>
@@ -603,7 +573,7 @@
                 </div>
             </div>
             <div class="card mt-3">
-                <div class="card-header" style="display: flex; justify-content: space-between">
+                <div class="card-header">
                     <h5 class="mb-3 text-primary">Instructor</h5>
                     {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
                         <a class="btn btn-sm btn-outline-primary" href="/teacher/profile/{{this.course.GiaoVien}}" role="button">
@@ -613,35 +583,35 @@
                     {{/isTeacherAndAdmin}}
                 </div>
                 <div class="card-body h-auto course-teacher-infor">
-                    <h5 class="card__name mb-3"><a href="/account/profile" class="text-info">{{this.course.Name}}</a></h5>
+                    <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
                             <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
                         </div>
                         <div class="ml-3 w-100">
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fa fa-envelope text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.course.Email}}</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fa fa-envelope text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.course.Email}}</span>
                             </p>
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.course.DOB}}</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fa fa-birthday-cake text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.course.DOB}}</span>
                             </p>
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fa fa-star text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fa fa-star text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.inforStudentsOfTeacher.ratings}} Instructor Rating</span>
                             </p>
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fas fa-trophy text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fas fa-trophy text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.inforStudentsOfTeacher.amountReview}} Reviews</span>
                             </p>
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fa fa-user-plus text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fa fa-user-plus text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.inforStudentsOfTeacher.amountStudents}} Students</span>
                             </p>
-                            <p class="mb-2 row d-flex align-items-center">
-                                <i class="col-1 mr-1 fa fa-play-circle text-primary" aria-hidden="true"></i>
-                                <span col="col-11">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
+                            <p class="mb-2 row d-flex align-items-center infor-line">
+                                <i class="col-1 text-right fa fa-play-circle text-primary" aria-hidden="true"></i>
+                                <span col="col-11 ml-1">{{this.inforStudentsOfTeacher.amountCourses}} Courses</span>
                             </p>
                         </div>
                     </div>
@@ -682,18 +652,18 @@
                                                 </small>
                                             </div>
                                             <a class="card-title text-log h5" href="/course/detail?id={{MaKhoaHoc}}">{{TenKhoaHoc}}</a>
-                                            {{#if isFieldType}}
+                                            {{#if this.course.isFieldType}}
                                                 <p class="card-text">
                                                     <i class="fa fa-globe" aria-hidden="true"></i>
-                                                    {{TenLinhVuc}}
+                                                    {{this.course.TenLinhVuc}}
                                                 </p>
                                             {{else}}
                                                 <p class="card-text">
                                                     <i class="fa fa-mobile" aria-hidden="true"></i>
-                                                    {{TenLinhVuc}}
+                                                    {{this.course.TenLinhVuc}}
                                                 </p>
                                             {{/if}}
-                                            <p class="card-text">{{Username}}</p>
+                                            <p class="card-text">{{this.course.Name}}</p>
                                             <div class="card__stars">
                                         <span>
                                             <i class="fa fa-star text-primary"></i>
@@ -761,25 +731,96 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-
-            <div class="modal-footer">
-                <form method="post" action="" class="delete-review">
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 400px!important; margin: 0 auto">
+            <!--            <div class="modal-header">-->
+            <!--                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Edit Category</h3></h5>-->
+            <!--            </div>-->
+            <form method="post">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div class="form-group flex-row mt-1">
+                        <div class="width-100 align-items-center justify-content-center">
+                            <div class="col-lg-12 mb-3">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="/public/img/courses/{{this.course.Image}}" alt="">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <small class="m-0">
+                                                <i class="fa fa-users text-primary mr-2"></i>
+                                                {{this.course.LuotXem}} Students
+                                            </small>
+                                            <small class="m-0">
+                                                <i class="far fa-play-circle text-primary mr-2"></i>
+                                                {{this.course.SoLuongVideo}}
+                                            </small>
+                                        </div>
+                                        <p class="card-title text-log h5">{{this.course.TenKhoaHoc}}</p>
+                                        {{#if this.course.isFieldType}}
+                                            <p class="card-text">
+                                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                                {{this.course.TenLinhVuc}}
+                                            </p>
+                                        {{else}}
+                                            <p class="card-text">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                {{this.course.TenLinhVuc}}
+                                            </p>
+                                        {{/if}}
+                                        <p class="card-text">{{this.course.Name}}</p>
+                                        <div class="d-flex align-content-center">
+                                            <span class="stars" data-rating="{{RateTB}}" data-num-stars="5" ></span>
+                                            <h5 class="text-primary font-weight-bolder ml-2">{{this.course.RateTB}}</h5>
+                                            <span class="">({{this.course.SLHocSinhDanhGia}} ratings)</span>
+                                        </div>
+                                    </div>
+                                    <div class="border-top card-footer">
+                                        <div class="card__price">
+                                            {{#if this.course.isNoDiscount}}
+                                                <span>${{format_number this.course.Gia}}</span>
+                                            {{else}}
+                                                <span style="text-decoration: line-through;">${{format_number this.course.Gia}}</span>
+                                                <span>${{format_number this.course.finalPrice}}</span>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-muted">
+                    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                    <!--                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>-->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" name="subBtn" value="save">Save changes</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<!--<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content modal-content">-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--            <div class="modal-body">-->
+<!--                <p>Modal body text goes here.</p>-->
+<!--            </div>-->
+
+<!--            <div class="modal-footer">-->
+<!--                <form method="post" action="" class="delete-review">-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+<!--                    <button type="submit" class="btn btn-primary" name="subBtn" value="save">Save changes</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 </div>
 

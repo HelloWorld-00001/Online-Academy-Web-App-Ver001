@@ -16,7 +16,15 @@ export default {
         .innerJoin('TaiKhoan', {'TaiKhoan.MaTaiKhoan': 'HocVien.MaTaiKhoan'})
         return list[0];
     },
-    
+
+
+    async findByIDAccount(idUser) {
+        const student = await db('HocVien').where('MaTaiKhoan', idUser);
+        if(student.length === 0)
+            return null;
+        return student[0];
+    },
+
     add(accountID) {
         return db('HocVien').insert({
             MaTaiKhoan: accountID,
