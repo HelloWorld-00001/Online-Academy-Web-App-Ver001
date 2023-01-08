@@ -153,11 +153,24 @@
                             <div class="my-3">
                                 <h5>Personal Infomation</h5>
                                 <div class="row">
-                                    <div class="col-md-6 my-1"><i class="fa fa-user" aria-hidden="true"></i> Full Name: <font color="#C9DEEC">{{user.Name}}</font></div>
-                                    <div class="col-md my-1"> <i class="fa fa-birthday-cake" aria-hidden="true"></i> <storng>Birthday: &nbsp;</storng><font color="#C9DEEC">{{user.DOB}}</font></div>
+                                    <div class="col-md-6 my-1"><i class="fa fa-user" aria-hidden="true"></i> Full Name: &nbsp;<font color="#C9DEEC">{{user.Name}}</font></div>
+                                    <div class="col-md my-1"> <i class="fa fa-birthday-cake" aria-hidden="true"></i> <storng>Birthday: &nbsp;</storng><font color="#C9DEEC">
+                                        {{#if authUser.DOB}}
+                                            {{authUser.DOB}}
+                                        {{else}}
+                                            empty
+                                        {{/if}}
+                                    </font>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 my-1"><i class="fa fa-address-card" aria-hidden="true"></i> <storng>Address: &nbsp;</storng><font color="#C9DEEC">{{user.DiaChi}}</font></div>
+                                    <div class="col-md-6 my-1"><i class="fa fa-address-card" aria-hidden="true"></i> <storng>Address: &nbsp;</storng><font color="#C9DEEC">
+                                        {{#if user.DiaChi}}
+                                            {{user.DiaChi}}
+                                        {{else}}
+                                            empty
+                                        {{/if}}
+                                    </font></div>
                                 </div>
                             </div>
                         </div>
@@ -165,8 +178,14 @@
                         <div class="profile-head mt-3">
                             <div class="my-3">
                                 <h5>Contact Infomation</h5>
-                                <div class="mt-3"><i class="fa fa-envelope" aria-hidden="true"></i> Email: <font color="#C9DEEC">{{user.Email}} </font></div>
-                                <div class="mt-1"><i class="fa fa-phone" aria-hidden="true"></i><storng> Phone Number: &nbsp;</storng><font color="#C9DEEC">{{user.SDT}}</font></div>
+                                <div class="mt-3"><i class="fa fa-envelope" aria-hidden="true"></i> Email: &nbsp;<font color="#C9DEEC">{{user.Email}}</font></div>
+                                <div class="mt-1"><i class="fa fa-phone" aria-hidden="true"></i><storng> Phone Number: &nbsp;</storng><font color="#C9DEEC">
+                                    {{#if user.SDT}}
+                                        {{user.SDT}}
+                                    {{else}}
+                                        empty
+                                    {{/if}} 
+                                </font></div>
                             </div>
                         </div>
                     </div>

@@ -23,7 +23,7 @@ function authAdmin(req, res, next) {
     next();
 }
 
-router.get('/', async function (req, res) {
+router.get('/', authAdmin, async function (req, res) {
     const numofAcc = await adminService.countAllUser();
     const numofTeacher = await adminService.countAllTeacher();
     const numofStudent = await adminService.countAllStudent();
@@ -41,7 +41,7 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/allTable', async function(req, res) {
+router.get('/allTable', authAdmin, async function(req, res) {
 
     const studentList = await adminService.findTopThreeStudent();
     const teacherList = await adminService.findTopThreeTeacher();
@@ -58,7 +58,7 @@ router.get('/allTable', async function(req, res) {
 });
 
 /* Teacher Management Section */
-router.get('/teachers', async function(req, res) {
+router.get('/teachers', authAdmin, async function(req, res) {
     const teacherList = await adminService.findAllTeacher();
     res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
@@ -66,7 +66,7 @@ router.get('/teachers', async function(req, res) {
     });
 });
 
-router.get('/addTeacher', function (req, res){
+router.get('/addTeacher', authAdmin, function (req, res){
     res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
     });
@@ -92,7 +92,7 @@ router.post('/delTeacher', async function (req, res){
         layout: 'adminLayout',
     });
 });
-router.get('/delTeacher', async function (req, res){
+router.get('/delTeacher', authAdmin, async function (req, res){
     const id = req.query.id;
     await teacherService.delTeacher(id);
     await teacherService.delAccount(id);
@@ -100,7 +100,7 @@ router.get('/delTeacher', async function (req, res){
     res.redirect('/admin/teachers');
 });
 
-router.get('/editTeacher', async function (req, res){
+router.get('/editTeacher', authAdmin, async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
 
@@ -145,7 +145,7 @@ router.post('/editTeacher', async function (req, res){
     })
 });
 
-router.get('/viewTeacher', async function (req, res){
+router.get('/viewTeacher', authAdmin, async function (req, res){
     const id = req.query.id;
     const teacher = await teacherService.findTeacherById(id);
     teacher.DOB = moment(teacher.DOB).format('DD/MM/YYYY');
@@ -213,7 +213,7 @@ router.get('/courses', async function(req, res) {
 });
 
 //Student
-router.get('/students', async function(req, res) {
+router.get('/students', authAdmin, async function(req, res) {
     const studentList = await studentService.findAll();
     
     res.render('vwAdmin/student/students', {layout: 'adminLayout',
@@ -261,7 +261,7 @@ router.post('/students', async function(req, res) {
 });
 
 
-router.get('/addStudent', async function (req, res){
+router.get('/addStudent', authAdmin, async function (req, res){
     res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
         isStudent: true,
@@ -289,7 +289,7 @@ router.post('/addStudent', async function (req, res){
     });
 });
 
-router.get('/editStudent', async function (req, res){
+router.get('/editStudent', authAdmin, async function (req, res){
     const id = req.query.id;
     const student = await studentService.findByID(id);
     console.log(student);
@@ -335,7 +335,7 @@ router.post('/editStudent', async function (req, res){
     })
 });
 
-router.get('/viewStudent', async function (req, res){
+router.get('/viewStudent', authAdmin, async function (req, res){
     const id = req.query.id;
     const student = await studentService.findByID(id);
     const isStudent = true;
@@ -348,7 +348,7 @@ router.get('/viewStudent', async function (req, res){
 
 });
 
-router.get('/addStudent', async function (req, res){
+router.get('/addStudent', authAdmin, async function (req, res){
     const id = req.query.id;
 
     res.render('vwAdmin/manage/add', {
@@ -440,10 +440,10 @@ router.get('/videos', function(req, res) {
 });
 
 //admin info
-router.get('/profile', function(req, res) {
+router.get('/profile', authAdmin, function(req, res) {
     const user = req.session.authUser;
-  
-    user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+    if(user.DOB !== null)
+        user.DOB = moment(user.DOB).format('DD/MM/YYYY');
   
     res.render('vwAdmin/manage/view',{
         layout: 'adminLayout',

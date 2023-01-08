@@ -95,7 +95,10 @@ router.post('/sendOTP', async function (req, res) {
   req.session.regis = false;
   req.session.temp = null;
 
-  res.redirect('/account/login');
+  req.session.authUser = user;
+  req.session.auth = true;
+  const student = await accountService.findStudentByID(user.MaTaiKhoan);
+  return res.redirect('/student/profile/' + student.MaHocVien);
 });
 
 router.get('/is-true-otp', async function (req, res) {
@@ -182,11 +185,11 @@ router.get('/profile', auth, async function(req, res) {
   var MoTa = null;
   if(user.LoaiTaiKhoan === 'Giáo Viên') {
     const teacher = await accountService.findTeacherByID(user.MaTaiKhoan);
-    console.log(user.MaTaiKhoan);
     MoTa = teacher.MoTa;
   }
-
-  user.DOB = moment(user.DOB).format('DD/MM/YYYY');
+  
+  if(user.DOB != null)
+    user.DOB = moment(user.DOB).format('DD/MM/YYYY');
 
   res.render('vwAccount/profile',{
     MoTa,

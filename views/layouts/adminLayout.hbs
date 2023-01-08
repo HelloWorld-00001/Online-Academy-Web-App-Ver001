@@ -141,11 +141,14 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
-								<img src="../public/admin/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-								<span>John Doe</span>
-								{{!-- <a href="auth-signin.html" class="dud-logout" title="Logout">
-									<i class="feather icon-log-out"></i>
-								</a> --}}
+								{{#if auth}}
+									{{#if authUser.Avatar}}
+										<img id="img" src="/public/img/admins/{{authUser.Avatar}}" class="rounded-circle" alt="User-Profile-Image">  
+									{{else}}
+										<img id="img" src="/public/img/emptyAva.png" class="rounded-circle" alt="User-Profile-Image">  
+									{{/if}}
+									<span>{{authUser.Name}}</span>
+								{{/if}}
 							</div>
 							<ul class="pro-body">
 								<li><a href="/admin/profile" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
@@ -177,6 +180,7 @@
     <script src="../public/admin/plugins/chart-morris/js/raphael.min.js"></script>
     <script src="../public/admin/plugins/chart-morris/js/morris.min.js"></script>
     <script src="../public/admin/js/pages/chart-morris-custom.js"></script>
+	
 	{{{_sections.js}}}
 </body>
 

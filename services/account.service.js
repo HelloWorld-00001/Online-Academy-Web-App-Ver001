@@ -80,6 +80,14 @@ export default {
     return list[0];
   },
 
+  async findStudentByID(id) {
+    const list = await db('HocVien').where('MaTaiKhoan', id);
+    if(list.length === 0) {
+      return null;
+    }
+    return list[0];
+  },
+
   async getNameImage(accountId) {
     const list = await db('taikhoan')
         .select('taikhoan.Avatar').where('taikhoan.MaTaiKhoan', accountId)

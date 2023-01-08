@@ -64,12 +64,23 @@ router.get('/profile/facebook', async function (req, res) {
         SLKhoaHoc: 0
       }
       await studentService.add(NewStudent.MaTaiKhoan);
+      
+      req.session.authUser = user;
+      req.session.auth = true;
+      const student = await accountService.findStudentByID(user.MaTaiKhoan);
+      return res.redirect('/student/profile/' + student.MaHocVien);
     }
     
     req.session.auth = true;
     req.session.authUser = user;
     res.locals.auth = true;
     res.locals.authUser = user;
+
+    if(user.LoaiTaiKhoan === 'Admin') {
+      return res.redirect('/admin/editProfile');
+    }
+
+    return res.redirect('/');
 });
 
 const GoogleStrategy = ggStrategy.Strategy;
@@ -119,6 +130,11 @@ router.get('/profile/google', async function (req, res) {
         SLKhoaHoc: 0
       }
       await studentService.add(NewStudent.MaTaiKhoan);
+
+      req.session.authUser = user;
+      req.session.auth = true;
+      const student = await accountService.findStudentByID(user.MaTaiKhoan);
+      return res.redirect('/student/profile/' + student.MaHocVien);
     }
 
     req.session.auth = true;
@@ -126,6 +142,10 @@ router.get('/profile/google', async function (req, res) {
     res.locals.auth = true;
     res.locals.authUser = user;
     
-    res.redirect('/account/profile');
+    if(user.LoaiTaiKhoan === 'Admin') {
+      return res.redirect('/admin/editProfile');
+    }
+
+    return res.redirect('/');
 });
 export default router;
