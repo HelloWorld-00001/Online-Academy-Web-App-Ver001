@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS `QLKhoaHoc`;
 CREATE DATABASE `QLKhoaHoc`;
 USE `QLKhoaHoc`;
 
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 
@@ -16,6 +15,33 @@ CREATE TABLE `LinhVuc` (
 BEGIN;
 INSERT INTO `LinhVuc` VALUES (1, 'Lập trình Web');
 INSERT INTO `LinhVuc` VALUES (2, 'Lập trình thiết bị di động');
+COMMIT;
+
+DROP TABLE IF EXISTS `CapNgonNgu`;
+CREATE TABLE `CapNgonNgu` (
+                           `MaNgonNgu` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                           `TenNgonNgu` VARCHAR(50) COLLATE utf8_general_ci NOT NULL,
+                           `MaKhoaHoc` INT UNSIGNED NOT NULL,
+                           PRIMARY KEY (`MaNgonNgu`, `TenNgonNgu`),
+                           KEY `fk_caplinhvuc_khoahoc_idx`(`MaKhoaHoc`),
+                           CONSTRAINT `fk_caplinhvuc_khoahoc` FOREIGN KEY (`MaKhoaHoc`) REFERENCES `KhoaHoc`(`MaKhoaHoc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `LVNgonNgu`;
+CREATE TABLE `LVNgonNgu` (
+    `NgonNgu` VARCHAR(255) COLLATE utf8_general_ci NOT NULL,
+    `LinhVuc` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`NgonNgu`),
+    KEY `fk_lvngonngu_linhvuc_idx`(`LinhVuc`),
+    CONSTRAINT `fk_lvngonngu_linhvuc` FOREIGN KEY (`LinhVuc`) REFERENCES `LinhVuc`(`MaLinhVuc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+BEGIN;
+INSERT INTO `LVNgonNgu` VALUES ('HTML', 1);
+INSERT INTO `LVNgonNgu` VALUES ('CSS', 1);
+INSERT INTO `LVNgonNgu` VALUES ('JAVASCRIPT', 1);
+INSERT INTO `LVNgonNgu` VALUES ('SwiftUI', 2);
+INSERT INTO `LVNgonNgu` VALUES ('Flutter', 2);
 COMMIT;
 
 DROP TABLE IF EXISTS `KhoaHoc`;
@@ -36,7 +62,8 @@ CREATE TABLE `KhoaHoc` (
                            `TinhTrang` INT UNSIGNED NOT NULL,
                            PRIMARY KEY (`MaKhoaHoc`),
                            KEY `fk_khoahoc_linhvuc_idx`(`LinhVuc`),
-                           CONSTRAINT `fk_khoahoc_linhvuc` FOREIGN KEY (`LinhVuc`) REFERENCES `LinhVuc`(`MaLinhVuc`)
+                           CONSTRAINT `fk_khoahoc_linhvuc` FOREIGN KEY (`LinhVuc`) REFERENCES `LinhVuc`(`MaLinhVuc`),
+                           CONSTRAINT `fk_khoahoc_lvngonngu` FOREIGN KEY (`NgonNgu`) REFERENCES `LVNgonNgu`(`NgonNgu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 BEGIN;
