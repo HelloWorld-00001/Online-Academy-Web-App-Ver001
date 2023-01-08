@@ -19,7 +19,7 @@
     <div class="container pt-5 pb-3">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-            <h1>Explore Top Subjects</h1>
+            <h1>Explore Our Subjects</h1>
         </div>
         <div class="row d-flex justify-content-lg-center">
             {{#each this.fields}}
@@ -58,11 +58,22 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-2">
                                         <small class="m-0">
-                                            <i class="fa fa-users text-primary mr-2"></i>
+                                            <i class="fa fa-users text-primary mr-1"></i>
                                             {{LuotXem}} Students
                                         </small>
+                                        {{#if completedStatus}}
+                                            <small>
+                                                <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                                                <span class="font-weight-bold" style="color: green;">{{TrangThai}}</span>
+                                            </small>
+                                        {{else}}
+                                            <small>
+                                                <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                                                <span class="font-weight-bold" style="color: red;">{{TrangThai}}</span>
+                                            </small>
+                                        {{/if}}
                                         <small class="m-0">
-                                            <i class="far fa-play-circle text-primary mr-2"></i>
+                                            <i class="far fa-play-circle text-primary mr-1"></i>
                                             {{SoLuongVideo}}
                                         </small>
                                     </div>

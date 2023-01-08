@@ -2,9 +2,10 @@ import db from '../utils/db.js';
 
 export default {
     async findTop10MostViewCourse() {
-        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc
+        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc,CTKH.TrangThai
                      FROM khoahoc KH
                               INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
+                              INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
                               INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                      ORDER BY KH.LuotXem DESC
@@ -18,6 +19,7 @@ export default {
             const ele4 = true;
 
             Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {completedStatus: courses[i] === 'Đã hoàn thành'});
             Object.assign(courses[i], {isNoDiscount: ele2});
             Object.assign(courses[i], {finalPrice: ele3});
             Object.assign(courses[i], {isExist: ele4});
@@ -51,8 +53,10 @@ export default {
             const ele1 = courses[i].LinhVuc === 1;
             const ele2 = courses[i].KhuyenMai === 0;
             const ele3 = courses[i].Gia * (1 - courses[i].KhuyenMai / 100);
+            const status = courses[i].TrangThai === "Đã hoàn thành"
 
             courses[i].isFieldType = ele1;
+            courses[i].completedStatus = status;
             courses[i].isNoDiscount= ele2;
             courses[i].finalPrice= ele3;
         }
@@ -69,7 +73,7 @@ export default {
                          INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
                      HAVING Day between 0 AND 7
                      ORDER BY Day ASC, SLHocVien DESC
-                     LIMIT 3`;
+                         LIMIT 3`;
         const ret = await db.raw(sql);
         const courses = this.assignDiscount(ret[0]);
 
@@ -94,6 +98,7 @@ export default {
             const ele4 = true;
 
             Object.assign(courses[i], {isFieldType: ele1});
+            Object.assign(courses[i], {completedStatus: courses[i] === 'Đã hoàn thành'});
             Object.assign(courses[i], {isNoDiscount: ele2});
             Object.assign(courses[i], {finalPrice: ele3});
             Object.assign(courses[i], {isExist: ele4});
@@ -183,9 +188,11 @@ export default {
             .select(
                 'khoahoc.*',
                 'taikhoan.Name',
-                'linhvuc.TenLinhVuc'
+                'linhvuc.TenLinhVuc',
+                'chitietkhoahoc.TrangThai',
             )
             .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
             .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)
@@ -200,10 +207,12 @@ export default {
             .select(
                 'khoahoc.*',
                 'taikhoan.Name',
-                'linhvuc.TenLinhVuc'
+                'linhvuc.TenLinhVuc',
+                'chitietkhoahoc.TrangThai',
             )
             .where('LinhVuc', linhVuc)
             .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
             .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)
@@ -256,9 +265,10 @@ export default {
         }
 
         Object.assign(detailList[0], {isFieldType: detailList[0].LinhVuc === 1});
+        Object.assign(detailList[0], {completedStatus: detailList[0].TrangThai === "Đã hoàn thành"});
         Object.assign(detailList[0], {isNoDiscount: detailList[0].KhuyenMai === 0});
         Object.assign(detailList[0], {finalPrice: detailList[0].Gia * (1 - detailList[0].KhuyenMai / 100)});
-
+        console.log(detailList[0]);
         return detailList[0];
     },
     async findTop5BestSeller() {
@@ -301,7 +311,6 @@ export default {
 
         if(videoList.length === 0)
             return null;
-        console.log(videoList);
         return videoList;
     },
 
@@ -357,10 +366,10 @@ export default {
 
     async courseFullTextSearch(name, limit, offset) {
         const sql = `SELECT *
-        FROM khoahoc
-        WHERE 
-        MATCH(TenKhoaHoc, MoTaNgan) 
-        AGAINST('` + name + `')
+                     FROM khoahoc
+                     WHERE
+                         MATCH(TenKhoaHoc, MoTaNgan)
+                         AGAINST('` + name + `')
         LIMIT ${limit}
         OFFSET ${offset};`
         const rel = await db.raw(sql);
@@ -368,10 +377,10 @@ export default {
     },
     async SearchOrderByPrice(name, limit, offset) {
         const sql = `SELECT * from
-        (SELECT MaKhoaHoc
-        FROM khoahoc
-        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
-        AGAINST('` + name + `')) M
+            (SELECT MaKhoaHoc
+             FROM khoahoc
+             WHERE MATCH(TenKhoaHoc, MoTaNgan)
+                 AGAINST('` + name + `')) M
         INNER JOIN khoahoc k USING(MaKhoaHoc)
         ORDER BY k.Gia
         LIMIT ${limit}
@@ -381,10 +390,10 @@ export default {
     },
     async SearchOrderByRate(name, limit, offset) {
         const sql = `SELECT * from
-        (SELECT MaKhoaHoc
-        FROM khoahoc
-        WHERE MATCH(TenKhoaHoc, MoTaNgan) 
-        AGAINST('` + name + `')) M
+            (SELECT MaKhoaHoc
+             FROM khoahoc
+             WHERE MATCH(TenKhoaHoc, MoTaNgan)
+                 AGAINST('` + name + `')) M
         INNER JOIN khoahoc k USING(MaKhoaHoc)
         ORDER BY k.RateTB DESC
         LIMIT ${limit}

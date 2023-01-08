@@ -343,7 +343,18 @@
                             {{this.course.TenLinhVuc}}
                         </p>
                     {{/if}}
-
+                    {{#if this.course.completedStatus}}
+                        <p>
+                            <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                            Status: <span style="color: green;">{{this.course.TrangThai}}</span>
+                        </p>
+                    {{else}}
+                        <p>
+                            <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                            <span style="color: red;">{{this.course.TrangThai}}</span></p>
+                        </p>
+                    {{/if}}
+                    <p>Last update date: {{convertDate this.course.NgayCapNhat}}</p>
                     <p class="card-text">{{this.course.Name}}</p>
                     <div class="d-flex align-content-center">
                         <span class="stars" data-rating="{{this.course.RateTB}}" data-num-stars="5" ></span>
@@ -435,11 +446,10 @@
                             </p>
                         </div>
                         <div class="row">
-                            <p class="col-sm-3">
-                                <i class="fa fa-refresh text-primary" aria-hidden="true"></i>
-
+                            <p class="col-sm-2">
+                                <i class="fas fa-sync-alt text-primary" aria-hidden="true"></i>
                             </p>
-                            <p class="col-sm-9">
+                            <p class="col-sm-10">
                                 Always update course
                             </p>
                         </div>
@@ -502,7 +512,7 @@
                         Course Content
                     </h5>
                     <p class="card-text">
-                        Start Date: {{this.course.NgayBD}}
+                        Start Date: {{ convertDate this.course.NgayBD}}
                     </p>
                 </div>
                 <div class="card-body h-auto">
@@ -586,7 +596,7 @@
                     <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
                     <div class="card__top">
                         <div class="card__avatar__teacher">
-                            <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
+                            <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Name}}">
                         </div>
                         <div class="ml-3 w-100">
                             <p class="mb-2 row d-flex align-items-center infor-line">
@@ -616,14 +626,7 @@
                         </div>
                     </div>
                     <p class="card-text">
-                        I had a couple of months of experience trading
-                        without consistent
-                        results. After taking this
-                        course I'm pretty confident that I'll be a
-                        better trader and know better when to enter a
-                        trade, how to put my stop
-                        loss and take profit, how many lots to trade and
-                        much more.
+                        {{this.course.MoTa}}
                     </p>
                 </div>
             </div>

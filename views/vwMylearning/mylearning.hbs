@@ -713,7 +713,7 @@
                 <div class="tab-pane" id="course-content" role="tabpanel">
                     <div class="mt-3 container">
                         <div class="h-auto video-content-section">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -780,7 +780,7 @@
                             <h5 class="card__name mb-3"><a href="" class="text-info">{{this.course.Name}}</a></h5>
                             <div class="card__top">
                                 <div class="card__avatar__teacher">
-                                    <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Username}}">
+                                    <img src="/public/img/teachers/{{this.course.Avatar}}" alt="{{this.course.Name}}">
                                 </div>
                                 <div class="ml-3 w-100">
                                     <p class="mb-2 row d-flex align-items-center">
@@ -810,14 +810,7 @@
                                 </div>
                             </div>
                             <p class="card-text">
-                                I had a couple of months of experience trading
-                                without consistent
-                                results. After taking this
-                                course I'm pretty confident that I'll be a
-                                better trader and know better when to enter a
-                                trade, how to put my stop
-                                loss and take profit, how many lots to trade and
-                                much more.
+                                {{this.course.MoTa}}
                             </p>
                         </div>
                     </div>
@@ -940,6 +933,10 @@
                                         <div class="card-body h-auto">
                                             <p>{{TenVideo}}</p>
                                             <p>{{convertDate NgayCapNhat}}</p>
+                                            <a href="{{Link}}" class="video-btn" target="myFrame">
+                                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                <span>video</span>
+                                            </a>
                                             {{#if isFile}}
                                                 <a href="/public/videos/{{File}}" class="video-btn" target="myFrame">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>

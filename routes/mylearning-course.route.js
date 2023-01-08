@@ -32,7 +32,6 @@ router.get('/', async function (req, res) {
         value: +page - 1,
         isPreviousPage:   +page - 1 > 0,
     }
-    // const list = await mylearningService.findCourseList(limit, offset)
     const courses = await mylearningService.findPageStudentCourseAll(idStudent,limit, offset);
     res.render('vwMylearning/index' , {
         courses,
@@ -97,7 +96,6 @@ router.get('/course', async function (req, res) {
         }
         else if(req.session.authUser.LoaiTaiKhoan === 'Giáo Viên') {
             const idTeacher = await courseService.findByIDTeacherAccount(req.session.authUser.MaTaiKhoan);
-            console.log(req.session.authUser.MaTaiKhoan,makhoahoc, idTeacher);
             const checkCourseOfTeacher = await  mylearningService.checkCourseOfTeacher(makhoahoc, idTeacher);
             if(checkCourseOfTeacher) {
                 res.render('vwMylearning/mylearning', {
