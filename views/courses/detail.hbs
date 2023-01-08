@@ -248,27 +248,6 @@
             });
         });
 
-        // $(function () {
-        //     if ($(".list-course:hidden").length <= 10) {
-        //         $(".more-section").css('visibility', 'hidden');
-        //
-        //     }
-        //     console.log($(".list-course:hidden").length)
-        //
-        //     $(".list-course").slice(0, 10).show();
-        //     $(".more-section").text($(".list-course:hidden").length + " more section");
-        //     $("body").on('click touchstart', '.more-section', function (e) {
-        //         e.preventDefault();
-        //         $(".list-course:hidden").slice(0, $(".list-course:hidden").length).slideDown();
-        //         if ($(".list-course:hidden").length === 0) {
-        //             $(".more-section").css('visibility', 'hidden');
-        //         }
-        //         $('html,body').animate({
-        //             scrollTop: $('.more-section').offset().top - 500
-        //         }, 1000);
-        //     });
-        // });
-
         $(function () {
             if ($(".list-course:hidden").length > 10) {
                 $(".more-section").removeClass('d-none').addClass('d-inline-block');
@@ -403,7 +382,10 @@
                                 {{/if}}
                             </div>
                             {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
-                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                                {{#if checkCourseOfTeacher}}
+                                    <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                                {{else}}
+                                {{/if}}
                             {{else}}
                                 <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/course/wishList" role="button">Add to wish list</a>
                                 <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
@@ -483,10 +465,12 @@
                         Course Overview
                     </h5>
                     {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
-                        <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{this.course.MaKhoaHoc}}" role="button">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                            Edit this course
-                        </a>
+                        {{#if checkCourseOfTeacher}}
+                            <a class="btn btn-sm btn-outline-primary" href="/teacher/input/{{this.course.MaKhoaHoc}}" role="button">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                Edit this course
+                            </a>
+                        {{/if}}
                     {{/isTeacherAndAdmin}}
                 </div>
                 <div class="card-body h-auto">
@@ -586,10 +570,12 @@
                 <div class="card-header">
                     <h5 class="mb-3 text-primary">Instructor</h5>
                     {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
-                        <a class="btn btn-sm btn-outline-primary" href="/teacher/profile/{{this.course.GiaoVien}}" role="button">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                            Edit profile
-                        </a>
+                        {{#if checkCourseOfTeacher}}
+                            <a class="btn btn-sm btn-outline-primary" href="/teacher/profile/{{this.course.GiaoVien}}" role="button">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                Edit profile
+                            </a>
+                        {{/if}}
                     {{/isTeacherAndAdmin}}
                 </div>
                 <div class="card-body h-auto course-teacher-infor">
@@ -605,7 +591,7 @@
                             </p>
                             <p class="mb-2 row d-flex align-items-center infor-line">
                                 <i class="col-1 text-right fa fa-birthday-cake text-primary" aria-hidden="true"></i>
-                                <span col="col-11 ml-1">{{this.course.DOB}}</span>
+                                <span col="col-11 ml-1">{{convertDate this.course.DOB}}</span>
                             </p>
                             <p class="mb-2 row d-flex align-items-center infor-line">
                                 <i class="col-1 text-right fa fa-star text-primary" aria-hidden="true"></i>
@@ -704,7 +690,7 @@
                     <div class="w-100">
                         <div class="row" id="review-list">
                             {{#each this.studentReviewList}}
-                                <div class="col-md-6 mb-3 mw-100 course-review">
+                                <div class="col-md-12 mb-3 mw-100 course-review">
                                     <div class="card card--feedback h-100">
                                         <div class="card-body h-auto">
                                             <div class="card__top">
@@ -796,34 +782,11 @@
                     </div>
                 </div>
                 <div class="modal-footer text-muted">
-                    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                    <!--                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>-->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary" name="subBtn" value="save">Save changes</button>
                 </div>
             </form>
         </div>
     </div>
-</div>
-
-<!--<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content modal-content">-->
-<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                <span aria-hidden="true">&times;</span>-->
-<!--            </button>-->
-<!--            <div class="modal-body">-->
-<!--                <p>Modal body text goes here.</p>-->
-<!--            </div>-->
-
-<!--            <div class="modal-footer">-->
-<!--                <form method="post" action="" class="delete-review">-->
-<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
-<!--                    <button type="submit" class="btn btn-primary" name="subBtn" value="save">Save changes</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 </div>
 

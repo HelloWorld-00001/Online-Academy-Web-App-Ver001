@@ -160,16 +160,21 @@ router.get('/detail', async function (req, res) {
     const studentReviewList = await courseService.getStudentReviewList(makhoahoc);
 
     for(let i = 0; (courseVideoList !== null)  && i < courseVideoList.length; i++) {
-        if(i === 0 || i === 1) {
-            courseVideoList[i].isShowVideo= true;
+        if(courseVideoList.length <= 1) {
+            courseVideoList[i].isShowVideo = false;
         }
         else {
-            courseVideoList[i].isShowVideo = false;
+            if(i <= 1) {
+                courseVideoList[i].isShowVideo= true;
+            }
+            else {
+                courseVideoList[i].isShowVideo = false;
+            }
         }
     }
 
     var isCoursesRegister = false;
-
+    var checkCourseOfTeacher;
     if(req.session.auth === true){
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
             const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
@@ -177,9 +182,13 @@ router.get('/detail', async function (req, res) {
             if(courseRegistered !== null)
                 isCoursesRegister = true;
         }
+        else if(req.session.authUser.LoaiTaiKhoan === 'Giáo Viên') {
+            const idTeacher = await courseService.findByIDTeacherAccount(req.session.authUser.MaTaiKhoan);
+            checkCourseOfTeacher = await  mylearningService.checkCourseOfTeacher(makhoahoc, idTeacher);
+        }
     }
     const isInWL = isInWishList(req, makhoahoc);
-
+    console.log(checkCourseOfTeacher)
     res.render('courses/detail', {
         isCoursesRegister,
         course,
@@ -190,6 +199,7 @@ router.get('/detail', async function (req, res) {
         studentReviewList,
         auth: req.session.auth,
         isInWL: isInWL,
+        checkCourseOfTeacher: checkCourseOfTeacher,
     });
 });
 

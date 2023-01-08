@@ -128,22 +128,21 @@ export default {
     },
 
     async findTop5MostViewWithField(field, idCourse) {
-        const courses = await db('khoahoc')
-            .select(
-                'khoahoc.*',
-                'taikhoan.Name',
-                'taikhoan.Avatar',
-                'linhvuc.TenLinhVuc'
-            )
-            .where('LinhVuc', field)
-            .whereNot('MaKhoaHoc', +idCourse)
-            .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
-            .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
-            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
+        const sql = `SELECT KH.*, TK.Name, LV.TenLinhVuc,CTKH.TrangThai, count(DSDK.MaHocVien) as SLKhoaHoc
+                     FROM khoahoc KH
+                              INNER JOIN GiaoVien GV ON GV.MaGiaoVien = KH.GiaoVien
+                              INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                              INNER JOIN danhsachdangki DSDK ON DSDK.MaKhoaHoc = CTKH.MaKhoaHoc
+                              INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
+                              INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
+                     WHERE LV.MaLinhVuc = ${field} and KH.MaKhoaHoc != ${idCourse}
+                     GROUP BY TK.Name, LV.TenLinhVuc,CTKH.TrangThai
+                     ORDER BY SLKhoaHoc DESC
+                     LIMIT 5`;
+        const raw = await db.raw(sql);
 
-            .limit(5);
+        const course = this.assignDiscount(raw[0]);
 
-        const course = this.assignDiscount(courses);
         return course;
     },
 
@@ -158,6 +157,21 @@ export default {
 
     findAll() {
         return db('Khoahoc')
+    },
+
+    async getNameField(idField) {
+        const nameField = await db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', idField)
+        console.log(nameField[0])
+        return nameField[0].TenLinhVuc;
+    },
+
+    async getNameLanguage(nameLanguage) {
+        const nameField = await db('lvngonngu')
+                    .select('linhvuc.TenLinhVuc', 'lvngonngu.NgonNgu')
+                    .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'lvngonngu.LinhVuc'})
+                    .where('lvngonngu.NgonNgu', nameLanguage);
+        console.log(nameField[0])
+        return nameField[0];
     },
 
     async countCourseAll() {
@@ -179,7 +193,6 @@ export default {
                       from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
                       Group by k.NgonNgu,lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
-        console.log(raw[0])
         return raw[0];
     },
 
@@ -257,20 +270,20 @@ export default {
             .where('khoahoc.MaKHoaHoc', idCourse)
         if (detailList.length === 0)
             return null;
-        if(detailList[0]['DOB'] !== null) {
-            detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
-            detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
-            detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
-            detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
-        }
+        // if(detailList[0]['DOB'] !== null) {
+        //     detailList[0]['DOB'] = detailList[0]['DOB'].getDay() + '/' + detailList[0]['DOB'].getMonth() + '/' + detailList[0]['DOB'].getFullYear();
+        //     detailList[0]['NgayBD'] = detailList[0]['NgayBD'].getDay() + '/' + detailList[0]['NgayBD'].getMonth() + '/' + detailList[0]['NgayBD'].getFullYear();
+        //     detailList[0]['NgayKT'] = detailList[0]['NgayKT'].getDay() + '/' + detailList[0]['NgayKT'].getMonth() + '/' + detailList[0]['NgayKT'].getFullYear();
+        //     detailList[0]['NgayCapNhat'] = detailList[0]['NgayCapNhat'].getDay() + '/' + detailList[0]['NgayCapNhat'].getMonth() + '/' + detailList[0]['NgayCapNhat'].getFullYear();
+        // }
 
         Object.assign(detailList[0], {isFieldType: detailList[0].LinhVuc === 1});
         Object.assign(detailList[0], {completedStatus: detailList[0].TrangThai === "Đã hoàn thành"});
         Object.assign(detailList[0], {isNoDiscount: detailList[0].KhuyenMai === 0});
         Object.assign(detailList[0], {finalPrice: detailList[0].Gia * (1 - detailList[0].KhuyenMai / 100)});
-        console.log(detailList[0]);
         return detailList[0];
     },
+
     async findTop5BestSeller() {
         const courseList = await db.select('MaKhoaHoc').count('MaKhoaHoc as sldk')
             .from('danhsachdangki')

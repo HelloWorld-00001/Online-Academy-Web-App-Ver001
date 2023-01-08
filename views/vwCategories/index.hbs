@@ -4,7 +4,7 @@
         <div class="container pt-5 pb-3">
             <div class="text-center mb-5">
                 <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-                <h1>Explore Top Subjects</h1>
+                <h1>Explore Our Subjects</h1>
             </div>
             <div class="row d-flex justify-content-lg-center">
                 {{#each this.fields}}
@@ -29,7 +29,12 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-            <h1>Our Popular Courses</h1>
+            {{#if this.isField}}
+                <h1>{{this.nameField}}</h1>
+            {{else}}
+                <h1>{{this.nameLanguage.TenLinhVuc}}</h1>
+                <h2>Ngôn ngữ {{this.nameLanguage.NgonNgu}}</h2>
+            {{/if}}
         </div>
         {{#if this.empty}}
             <h5 class="card-title">Không có dữ liệu</h5>

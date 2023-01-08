@@ -789,7 +789,7 @@
                                     </p>
                                     <p class="mb-2 row d-flex align-items-center">
                                         <i class="col-1 text-right mr-1 fa fa-birthday-cake text-primary" aria-hidden="true" style="width: 20px"></i>
-                                        <span col="col-11">{{this.course.DOB}}</span>
+                                        <span col="col-11">{{convertDate this.course.DOB}}</span>
                                     </p>
                                     <p class="mb-2 row d-flex align-items-center">
                                         <i class="col-1 text-right mr-1 fa fa-star text-primary" aria-hidden="true" style="width: 20px"></i>
@@ -875,7 +875,7 @@
                             <div class="w-100">
                                 <div class="row" id="review-list">
                                     {{#each this.studentReviewList}}
-                                        <div class="col-md-6 mb-3 mw-100 course-review">
+                                        <div class="col-md-10 mb-3 mw-100 course-review">
                                             <div class="card card--feedback h-100">
                                                 <div class="card-body h-auto">
                                                     <div class="card__top">
