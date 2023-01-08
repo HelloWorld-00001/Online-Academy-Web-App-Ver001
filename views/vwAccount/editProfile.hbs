@@ -94,6 +94,12 @@
             format: 'Y/m/d',
             mask: true
         });
+
+        $('#myModal').modal('hide');
+
+        {{#if err_message}}
+            $('#myModal').modal('show');
+        {{/if}}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
@@ -115,24 +121,6 @@
         console.log('path', path);
     </script>
 {{/section}}
-{{!-- 
-{{#isStudent authUser.LoaiTaiKhoan}}
-{{else}}
-<div class="container-fluid page-header" style="margin-bottom: 90px;">
-    <div class="container">
-        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-            <h3 class="display-4 text-white text-uppercase">Teachers</h3>
-            <div class="d-inline-flex text-white">
-                <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase"><a class="text-white" href="/teacher">Teachers</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase"><a class="text-white" href="/teacher/profile">Profile</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-{{/isStudent}} --}}
 
 <form method="post" id="frmInputCourse" class="container-fluid py-10" enctype="multipart/form-data">
     <div class="container">
@@ -263,3 +251,27 @@
         </div>
     </div>
 </form>
+
+{{!-- Modal --}}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius:0; border:none">
+        <div class="modal-header" style="border-radius:0; background-color:#F80040">
+            <h4 class="modal-title" style="color: white;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Fail edit email</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            {{#if err_message}}
+            <p style="font-size:17px">{{err_message}}</p>
+            {{/if}}
+        </div>
+        <div class="modal-footer" style="border: none;">
+            <button type="button" style="border: none; background-color:grey" class="btn btn-primary btnChange" data-dismiss="modal">
+            Try Again
+            </button>
+        </div>
+        </div>
+    </div>
+</div>

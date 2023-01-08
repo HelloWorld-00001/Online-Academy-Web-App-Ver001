@@ -52,7 +52,11 @@
                                                         <tr>
                                                             <td>{{MaHocVien}}</td>
                                                             <td>{{Name}}</td>
-                                                            <td>{{TinhTrang}}</td>
+                                                            {{#isActive TinhTrang}}
+                                                                <td>Enable</td>
+                                                            {{else}}
+                                                                <td>Disable</td>
+                                                            {{/isActive}}
                                                             <input type="hidden" value={{MaHocVien}} name="MaHocVien">
                                                             <input type="hidden" value="{{Name}}" name="Name">
                                                             <input type="hidden" value="{{Username}}" name="Username">

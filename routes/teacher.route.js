@@ -1,7 +1,9 @@
 import express from 'express';
 import multer from 'multer';
 import moment from 'moment';
+import mailer from '../services/mail.service.js';
 import teacherService from '../services/teacher.service.js';
+import accountService from '../services/account.service.js';
 const router = express.Router();
 
 function authTeacher(req, res, next) {
@@ -247,14 +249,40 @@ router.post('/profile/:id', function (req, res){
             } else {
                 obj.Avatar = file_name;
             }
+
+            if(req.session.authUser.Email !== obj.Email) {
+                const check = await mailer.isEmailValid(req.body.Email);
+                if(check.valid === false) {
+                    obj.Email = req.session.authUser.Email;
+                    const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const teacher = await teacherService.findTeacherById(teacherId);
+                    
+                    req.session.authUser = teacher;
+                    return res.render('vwAccount/editProfile', {
+                        info: teacher,
+                        err_message: "This Email does not exist"
+                    });
+                }
+                
+                const userCheck = await accountService.findByEmail(req.body.Email);
+                if(userCheck !== null) {
+                    obj.Email = req.session.authUser.Email;
+                    const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const teacher = await teacherService.findTeacherById(teacherId);
+                    
+                    req.session.authUser = teacher;
+                    return res.render('vwAccount/editProfile', {
+                        info: teacher,
+                        err_message: "Email has been used."
+                    });
+                } 
+            }
+
             const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
             
             var user = await teacherService.findTeacherById(teacherId);
-            delete user.Password;
             user.DOB = moment(user.DOB, 'YYYY/MM/DD').format('DD/MM/YYYY');
             user.Mota = obj.Mota;
-            user.Website = obj.Website;
-            console.log(user);
 
             req.session.authUser = user;
             res.redirect('/teacher/profile/' + teacherId);

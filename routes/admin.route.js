@@ -3,6 +3,7 @@ import adminService from '../services/admin.service.js';
 import studentService from '../services/student.service.js';
 import accountService from '../services/account.service.js';
 import teacherService from '../services/teacher.service.js';
+import mailer from '../services/mail.service.js';
 
 import bcrypt from 'bcryptjs';
 import moment from 'moment';
@@ -151,6 +152,8 @@ router.post('/editTeacher', async function (req, res){
         } else {
             const obj = JSON.parse(JSON.stringify(req.body));
             const teacherId = req.query.id || 0;
+            const teacherPre = await teacherService.findTeacherById(teacherId);
+
             const affected_rows = await teacherService.editGiaovien(obj.Mota, teacherId);
             const accountId = await teacherService.findAccountByIdTeacher(teacherId);
             if (obj.Avatar === null) {
@@ -158,6 +161,35 @@ router.post('/editTeacher', async function (req, res){
             } else {
                 obj.Avatar = file_name;
             }
+
+            if(teacherPre.Email !== obj.Email) {
+                const check = await mailer.isEmailValid(req.body.Email);
+                if(check.valid === false) {
+                    obj.Email = teacherPre.Email;
+                    const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const teacher = await teacherService.findTeacherById(teacherId);
+
+                    return res.render('vwAdmin/manage/edit', {
+                        layout: 'adminLayout',
+                        info: teacher,
+                        err_message: "This Email does not exist"
+                    });
+                }
+                
+                const userCheck = await accountService.findByEmail(req.body.Email);
+                if(userCheck !== null) {
+                    obj.Email = teacherPre.Email;
+                    const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const teacher = await teacherService.findTeacherById(teacherId);
+
+                    return res.render('vwAdmin/manage/edit', {
+                        layout: 'adminLayout',
+                        info: teacher,
+                        err_message: "Email has been used."
+                    });
+                } 
+            }
+
             const affected_rows_= await teacherService.editTaikhoan(obj, accountId.MaTaiKhoan);
             res.redirect('/admin/editTeacher?id=' + teacherId);
         }
@@ -336,17 +368,46 @@ router.post('/editStudent', async function (req, res){
 
     const upload = multer({ storage: storage });
     upload.array('Avatar', 5)(req, res, async function (err) {
-        console.log(req.body);
         if (err) {
             console.error(err);
         } else {
             const obj = JSON.parse(JSON.stringify(req.body));
             const studentId = req.query.id || 0;
+            const studentPre = await studentService.findStudentById(studentId);
             const accountId = await studentService.findAccountIdByIdStudent(studentId);
+
             if (obj.Avatar === null) {
                 obj.Avatar = await studentService.getNameImage(accountId).Avatar;
             } else {
                 obj.Avatar = file_name;
+            }
+
+            if(studentPre.Email !== obj.Email) {
+                const check = await mailer.isEmailValid(req.body.Email);
+                if(check.valid === false) {
+                    obj.Email = studentPre.Email;
+                    const affected_rows_= await studentService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const student = await studentService.findStudentById(studentId);
+                    
+                    return res.render('vwAdmin/manage/edit', {
+                        layout: 'adminLayout',
+                        info: student,
+                        err_message: "This Email does not exist"
+                    });
+                }
+                
+                const userCheck = await accountService.findByEmail(req.body.Email);
+                if(userCheck !== null) {
+                    obj.Email = studentPre.Email;
+                    const affected_rows_= await studentService.editTaikhoan(obj, accountId.MaTaiKhoan);
+                    const student = await studentService.findStudentById(studentId);
+                    
+                    return res.render('vwAdmin/manage/edit', {
+                        layout: 'adminLayout',
+                        info: student,
+                        err_message: "Email has been used."
+                    });
+                } 
             }
             const affected_rows_= await studentService.editTaikhoan(obj, accountId.MaTaiKhoan);
             

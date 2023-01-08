@@ -119,17 +119,17 @@ router.get('/login', NotAuth, async function (req, res) {
 
 router.post('/login', async function (req, res) {
   const user = await accountService.findByUsername(req.body.username);
-  if(user.TinhTrang === 0) {
-    return res.render('vwAccount/login', {
-      layout: false,
-      err_message: 'Account is blocked.'
-    });
-  }
-
   if (user === null) {
     return res.render('vwAccount/login', {
       layout: false,
       err_message: 'Invalid username or password.'
+    });
+  }
+
+  if(user.TinhTrang === 0) {
+    return res.render('vwAccount/login', {
+      layout: false,
+      err_message: 'Account is blocked.'
     });
   }
 
