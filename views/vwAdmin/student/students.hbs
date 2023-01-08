@@ -42,12 +42,8 @@
                                                     <tr>
                                                         <th>Student ID</th>
                                                         <th>Name</th>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Address</th>
-                                                        <th>SLKH</th>
-                                                        <th colspan="4">Action</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
@@ -56,11 +52,7 @@
                                                         <tr>
                                                             <td>{{MaHocVien}}</td>
                                                             <td>{{Name}}</td>
-                                                            <td>{{Username}}</td>
-                                                            <td>{{Email}}</td>
-                                                            <td>{{SDT}}</td>
-                                                            <td>{{DiaChi}}</td>
-                                                            <td>{{SLKhoaHoc}}</td>
+                                                            <td>{{TinhTrang}}</td>
                                                             <input type="hidden" value={{MaHocVien}} name="MaHocVien">
                                                             <input type="hidden" value="{{Name}}" name="Name">
                                                             <input type="hidden" value="{{Username}}" name="Username">
@@ -70,7 +62,7 @@
                                                             <input type="hidden" value={{SLKhoaHoc}} name="SLKhoaHoc">
                                                             <input type="hidden" value={{MaTaiKhoan}} name="MaTaiKhoan">
                                                             <td>
-                                                                <div class="dropdown">
+                                                                <div class="dropdown">                                                                  
                                                                     <button
                                                                         class="btn btn-light btn-circle pl-2 border-0"
                                                                         type="button" data-toggle="dropdown">
@@ -78,6 +70,15 @@
                                                                             aria-hidden="true"></i>
                                                                     </button>
                                                                     <div class="dropdown-menu">
+                                                                        {{#isActive TinhTrang}}
+                                                                            <button type="submit" class="view text-c-black dropdown-item" name="lockAccount" value="lock">
+                                                                                <i class="fa fa-lock" aria-hidden="true"></i> <span class="f-16 m-2">Lock</span>
+                                                                            </button>
+                                                                        {{else}}
+                                                                            <button type="submit" class="view text-c-black dropdown-item" name="unlockAccount" value="unlock">
+                                                                                <i class="fa fa-unlock" aria-hidden="true"></i> <span class="f-16 m-2">Unlock</span>
+                                                                            </button>
+                                                                        {{/isActive}}                                                                        
                                                                         <a href="/admin/viewStudent?id={{MaHocVien}}"
                                                                             class="view text-c-info dropdown-item"
                                                                             name="viewStudent" value="view">

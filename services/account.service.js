@@ -43,7 +43,8 @@ export default {
       DOB: taikhoan.DOB,
       Avatar: taikhoan.Avatar,
       DiaChi: taikhoan.DiaChi,
-      SDT: taikhoan.SDT      
+      SDT: taikhoan.SDT,
+      TinhTrang: taikhoan.TinhTrang      
     });
   },
 

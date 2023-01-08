@@ -39,12 +39,10 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Ma Giao Vien</th>
-                                                        <th>Ma tai khoan</th>
-                                                        <th>Ten</th>
-                                                        <th>Username</th>
-                                                        <th>email</th>
-                                                        <th>SLKH</th>
+                                                        <th>Teacher ID</th>
+                                                        <th>Name</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
@@ -54,19 +52,24 @@
                                                         <tr>
                                                             <td>{{MaGiaoVien}}</td>
                                                             <input type="hidden" value={{MaGiaoVien}} name="MaGiaoVien">
-                                                            <td>{{MaTaiKhoan}}</td>
-                                                            <input type="hidden" value={{MaTaiKhoan}} name="MaTaiKhoan">
                                                             <td>{{Name}}</td>
-                                                            <input type="hidden" value={{Name}} name="Name">
-                                                            <td>{{Username}}</td>
-                                                            <td>{{Email}}</td>
-                                                            <td>{{SLKhoaHoc}}</td>
+                                                            <td>{{TinhTrang}}</td>
+                                                            <input type="hidden" value={{MaTaiKhoan}} name="MaTaiKhoan">
                                                             <td>
                                                                 <div class="dropdown">
                                                                     <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
                                                                         <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
                                                                     </button>
                                                                     <div class="dropdown-menu">
+                                                                        {{#isActive TinhTrang}}
+                                                                            <button type="submit" class="view text-c-green dropdown-item" name="lockAccount" value="lock">
+                                                                                <i class="fa fa-lock" aria-hidden="true"></i> <span class="f-16 m-2">Lock</span>
+                                                                            </button>
+                                                                        {{else}}
+                                                                            <button type="submit" class="view text-c-green dropdown-item" name="unlockAccount" value="unlock">
+                                                                                <i class="fa fa-unlock" aria-hidden="true"></i> <span class="f-16 m-2">Unlock</span>
+                                                                            </button>
+                                                                        {{/isActive}}
                                                                         <a href="/admin/viewTeacher?id={{MaGiaoVien}}" class="view dropdown-item text-c-info" title="View" data-toggle="tooltip">
                                                                             <i class="fa fa-eye fa-sm" aria-hidden="true"></i> <span class="f-16 m-2">View</span>
                                                                         </a>
@@ -76,12 +79,6 @@
                                                                         <a name="id" id="" class="view text-c-red dropdown-item" href="/admin/delTeacher?id={{MaTaiKhoan}}" role="button">
                                                                             <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
                                                                         </a>
-                                                                        <button type="submit" class="view text-c-yellow dropdown-item" name="denoteStudent" value="grant">
-                                                                            <i class="fas fa fa-arrow-down" aria-hidden="true"></i><span> Student Grant</span>
-                                                                        </button>
-                                                                        <button type="submit" class="view text-c-yellow dropdown-item" name="grantAdmin" value="grant">
-                                                                            <i class="fa fa-user" aria-hidden="true"></i><span> Admin Grant</span>
-                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                                 

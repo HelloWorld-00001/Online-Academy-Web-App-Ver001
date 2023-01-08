@@ -41,7 +41,8 @@ export default {
             'taikhoan.Name',
             'taikhoan.Username',
             'taikhoan.Email',
-            'giaovien.SLKhoaHoc'
+            'giaovien.SLKhoaHoc',
+            'taikhoan.TinhTrang'
         )
         .innerJoin('giaovien', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'});
         return list;
@@ -49,8 +50,7 @@ export default {
     async findAllCategory() {
         return db('linhvuc');
     },
-
-
+    
     async findAllCourse() {
         const sql = `SELECT kh.MaKhoaHoc, kh.TenKhoaHoc, lv.TenLinhVuc, kh.SoLuongVideo, COUNT(b.MaHocVien) as SLHocVien
                         FROM khoahoc kh LEFT JOIN danhsachdangki b on kh.MaKhoaHoc = b.MaKhoaHoc
@@ -130,6 +130,18 @@ export default {
                         join linhvuc lv on lv.MaLinhVuc = kh.LinhVuc`;
         const raw = await db.raw(sql);
         return raw[0];
-    }
+    },
 
+    //account
+    lockAccount(id) {
+        return db('TaiKhoan')
+        .where({MaTaiKhoan: id})
+        .update({TinhTrang: 0});
+    },
+
+    unlockAccount(id) {
+        return db('TaiKhoan')
+        .where({MaTaiKhoan: id})
+        .update({TinhTrang: 1});
+    }
 }

@@ -28,7 +28,8 @@ router.post('/register', function (req, res) {
     LoaiTaiKhoan: 'Học Viên',
     Avatar: null,
     SDT: null,
-    DiaChi: null
+    DiaChi: null,
+    TinhTrang: 1
   }
 
   const otp = randomInteger(100000, 999999).toString();
@@ -118,7 +119,13 @@ router.get('/login', NotAuth, async function (req, res) {
 
 router.post('/login', async function (req, res) {
   const user = await accountService.findByUsername(req.body.username);
-  
+  if(user.TinhTrang === 0) {
+    return res.render('vwAccount/login', {
+      layout: false,
+      err_message: 'Account is blocked.'
+    });
+  }
+
   if (user === null) {
     return res.render('vwAccount/login', {
       layout: false,

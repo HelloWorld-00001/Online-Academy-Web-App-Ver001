@@ -66,6 +66,25 @@ router.get('/teachers', authAdmin, async function(req, res) {
     });
 });
 
+router.post('/teachers', async function(req, res) {
+    const result = req.body;
+    const id = result.MaHocVien;
+
+    if(result.lockAccount === "lock") {
+        await adminService.lockAccount(req.body.MaTaiKhoan);
+    }
+
+    if(result.unlockAccount === "unlock") {
+        await adminService.unlockAccount(req.body.MaTaiKhoan);
+    }
+
+    const teacherList = await adminService.findAllTeacher();
+    res.render('vwAdmin/teachers', {
+        layout: 'adminLayout',
+        teacher: teacherList
+    });
+});
+
 router.get('/addTeacher', authAdmin, function (req, res){
     res.render('vwAdmin/manage/add', {
         layout: 'adminLayout',
@@ -156,13 +175,6 @@ router.get('/viewTeacher', authAdmin, async function (req, res){
     });
 
 });
-router.post('/teachers', async function(req, res) {
-    //await teacherService.del(req.body.MaGiaoVien);
-    //await teacherService.delAccount(req.body.MaTaiKhoan);
-    res.render('vwAdmin/manage/teachers', {
-        layout: 'adminLayout',
-    });
-});
 
 
 /* Category Management Section */
@@ -252,6 +264,14 @@ router.post('/students', async function(req, res) {
         await studentService.delBangDanhGia(id);
         await studentService.delDanhSachDangKi(id);
         await studentService.del(id);
+    }
+
+    if(result.lockAccount === "lock") {
+        await adminService.lockAccount(req.body.MaTaiKhoan);
+    }
+
+    if(result.unlockAccount === "unlock") {
+        await adminService.unlockAccount(req.body.MaTaiKhoan);
     }
 
     const studentList = await studentService.findAll();

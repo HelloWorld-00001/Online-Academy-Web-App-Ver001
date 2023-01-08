@@ -51,7 +51,8 @@ router.get('/profile/facebook', async function (req, res) {
         LoaiTaiKhoan: 'Học Viên',
         Avatar: null,
         SDT: null,
-        DiaChi: null
+        DiaChi: null,
+        TinhTrang: 1
       }
 
       await accountService.add(NewUser);
@@ -117,7 +118,8 @@ router.get('/profile/google', async function (req, res) {
         LoaiTaiKhoan: 'Học Viên',
         Avatar: null,
         SDT: null,
-        DiaChi: null
+        DiaChi: null,
+        TinhTrang: 1
       }
       
       await accountService.add(NewUser);

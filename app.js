@@ -27,7 +27,7 @@ import mylearningRoute from './routes/mylearning-course.route.js'
 import studentService from "./services/student.service.js";
 import teacherService from "./services/teacher.service.js";
 import searchRoute from "./routes/search.route.js";
-import wishListRoute from "./routes/wishList.route.js";
+// import wishListRoute from "./routes/wishList.route.js";
 
 
 const app = express();
@@ -125,6 +125,12 @@ app.engine(
               return options.fn(this);
           }
           return options.inverse(this);
+        },
+        isActive(TinhTrang, options) {
+          if(TinhTrang === 1) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
         }
   }}));
 
@@ -208,7 +214,7 @@ app.use("/admin", adminRoute);
 app.use("/mylearning", mylearningRoute);
 app.use("/search", searchRoute);
 app.use("/student", studentRoute);
-app.use("/wishList", wishListRoute);
+// app.use("/wishList", wishListRoute);
 
 app.use(function (req, res, next) {
   res.render('404', { layout: false });
