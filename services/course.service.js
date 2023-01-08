@@ -292,10 +292,16 @@ export default {
             } else {
                 videoList[i]['Link'] =  "//www.youtube.com/embed/" + 'error';
             }
+
+            if (videoList[i].File === '')
+                Object.assign(videoList[i], {isFile: false});
+            else
+                Object.assign(videoList[i], {isFile: true});
         }
 
         if(videoList.length === 0)
             return null;
+        console.log(videoList);
         return videoList;
     },
 

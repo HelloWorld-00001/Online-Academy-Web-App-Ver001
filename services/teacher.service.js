@@ -129,6 +129,7 @@ export default {
                 Image: obj.Image,
                 LuotXem: 0,
                 NgonNgu: obj.NgonNgu,
+                TinhTrang: 1,
             })
     },
     async insertChiTietKhoaHoc(courseId, obj) {

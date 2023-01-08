@@ -940,10 +940,17 @@
                                         <div class="card-body h-auto">
                                             <p>{{TenVideo}}</p>
                                             <p>{{convertDate NgayCapNhat}}</p>
-                                            <a href="{{Link}}" class="video-btn" target="myFrame">
-                                                <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                                <span>video</span>
-                                            </a>
+                                            {{#if isFile}}
+                                                <a href="/public/videos/{{File}}" class="video-btn" target="myFrame">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </a>
+                                            {{else}}
+                                                <a href="{{Link}}" class="video-btn" target="myFrame">
+                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                    <span>video</span>
+                                                </a>
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
