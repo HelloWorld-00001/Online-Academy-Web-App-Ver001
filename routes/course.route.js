@@ -81,7 +81,7 @@ router.post('/orderByPrice', async function (req, res) {
 });
 
 router.get('/search', function (req, res) {
-    
+
     //console.log(productList);
     // res.render('courses/search.hbs', {
     //     product: productList,
@@ -90,7 +90,7 @@ router.get('/search', function (req, res) {
     res.render('/');
 });
 
-router.get('/', async function (req, res) { 
+router.get('/', async function (req, res) {
     const fields = await courseService.countByField();
 
     const limit = 6;
@@ -140,7 +140,7 @@ function isInWishList(req, id) {
                 return true;
             }
         }
-    } 
+    }
 
     return false;
 }
@@ -169,17 +169,17 @@ router.get('/detail', async function (req, res) {
     }
 
     var isCoursesRegister = false;
-    
+
     if(req.session.auth === true){
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
-            const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);
-            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent);
+            const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+            const courseRegistered = await courseService.isCourseRegister(makhoahoc, idStudent.MaHocVien);
             if(courseRegistered !== null)
                 isCoursesRegister = true;
         }
     }
     const isInWL = isInWishList(req, makhoahoc);
-    console.log(isInWL);
+
     res.render('courses/detail', {
         isCoursesRegister,
         course,
@@ -189,19 +189,17 @@ router.get('/detail', async function (req, res) {
         inforStudentsOfTeacher,
         studentReviewList,
         auth: req.session.auth,
-        isInWL: isInWL
+        isInWL: isInWL,
     });
 });
 
 router.post('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
-
-
     const today = new Date().toISOString().slice(0, 10);
 
-    const idStudent = await courseService.findByIDStudentAccount(req.session.authUser.MaTaiKhoan);
-    const ret1 = await courseService.updateSLKhoaHoc(idStudent, idStudent.SLKhoaHoc + 1);
-    const dangsachdangki = {MaHocVien: idStudent, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
+    const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
+    const ret1 = await courseService.updateSLKhoaHoc(idStudent.MaHocVien, idStudent.SLKhoaHoc + 1);
+    const dangsachdangki = {MaHocVien: idStudent.MaHocVien, MaKhoaHoc: makhoahoc, NgayDangKy: today, Note: ''};
     const ret2 = await courseService.addBangDanhSachDangKi(dangsachdangki);
 
 
