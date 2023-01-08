@@ -150,6 +150,9 @@ export default {
     },
     enableCouse(id) {
         return db('KhoaHoc').where({MaKhoaHoc: id}).update({TinhTrang: 1});
+    },
+    editCategory(id, name) {
+        return db('linhvuc').where({MaLinhVuc: id}).update({TenLinhVuc: name})
     }
 
 }

@@ -29,6 +29,15 @@
             $('#ModalAlert').modal('show');
         </script>
     {{/if}} 
+    <script>
+        $('#ModalEditCategory').on('show.bs.modal', function(e) {
+            var CateName = $(e.relatedTarget).data('cate-name');
+            var CateID = $(e.relatedTarget).data('cate-id')
+            $(e.currentTarget).find('input[name="NameCate"]').val(CateName);
+            $(e.currentTarget).find('input[name="CateID"]').val(CateID);
+            
+        })
+    </script>
 {{/section}}
 
 <section class="pcoded-main-container">
@@ -76,7 +85,7 @@
                                                                 <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory">
+                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}">
                                                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
                                                                 </a>
                                                                 <input name="id" type="hidden" value="{{MaLinhVuc}}">
@@ -144,11 +153,12 @@
                     <div class="form-group flex-row">
                         <label for="NameCate"><h4></h4></label>
                         <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" autofocus>
+                        <input type="hidden" name="CateID" id="CateID" autofocus>
                     </div>
                 </div>
                 <div class="modal-footer text-muted">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="paramsSubmit">Save</button>
+                    <button type="submit" class="btn btn-primary" id="paramsSubmit" name="btnEdit" value="edit">Save</button>
                 </div>
             </form>
         </div>

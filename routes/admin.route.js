@@ -204,11 +204,10 @@ router.get('/categories', async function(req, res) {
     });
 });
 router.post('/categories', async function(req, res) {
-    console.log(req.body);
     const result = req.body;
-    
+    console.log(result)
     if (result.addCategory === 'add') {
-        console.log(result.Name);
+        //console.log(result.Name);
         await adminService.addCategory(result.Name);
         const categories = await adminService.findAllCategory();
         res.redirect('/admin/categories');
@@ -230,6 +229,14 @@ router.post('/categories', async function(req, res) {
                 err_message: true,
             });
         }
+    }
+    if (result.btnEdit === 'edit') {
+        const id = result.CateID;
+        const name = result.NameCate;
+        await adminService.editCategory(id, name);
+        const categories = await adminService.findAllCategory();
+        res.redirect('/admin/categories');
+
     }
 });
 
@@ -435,7 +442,6 @@ router.get('/courses', authAdmin, async function(req, res) {
 router.post('/courses', async function(req, res) {
     const result = req.body;
     const id = result.MaKhoaHoc;
-    console.log(result.buttonEnable);
     if (result.buttonDisable === "true"){
         await adminService.disableCourse(id);
     }
