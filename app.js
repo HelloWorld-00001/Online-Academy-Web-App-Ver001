@@ -28,6 +28,7 @@ import studentService from "./services/student.service.js";
 import teacherService from "./services/teacher.service.js";
 import searchRoute from "./routes/search.route.js";
 import wishListRoute from "./routes/wishList.route.js";
+import myleaningService from "./services/myleaning.service.js";
 
 
 const app = express();
@@ -65,7 +66,11 @@ app.use(async function (req, res, next) {
   if (typeof req.session.wishList === "undefined") {
     req.session.wishList = [];
   }
+  req.session.lv1 = await myleaningService.findLV(1);
+  req.session.lv2 = await myleaningService.findLV(2);
 
+  res.locals.lv1 = req.session.lv1;
+  res.locals.lv2 = req.session.lv2;
   res.locals.regis = req.session.regis;
   res.locals.temp = req.session.temp;
   res.locals.auth = req.session.auth;

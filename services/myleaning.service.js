@@ -47,7 +47,6 @@ export default {
         return studentCourse;
     },
 
-
     async countStarRate(idCourse, numberRate) {
         const numberStar= await db('bangdanhgia')
             // .innerJoin('bangdanhgia', {'khoahoc.MaKhoaHoc': 'bangdanhgia.MaKhoaHoc'})
@@ -125,6 +124,14 @@ export default {
             .where('MaKhoaHoc', idCourse)
             .where('MaHocVien', idStudent)
             .update(studentReview);
-    }
+    },
+
+    async findLV(id) {
+        const list = await db('khoahoc')
+            .select('NgonNgu')
+            .where('LinhVuc', id)
+            .distinct()
+        return list;
+    },
 
 }

@@ -82,16 +82,17 @@
                     <div class="nav-item nav-item-dropdown">
                         <a href="/categories/1" class="nav-link nav-link-dropdown-toggle">Web development <i class="fa fa-angle-down float-right mt-1"></i></a>
                         <div class="nav-dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                            <a href="/categories/language/HTML" class="nav-link dropdown-item">HTML</a>
-                            <a href="/categories/language/CSS" class="nav-link dropdown-item">CSS</a>
-                            <a href="/categories/language/JAVASCRIPT" class="nav-link dropdown-item">JAVASCRIPT</a>
+                            {{#each lv1}}
+                            <a href="/categories/language/{{this.NgonNgu}}" class="nav-link dropdown-item">{{this.NgonNgu}}</a>
+                            {{/each}}
                         </div>
                     </div>
                     <div class="nav-item nav-item-dropdown">
                         <a href="/categories/2" class="nav-link nav-link-dropdown-toggle">Mobile development <i class="fa fa-angle-down float-right mt-1"></i></a>
                         <div class="nav-dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                            <a href="/categories/language/SwiftUI" class="nav-link dropdown-item">SwiftUI</a>
-                            <a href="/categories/language/Flutter" class="nav-link dropdown-item">Flutter</a>
+                            {{#each lv2}}
+                                <a href="/categories/language/{{this.NgonNgu}}" class="nav-link dropdown-item">{{this.NgonNgu}}</a>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
@@ -143,10 +144,10 @@
                                     {{#isStudent authUser.LoaiTaiKhoan}}
                                         <a class="dropdown-item" href="/student/profile">Edit profile</a>
                                         <a class="dropdown-item" href="/mylearning">My learning</a>
+                                        <a class="dropdown-item" href="/wishList">My wish list</a>
                                     {{/isStudent}}
                                     <a class="dropdown-item" href="/account/profile">Profile</a>
                                     <a class="dropdown-item" href="/account/changePassword">Change Password</a>
-                                    <a class="dropdown-item" href="/wishList">My wish list</a>
                                     <form id="frmLogout" action="/account/logout" method="post">
                                         <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Logout</a>
                                     </form>
