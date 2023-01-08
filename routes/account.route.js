@@ -140,6 +140,10 @@ router.post('/login', async function (req, res) {
   req.session.auth=true;
   req.session.authUser=user;
 
+  if(user.LoaiTaiKhoan === 'Admin') {
+    return res.redirect('/admin');
+  }
+
   const url = req.session.retUrl || '/';
   res.redirect(url);
 });
@@ -149,7 +153,7 @@ router.post('/logout', async function(req, res){
   console.log(req.session.wishList);
   req.session.auth=false;
   req.session.authUser=null;
-
+  
   const url = req.session.retUrl || '/';
   res.redirect(url);
 });

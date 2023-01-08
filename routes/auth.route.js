@@ -77,7 +77,7 @@ router.get('/profile/facebook', async function (req, res) {
     res.locals.authUser = user;
 
     if(user.LoaiTaiKhoan === 'Admin') {
-      return res.redirect('/admin/editProfile');
+      return res.redirect('/admin');
     }
 
     return res.redirect('/');
@@ -143,7 +143,7 @@ router.get('/profile/google', async function (req, res) {
     res.locals.authUser = user;
     
     if(user.LoaiTaiKhoan === 'Admin') {
-      return res.redirect('/admin/editProfile');
+      return res.redirect('/admin');
     }
 
     return res.redirect('/');
