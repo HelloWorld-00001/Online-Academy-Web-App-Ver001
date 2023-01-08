@@ -51,7 +51,7 @@ CREATE TABLE `KhoaHoc` (
                            `LinhVuc` INT UNSIGNED NOT NULL,
                            `Gia` FLOAT NOT NULL,
                            `SoLuongVideo` INT,
-                           `GiaoVien` INT NOT NULL,
+                           `GiaoVien` INT ,
                            `Image` VARCHAR(255),
                            `KhuyenMai` FLOAT,
                            `RateTB` FLOAT,
@@ -63,30 +63,31 @@ CREATE TABLE `KhoaHoc` (
                            PRIMARY KEY (`MaKhoaHoc`),
                            KEY `fk_khoahoc_linhvuc_idx`(`LinhVuc`),
                            CONSTRAINT `fk_khoahoc_linhvuc` FOREIGN KEY (`LinhVuc`) REFERENCES `LinhVuc`(`MaLinhVuc`),
-                           CONSTRAINT `fk_khoahoc_lvngonngu` FOREIGN KEY (`NgonNgu`) REFERENCES `LVNgonNgu`(`NgonNgu`)
+                           CONSTRAINT `fk_khoahoc_lvngonngu` FOREIGN KEY (`NgonNgu`) REFERENCES `LVNgonNgu`(`NgonNgu`),
+						CONSTRAINT `fk_khoahoc_giaovien` FOREIGN KEY (`LinhVuc`) REFERENCES `giaovien`(`MaGiaoVien`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 BEGIN;
-INSERT INTO `KhoaHoc` VALUES (1, 'Introduct To HTML, JS, CSS', 1, 100, 21, 1, '1.jpg', 10, 0, 0, 'Explore how you can create websites from scratch!!!', 0, 'HTML', 1);
-INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 0, 0, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database css', 0, 'HTML', 1);
-INSERT INTO `KhoaHoc` VALUES (3, 'Web Design Course', 1, 120, 19, 3, '3.jpg', 10, 0, 0, 'In this course, you will learn how to create a website and how to design it', 0, 'CSS', 1);
-INSERT INTO `KhoaHoc` VALUES (4, 'HTML & CSS Crash Course Tutorial', 1, 100, 11, 4, '4.jpg', 10, 0, 0, 'Throughout this crash course series I will take you from total beginner to create great-looking sites with HTML & CSS. In this video, we will cover what HTML & CSS are, as well as setting up our dev environment.', 0, 'CSS', 1);
-INSERT INTO `KhoaHoc` VALUES (5, 'Javascript Nâng Cao', 1, 50, 12, 5, '5.jpg', 10, 0, 0, 'Hiểu sâu hơn về cách Javascript hoạt động, hiểu các khái niệm Javascript nâng cao như: IIFE, closure, reference types, this keyword, bind, call, apply, ...', 0, 'JAVASCRIPT', 1);
-INSERT INTO `KhoaHoc` VALUES (6, 'The Complete JavaScript Course 2022: From Zero to Expert', 1, 50, 20, 6, '6.jpg', 10, 0, 0, 'Entire JavaScript course from Zero to Expert! This course will help you learn web development in 2022 and beyond. Mastering these technical skills is vital to your career as a software developer.', 0, 'JAVASCRIPT', 1);
+INSERT INTO `KhoaHoc` VALUES (1, 'Introduct To HTML, JS, CSS', 1, 100, 21, 1, '1.jpg', 10, 4.5, 10, 'Explore how you can create websites from scratch!!!', 0, 'HTML', 1);
+INSERT INTO `KhoaHoc` VALUES (2, 'Food Ordering Web', 1, 125, 13, 2, '2.jpg', 10, 4, 20, 'In this course, you will learn to create complete dynamic and fully functional website using PHP programming language and MySQL Database css', 0, 'HTML', 1);
+INSERT INTO `KhoaHoc` VALUES (3, 'Web Design Course', 1, 120, 19, 3, '3.jpg', 10, 4.2, 0, 'In this course, you will learn how to create a website and how to design it', 0, 'CSS', 1);
+INSERT INTO `KhoaHoc` VALUES (4, 'HTML & CSS Crash Course Tutorial', 1, 100, 11, 4, '4.jpg', 10, 5, 10, 'Throughout this crash course series I will take you from total beginner to create great-looking sites with HTML & CSS. In this video, we will cover what HTML & CSS are, as well as setting up our dev environment.', 0, 'CSS', 1);
+INSERT INTO `KhoaHoc` VALUES (5, 'Javascript Nâng Cao', 1, 50, 12, 5, '5.jpg', 10, 4, 10, 'Hiểu sâu hơn về cách Javascript hoạt động, hiểu các khái niệm Javascript nâng cao như: IIFE, closure, reference types, this keyword, bind, call, apply, ...', 0, 'JAVASCRIPT', 1);
+INSERT INTO `KhoaHoc` VALUES (6, 'The Complete JavaScript Course 2022: From Zero to Expert', 1, 50, 20, 6, '6.jpg', 10, 3, 10, 'Entire JavaScript course from Zero to Expert! This course will help you learn web development in 2022 and beyond. Mastering these technical skills is vital to your career as a software developer.', 0, 'JAVASCRIPT', 1);
 INSERT INTO `KhoaHoc` VALUES (7, 'Shopping web app', 1, 120, 20, 7, '7.jpg', 10, 0, 0, 'Hướng dẫn làm web bán hàng đơn giản cho người mới', 0, 'HTML', 1);
-INSERT INTO `KhoaHoc` VALUES (8, 'Hotel booking web using PHP and MySQL', 1, 140, 20, 8, '8.jpg', 10, 0, 0, 'Learn about booking web and how to do it', 0, 'CSS', 1);
-INSERT INTO `KhoaHoc` VALUES (9, 'HTML Tutorial for Beginners', 1, 75, 20, 9, '9.jpg', 10, 0, 0, 'In this video we go over the basics of HTML and what you will need to follow along for the entire series. This series will cover the latest concepts including HTML5.', 0, 'HTML', 1);
-INSERT INTO `KhoaHoc` VALUES (10, 'Hotel booking web', 1, 130, 20, 10, '10.jpg', 10, 0, 0, 'Learn about booking web and how to do it', 0, 'JAVASCRIPT', 1);
-INSERT INTO `KhoaHoc` VALUES (11, 'How to Make an App for Beginners (SwiftUI)', 2, 50, 14, 11, '11.jpg', 10, 0, 0, 'In this 14 day beginner challenge, you’ll learn how to make an app even if you’ve never coded before.', 0, 'SwiftUI', 1);
-INSERT INTO `KhoaHoc` VALUES (12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 0, 0, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0, 'SwiftUI', 1);
-INSERT INTO `KhoaHoc` VALUES (13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13, '13.jpg', 10, 0, 0, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0, 'SwiftUI', 1);
-INSERT INTO `KhoaHoc` VALUES (14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 0, 0, 'This is React Native Video Tutorial', 0, 'SwiftUI', 1);
-INSERT INTO `KhoaHoc` VALUES (15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 0, 0, 'How to use Flutter in this complete course for beginners.', 0, 'Flutter', 1);
-INSERT INTO `KhoaHoc` VALUES (16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 0, 0, 'This is Android App Development for Beginners.', 0, 'Flutter', 1);
-INSERT INTO `KhoaHoc` VALUES (17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 0, 0, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0, 'Flutter', 1);
-INSERT INTO `KhoaHoc` VALUES (18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 0, 0, 'How to make an app even if you’ve never coded before.', 0, 'SwiftUI', 1);
-INSERT INTO `KhoaHoc` VALUES (19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 0, 0, 'Get Started with React Native and learn how to build iOS and Android apps!', 0, 'Flutter', 1);
-INSERT INTO `KhoaHoc` VALUES (20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 15, 20, '20.jpg', 10, 0, 0, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0, 'Flutter', 1);
+INSERT INTO `KhoaHoc` VALUES (8, 'Hotel booking web using PHP and MySQL', 1, 140, 20, 8, '8.jpg', 10, 3.9, 9, 'Learn about booking web and how to do it', 0, 'CSS', 1);
+INSERT INTO `KhoaHoc` VALUES (9, 'HTML Tutorial for Beginners', 1, 75, 20, 9, '9.jpg', 10, 5, 30, 'In this video we go over the basics of HTML and what you will need to follow along for the entire series. This series will cover the latest concepts including HTML5.', 0, 'HTML', 1);
+INSERT INTO `KhoaHoc` VALUES (10, 'Hotel booking web', 1, 130, 20, 10, '10.jpg', 10, 4.1, 8, 'Learn about booking web and how to do it', 0, 'JAVASCRIPT', 1);
+INSERT INTO `KhoaHoc` VALUES (11, 'How to Make an App for Beginners (SwiftUI)', 2, 50, 14, 11, '11.jpg', 10, 3.7, 21, 'In this 14 day beginner challenge, you’ll learn how to make an app even if you’ve never coded before.', 0, 'SwiftUI', 1);
+INSERT INTO `KhoaHoc` VALUES (12, 'Food Delivery App Development for iOS and Android', 2, 499, 8, 12, '12.jpg', 10, 4, 13, 'This is an e-commerce app for food delivery using flutter with backend as crash course tutorial for iOS and Android.', 0, 'SwiftUI', 1);
+INSERT INTO `KhoaHoc` VALUES (13, 'Build and Deploy Your First Modern React Native App', 2, 100, 1, 13, '13.jpg', 10, 5, 10, 'Master React Native by building a modern NFT Marketplace iOS and Android ReactNative Application', 0, 'SwiftUI', 1);
+INSERT INTO `KhoaHoc` VALUES (14, 'React Native Tutorial Series for Beginners', 2, 599, 10, 14, '14.jpg', 10, 1, 10, 'This is React Native Video Tutorial', 0, 'SwiftUI', 1);
+INSERT INTO `KhoaHoc` VALUES (15, 'Flutter Course for Beginners', 2, 349, 1, 15, '15.jpg', 10, 4.3, 7, 'How to use Flutter in this complete course for beginners.', 0, 'Flutter', 1);
+INSERT INTO `KhoaHoc` VALUES (16, 'Android App Development for Beginners', 2, 449, 15, 16, '16.jpg', 10, 4.8, 9, 'This is Android App Development for Beginners.', 0, 'Flutter', 1);
+INSERT INTO `KhoaHoc` VALUES (17, 'Lộ trình tự học lập trình di động', 2, 5, 1, 17, '17.jpg', 0, 4.6, 21, 'Giới tiệu Lộ trình tự học lập trình di động cơ bản, siêu chi tiếc', 0, 'Flutter', 1);
+INSERT INTO `KhoaHoc` VALUES (18, 'How To Make An App for Beginners 2021 - SwiftUI', 2, 299, 14, 18, '18.jpg', 5, 2.2, 1, 'How to make an app even if you’ve never coded before.', 0, 'SwiftUI', 1);
+INSERT INTO `KhoaHoc` VALUES (19, 'Full React Native Project Tutorial for beginners.', 2, 399, 1, 19, '19.jpg', 10, 4, 10, 'Get Started with React Native and learn how to build iOS and Android apps!', 0, 'Flutter', 1);
+INSERT INTO `KhoaHoc` VALUES (20, 'Xamarin & Xamarin.Forms for Beginners', 2, 549, 15, 20, '20.jpg', 10, 5, 20, 'Build iOS & Android Apps with C#, Visual Studio, and Xamarin.Forms.', 0, 'Flutter', 1);
 COMMIT;
 
 DROP TABLE IF EXISTS `ChiTietKhoaHoc`;
@@ -513,6 +514,8 @@ INSERT INTO `GiaoVien` VALUES (17, 17, 1, 'Trình độ tiến sĩ, Tốt nghi�
 INSERT INTO `GiaoVien` VALUES (18, 18, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
 INSERT INTO `GiaoVien` VALUES (19, 19, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
 INSERT INTO `GiaoVien` VALUES (20, 20, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+INSERT INTO `GiaoVien` VALUES (21, 96, 1, 'Trình độ tiến sĩ, Tốt nghiệp chunin loại xuất sắc, cấp bậc kage');
+
 COMMIT;
 
 DROP TABLE IF EXISTS `HocVien`;
@@ -537,6 +540,8 @@ INSERT INTO `HocVien` VALUES (8, 28, 2);
 INSERT INTO `HocVien` VALUES (9, 29, 2);
 INSERT INTO `HocVien` VALUES (10, 30, 0);
 INSERT INTO `HocVien` VALUES (11, 31, 1);
+INSERT INTO `HocVien` VALUES (12, 98, 0);
+INSERT INTO `HocVien` VALUES (13, 97, 1);
 COMMIT;
 
 DROP TABLE IF EXISTS `BangDanhGia`;
@@ -609,6 +614,16 @@ insert into danhsachdangki values(1, 7, '2022-12-25', 'No');
 insert into danhsachdangki values(2, 4, '2022-12-25', 'No');
 insert into danhsachdangki values(2, 7, '2022-12-25', 'No');
 COMMIT;
+
+DROP TABLE IF EXISTS `wishList`;
+CREATE TABLE `wishList` (
+                            `MaKhoaHoc` INT UNSIGNED NOT NULL,
+                            `Username` VARCHAR(50)  NOT NULL,
+														
+								            PRIMARY KEY (`MakhoaHoc`,`Username`),
+											 CONSTRAINT `fk_wl_kh` FOREIGN KEY (`MaKhoaHoc`) REFERENCES `khoahoc`(`MaKhoaHoc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 ALTER TABLE khoahoc
     ADD FULLTEXT(TenKhoaHoc, MoTaNgan);

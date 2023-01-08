@@ -179,7 +179,6 @@ export default {
                       from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
                       Group by k.NgonNgu,lv.MaLinhVuc, lv.TenLinhVuc`;
         const raw = await db.raw(sql);
-        console.log(raw[0])
         return raw[0];
     },
 
@@ -268,7 +267,6 @@ export default {
         Object.assign(detailList[0], {completedStatus: detailList[0].TrangThai === "Đã hoàn thành"});
         Object.assign(detailList[0], {isNoDiscount: detailList[0].KhuyenMai === 0});
         Object.assign(detailList[0], {finalPrice: detailList[0].Gia * (1 - detailList[0].KhuyenMai / 100)});
-        console.log(detailList[0]);
         return detailList[0];
     },
     async findTop5BestSeller() {

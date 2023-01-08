@@ -1,8 +1,12 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
 import studentService from '../services/student.service.js';
+import wishListService from '../services/wishList.service.js';
+
 import mylearningService from "../services/myleaning.service.js";
 const router = express.Router();
+const WL = await wishListService.getWishList();
+
 
 function assingNewBest(courseList, bsl, newList) {
     let checkBest = false, checkNew = false;
@@ -128,17 +132,10 @@ router.get('/', async function (req, res) {
 });
 
 function isInWishList(req, id) {
-    let wishList = [];
-    const storage = req.session.wishList;
-
-    if (storage.length != 0) {
-        wishList = JSON.parse(storage);
-        const user = req.session.authUser.Username;
-
-        for (let i = 0; i < wishList.length; i++) {
-            if (wishList[i].courseID === id && wishList[i].user === user && typeof wishList[i].courseID != 'undefined') {
-                return true;
-            }
+    const user = req.session.authUser.Username;
+    for (let i = 0; i < WL.length; i++) {
+        if (WL[i].Username === user && WL[i].MaKhoaHoc == id) {
+            return true
         }
     }
 
