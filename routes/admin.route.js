@@ -196,32 +196,32 @@ router.post('/teachers', async function(req, res) {
 
 
 /* Category Management Section */
-router.get('/categories', async function(req, res) {
+router.get('/category', async function(req, res) {
     const categories = await adminService.findAllCategory();
     res.render('vwAdmin/categories', {
         layout: 'adminLayout',
         categories: categories
     });
 });
-router.post('/categories', async function(req, res) {
+router.post('/category', async function(req, res) {
     const result = req.body;
     console.log(result)
     if (result.addCategory === 'add') {
         //console.log(result.Name);
         await adminService.addCategory(result.Name);
         const categories = await adminService.findAllCategory();
-        res.redirect('/admin/categories');
+        res.redirect('/admin/category');
     }
     if (result.btnDelete === 'delete') {
         const id = result.id;
         const amountC = await adminService.countCoursebyCateID(id);
         if (amountC.amount === 0) {
-            console.log(amountC.amount, '1');
+            //console.log(amountC.amount, '1');
             await adminService.delCategory(id);
-            res.redirect('/admin/categories');
+            res.redirect('/admin/category');
         }
         else {
-            console.log(amountC.amount, '2');
+            //console.log(amountC.amount, '2');
             const categories = await adminService.findAllCategory();
             return res.render('vwAdmin/categories', {
                 layout: 'adminLayout',
@@ -235,9 +235,47 @@ router.post('/categories', async function(req, res) {
         const name = result.NameCate;
         await adminService.editCategory(id, name);
         const categories = await adminService.findAllCategory();
-        res.redirect('/admin/categories');
-
+        res.redirect('/admin/category');
     }
+});
+
+router.get('/categorylevel1', async function(req, res) {
+    const categories = await adminService.findAllCategory();
+    const categories1 = await adminService.findAllCategory1();
+    res.render('vwAdmin/categories1', {
+        layout: 'adminLayout',
+        categories1: categories1,
+        categories: categories
+    });
+});
+router.post('/categorylevel1', async function(req, res) {
+    const result = req.body;
+    console.log(result)
+    if (result.addCategory === 'add') {
+        //console.log(result.Name);
+        await adminService.addCategory1(result.MaLinhVuc, result.Name);
+        res.redirect('/admin/categorylevel1');
+    }
+    if (result.btnDelete === 'delete') {
+        const id = result.id;
+        console.log(id);
+        const amountC = await adminService.countCoursebyCateID1(id);
+        console.log(amountC.amount);
+        if (amountC.amount === 0) {
+            await adminService.delCategory1(id);
+            res.redirect('/admin/categorylevel1')
+        } else {
+            const categories = await adminService.findAllCategory();
+            const categories1 = await adminService.findAllCategory1();
+            res.render('vwAdmin/categories1', {
+                layout: 'adminLayout',
+                categories1: categories1,
+                categories: categories,
+                err_message: true,
+            });
+        }
+    }
+
 });
 
 

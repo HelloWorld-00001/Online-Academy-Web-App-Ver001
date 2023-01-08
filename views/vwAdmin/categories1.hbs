@@ -1,0 +1,215 @@
+{{#section 'css'}}
+<style>
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+    }
+    .text-black {
+        color: black;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+    <script>
+        $(document).ready(function(){
+            $('#ModalAddCategory').on('click', '#paramsSubmit', function(e) {
+                console.log($('#txtNameCategory').val());
+            });
+        })
+    </script>
+    {{#if err_message}}
+        <script>
+            $('#ModalAlert').modal('show');
+        </script>
+    {{/if}} 
+    <script>
+        $('#ModalEditCategory').on('show.bs.modal', function(e) {
+            var CateName = $(e.relatedTarget).data('cate-name');
+            var CateID = $(e.relatedTarget).data('cate-id');
+            var CateID1 = $(e.relatedTarget).data('cate-child')
+            $(e.currentTarget).find('input[name="NameCate"]').val(CateName);
+            $(e.currentTarget).find('input[name="CateID"]').val(CateID);
+            $(e.currentTarget).find('input[name="CateID1"]').val(CateID1);
+        })
+    </script>
+{{/section}}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div>
+                                        <h4>Category Level 2 Table</h4>
+                                        <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc Con</code> cua he thong</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-filter"></i>
+                                    </div>
+                                    <div>
+                                        <a name="Name" value="" id="" class="btn btn-outline-primary float-right" role="button" data-toggle="modal" data-target="#ModalAddCategory">  
+                                            <i class="fa fa-plus text-c-blue" aria-hidden="true"></i> <span class="text-c-blue">Add more</span> 
+                                        </a>
+                                    </div>      
+                                </div>
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ngôn Ngữ</th>
+                                                    <th>Linh Vực Chung</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{#each this.categories1}}
+                                                <form method="post" action="" >
+                                                <tr class="">
+                                                    <td>{{NgonNgu}}</td>
+                                                    <td>{{TenLinhVuc}}</td>                                        
+                                                    <td class="d-flex justify-content-end align-content-center">
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
+                                                                <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                {{!-- <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}" data-cate-child="{{NgonNgu}}">
+                                                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
+                                                                </a> --}}
+                                                                <input name="id" type="hidden" value="{{NgonNgu}}">
+                                                                <button name="btnDelete" value="delete" class="view text-c-red dropdown-item" role="button" type="submit">
+                                                                    <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </form>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Khung nhập  -->
+<div class="modal fade" id="ModalAddCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Add Category</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group flex-row">
+                        <label for="txtNameCategory"><h4>New Category</h4></label>
+                        <div class="form-group">
+                            <label for="txtFieldCourse">Field course</label>
+                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
+                                {{#each categories}}
+                                    {{#if isChoose}}
+                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                                    {{else}}
+                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
+                        <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="addCategory" value="add" class="btn btn-primary" id="paramsSubmit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Khung edit  -->
+<div class="modal fade" id="ModalEditCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Edit Category</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group flex-row">
+                        <label for="CateParent"><h4></h4></label>
+                        <div class="form-group">
+                            <label for="txtFieldCourse">Field course</label>
+                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
+                                {{#each categories}}
+                                    {{#if isChoose}}
+                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                                    {{else}}
+                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
+                        <label for="CateChild"><h4></h4></label>
+                        <input type="hidden" name="CateID" id="CateID" autofocus>
+                        <input type="text" class="form-control w-100 h-100" name="CateID1" id="CateID1" disabled>
+                    </div>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="paramsSubmit" name="btnEdit" value="edit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Khung alert  -->
+<div class="modal fade" id="ModalAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><h3>Alert</h3></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <p>This Field have courses</p>
+                </div>
+                <div class="modal-footer text-muted">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

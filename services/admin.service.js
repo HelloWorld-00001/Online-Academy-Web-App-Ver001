@@ -29,6 +29,10 @@ export default {
         const list = await db('khoahoc').count({amount: 'MaKhoaHoc'}).where('LinhVuc', idlv);
         return list[0];
     },
+    async countCoursebyCateID1(idlv) {
+        const list = await db('khoahoc').count({amount: 'MaKhoaHoc'}).where('NgonNgu', idlv);
+        return list[0];
+    },
 
     vwAllVideo() {
         return db('danhsachvideo');
@@ -49,6 +53,13 @@ export default {
     },
     async findAllCategory() {
         return db('linhvuc');
+    },
+    async findAllCategory1() {
+        return db('lvngonngu').select(
+            'lvngonngu.NgonNgu',
+            'linhvuc.TenLinhVuc',
+            'linhvuc.MaLinhVuc'
+        ).innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'lvngonngu.LinhVuc'})
     },
     
     async findAllCourse() {
@@ -115,8 +126,17 @@ export default {
             TenLinhVuc: entity,
         });
     },
+    addCategory1(entityparent, entitychildren){
+        return db('lvngonngu').insert({
+            NgonNgu: entitychildren,
+            LinhVuc: entityparent
+        })
+    },
     delCategory(id) {
         return db('linhvuc').where('MaLinhVuc', id).del();
+    },
+    delCategory1(id) {
+        return db('lvngonngu').where('NgonNgu', id).del();
     },
     async findCatebyID(id) {
         return await db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
