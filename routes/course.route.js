@@ -90,51 +90,6 @@ router.get('/search', function (req, res) {
     res.render('/');
 });
 
-router.get('/wishList', async function (req, res) {
-    let wl = [];
-    const storage = req.session.wisList;
-    if (storage) {
-        wl = JSON.parse(storage);
-    }
-    const myWL = [];
-    for (let i = 0; i < wl.length; i++) {
-        if (wl[i].MaTK == req.session.authUser.MaTaiKhoan)
-            myWL.push(wl[i].course)
-    }
-
-    res.render('courses/wishList', {
-        courses: myWL
-    });
-});
-
-router.get('/addToWishList', async function (req, res) {
-    
-    let wishList = [];
-
-    let storage = req.session.wisList;
-    const MaTK = req.query.MaTK;
-    const MaKH = req.query.MaKH;
-    // Lay wl tu local storeage
-    if (storage) {
-        wishList = JSON.parse(storage);
-    }
-
-    let courses = await courseService.findCourseById(MaKH);
-    const course = courses[0];
-    let item = wishList.find(c =>(c.course.MaKhoaHoc == MaKH && c.MaTK == MaTK));
-    if (item) {
-        console.log('Course was added')
-    }
-    else {
-        wishList.push({course, MaTK});
-    }
-
-    req.session.wisList = JSON.stringify(wishList);
-
-    res.redirect(`/course/detail?id=${req.query.MaKH}`);
-});
-
-
 router.get('/', async function (req, res) { 
     const fields = await courseService.countByField();
 
@@ -171,6 +126,7 @@ router.get('/', async function (req, res) {
         fields,
     });
 });
+
 
 router.get('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
@@ -214,6 +170,7 @@ router.get('/detail', async function (req, res) {
         top5CousresMostView,
         inforStudentsOfTeacher,
         studentReviewList,
+        auth: req.session.auth
     });
 });
 

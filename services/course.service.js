@@ -411,5 +411,8 @@ export default {
     delCoursebyID(idkh) {
         return db('khoahoc').where('MaKhoaHoc', idkh).del();
     },
+    test500err() {
+        return db('nothing').where('MaKhoaHoc', idkh);
+    }
 
 }
