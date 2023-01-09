@@ -240,10 +240,12 @@ export default {
             .select(
                 'khoahoc.*',
                 'taikhoan.Name',
-                'linhvuc.TenLinhVuc'
+                'linhvuc.TenLinhVuc',
+                'chitietkhoahoc.TrangThai',
             )
             .where('NgonNgu', idLanguage)
             .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
+            .innerJoin('chitietkhoahoc', {'khoahoc.MaKhoaHoc': 'chitietkhoahoc.MaKhoaHoc'})
             .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
             .limit(limit)

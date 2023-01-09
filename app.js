@@ -30,7 +30,7 @@ import searchRoute from "./routes/search.route.js";
 import wishListRoute from "./routes/wishList.route.js";
 import myleaningService from "./services/myleaning.service.js";
 import adminService from "./services/admin.service.js";
-
+import asyncErrors from 'express-async-errors'
 
 const app = express();
 app.use(

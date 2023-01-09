@@ -60,7 +60,7 @@ router.get('/language/:id', async function (req, res) {
     let total = 0;
 
     for(let i = 0; i < fields.length; i++) {
-        if( language === fields[i].NgonNgu) {
+        if( +language === fields[i].NgonNgu) {
             total = fields[i].SLKhoaHoc;
             break;
         }
