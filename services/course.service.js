@@ -422,18 +422,35 @@ export default {
         return list;
     },
 
-    async findCourseBySubCate(nameCat) {
-        const list = await db('KhoaHoc')
-        .select('KhoaHoc.*',
-                'ChiTietKhoaHoc.*',
-                'LinhVuc.*')
-        .innerJoin('ChiTietKhoaHoc', {'KhoaHoc.MaKhoaHoc': 'ChiTietKhoaHoc.MaKhoaHoc'})
-        .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
-        .where('NgonNgu', nameCat);
+    async findCourseBySubCate(idCat) {
+        const sql = `SELECT KH.*, CTKH.*, LV.*, count(DSDK.MaHocVien) as SLHocVien
+        FROM khoahoc KH
+                 INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                 LEFT JOIN danhsachdangki DSDK ON DSDK.MaKhoaHoc = CTKH.MaKhoaHoc
+                 INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc   
+        WHERE KH.NgonNgu = ${idCat}
+        GROUP BY KH.MaKhoaHoc`
+        const raw = await db.raw(sql);
 
+        if(raw[0].length === 0)
+            return null;
+        return raw[0];
+    },
+
+    async findCourseByCate(idCat) {
+        const sql = `SELECT KH.*, CTKH.*, LV.*, count(DSDK.MaHocVien) as SLHocVien
+        FROM khoahoc KH
+                 INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                 LEFT JOIN danhsachdangki DSDK ON DSDK.MaKhoaHoc = CTKH.MaKhoaHoc
+                 INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc   
+        WHERE KH.LinhVuc = ${idCat}
+        GROUP BY KH.MaKhoaHoc`
+        const raw = await db.raw(sql);
+
+        if(raw[0].length === 0)
         if(list.length === 0)
             return null;
-        return list;
+        return raw[0];
     },
 
     async isCourseRegister(maKhoaHoc, maHocVien) {

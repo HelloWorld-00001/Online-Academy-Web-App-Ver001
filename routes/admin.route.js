@@ -587,7 +587,7 @@ router.get('/viewCourse', async function (req, res){
 
 router.get('/getCourseByTeacher', async function(req, res) {
     const teacherId = req.query.id;
-    const courses = await teacherService.findCoursesByIdTeacher(teacherId);
+    const courses = await teacherService.findAllCoursesByIdTeacher(teacherId);
 
     const category = await adminService.findAllCategory();
     const teacher = await adminService.findAllTeacher();
@@ -608,6 +608,26 @@ router.get('/getCourseByTeacher', async function(req, res) {
 router.get('/getCourseByLinhVuc', async function(req, res) {
     const linhVuc = req.query.linhvuc;
     const courses = await courseService.findCourseBySubCate(linhVuc);
+
+    const category = await adminService.findAllCategory();
+    const teacher = await adminService.findAllTeacher();
+    
+    for(let i = 0; i < category.length; i++) {
+        const x = await courseService.findLangByCat(category[i].MaLinhVuc);
+        category[i].subCat = x;
+    }
+
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+        courses: courses,
+        category,
+        teacher
+    });
+})
+
+router.get('/getCourseByCate', authAdmin, async function(req, res) {
+    const linhVuc = req.query.cate;
+    const courses = await courseService.findCourseByCate(linhVuc);
 
     const category = await adminService.findAllCategory();
     const teacher = await adminService.findAllTeacher();

@@ -14,7 +14,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="description" content="Flash Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+	<meta name="description"
+		content="Flash Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
 	<meta name="keywords"
 		content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, Flash Able, Flash Able bootstrap admin template">
 	<meta name="author" content="Codedthemes" />
@@ -26,10 +27,10 @@
 	<!-- animation css -->
 	<link rel="stylesheet" href="../public/admin/plugins/animation/css/animate.min.css">
 	<!-- morris css -->
-    <link rel="stylesheet" href="../public/admin/plugins/chart-morris/css/morris.css">
+	<link rel="stylesheet" href="../public/admin/plugins/chart-morris/css/morris.css">
 	<!-- vendor css -->
 	<link rel="stylesheet" href="../public/admin/css/style.css">
-	    {{{_sections.css}}}
+	{{{_sections.css}}}
 </head>
 
 <body class="">
@@ -54,56 +55,78 @@
 			<div class="navbar-content scroll-div">
 				<ul class="nav pcoded-inner-navbar">
 					<li class="nav-item pcoded-menu-caption">
-						<label><h3>Navigation</h3></label>
+						<label>
+							<h3>Navigation</h3>
+						</label>
 					</li>
 					<li class="nav-item">
-						<a href="/admin" class="nav-link f-18"><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+						<a href="/admin" class="nav-link f-18"><span class="pcoded-micon"><i
+									class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 					</li>
 					<li class="nav-item pcoded-menu-caption">
-						<label><h3>Tables</h3></label>
+						<label>
+							<h3>Tables</h3>
+						</label>
 					</li>
 					<!--<li class="nav-item">
 						<a href="form_elements.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Form elements</span></a>
 					</li>-->
 					<li class="nav-item pcoded-hasmenu">
-						<a href="#!" class="nav-link f-18"><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Table</span></a>
+						<a href="#!" class="nav-link f-18"><span class="pcoded-micon"><i
+									class="feather icon-align-justify"></i></span><span
+								class="pcoded-mtext">Table</span></a>
 						<ul class="pcoded-submenu f-16">
 							<li class=""><a href="/admin/allTable" class="">All Table</a></li>
 							<li class=""><a href="/admin/teachers" class="">Teachers Table</a></li>
 							<li class=""><a href="/admin/students" class="">Students Table</a></li>
 							<li class="">
-								<a href="#!" class="nav-link f-18"><span class="pcoded-micon"><i class="feather icon-align-justify"></i></span><span class="pcoded-mtext">Categories</span></a>
+								<a href="#!" class="nav-link f-18"><span class="pcoded-micon"><i
+											class="feather icon-align-justify"></i></span><span
+										class="pcoded-mtext">Categories</span></a>
 								<ul class="pcoded-submenu f-16">
 									<li class=""><a href="/admin/category" class="">Category Level 1</a></li>
 									<li class=""><a href="/admin/categorylevel1" class="">Category Level 2</a></li>
 								</ul>
 							</li>
-							
+
 							<li class=""><a href="/admin/courses" class="">Courses Table</a></li>
 							<li class=""><a href="/admin/videos" class="">Videos Table</a></li>
 						</ul>
 					</li>
 					{{!-- <li class="nav-item pcoded-menu-caption">
-						<label><h3>Charts</h3></label>
+						<label>
+							<h3>Charts</h3>
+						</label>
 					</li>
 					<li class="nav-item">
-						<a href="chart-morris.html" class="nav-link f-18"><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Chart</span></a>
+						<a href="chart-morris.html" class="nav-link f-18"><span class="pcoded-micon"><i
+									class="feather icon-pie-chart"></i></span><span
+								class="pcoded-mtext">Chart</span></a>
 					</li>
 					<li class="nav-item">
-						<a href="map-google.html" class="nav-link f-18"><span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a>
+						<a href="map-google.html" class="nav-link f-18"><span class="pcoded-micon"><i
+									class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a>
 					</li>
 					<li class="nav-item pcoded-menu-caption">
-						<label><h3>Pages</h3></label>
-					</li> --}}
-					{{!-- <li class="nav-item pcoded-hasmenu">
-						<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+						<label>
+							<h3>Pages</h3>
+						</label>
+					</li>
+					<li class="nav-item pcoded-hasmenu">
+						<a href="#!" class="nav-link"><span class="pcoded-micon"><i
+									class="feather icon-lock"></i></span><span
+								class="pcoded-mtext">Authentication</span></a>
 						<ul class="pcoded-submenu">
 							<li class=""><a href="auth-signup.html" class="" target="_blank">Sign up</a></li>
 							<li class=""><a href="auth-signin.html" class="" target="_blank">Sign in</a></li>
 						</ul>
-					</li> --}}
-					{{!-- <li class="nav-item"><a href="/admin" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
-					<li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled menu</span></a></li> --}}
+					</li>
+					<li class="nav-item"><a href="/admin" class="nav-link"><span class="pcoded-micon"><i
+									class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample
+								page</span></a></li>
+					<li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i
+									class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled
+								menu</span></a></li> --}}
 				</ul>
 			</div>
 		</div>
@@ -126,21 +149,11 @@
 			<a href="#!" class="mob-toggler"></a>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<div class="main-search open">
-						<div class="input-group">
-							<input type="text" id="m-search" class="form-control" placeholder="Search . . .">
-							<a href="#!" class="input-group-append search-close">
-								<i class="feather icon-x input-group-text"></i>
-							</a>
-							<span class="input-group-append search-btn btn btn-primary">
-								<i class="feather icon-search input-group-text"></i>
-							</span>
-						</div>
-					</div>
+					
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				
+
 				<li>
 					<div class="dropdown drp-user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -149,23 +162,30 @@
 						<div class="dropdown-menu dropdown-menu-right profile-notification">
 							<div class="pro-head">
 								{{#if auth}}
-									{{#if authUser.Avatar}}
-										<img id="img" src="/public/img/admins/{{authUser.Avatar}}" class="rounded-circle" alt="User-Profile-Image">  
-									{{else}}
-										<img id="img" src="/public/img/emptyAva.png" class="rounded-circle" alt="User-Profile-Image">  
-									{{/if}}
-									<span>{{authUser.Name}}</span>
+								{{#if authUser.Avatar}}
+								<img id="img" src="/public/img/admins/{{authUser.Avatar}}" class="rounded-circle"
+									alt="User-Profile-Image">
+								{{else}}
+								<img id="img" src="/public/img/emptyAva.png" class="rounded-circle"
+									alt="User-Profile-Image">
+								{{/if}}
+								<span>{{authUser.Name}}</span>
 								{{/if}}
 							</div>
 							<ul class="pro-body">
-								<li><a href="/admin/profile" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-								<li><a href="/admin/editProfile" class="dropdown-item"><i class="feather icon-settings"></i>Edit Profile</a></li>
-								<li><a href="/admin/changePassword" class="dropdown-item"><i class="feather icon-lock"></i>Change Password</a></li>
-								<li><a href="/" class="dropdown-item"><i class="feather icon-user"></i>View As Guest</a></li>
+								<li><a href="/admin/profile" class="dropdown-item"><i class="feather icon-user"></i>
+										Profile</a></li>
+								<li><a href="/admin/editProfile" class="dropdown-item"><i
+											class="feather icon-settings"></i>Edit Profile</a></li>
+								<li><a href="/admin/changePassword" class="dropdown-item"><i
+											class="feather icon-lock"></i>Change Password</a></li>
+								<li><a href="/" class="dropdown-item"><i class="feather icon-user"></i>View As Guest</a>
+								</li>
 								<li>
 									<form id="frmLogout" action="/account/logout" method="post">
-                                    	<a href="javascript: $('#frmLogout').submit();" class="dropdown-item"><i class="feather icon-log-out"></i>Log Out</a>
-                                	</form>
+										<a href="javascript: $('#frmLogout').submit();" class="dropdown-item"><i
+												class="feather icon-log-out"></i>Log Out</a>
+									</form>
 								</li>
 							</ul>
 						</div>
@@ -176,18 +196,18 @@
 	</header>
 	<!-- [ Header ] end -->
 
-    <!-- Body end -->
-    {{{body}}}
+	<!-- Body end -->
+	{{{body}}}
 
 	<!-- Required Js -->
 	<script src="../public/admin/js/vendor-all.min.js"></script>
 	<script src="../public/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../public/admin/js/pcoded.min.js"></script>
 	<!-- chart-morris Js -->
-    <script src="../public/admin/plugins/chart-morris/js/raphael.min.js"></script>
-    <script src="../public/admin/plugins/chart-morris/js/morris.min.js"></script>
-    <script src="../public/admin/js/pages/chart-morris-custom.js"></script>
-	
+	<script src="../public/admin/plugins/chart-morris/js/raphael.min.js"></script>
+	<script src="../public/admin/plugins/chart-morris/js/morris.min.js"></script>
+	<script src="../public/admin/js/pages/chart-morris-custom.js"></script>
+
 	{{{_sections.js}}}
 </body>
 

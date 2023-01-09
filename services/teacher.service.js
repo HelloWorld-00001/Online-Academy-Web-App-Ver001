@@ -97,6 +97,23 @@ export default {
                 TrangThai: obj.isDone,
             })
     },
+
+    async findAllCoursesByIdTeacher(id) {        
+        const sql = `SELECT KH.*, CTKH.*, LV.*, count(DSDK.MaHocVien) as SLHocVien
+        FROM khoahoc KH
+                    INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
+                    LEFT JOIN danhsachdangki DSDK ON DSDK.MaKhoaHoc = CTKH.MaKhoaHoc
+                    INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc   
+        WHERE KH.GiaoVien = ${id}
+        GROUP BY KH.MaKhoaHoc`
+        const raw = await db.raw(sql);
+
+        if(raw[0].length === 0)
+            return null;
+        return raw[0];
+        // return list;
+    }, 
+    
     async deleteDanhSachVideoById(courseId, obj) {
         return db('danhsachvideo')
             .delete()
