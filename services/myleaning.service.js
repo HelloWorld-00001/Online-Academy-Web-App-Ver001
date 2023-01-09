@@ -127,13 +127,4 @@ export default {
             .where('MaHocVien', idStudent)
             .update(studentReview);
     },
-
-    async findLV(id) {
-        const list = await db('khoahoc')
-            .select('NgonNgu')
-            .where('LinhVuc', id)
-            .distinct()
-        return list;
-    },
-
 }

@@ -29,6 +29,7 @@ import teacherService from "./services/teacher.service.js";
 import searchRoute from "./routes/search.route.js";
 import wishListRoute from "./routes/wishList.route.js";
 import myleaningService from "./services/myleaning.service.js";
+import adminService from "./services/admin.service.js";
 
 
 const app = express();
@@ -66,11 +67,14 @@ app.use(async function (req, res, next) {
   if (typeof req.session.wishList === "undefined") {
     req.session.wishList = [];
   }
-  req.session.lv1 = await myleaningService.findLV(1);
-  req.session.lv2 = await myleaningService.findLV(2);
 
-  res.locals.lv1 = req.session.lv1;
-  res.locals.lv2 = req.session.lv2;
+  req.session.category = await adminService.findAllCategory();
+    for(let i = 0; i < req.session.category.length; i++) {
+        const x = await courseService.findLangByCat(req.session.category[i].MaLinhVuc);
+        req.session.category[i].subCat = x;
+    }
+
+  res.locals.category = req.session.category;
   res.locals.regis = req.session.regis;
   res.locals.temp = req.session.temp;
   res.locals.auth = req.session.auth;
@@ -154,6 +158,7 @@ app.get("/", async function (req, res) {
   const listTop3CourseLastWeek = await courseService.findTop3LastWeek();
   const listTop10LastedCourse = await courseService.findTop10LastedCourse();
   const fields = await courseService.findTopFiedls();
+  console.log(fields);
   res.render("home", {
     listTop10CourseView1: listTop10CourseView[0],
     listTop10CourseView2: listTop10CourseView[1],

@@ -71,7 +71,6 @@ export default {
                          INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
                          INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                          INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
-                     HAVING Day between 0 AND 7
                      ORDER BY Day ASC, SLHocVien DESC
                          LIMIT 3`;
         const ret = await db.raw(sql);
@@ -147,10 +146,11 @@ export default {
     },
 
     async findTopFiedls() {
-        const sql =  `select lv.MaLinhVuc, lv.TenLinhVuc, count(k.MaKhoaHoc) as SLKhoaHoc
-                      from khoahoc k right join linhvuc lv on k.LinhVuc = lv.MaLinhVuc
-                      Group by lv.MaLinhVuc, lv.TenLinhVuc
-                          LIMIT 1`;
+        const sql =  `select lv.NgonNgu, count(k.MaKhoaHoc) as SLKhoaHoc, sum(k.LuotXem) AS SLLuotXem
+                      from khoahoc k right join lvngonngu lv on k.NgonNgu = lv.NgonNgu
+                      Group by lv.NgonNgu
+                      ORDER BY SLLuotXem DESC
+                          LIMIT 5`;
         const raw = await db.raw(sql);
         return raw[0] ;
     },
