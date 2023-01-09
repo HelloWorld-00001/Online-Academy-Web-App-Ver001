@@ -37,7 +37,7 @@ router.get('/',async function (req, res) {
 router.get('/del', async function (req, res) {
     const id = req.query.MaKH;
     const user = req.session.authUser.Username;
-    const x = wishListService.del({MaKhoaHoc: id, Username: user});
+    const x = await wishListService.del( id, user);
 
     
     res.redirect('/wishList');
@@ -47,7 +47,7 @@ router.get('/add', async function (req, res) {
     
     const courseID = req.query.MaKH;
     const user = req.session.authUser.Username || 'guest';
-    const x = wishListService.add({MaKhoaHoc: courseID, Username: user});
+    const x = await wishListService.add({MaKhoaHoc: courseID, Username: user});
 
 
     res.redirect(`/course/detail?id=${courseID}`);

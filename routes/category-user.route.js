@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/:id', async function (req, res) {
     const linhVuc = req.params.id || 1;
     const fields = await courseService.countByField();
+    const nameField = await courseService.getNameField(linhVuc);
 
     const limit = 6;
     const page = req.query.page || 1;
@@ -39,6 +40,7 @@ router.get('/:id', async function (req, res) {
 
     res.render('vwCategories/index' , {
         isField: true,
+        nameField,
         courses: courses,
         empty: courses.length === 0,
         pageNumbers,
@@ -50,9 +52,8 @@ router.get('/:id', async function (req, res) {
 
 router.get('/language/:type', async function (req, res) {
     const language = req.params.type || 'HTML';
-    console.log(language)
     const fields = await courseService.countByLanguage();
-
+    const nameLanguage = await courseService.getNameLanguage(language)
     const limit = 6;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
@@ -85,6 +86,7 @@ router.get('/language/:type', async function (req, res) {
 
     res.render('vwCategories/index' , {
         courses: courses,
+        nameLanguage,
         empty: courses.length === 0,
         pageNumbers,
         nextPageNumber,

@@ -32,10 +32,11 @@
     <script>
         $('#ModalEditCategory').on('show.bs.modal', function(e) {
             var CateName = $(e.relatedTarget).data('cate-name');
-            var CateID = $(e.relatedTarget).data('cate-id')
+            var CateID = $(e.relatedTarget).data('cate-id');
+            var CateID1 = $(e.relatedTarget).data('cate-child')
             $(e.currentTarget).find('input[name="NameCate"]').val(CateName);
             $(e.currentTarget).find('input[name="CateID"]').val(CateID);
-            
+            $(e.currentTarget).find('input[name="CateID1"]').val(CateID1);
         })
     </script>
 {{/section}}
@@ -51,8 +52,8 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
-                                        <h4>Categories Table</h4>
-                                        <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc</code> cua he thong</span>
+                                        <h4>Category Level 2 Table</h4>
+                                        <span class="d-block m-t-5">Danh sach cac <code>Linh Vuc Con</code> cua he thong</span>
                                     </div>
                                     <div>
                                         <i class="fa fa-filter"></i>
@@ -68,27 +69,27 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
+                                                    <th>Ngôn Ngữ</th>
+                                                    <th>Linh Vực Chung</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{#each this.categories}}
+                                                {{#each this.categories1}}
                                                 <form method="post" action="" >
                                                 <tr class="">
-                                                    <td>{{MaLinhVuc}}</td>
-                                                    <td>{{TenLinhVuc}}</td>
+                                                    <td>{{NgonNgu}}</td>
+                                                    <td>{{TenLinhVuc}}</td>                                        
                                                     <td class="d-flex justify-content-end align-content-center">
                                                         <div class="dropdown">
                                                             <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
                                                                 <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}">
+                                                                {{!-- <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}" data-cate-child="{{NgonNgu}}">
                                                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
-                                                                </a>
-                                                                <input name="id" type="hidden" value="{{MaLinhVuc}}">
+                                                                </a> --}}
+                                                                <input name="id" type="hidden" value="{{NgonNgu}}">
                                                                 <button name="btnDelete" value="delete" class="view text-c-red dropdown-item" role="button" type="submit">
                                                                     <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
                                                                 </button>
@@ -126,6 +127,18 @@
                 <div class="modal-body">
                     <div class="form-group flex-row">
                         <label for="txtNameCategory"><h4>New Category</h4></label>
+                        <div class="form-group">
+                            <label for="txtFieldCourse">Field course</label>
+                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
+                                {{#each categories}}
+                                    {{#if isChoose}}
+                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                                    {{else}}
+                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
                         <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
                     </div>
                 </div>
@@ -151,9 +164,22 @@
             <form method="post">
                 <div class="modal-body">
                     <div class="form-group flex-row">
-                        <label for="NameCate"><h4></h4></label>
-                        <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" autofocus>
+                        <label for="CateParent"><h4></h4></label>
+                        <div class="form-group">
+                            <label for="txtFieldCourse">Field course</label>
+                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
+                                {{#each categories}}
+                                    {{#if isChoose}}
+                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                                    {{else}}
+                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
+                        <label for="CateChild"><h4></h4></label>
                         <input type="hidden" name="CateID" id="CateID" autofocus>
+                        <input type="text" class="form-control w-100 h-100" name="CateID1" id="CateID1" disabled>
                     </div>
                 </div>
                 <div class="modal-footer text-muted">
@@ -180,7 +206,7 @@
                     <p>This Field have courses</p>
                 </div>
                 <div class="modal-footer text-muted">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
