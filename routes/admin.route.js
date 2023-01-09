@@ -258,12 +258,12 @@ router.post('/categorylevel1', async function(req, res) {
         res.redirect('/admin/categorylevel1');
     }
     if (result.btnDelete === 'delete') {
-        const id = result.id;
-        console.log(id);
-        const amountC = await adminService.countCoursebyCateID1(id);
+        const id1 = result.id1;
+        console.log(id1);
+        const amountC = await adminService.countCoursebyCateID1(id1);
         console.log(amountC.amount);
         if (amountC.amount === 0) {
-            await adminService.delCategory1(id);
+            await adminService.delCategory1(id1);
             res.redirect('/admin/categorylevel1')
         } else {
             const categories = await adminService.findAllCategory();
@@ -276,7 +276,12 @@ router.post('/categorylevel1', async function(req, res) {
             });
         }
     }
-
+    if (result.btnEdit === 'edit') {
+        const id1 = result.CateID1;
+        const name1 = result.NameCate1;
+        await adminService.editCategory1(id1, name1);
+        res.redirect('/admin/categorylevel1');
+    }
 });
 
 

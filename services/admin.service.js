@@ -34,7 +34,7 @@ export default {
         return list[0];
     },
     async countChildrent(idlv) {
-        const list = await db('lvngonngu').count({amount: 'NgonNgu'}).where('LinhVuc', idlv);
+        const list = await db('lvngonngu').count({amount: 'MaNgonNgu'}).where('LinhVuc', idlv);
         return list[0];
     },
     vwAllVideo() {
@@ -59,6 +59,7 @@ export default {
     },
     async findAllCategory1() {
         return db('lvngonngu').select(
+            'lvngonngu.MaNgonNgu',
             'lvngonngu.NgonNgu',
             'linhvuc.TenLinhVuc',
             'linhvuc.MaLinhVuc'
@@ -139,7 +140,7 @@ export default {
         return db('linhvuc').where('MaLinhVuc', id).del();
     },
     delCategory1(id) {
-        return db('lvngonngu').where('NgonNgu', id).del();
+        return db('lvngonngu').where('MaNgonNgu', id).del();
     },
     async findCatebyID(id) {
         return await db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
@@ -176,6 +177,9 @@ export default {
     },
     editCategory(id, name) {
         return db('linhvuc').where({MaLinhVuc: id}).update({TenLinhVuc: name})
+    },
+    editCategory1(id, name) {
+        return db('lvngonngu').where({MaNgonNgu: id}).update({NgonNgu: name})
     }
 
 }
