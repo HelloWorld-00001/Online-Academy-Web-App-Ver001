@@ -132,6 +132,8 @@ router.get('/', async function (req, res) {
 });
 
 function isInWishList(req, id) {
+    if (req.session.auth === false)
+        return false
     const user = req.session.authUser.Username;
     for (let i = 0; i < WL.length; i++) {
         if (WL[i].Username === user && WL[i].MaKhoaHoc == id) {
