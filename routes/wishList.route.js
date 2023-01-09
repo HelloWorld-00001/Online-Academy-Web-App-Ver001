@@ -49,7 +49,6 @@ router.get('/add', async function (req, res) {
     const user = req.session.authUser.Username || 'guest';
     const x = await wishListService.add({MaKhoaHoc: courseID, Username: user});
 
-
     res.redirect(`/course/detail?id=${courseID}`);
 });
 

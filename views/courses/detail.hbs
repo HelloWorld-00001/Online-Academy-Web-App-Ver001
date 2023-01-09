@@ -561,10 +561,17 @@
                                         <div id="collapse{{STT}}" class="collapse show">
                                             <div class="card-body h-auto">
                                                 <p>{{TenVideo}}</p>
-                                                <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
-                                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                                    <span>video</span>
-                                                </a>
+                                                {{#if isFile}}
+                                                    <a href="" class="video-btn" data-toggle="modal" data-src="/public/videos/{{File}}" data-target="#myModal">
+                                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                        <span>video</span>
+                                                    </a>
+                                                {{else}}
+                                                    <a href="" class="video-btn" data-toggle="modal" data-src="{{Link}}" data-target="#myModal">
+                                                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                                        <span>video</span>
+                                                    </a>
+                                                {{/if}}
                                             </div>
                                         </div>
                                     {{else}}
