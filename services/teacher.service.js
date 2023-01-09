@@ -171,9 +171,8 @@ export default {
     },
 
     async findNgonNgu() {
-        const list = await db('khoahoc')
-            .select('NgonNgu')
-            .distinct()
+        const list = await db('lvngonngu')
+            .select('MaNgonNgu', 'NgonNgu')
         return list;
     },
 
@@ -195,16 +194,15 @@ export default {
     },
 
     async findNgonNguById(courseId) {
-        const list = await db('khoahoc')
-            .select('NgonNgu')
-            .distinct()
+        const list = await db('lvngonngu')
+            .select('MaNgonNgu', 'NgonNgu')
 
         const choose = await db('khoahoc')
             .select('NgonNgu')
             .where('MaKhoaHoc', courseId)
 
         for (let i = 0; i < list.length; i++) {
-            if(list[i].NgonNgu === choose[0].NgonNgu) {
+            if(list[i].MaNgonNgu === choose[0].NgonNgu) {
                 Object.assign(list[i], {isChoose: true});
             } else {
                 Object.assign(list[i], {isChoose: false});
