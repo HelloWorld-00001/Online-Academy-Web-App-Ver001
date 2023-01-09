@@ -10,6 +10,8 @@
         border-radius: 15px;
         background: rgb(255, 255, 255);
     }
+
+    ,
     .text-black {
         color: black;
     }
@@ -31,10 +33,13 @@
     display: block;
     }
 </style>
+
 {{/section}}
 
 <section class="pcoded-main-container">
+    
     <div class="pcoded-wrapper">
+
         <div class="pcoded-content">
             <div class="pcoded-inner-content">
                 <div class="main-body">
@@ -79,74 +84,90 @@
 
                                         <span class="d-block m-t-5">Danh sach cac <code>Khoa hoc</code> cua he thong</span>
                                     </div>
-                                    
-                                </div>
-                                <div class="card-body table-border-style p-2">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Video Quantity</th>
-                                                    <th>Student Quantity</th>
-                                                    <th>Status</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{#each this.courses}}
-                                                <form method="post" action="">
-                                                    <tr >
-                                                        <td>{{MaKhoaHoc}}</td>
-                                                        <input type="hidden" value={{MaKhoaHoc}} name="MaKhoaHoc">
-                                                        <td>{{TenKhoaHoc}}</td>
-                                                        <td>{{TenLinhVuc}}</td>
-                                                        <td>{{SoLuongVideo}}</td>
-                                                        <td>{{SLHocVien}}</td>
-                                                        {{#isActive TinhTrang}}  
-                                                        <td class="text-c-green">Enable</td>    
-                                                        {{else}}
-                                                        <td class="text-c-red">Disable</td>
-                                                        {{/isActive}}                        
-                                                        <td>
-                                                            <div class="dropdown">
-                                                                <button class="btn btn-light btn-circle pl-2 border-0" type="button" data-toggle="dropdown">
-                                                                    <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a href="/admin/viewCourse?id={{MaKhoaHoc}}" class="view dropdown-item text-c-info" title="View" data-toggle="tooltip">
-                                                                        <i class="fa fa-eye fa-sm" aria-hidden="true"></i> <span class="f-16 m-2">View</span>
-                                                                    </a>
-                                                                    {{#isActive TinhTrang}} 
-                                                                        <button type="submit" name="buttonDisable" class="view dropdown-item" value="true">
-                                                                            <i class="fas fa-ban" aria-hidden="true"></i><span class="f-16 m-2">Disable</span>
-                                                                        </button>
-                                                                    {{else}}
-                                                                       
-                                                                        <button type="submit" name="buttonEnable" class="view text-c-green dropdown-item" value="true">
-                                                                            <i class="fas fa-check" aria-hidden="true"></i><span class="f-16 m-2">Enable</span>
-                                                                        </button> 
-                                                                    {{/isActive}}
-                                                                    
-                                                                    <a name="id" id="" class="view text-c-red dropdown-item" href="/admin/delCourse?id={{MaKhoaHoc}}" role="button">
-                                                                        <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
-                                                                    </a>
-
-                                                                </div>
-                                                            </div>
-                                                        </td>
+                                    <div class="card-body table-border-style p-2">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Category</th>
+                                                        <th>Video Quantity</th>
+                                                        <th>Student Quantity</th>
+                                                        <th>Status</th>
+                                                        <th></th>
                                                     </tr>
-                                                </form>
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each this.courses}}
+                                                    <form method="post" action="">
+                                                        <tr>
+                                                            <td>{{MaKhoaHoc}}</td>
+                                                            <input type="hidden" value={{MaKhoaHoc}} name="MaKhoaHoc">
+                                                            <td>{{TenKhoaHoc}}</td>
+                                                            <td>{{TenLinhVuc}}</td>
+                                                            <td>{{SoLuongVideo}}</td>
+                                                            <td>{{SLHocVien}}</td>
+                                                            {{#isActive TinhTrang}}
+                                                            <td class="text-c-green">Enable</td>
+                                                            {{else}}
+                                                            <td class="text-c-red">Disable</td>
+                                                            {{/isActive}}
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button
+                                                                        class="btn btn-light btn-circle pl-2 border-0"
+                                                                        type="button" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-v text-black ml-1"
+                                                                            aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a href="/admin/viewCourse?id={{MaKhoaHoc}}"
+                                                                            class="view dropdown-item text-c-info"
+                                                                            title="View" data-toggle="tooltip">
+                                                                            <i class="fa fa-eye fa-sm"
+                                                                                aria-hidden="true"></i> <span
+                                                                                class="f-16 m-2">View</span>
+                                                                        </a>
+                                                                        {{#isActive TinhTrang}}
+                                                                        <button type="submit" name="buttonDisable"
+                                                                            class="view dropdown-item" value="true">
+                                                                            <i class="fas fa-ban"
+                                                                                aria-hidden="true"></i><span
+                                                                                class="f-16 m-2">Disable</span>
+                                                                        </button>
+                                                                        {{else}}
+
+                                                                        <button type="submit" name="buttonEnable"
+                                                                            class="view text-c-green dropdown-item"
+                                                                            value="true">
+                                                                            <i class="fas fa-check"
+                                                                                aria-hidden="true"></i><span
+                                                                                class="f-16 m-2">Enable</span>
+                                                                        </button>
+                                                                        {{/isActive}}
+
+                                                                        <a name="id" id=""
+                                                                            class="view text-c-red dropdown-item"
+                                                                            href="/admin/delCourse?id={{MaKhoaHoc}}"
+                                                                            role="button">
+                                                                            <i class="fas fa-trash"></i><span
+                                                                                class="f-16 m-2">Delete</span>
+                                                                        </a>
+
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                    {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

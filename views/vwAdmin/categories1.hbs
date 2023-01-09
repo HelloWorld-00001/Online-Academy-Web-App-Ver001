@@ -33,10 +33,12 @@
         $('#ModalEditCategory').on('show.bs.modal', function(e) {
             var CateName = $(e.relatedTarget).data('cate-name');
             var CateID = $(e.relatedTarget).data('cate-id');
-            var CateID1 = $(e.relatedTarget).data('cate-child')
+            var CateID1 = $(e.relatedTarget).data('child-id');
+            var CateName1 = $(e.relatedTarget).data('child-name')
             $(e.currentTarget).find('input[name="NameCate"]').val(CateName);
             $(e.currentTarget).find('input[name="CateID"]').val(CateID);
             $(e.currentTarget).find('input[name="CateID1"]').val(CateID1);
+            $(e.currentTarget).find('input[name="NameCate1"]').val(CateName1);
         })
     </script>
 {{/section}}
@@ -86,10 +88,12 @@
                                                                 <i class="fa fa-ellipsis-v text-black ml-1" aria-hidden="true"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                {{!-- <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}" data-cate-child="{{NgonNgu}}">
+                                                                <a href="#" class="view dropdown-item text-c-blue" title="View" data-toggle="modal" data-target="#ModalEditCategory" data-cate-name="{{TenLinhVuc}}" data-cate-id="{{MaLinhVuc}}" data-child-name="{{NgonNgu}}" data-child-id="{{MaNgonNgu}}">
                                                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i> <span class="f-16 m-2">Edit</span>
-                                                                </a> --}}
-                                                                <input name="id" type="hidden" value="{{NgonNgu}}">
+                                                                </a>
+                                                                <input name="id1" type="hidden" value="{{MaNgonNgu}}">
+                                                                <input name="name1" type="hidden" value="{{NgonNgu}}">
+                                                                <input name="id" type="hidden" value="{{MaLinhVuc}}">
                                                                 <button name="btnDelete" value="delete" class="view text-c-red dropdown-item" role="button" type="submit">
                                                                     <i class="fas fa-trash"></i><span class="f-16 m-2">Delete</span>
                                                                 </button>
@@ -139,7 +143,7 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
+                        <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" autofocus>
                     </div>
                 </div>
                 <div class="modal-footer text-muted">
@@ -165,21 +169,10 @@
                 <div class="modal-body">
                     <div class="form-group flex-row">
                         <label for="CateParent"><h4></h4></label>
-                        <div class="form-group">
-                            <label for="txtFieldCourse">Field course</label>
-                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
-                                {{#each categories}}
-                                    {{#if isChoose}}
-                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
-                                    {{else}}
-                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
-                                    {{/if}}
-                                {{/each}}
-                            </select>
-                        </div>
+                        <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" disabled>
                         <label for="CateChild"><h4></h4></label>
-                        <input type="hidden" name="CateID" id="CateID" autofocus>
-                        <input type="text" class="form-control w-100 h-100" name="CateID1" id="CateID1" disabled>
+                        <input type="hidden" name="CateID1" id="CateID1" autofocus>
+                        <input type="text" class="form-control w-100 h-100" name="NameCate1" id="NameCate1" autofocus>
                     </div>
                 </div>
                 <div class="modal-footer text-muted">

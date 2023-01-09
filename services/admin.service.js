@@ -33,7 +33,10 @@ export default {
         const list = await db('khoahoc').count({amount: 'MaKhoaHoc'}).where('NgonNgu', idlv);
         return list[0];
     },
-
+    async countChildrent(idlv) {
+        const list = await db('lvngonngu').count({amount: 'MaNgonNgu'}).where('LinhVuc', idlv);
+        return list[0];
+    },
     vwAllVideo() {
         return db('danhsachvideo');
     },
@@ -56,6 +59,7 @@ export default {
     },
     async findAllCategory1() {
         return db('lvngonngu').select(
+            'lvngonngu.MaNgonNgu',
             'lvngonngu.NgonNgu',
             'linhvuc.TenLinhVuc',
             'linhvuc.MaLinhVuc'
@@ -70,7 +74,7 @@ export default {
         const raw = await db.raw(sql);
         return raw[0];
     },
-    async findTopThreeTeacher() {
+    async findTopFiveTeacher() {
         const list = await db('giaovien')
         .select(
             'giaovien.MaGiaoVien',
@@ -79,10 +83,10 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
-    async findTopThreeStudent() {
+    async findTopFiveStudent() {
         const list = await db('hocvien')
         .select(
             'hocvien.MaHocVien',
@@ -91,11 +95,11 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
     
-    async findTopThreeCourse() {
+    async findTopFiveCourse() {
         const list = await db('KhoaHoc')
         .select(
             'MaKhoaHoc',
@@ -104,10 +108,10 @@ export default {
             'taikhoan.Username',
         )
         .innerJoin('taikhoan', {'KhoaHoc.GiaoVien': 'taikhoan.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
-    async findTopThreeVideo() {
+    async findTopFiveVideo() {
         const list = await db('danhsachvideo')
         .select(
             'TenVideo',
@@ -116,7 +120,7 @@ export default {
             'NgayCapNhat',
         )
         .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachvideo.MaKhoaHoc'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
 
@@ -136,7 +140,7 @@ export default {
         return db('linhvuc').where('MaLinhVuc', id).del();
     },
     delCategory1(id) {
-        return db('lvngonngu').where('NgonNgu', id).del();
+        return db('lvngonngu').where('MaNgonNgu', id).del();
     },
     async findCatebyID(id) {
         return await db('linhvuc').select('TenLinhVuc').where('MaLinhVuc', id);
@@ -173,6 +177,9 @@ export default {
     },
     editCategory(id, name) {
         return db('linhvuc').where({MaLinhVuc: id}).update({TenLinhVuc: name})
+    },
+    editCategory1(id, name) {
+        return db('lvngonngu').where({MaNgonNgu: id}).update({NgonNgu: name})
     }
 
 }

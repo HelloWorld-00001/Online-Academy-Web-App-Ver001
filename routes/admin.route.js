@@ -44,10 +44,10 @@ router.get('/', authAdmin, async function (req, res) {
 
 router.get('/allTable', authAdmin, async function(req, res) {
 
-    const studentList = await adminService.findTopThreeStudent();
-    const teacherList = await adminService.findTopThreeTeacher();
-    const courseList = await adminService.findTopThreeCourse();
-    const videoList = await adminService.findTopThreeVideo();
+    const studentList = await adminService.findTopFiveStudent();
+    const teacherList = await adminService.findTopFiveTeacher();
+    const courseList = await adminService.findTopFiveCourse();
+    const videoList = await adminService.findTopFiveVideo();
 
     res.render('vwAdmin/allTable', {
         layout: 'adminLayout',
@@ -213,7 +213,10 @@ router.post('/category', async function(req, res) {
     if (result.btnDelete === 'delete') {
         const id = result.id;
         const amountC = await adminService.countCoursebyCateID(id);
-        if (amountC.amount === 0) {
+        const amountCh = await adminService.countChildrent(id);
+        console.log(amountC.amount);
+        console.log(amountCh.amount);
+        if (amountC.amount === 0 && amountCh.amount === 0) {
             //console.log(amountC.amount, '1');
             await adminService.delCategory(id);
             res.redirect('/admin/category');
@@ -251,16 +254,16 @@ router.post('/categorylevel1', async function(req, res) {
     console.log(result)
     if (result.addCategory === 'add') {
         //console.log(result.Name);
-        await adminService.addCategory1(result.MaLinhVuc, result.Name);
+        await adminService.addCategory1(result.MaLinhVuc, result.NameCate);
         res.redirect('/admin/categorylevel1');
     }
     if (result.btnDelete === 'delete') {
-        const id = result.id;
-        console.log(id);
-        const amountC = await adminService.countCoursebyCateID1(id);
+        const id1 = result.id1;
+        console.log(id1);
+        const amountC = await adminService.countCoursebyCateID1(id1);
         console.log(amountC.amount);
         if (amountC.amount === 0) {
-            await adminService.delCategory1(id);
+            await adminService.delCategory1(id1);
             res.redirect('/admin/categorylevel1')
         } else {
             const categories = await adminService.findAllCategory();
@@ -273,7 +276,12 @@ router.post('/categorylevel1', async function(req, res) {
             });
         }
     }
-
+    if (result.btnEdit === 'edit') {
+        const id1 = result.CateID1;
+        const name1 = result.NameCate1;
+        await adminService.editCategory1(id1, name1);
+        res.redirect('/admin/categorylevel1');
+    }
 });
 
 
@@ -484,9 +492,22 @@ router.get('/courses', authAdmin, async function(req, res) {
         teacher
     });
 });
+
+// router.get('category', authAdmin, async function(req, res) {
+//     const courses = await adminService.findAllCourse();
+//     const x = courseService.findLangByCat()
+//     course/category
+//     res.render('vwAdmin/course/courses', {
+//         layout: 'adminLayout',
+//         courses: courses
+//     });
+// });
+
 router.post('/courses', async function(req, res) {
     const result = req.body;
     const id = result.MaKhoaHoc;
+    console.log(result.buttonEnable);
+
     if (result.buttonDisable === "true"){
         await adminService.disableCourse(id);
     }

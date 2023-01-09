@@ -657,17 +657,17 @@
     <div class="row align-items-center px-3 mylearning-header">
         <div class="col-header-1 col-lg-2">
             <a href="/" class="text-decoration-none">
-                <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
+                <h1 class="m-0" style="color: #FFFFFF"><span class="text-primary">IGE</span>COURSES</h1>
             </a>
         </div>
 
-        <div class="col-header-1 col-lg-6 course-name d-flex align-items-center">
+        <div class="ml-5 col-header-1 col-lg-6 course-name d-flex align-items-center">
             <a href="/">
                 {{this.course.TenKhoaHoc}}
             </a>
         </div>
         {{#if checkCanRating}}
-            <div class="col-header-1 col-lg-4 text-right">
+            <div class="col-header-1 col-lg-3 text-right">
                 {{#if this.checkStudentReview}}
                     <a class="trigger text-primary" href="#">
                         <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
@@ -933,10 +933,6 @@
                                         <div class="card-body h-auto">
                                             <p>{{TenVideo}}</p>
                                             <p>{{convertDate NgayCapNhat}}</p>
-                                            <a href="{{Link}}" class="video-btn" target="myFrame">
-                                                <i class="fa fa-play-circle" aria-hidden="true"></i>
-                                                <span>video</span>
-                                            </a>
                                             {{#if isFile}}
                                                 <a href="/public/videos/{{File}}" class="video-btn" target="myFrame">
                                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
