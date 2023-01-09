@@ -131,8 +131,19 @@
                 <div class="modal-body">
                     <div class="form-group flex-row">
                         <label for="txtNameCategory"><h4>New Category</h4></label>
+                        <div class="form-group">
+                            <label for="txtFieldCourse">Field course</label>
+                            <select name="MaLinhVuc" id="txtFieldCourse" class="form-control">
+                                {{#each categories}}
+                                    {{#if isChoose}}
+                                        <option value="{{MaLinhVuc}}" selected>{{TenLinhVuc}}</option>
+                                    {{else}}
+                                        <option value="{{MaLinhVuc}}">{{TenLinhVuc}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
                         <input name="NameCate" type="text" class="form-control w-100 h-100" id="NameCate" autofocus>
-                        <input name="Name" type="text" class="form-control w-100 h-100" id="txtNameCategory" autofocus>
                     </div>
                 </div>
                 <div class="modal-footer text-muted">

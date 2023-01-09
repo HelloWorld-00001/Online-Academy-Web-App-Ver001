@@ -254,7 +254,7 @@ router.post('/categorylevel1', async function(req, res) {
     console.log(result)
     if (result.addCategory === 'add') {
         //console.log(result.Name);
-        await adminService.addCategory1(result.MaLinhVuc, result.Name);
+        await adminService.addCategory1(result.MaLinhVuc, result.NameCate);
         res.redirect('/admin/categorylevel1');
     }
     if (result.btnDelete === 'delete') {
