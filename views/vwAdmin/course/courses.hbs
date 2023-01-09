@@ -56,10 +56,10 @@
                                                 <ul class="dropdown-menu dropdown-submenu">
                                                     {{#each this.category}}
                                                         <li>
-                                                            <a class="dropdown-item" href="/admin/courses">{{TenLinhVuc}}</a>
+                                                            <a class="dropdown-item" href="/admin/getCourseByCate?cate={{MaLinhVuc}}">{{TenLinhVuc}}</a>
                                                             <ul class="dropdown-menu dropdown-submenu">
                                                             {{#each subCat}}
-                                                            <li><a class="dropdown-item" href="/admin/getCourseByLinhVuc?linhvuc={{NgonNgu}}">{{NgonNgu}}</a></li>
+                                                            <li><a class="dropdown-item" href="/admin/getCourseByLinhVuc?linhvuc={{MaNgonNgu}}">{{NgonNgu}}</a></li>
                                                             {{/each}}
                                                             </ul>
                                                         </li>
