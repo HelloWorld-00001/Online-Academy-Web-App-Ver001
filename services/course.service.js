@@ -468,4 +468,11 @@ export default {
         return db('khoahoc').where('MaKhoaHoc', idkh).del();
     },
 
+    async findLangByCat(catId) {
+        const list = await db('LVNgonNgu').where('LinhVuc', catId);
+        if(list.length === 0)
+            return null;
+        return list;
+    }
+
 }

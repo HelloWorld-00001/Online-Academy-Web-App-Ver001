@@ -8,6 +8,32 @@
                         <div class="col-xl-12 ml-3">
                             <div class="card">
                                 <div class="card-header">
+                                     <div class="col-lg-3 d-none d-lg-block">
+            <a class="d-flex align-items-center justify-content-between bg-secondary w-100 text-decoration-none" data-toggle="collapse" href="#navbar-vertical" style="height: 67px; padding: 0 30px;">
+                <h5 class="text-primary m-0"><i class="fa fa-book-open mr-2"></i>Subjects</h5>
+                <i class="fa fa-angle-down text-primary"></i>
+            </a>
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 9;">
+                <div class="navbar-nav w-100">
+                    <div class="nav-item nav-item-dropdown">
+                        <a href="/categories/1" class="nav-link nav-link-dropdown-toggle">Web development <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <div class="nav-dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            {{#each lv1}}
+                            <a href="/categories/language/{{this.NgonNgu}}" class="nav-link dropdown-item">{{this.NgonNgu}}</a>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="nav-item nav-item-dropdown">
+                        <a href="/categories/2" class="nav-link nav-link-dropdown-toggle">Mobile development <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <div class="nav-dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                            {{#each lv2}}
+                                <a href="/categories/language/{{this.NgonNgu}}" class="nav-link dropdown-item">{{this.NgonNgu}}</a>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
                                     <h5>Course Table</h5>
                                     <a name="" id="" class="btn btn-outline-primary float-right"
                                             href="/admin/courses/add" role="button"><i class="fa fa-plus" aria-hidden="true"></i> Add more</a>

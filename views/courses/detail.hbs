@@ -359,8 +359,8 @@
                                         <h4> {{this.course.KhuyenMai}}% off</h4>
                                     {{/if}}
                                 </div>
-                                {{#if auth}}
-                                    {{#if isInWL}}
+                                {{#if this.auth}}
+                                    {{#if this.isInWL}}
                                         <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/wishList/del?MaKH={{this.course.MaKhoaHoc}}" role="button">Remove from wish list</a>
                                     {{else}}
                                         <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/wishList/add?MaKH={{this.course.MaKhoaHoc}}" role="button">Add to wish list</a>

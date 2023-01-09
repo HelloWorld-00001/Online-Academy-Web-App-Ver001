@@ -73,7 +73,7 @@ export default {
         const raw = await db.raw(sql);
         return raw[0];
     },
-    async findTopThreeTeacher() {
+    async findTopFiveTeacher() {
         const list = await db('giaovien')
         .select(
             'giaovien.MaGiaoVien',
@@ -82,10 +82,10 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'giaovien.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
-    async findTopThreeStudent() {
+    async findTopFiveStudent() {
         const list = await db('hocvien')
         .select(
             'hocvien.MaHocVien',
@@ -94,11 +94,11 @@ export default {
             'taikhoan.Email',
         )
         .innerJoin('taikhoan', {'taikhoan.MaTaiKhoan': 'hocvien.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
     
-    async findTopThreeCourse() {
+    async findTopFiveCourse() {
         const list = await db('KhoaHoc')
         .select(
             'MaKhoaHoc',
@@ -107,10 +107,10 @@ export default {
             'taikhoan.Username',
         )
         .innerJoin('taikhoan', {'KhoaHoc.GiaoVien': 'taikhoan.MaTaiKhoan'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
-    async findTopThreeVideo() {
+    async findTopFiveVideo() {
         const list = await db('danhsachvideo')
         .select(
             'TenVideo',
@@ -119,7 +119,7 @@ export default {
             'NgayCapNhat',
         )
         .innerJoin('khoahoc', {'khoahoc.MaKhoaHoc': 'danhsachvideo.MaKhoaHoc'})
-        //.limit(3);
+        .limit(5);
         return list;
     },
 

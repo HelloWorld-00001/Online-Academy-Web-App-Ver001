@@ -44,10 +44,10 @@ router.get('/', authAdmin, async function (req, res) {
 
 router.get('/allTable', authAdmin, async function(req, res) {
 
-    const studentList = await adminService.findTopThreeStudent();
-    const teacherList = await adminService.findTopThreeTeacher();
-    const courseList = await adminService.findTopThreeCourse();
-    const videoList = await adminService.findTopThreeVideo();
+    const studentList = await adminService.findTopFiveStudent();
+    const teacherList = await adminService.findTopFiveTeacher();
+    const courseList = await adminService.findTopFiveCourse();
+    const videoList = await adminService.findTopFiveVideo();
 
     res.render('vwAdmin/allTable', {
         layout: 'adminLayout',
@@ -487,9 +487,22 @@ router.get('/courses', authAdmin, async function(req, res) {
         teacher
     });
 });
+
+// router.get('category', authAdmin, async function(req, res) {
+//     const courses = await adminService.findAllCourse();
+//     const x = courseService.findLangByCat()
+//     course/category
+//     res.render('vwAdmin/course/courses', {
+//         layout: 'adminLayout',
+//         courses: courses
+//     });
+// });
+
 router.post('/courses', async function(req, res) {
     const result = req.body;
     const id = result.MaKhoaHoc;
+    console.log(result.buttonEnable);
+
     if (result.buttonDisable === "true"){
         await adminService.disableCourse(id);
     }
