@@ -345,7 +345,10 @@
 
             <div class="card mt-3 shadow">
                 <div class="card-body h-auto">
+                     {{#if this.auth}}
+
                     <div>
+
                         {{#isStudent authUser.LoaiTaiKhoan}}
                             {{#if isCoursesRegister}}
                                 <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
@@ -359,15 +362,11 @@
                                         <h4> {{this.course.KhuyenMai}}% off</h4>
                                     {{/if}}
                                 </div>
-                                {{#if this.auth}}
                                     {{#if this.isInWL}}
                                         <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/wishList/del?MaKH={{this.course.MaKhoaHoc}}" role="button">Remove from wish list</a>
                                     {{else}}
                                         <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/wishList/add?MaKH={{this.course.MaKhoaHoc}}" role="button">Add to wish list</a>
                                     {{/if}}
-                                {{else}}
-                                    <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/account/login" role="button">Add to wish list</a>
-                                {{/if}}
                                 <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
 
                             {{/if}}
@@ -387,11 +386,54 @@
                                 {{else}}
                                 {{/if}}
                             {{else}}
-                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/course/wishList" role="button">Add to wish list</a>
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/account/login" role="button">Add to wish list</a>
                                 <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
                             {{/isTeacherAndAdmin}}
                         {{/isStudent}}
                     </div>
+                    {{else}}
+                    <div>
+
+                        {{#isStudent authUser.LoaiTaiKhoan}}
+                            {{#if isCoursesRegister}}
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                            {{else}}
+                                <div class="mt-1">
+                                    {{#if isNoDiscount}}
+                                        <span class="align-self-center">${{format_number this.course.Gia}}</span>
+                                    {{else}}
+                                        <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
+                                        <h4>$ {{format_number this.course.finalPrice}}</h4>
+                                        <h4> {{this.course.KhuyenMai}}% off</h4>
+                                    {{/if}}
+                                </div>
+                                    
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/account/login" role="button">Add to wish list</a>
+                                <button class="btn btn-primary w-100 pt-3 pb-3"  data-toggle="modal" data-target="#buyModal">Buy now</button>
+
+                            {{/if}}
+                        {{else}}
+                            <div class="mt-1">
+                                {{#if isNoDiscount}}
+                                    <span class="align-self-center">${{format_number this.course.Gia}}</span>
+                                {{else}}
+                                    <h2  style="text-decoration: line-through; font-weight: 10;"> ${{format_number this.course.Gia}}</h2>
+                                    <h4>$ {{format_number this.course.finalPrice}}</h4>
+                                    <h4> {{this.course.KhuyenMai}}% off</h4>
+                                {{/if}}
+                            </div>
+                            {{#isTeacherAndAdmin authUser.LoaiTaiKhoan}}
+                                {{#if checkCourseOfTeacher}}
+                                    <a class="btn btn-primary w-100 pt-3 pb-3" href="/mylearning/course?id={{this.course.MaKhoaHoc}}" role="button">Go to course</a>
+                                {{else}}
+                                {{/if}}
+                            {{else}}
+                                <a class="btn btn-dark w-100 pt-3 pb-3 mb-3" href="/account/login" role="button">Add to wish list</a>
+                                <a class="btn btn-primary w-100 pt-3 pb-3" href="/account/login" role="button">Buy now</a>
+                            {{/isTeacherAndAdmin}}
+                        {{/isStudent}}
+                    </div>
+                    {{/if}}
 
                     <div class="mt-5 course-includes">
                         <p class="font-weight-bold">This course includes:</p>

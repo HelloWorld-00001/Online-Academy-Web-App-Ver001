@@ -424,6 +424,12 @@ export default {
             return null;
         return list;
     },
+    async findCat(catName) {
+        const list = await db('LinhVuc').where('TenLinhVuc', catName);
+        if(list.length === 0)
+            return null;
+        return list;
+    },
 
     async findCourseBySubCate(idCat) {
         const sql = `SELECT KH.*, CTKH.*, LV.*, count(DSDK.MaHocVien) as SLHocVien

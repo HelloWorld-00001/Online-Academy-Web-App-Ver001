@@ -69,6 +69,9 @@
         <p class="card-text">Please try again</p>
         {{else}}
         <div class="text-center mb-5 row">
+
+        <h2>That is what i found<br></h2>
+
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Sort</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,9 +91,23 @@
                 </ul>
             </div>
             </nav>
-            <h1>That is what i found</h1>
             
         </div>
+        {{#if isCat}}
+        <div class="row ">
+            {{#each this.cate}}
+                    <div class="col-lg-4 col-md-6 mb-3">
+                        <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                            <img class="img-fluid" src="/public/img/cat-{{MaLinhVuc}}.jpg" alt="">
+                            <a class="cat-overlay text-white text-decoration-none" href="/categories/{{MaLinhVuc}}">
+                                <h4 class="text-white font-weight-medium">{{TenLinhVuc}}</h4>
+                                <span>{{SLKhoaHoc}} Courses</span>
+                            </a>
+                        </div>
+                    </div>
+            {{/each}}
+        </div>
+        {{/if}}
         <div class="row ">
             {{#each this.courses}}
             <div class="col-lg-4 mb-3">
@@ -120,7 +137,19 @@
                                                     <small class="m-0">
                                                         <i class="fa fa-users text-primary mr-2"></i>
                                                         {{LuotXem}} Students
+                                            
                                                     </small>
+                                                    {{#if TinhTrang}}
+                                                        <small>
+                                                            <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                                                            <span class="font-weight-bold" style="color: green;">{{TrangThai}}</span>
+                                                        </small>
+                                                    {{else}}
+                                                        <small>
+                                                            <i class="fa fa-bell text-primary mr-1" aria-hidden="true"></i>
+                                                            <span class="font-weight-bold" style="color: red;">{{TrangThai}}</span>
+                                                        </small>
+                                                    {{/if}}
                                                     <small class="m-0">
                                                         <i class="far fa-clock text-primary mr-2"></i>
                                                         {{SoLuongVideo}}

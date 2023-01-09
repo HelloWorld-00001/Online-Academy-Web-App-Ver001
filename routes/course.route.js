@@ -39,7 +39,7 @@ router.post('/search', async function (req, res) {
 
     const courseTemp = assingNewBest(courseList[0], bsl, newCo);
     const courseFinal = courseService.assignDiscount(courseTemp);
-
+    console.log(courseList);
     const limit = 6;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
@@ -191,6 +191,7 @@ router.get('/detail', async function (req, res) {
         }
     }
     const isInWL = isInWishList(req, makhoahoc);
+    console.log(req.session.auth);
     res.render('courses/detail', {
         isCoursesRegister,
         course,

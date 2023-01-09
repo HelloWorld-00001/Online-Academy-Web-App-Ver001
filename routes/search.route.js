@@ -56,7 +56,8 @@ router.post('/', async function (req, res) {
     const courseList = await courseService.courseFullTextSearch(findName, LIMIT, offsetNow);
     const courseTemp = assingNewBest(courseList[0]);
     const courseFinal = courseService.assignDiscount(courseTemp);
-
+    const cate= await courseService.findCat(findName);
+    console.log(courseFinal);
     if (courseFinal.length < LIMIT) {
         paging.nextPage.isNextPage = false;
     }
@@ -69,6 +70,8 @@ router.post('/', async function (req, res) {
         isNull: courseFinal.length === 0,
         nextPageNumber: paging.nextPage,
         previousPageNumber: paging.previousPage,
+        cate: cate,
+        isCat: cate === null,
         findName
     });
 
@@ -80,6 +83,7 @@ router.get('/', async function (req, res) {
     const offsetNow = req.query.offset || 0;
     const paging = pagination(offsetNow);
     const courseList = await courseService.courseFullTextSearch(findName, LIMIT, offsetNow);
+  
     const courseTemp = assingNewBest(courseList[0]);
     const courseFinal = courseService.assignDiscount(courseTemp);
 
