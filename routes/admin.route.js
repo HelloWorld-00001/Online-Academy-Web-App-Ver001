@@ -186,9 +186,23 @@ router.get('/viewTeacher', authAdmin, async function (req, res){
     });
 
 });
+
 router.post('/teachers', async function(req, res) {
-    res.render('vwAdmin/manage/teachers', {
+    const result = req.body;
+    const id = result.MaHocVien;
+
+    if(result.lockAccount === "lock") {
+        await adminService.lockAccount(req.body.MaTaiKhoan);
+    }
+
+    if(result.unlockAccount === "unlock") {
+        await adminService.unlockAccount(req.body.MaTaiKhoan);
+    }
+
+    const teacherList = await adminService.findAllTeacher();
+    res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
+        teacher: teacherList
     });
 });
 
@@ -290,7 +304,7 @@ router.post('/categorylevel1', async function(req, res) {
 router.get('/students', authAdmin, async function(req, res) {
     const studentList = await studentService.findAll();
     
-    res.render('vwAdmin/student/students', {
+    res.render('vwAdmin/students', {
         layout: 'adminLayout',
         teacher: studentList
     });
@@ -328,8 +342,16 @@ router.post('/students', async function(req, res) {
         await studentService.del(id);
     }
 
+    if(result.lockAccount === "lock") {
+        await adminService.lockAccount(req.body.MaTaiKhoan);
+    }
+
+    if(result.unlockAccount === "unlock") {
+        await adminService.unlockAccount(req.body.MaTaiKhoan);
+    }
+
     const studentList = await studentService.findAll();
-    res.render('vwAdmin/student/students', {
+    res.render('vwAdmin/students', {
         layout: 'adminLayout',
         teacher: studentList
     });
