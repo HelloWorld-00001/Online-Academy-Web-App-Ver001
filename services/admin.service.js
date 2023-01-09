@@ -33,7 +33,10 @@ export default {
         const list = await db('khoahoc').count({amount: 'MaKhoaHoc'}).where('NgonNgu', idlv);
         return list[0];
     },
-
+    async countChildrent(idlv) {
+        const list = await db('lvngonngu').count({amount: 'NgonNgu'}).where('LinhVuc', idlv);
+        return list[0];
+    },
     vwAllVideo() {
         return db('danhsachvideo');
     },
