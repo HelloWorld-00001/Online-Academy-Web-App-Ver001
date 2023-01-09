@@ -100,6 +100,21 @@
         {{#if err_message}}
             $('#myModal').modal('show');
         {{/if}}
+
+        function invalidSDT(textbox) {
+            var number = /^[0-9]+$/;
+            if (textbox.value.length === 0) {
+                textbox.setCustomValidity('Empty! Please input telephone number');
+            } else if (textbox.value.length !== 10) {
+                textbox.setCustomValidity('Telephone number have 10 digits');
+            } else if(!textbox.value.match(number)){
+                 textbox.setCustomValidity('Number Telephone only contain digits');
+            } else{
+                textbox.setCustomValidity('');
+            }
+            
+            return true;
+        }
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js"></script>
@@ -194,17 +209,11 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="txtPhone">Phone</label>
-                                    <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.info.SDT}}" maxlength="11">
+                                    <input name="SDT" type="text" class="form-control" id="txtPhone" value="{{this.info.SDT}}"
+                                    oninvalid="invalidSDT(this)"
+                                    oninput="invalidSDT(this)">
                                 </div>
                             </div>
-                            {{#isTeacher this.info.LoaiTaiKhoan}}
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="txtWebsite">Website URL</label>
-                                    <input name="Website" type="url" class="form-control" id="txtWebsite" placeholder="Website url">
-                                </div>
-                            </div>
-                            {{/isTeacher}}
                             
                             {{#isTeacher this.info.LoaiTaiKhoan}}
                             <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">

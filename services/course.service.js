@@ -400,6 +400,26 @@ export default {
         return rel;
     },
 
+    async findLangByCat(catId) {
+        const list = await db('LVNgonNgu').where('LinhVuc', catId);
+        if(list.length === 0)
+            return null;
+        return list;
+    },
+
+    async findCourseBySubCate(nameCat) {
+        const list = await db('KhoaHoc')
+        .select('KhoaHoc.*',
+                'ChiTietKhoaHoc.*',
+                'LinhVuc.*')
+        .innerJoin('ChiTietKhoaHoc', {'KhoaHoc.MaKhoaHoc': 'ChiTietKhoaHoc.MaKhoaHoc'})
+        .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+        .where('NgonNgu', nameCat);
+
+        if(list.length === 0)
+            return null;
+        return list;
+    },
 
     async isCourseRegister(maKhoaHoc, maHocVien) {
         const list = await db('DanhSachDangKi')

@@ -88,7 +88,6 @@ router.post('/addTeacher', async function (req, res){
 });
 
 router.post('/delTeacher', async function (req, res){
-    console.log(req.body);
     res.render('vwAdmin/teachers', {
         layout: 'adminLayout',
     });
@@ -127,7 +126,6 @@ router.post('/editTeacher', async function (req, res){
 
     const upload = multer({ storage: storage });
     upload.array('Avatar', 5)(req, res, async function (err) {
-        console.log(req.body);
         if (err) {
             console.error(err);
         } else {
@@ -426,10 +424,19 @@ router.post('/addStudent', async function (req, res){
 /* Course Management Section */
 router.get('/courses', authAdmin, async function(req, res) {
     const courses = await adminService.findAllCourse();
-    console.log(courses);
+    const category = await adminService.findAllCategory();
+    const teacher = await adminService.findAllTeacher();
+    
+    for(let i = 0; i < category.length; i++) {
+        const x = await courseService.findLangByCat(category[i].MaLinhVuc);
+        category[i].subCat = x;
+    }
+
     res.render('vwAdmin/course/courses', {
         layout: 'adminLayout',
-        courses: courses
+        courses: courses,
+        category,
+        teacher
     });
 });
 router.post('/courses', async function(req, res) {
@@ -448,6 +455,7 @@ router.post('/courses', async function(req, res) {
         courses: courses
     });
 })
+
 router.post('/delCourse', async function (req, res){
     console.log(req.body);
     //await teacherService.del(req.body.MaGiaoVien);
@@ -511,6 +519,46 @@ router.get('/viewCourse', async function (req, res){
         studentReviewList: studentReviewList,
     });
 });
+
+router.get('/getCourseByTeacher', async function(req, res) {
+    const teacherId = req.query.id;
+    const courses = await teacherService.findCoursesByIdTeacher(teacherId);
+
+    const category = await adminService.findAllCategory();
+    const teacher = await adminService.findAllTeacher();
+    
+    for(let i = 0; i < category.length; i++) {
+        const x = await courseService.findLangByCat(category[i].MaLinhVuc);
+        category[i].subCat = x;
+    }
+
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+        courses: courses,
+        category,
+        teacher
+    });
+});
+
+router.get('/getCourseByLinhVuc', async function(req, res) {
+    const linhVuc = req.query.linhvuc;
+    const courses = await courseService.findCourseBySubCate(linhVuc);
+
+    const category = await adminService.findAllCategory();
+    const teacher = await adminService.findAllTeacher();
+    
+    for(let i = 0; i < category.length; i++) {
+        const x = await courseService.findLangByCat(category[i].MaLinhVuc);
+        category[i].subCat = x;
+    }
+
+    res.render('vwAdmin/course/courses', {
+        layout: 'adminLayout',
+        courses: courses,
+        category,
+        teacher
+    });
+})
 
 // video
 router.get('/videos', async function(req, res) {
@@ -596,7 +644,6 @@ router.post('/editProfile', function (req, res){
 
     const upload = multer({ storage: storage });
     upload.array('Avatar', 5)(req, res, async function (err) {
-        console.log(req.body);
         if (err) {
             console.error(err);
         } else {
