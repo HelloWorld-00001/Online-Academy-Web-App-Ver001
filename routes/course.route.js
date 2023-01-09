@@ -191,7 +191,7 @@ router.get('/detail', async function (req, res) {
         }
     }
     const isInWL = isInWishList(req, makhoahoc);
-    console.log(req.session.auth);
+    console.log(isInWL);
     res.render('courses/detail', {
         isCoursesRegister,
         course,
