@@ -31,32 +31,6 @@ export default {
         return list;
     },
 
-    async findAllCoursesByIdTeacher(id) {
-        // const list = await db('khoahoc')
-        //     .select(
-        //         'khoahoc.*',
-        //         'chitietkhoahoc.*',
-        //         'linhvuc.*',
-        //     ).where('khoahoc.GiaoVien', id)
-        //     .innerJoin('chitietkhoahoc', {'chitietkhoahoc.MaKhoaHoc': 'khoahoc.MaKhoaHoc'})
-        //     .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
-        
-        const sql = `SELECT KH.*, CTKH.*, LV.*, count(DSDK.MaHocVien) as SLHocVien
-        FROM khoahoc KH
-                    INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
-                    LEFT JOIN danhsachdangki DSDK ON DSDK.MaKhoaHoc = CTKH.MaKhoaHoc
-                    INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc   
-        WHERE KH.GiaoVien = ${id}
-        GROUP BY KH.MaKhoaHoc`
-        const raw = await db.raw(sql);
-
-        if(raw[0].length === 0)
-            return null;
-        return raw[0];
-        // return list;
-    },
-
-
     async findTeacherIdByAccountId(AccountId) {
         const list = await db('giaovien')
             .select('giaovien.MaGiaoVien').where('giaovien.MaTaiKhoan', AccountId)
