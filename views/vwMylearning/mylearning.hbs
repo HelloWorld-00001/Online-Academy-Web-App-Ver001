@@ -16,7 +16,6 @@
 
         .course-name {
             color: #fff;
-            border-left: 1px solid #3e4143;
         }
 
         .accordion .fa {
@@ -538,7 +537,7 @@
         });
 
         $( "#navlink-reviews" ).click(function() {
-            var delay = 1000;
+            var delay = 300;
             $(".progress-bar").each(function(i){
                 $(this).delay( delay*i ).animate( { width: $(this).attr('aria-valuenow') + '%' }, delay );
 
@@ -648,9 +647,6 @@
             }
         }
 
-        $(function() {
-            $('#navlink-reviews').tab('show');
-        });
     </script>
 {{/section}}
 <div class="container-fluid d-lg-block">
@@ -752,8 +748,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="overview" role="tabpanel">
-                    <div class="mt-3 container">
+                <div class="tab-pane row" id="overview" role="tabpanel">
+                    <div class="mt-3 col-6 container">
                         <div class="card-body h-auto">
                             <p class="text-primary card-title font-weight-bolder">
                                 Short Course Description
