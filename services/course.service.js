@@ -9,7 +9,7 @@ export default {
                               INNER JOIN taikhoan TK ON GV.MaTaiKhoan = TK.MaTaiKhoan
                               INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                      ORDER BY KH.LuotXem DESC
-                     LIMIT 10`;
+                         LIMIT 10`;
         const ret = await db.raw(sql);
         const courses = ret[0];
         for(let i = 0; i < courses.length; i++) {
@@ -87,7 +87,7 @@ export default {
                          INNER JOIN linhvuc LV ON LV.MaLinhVuc = KH.LinhVuc
                          INNER JOIN chitietkhoahoc CTKH ON CTKH.MaKhoaHoc = KH.MaKhoaHoc
                      ORDER BY Day ASC
-                    LIMIT 10`;
+                         LIMIT 10`;
         const ret = await db.raw(sql);
         const courses = ret[0];
         for(let i = 0; i < courses.length; i++) {
@@ -137,7 +137,7 @@ export default {
                      WHERE LV.MaLinhVuc = ${field} and KH.MaKhoaHoc != ${idCourse}
                      GROUP BY TK.Name, LV.TenLinhVuc,CTKH.TrangThai
                      ORDER BY SLKhoaHoc DESC
-                     LIMIT 5`;
+                         LIMIT 5`;
         const raw = await db.raw(sql);
 
         const course = this.assignDiscount(raw[0]);
@@ -165,11 +165,11 @@ export default {
         return nameField[0].TenLinhVuc;
     },
 
-    async getNameLanguage(nameLanguage) {
+    async getNameLanguage(idLanguage) {
         const nameField = await db('lvngonngu')
-                    .select('linhvuc.TenLinhVuc', 'lvngonngu.NgonNgu')
-                    .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'lvngonngu.LinhVuc'})
-                    .where('lvngonngu.NgonNgu', nameLanguage);
+            .select('linhvuc.TenLinhVuc', 'lvngonngu.NgonNgu')
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'lvngonngu.LinhVuc'})
+            .where('lvngonngu.MaNgonNgu', idLanguage);
         console.log(nameField[0])
         return nameField[0];
     },
@@ -235,14 +235,14 @@ export default {
         return course;
     },
 
-    async findPageByLanguage(language, limit, offset) {
+    async findPageByLanguage(idLanguage, limit, offset) {
         const courseField = await db('khoahoc')
             .select(
                 'khoahoc.*',
                 'taikhoan.Name',
                 'linhvuc.TenLinhVuc'
             )
-            .where('NgonNgu', language)
+            .where('NgonNgu', idLanguage)
             .innerJoin('giaovien', {'khoahoc.GiaoVien': 'giaovien.MaGiaoVien'})
             .innerJoin('taikhoan', {'giaovien.MaTaiKhoan': 'taikhoan.MaTaiKhoan'})
             .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'Khoahoc.LinhVuc'})
@@ -388,6 +388,7 @@ export default {
         const rel = await db.raw(sql);
         return rel;
     },
+
     async SearchOrderByPrice(name, limit, offset) {
         const sql = `SELECT * from
             (SELECT MaKhoaHoc
@@ -415,21 +416,14 @@ export default {
         return rel;
     },
 
-    async findLangByCat(catId) {
-        const list = await db('LVNgonNgu').where('LinhVuc', catId);
-        if(list.length === 0)
-            return null;
-        return list;
-    },
-
     async findCourseBySubCate(nameCat) {
         const list = await db('KhoaHoc')
-        .select('KhoaHoc.*',
+            .select('KhoaHoc.*',
                 'ChiTietKhoaHoc.*',
                 'LinhVuc.*')
-        .innerJoin('ChiTietKhoaHoc', {'KhoaHoc.MaKhoaHoc': 'ChiTietKhoaHoc.MaKhoaHoc'})
-        .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
-        .where('NgonNgu', nameCat);
+            .innerJoin('ChiTietKhoaHoc', {'KhoaHoc.MaKhoaHoc': 'ChiTietKhoaHoc.MaKhoaHoc'})
+            .innerJoin('linhvuc', {'linhvuc.MaLinhVuc': 'khoahoc.LinhVuc'})
+            .where('NgonNgu', nameCat);
 
         if(list.length === 0)
             return null;
@@ -445,25 +439,40 @@ export default {
         return list[0];
     },
 
+    async getLuotXem(idCourse) {
+        const LuotXem = await db('khoahoc').where("MaKhoaHoc", idCourse);
+        return LuotXem[0].LuotXem;
+    },
+
     addBangDanhSachDangKi(newDanhsachdangki) {
         return db('danhsachdangki').insert(newDanhsachdangki);
     },
+
     updateSLKhoaHoc(idStudent, amountCourse) {
         return db('hocvien').where('MaHocVien', idStudent).update({SLKhoaHoc: amountCourse});
     },
+
+    updateLuotXem(idCourse, view) {
+        return db('khoahoc').where('MaKhoaHoc', idCourse).update({LuotXem: view});
+    },
+
     // Process To Delete Course
     delAllVidCoursebyID(idkh) {
         return db('danhsachvideo').where('MaKhoaHoc', idkh).del();
     },
+
     delRatingCoursebyID(idkh) {
         return db('bangdanhgia').where('MaKhoaHoc', idkh).del();
     },
+
     delRegCoursebyID(idkh) {
         return db('danhsachdangki').where('MaKhoaHoc', idkh).del();
     },
+
     delDetailCoursebyID(idkh) {
         return db('chitietkhoahoc').where('MaKhoaHoc', idkh).del();
     },
+
     delCoursebyID(idkh) {
         return db('khoahoc').where('MaKhoaHoc', idkh).del();
     },
@@ -473,6 +482,5 @@ export default {
         if(list.length === 0)
             return null;
         return list;
-    }
-
+    },
 }

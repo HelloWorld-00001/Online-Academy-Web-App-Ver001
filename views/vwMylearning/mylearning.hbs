@@ -655,19 +655,19 @@
 {{/section}}
 <div class="container-fluid d-lg-block">
     <div class="row align-items-center px-3 mylearning-header">
-        <div class="col-header-1 col-lg-2">
+        <div class="col-header-1 col-md-3">
             <a href="/" class="text-decoration-none">
                 <h1 class="m-0" style="color: #FFFFFF"><span class="text-primary">IGE</span>COURSES</h1>
             </a>
         </div>
 
-        <div class="ml-5 col-header-1 col-lg-6 course-name d-flex align-items-center">
+        <div class="col-header-1 col-md-6 course-name d-flex align-items-center">
             <a href="/">
                 {{this.course.TenKhoaHoc}}
             </a>
         </div>
         {{#if checkCanRating}}
-            <div class="col-header-1 col-lg-3 text-right">
+            <div class="col-header-1 col-md-3 text-right">
                 {{#if this.checkStudentReview}}
                     <a class="trigger text-primary" href="#">
                         <i class="far fa-star text-primary mr-1" aria-hidden="true"></i>
@@ -755,14 +755,14 @@
                 <div class="tab-pane" id="overview" role="tabpanel">
                     <div class="mt-3 container">
                         <div class="card-body h-auto">
-                            <p class="card-title font-weight-bolder">
+                            <p class="text-primary card-title font-weight-bolder">
                                 Short Course Description
                             </p>
                             <p class="card-text">
                                 {{this.course.MoTaNgan}}
                             </p>
 
-                            <p class="card-title font-weight-bolder">
+                            <p class="text-primary card-title font-weight-bolder">
                                 Full Course Description
                             </p>
 
@@ -818,7 +818,7 @@
                 <div class="tab-pane" id="reviews" role="tabpanel">
                     <div class="mt-3 container">
                         <div class="card-body h-auto">
-                            <h3 class="mb-5">Student feedback</h3>
+                            <h3 class="mb-5 text-primary">Student feedback</h3>
                             <div class="row flex align-items-center">
                                 <div class="col-lg-2 col-md-5 text-center">
                                     <div class="text-primary font-weight-bold" style="font-size: 80px">{{this.course.RateTB}}</div>

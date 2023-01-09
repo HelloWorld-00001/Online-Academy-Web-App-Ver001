@@ -132,12 +132,14 @@ router.get('/', async function (req, res) {
 });
 
 function isInWishList(req, id) {
-    if (req.session.auth === false)
-        return false
+    if(req.session.auth === false)
+        return false;
     const user = req.session.authUser.Username;
-    for (let i = 0; i < WL.length; i++) {
-        if (WL[i].Username === user && WL[i].MaKhoaHoc == id) {
-            return true
+    if(user !== "null") {
+        for (let i = 0; i < WL.length; i++) {
+            if (WL[i].Username === user && WL[i].MaKhoaHoc == id) {
+                return true
+            }
         }
     }
 
@@ -148,6 +150,8 @@ router.get('/detail', async function (req, res) {
     const makhoahoc = req.query.id || 0;
     // makhoahoc = +makhoahoc
     const course = await courseService.findDetailCourseByID(makhoahoc);
+    const luotXem = await courseService.getLuotXem(makhoahoc);
+    const updateLuotXem = await courseService.updateLuotXem(makhoahoc, luotXem + 1);
 
     if (course === null) {
         return res.redirect('/');
@@ -173,7 +177,7 @@ router.get('/detail', async function (req, res) {
     }
 
     var isCoursesRegister = false;
-    var checkCourseOfTeacher;
+    var checkCourseOfTeacher = false;
     if(req.session.auth === true){
         if(req.session.authUser.LoaiTaiKhoan === 'Học Viên') {
             const idStudent = await studentService.findByIDAccount(req.session.authUser.MaTaiKhoan);
@@ -187,7 +191,6 @@ router.get('/detail', async function (req, res) {
         }
     }
     const isInWL = isInWishList(req, makhoahoc);
-    console.log(checkCourseOfTeacher)
     res.render('courses/detail', {
         isCoursesRegister,
         course,
