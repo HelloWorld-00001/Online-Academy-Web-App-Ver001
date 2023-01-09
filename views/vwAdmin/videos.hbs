@@ -36,8 +36,6 @@
             const videolist = videos
             const quotesEl = document.querySelector('.quotes');
             const loaderEl = document.querySelector('.loader');
-            console.log(this.videos);
-            console.log(videolist)
             // get the quotes from API
             const getQuotes = async (page, limit) => {
                 const API_URL = `https://api.javascripttutorial.net/v1/quotes/?page=${page}&limit=${limit}`;

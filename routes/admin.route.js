@@ -213,7 +213,10 @@ router.post('/category', async function(req, res) {
     if (result.btnDelete === 'delete') {
         const id = result.id;
         const amountC = await adminService.countCoursebyCateID(id);
-        if (amountC.amount === 0) {
+        const amountCh = await adminService.countChildrent(id);
+        console.log(amountC.amount);
+        console.log(amountCh.amount);
+        if (amountC.amount === 0 && amountCh.amount === 0) {
             //console.log(amountC.amount, '1');
             await adminService.delCategory(id);
             res.redirect('/admin/category');
