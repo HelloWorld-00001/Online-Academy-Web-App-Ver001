@@ -22,9 +22,11 @@
             <h1>Your wish list courses</h1>
         </div>
         {{#if this.isNull}}
-            <h5 class="card-title">Opp! có vẻ như bạn chưa thích môn học nào</h5>
-            <p class="card-text">Tìm xem một vài khóa học yêu thích ngay nhé</p>
-            <a href="/course">Go now</a>
+            <div class="row d-flex justify-content-center align-items-center flex-column">
+                <h5 class="card-title">Opp! có vẻ như bạn chưa thích môn học nào</h5>
+                <p class="card-text">Tìm xem một vài khóa học yêu thích ngay nhé</p>
+                <a href="/course">Go now</a>
+            </div>
         {{else}}
             <div class="row">
                 {{#each this.wishList}}

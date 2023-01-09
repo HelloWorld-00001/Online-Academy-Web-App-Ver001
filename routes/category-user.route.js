@@ -50,8 +50,8 @@ router.get('/:id', async function (req, res) {
     });
 });
 
-router.get('/language/:type', async function (req, res) {
-    const language = req.params.type || 'HTML';
+router.get('/language/:id', async function (req, res) {
+    const language = req.params.id || 1;
     const fields = await courseService.countByLanguage();
     const nameLanguage = await courseService.getNameLanguage(language)
     const limit = 6;

@@ -33,7 +33,7 @@
 <div class="container-fluid d-none d-lg-block" id="topbar">
     <div class="row align-items-center py-4 px-xl-5">
         <div class="col-lg-3">
-            <a href="" class="text-decoration-none">
+            <a href="/" class="text-decoration-none">
                 <h1 class="m-0"><span class="text-primary">IGE</span>COURSE</h1>
             </a>
         </div>
@@ -42,7 +42,7 @@
                 <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
                 <div class="text-left">
                     <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                    <small>123 Street, New York, USA</small>
+                    <small>227 Nguyen Van Cu, 4 ward, 5 district</small>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
                 <div class="text-left">
                     <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                    <small>info@example.com</small>
+                    <small>group02@gmail.com</small>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 <i class="fa fa-2x fa-phone text-primary mr-3"></i>
                 <div class="text-left">
                     <h6 class="font-weight-semi-bold mb-1">Call Us</h6>
-                    <small>+012 345 6789</small>
+                    <small>(028) 38351056</small>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
                 <div class="navbar-nav w-100">
                     {{#each category}}
                     <div class="nav-item nav-item-dropdown">
-                        <a href="/categories/{{MaLinhVuc}}" class="nav-link nav-link-dropdown-toggle">Web development <i class="fa fa-angle-down float-right mt-1"></i></a>
+                        <a href="/categories/{{MaLinhVuc}}" class="nav-link nav-link-dropdown-toggle">{{this.TenLinhVuc}} <i class="fa fa-angle-down float-right mt-1"></i></a>
                         <div class="nav-dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                             {{#each subCat}}
                             <a href="/categories/language/{{this.MaNgonNgu}}" class="nav-link dropdown-item">{{this.NgonNgu}}</a>
